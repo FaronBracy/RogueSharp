@@ -1,0 +1,38 @@
+# Auto detect text files and perform LF normalization
+*            text=auto
+
+*.cs         text diff=csharp
+*.asax       text
+*.html       text diff=html
+*.handlebars text
+*.cshtml     text
+*.css        text
+*.js         text diff=javascript
+*.ruleset    text
+
+*.config     text
+*.cscfg      text
+*.csdef      text
+*.resx       text
+
+*.targets    text
+*.bat        text
+*.ps1        text
+*.txt        text
+*.md         text
+*.xml        text
+
+*.csproj     text
+*.ccproj     text
+*.dbproj     text
+*.sln        text eol=crlf
+
+# Images should be treated as binary
+# (binary is a macro for -text -diff)
+*.png        binary
+*.gif        binary
+*.ico        binary
+*.jpeg       binary
+*.jpg        binary
+*.dll        binary
+*.exe        binary
