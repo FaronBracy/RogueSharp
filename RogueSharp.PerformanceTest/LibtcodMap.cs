@@ -287,6 +287,23 @@ namespace RogueSharp.PerformanceTest
       {
          throw new NotImplementedException();
       }
-   }
 
+      public Cell CellFor( int index )
+      {
+         int x = index % Width;
+         int y = index / Width;
+
+         return GetCell( x, y );
+      }
+
+      public int IndexFor( int x, int y )
+      {
+         return ( y * Width ) + x;
+      }
+
+      public int IndexFor( Cell cell )
+      {
+         return ( cell.Y * Width ) + cell.X;
+      }
+   }
 }

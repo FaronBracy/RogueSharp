@@ -14,9 +14,25 @@ namespace RogueSharp
          _inFov = new HashSet<int>();
       }
 
+      internal FieldOfView( IMap map, HashSet<int> inFov )
+      {
+         _map = map;
+         _inFov = inFov;
+      }
+
+      public FieldOfView Clone()
+      {
+         HashSet<int> inFovCopy = new HashSet<int>();
+         foreach( int i in _inFov )
+         {
+            inFovCopy.Add( i );
+         }
+         return new FieldOfView( _map, inFovCopy );
+      }
+
       public bool IsInFov( int x, int y )
       {
-         return _inFov.Contains( IndexFor( x, y ) );
+         return _inFov.Contains( _map.IndexFor( x, y ) );
       }
 
       public List<Cell> ComputeFov( int xOrigin, int yOrigin, int radius, bool lightWalls )
@@ -37,13 +53,13 @@ namespace RogueSharp
                }
                if ( cell.IsTransparent )
                {
-                  _inFov.Add( IndexFor( cell ) );
+                  _inFov.Add( _map.IndexFor( cell ) );
                }
                else
                {
                   if ( lightWalls )
                   {
-                     _inFov.Add( IndexFor( cell ) );
+                     _inFov.Add( _map.IndexFor( cell ) );
                   }
                   break;
                }
@@ -89,28 +105,12 @@ namespace RogueSharp
          var cells = new List<Cell>();
          foreach ( int index in _inFov )
          {
-            cells.Add( CellFor( index ) );
+            cells.Add( _map.CellFor( index ) );
          }
          return cells;
       }
 
-      private Cell CellFor( int index )
-      {
-         int x = index % _map.Width;
-         int y = index / _map.Width;
 
-         return _map.GetCell( x, y );
-      }
-
-      private int IndexFor( int x, int y )
-      {
-         return ( y * _map.Width ) + x;
-      }
-
-      private int IndexFor( Cell cell )
-      {
-         return ( cell.Y * _map.Width ) + cell.X;
-      }
 
       private void ClearFov()
       {
@@ -155,7 +155,7 @@ namespace RogueSharp
             if ( ( _map.IsTransparent( x1, y1 ) && IsInFov( x1, y1 ) ) || ( _map.IsTransparent( x2, y2 ) && IsInFov( x2, y2 ) )
                  || ( _map.IsTransparent( x2, y1 ) && IsInFov( x2, y1 ) ) )
             {
-               _inFov.Add( IndexFor( x, y ) );
+               _inFov.Add( _map.IndexFor( x, y ) );
             }
          }
       }

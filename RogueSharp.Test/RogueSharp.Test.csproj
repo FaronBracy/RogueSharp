@@ -53,6 +53,7 @@
     <Compile Include="KnownSeriesRandomTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MapTest.cs" />
+    <Compile Include="FieldOfViewTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RogueSharp\RogueSharp.csproj">

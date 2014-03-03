@@ -31,6 +31,9 @@ namespace RogueSharp
       string ToString( bool useFov );
       MapState Save();
       void Restore( MapState state );
+      Cell CellFor( int index );
+      int IndexFor( int x, int y );
+      int IndexFor( Cell cell );
    }
 
    public class MapState

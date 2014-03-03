@@ -6,7 +6,7 @@ namespace RogueSharp
 {
    public class Map : IMap
    {
-      private bool[,] _isInFov;
+      private FieldOfView _fieldOfView;
       private bool[,] _isTransparent;
       private bool[,] _isWalkable;
       private bool[,] _isExplored;
@@ -20,6 +20,12 @@ namespace RogueSharp
          Initialize( width, height );
       }
 
+      internal Map( int width, int height, FieldOfView fieldOfView )
+      {
+         Initialize( width, height );
+         _fieldOfView = fieldOfView ?? new FieldOfView( this );
+      }
+
       public int Width { get; private set; }
       public int Height { get; private set; }
 
@@ -29,8 +35,8 @@ namespace RogueSharp
          Height = height;
          _isTransparent = new bool[width, height];
          _isWalkable = new bool[width, height];
-         _isInFov = new bool[width, height];
          _isExplored = new bool[width, height];
+         _fieldOfView = new FieldOfView( this );
       }
 
       public bool IsTransparent( int x, int y )
@@ -45,7 +51,7 @@ namespace RogueSharp
 
       public bool IsInFov( int x, int y )
       {
-         return _isInFov[x, y];
+         return _fieldOfView.IsInFov( x, y );
       }
 
       public bool IsExplored( int x, int y )
@@ -73,7 +79,7 @@ namespace RogueSharp
          var map = new Map( Width, Height );
          foreach ( Cell cell in GetAllCells() )
          {
-            map.SetCellProperties( cell.X, cell.Y, cell.IsTransparent, cell.IsWalkable, cell.IsInFov, cell.IsExplored );
+            map.SetCellProperties( cell.X, cell.Y, cell.IsTransparent, cell.IsWalkable, cell.IsExplored );
          }
          return map;
       }
@@ -96,65 +102,12 @@ namespace RogueSharp
 
       public void ComputeFov( int xOrigin, int yOrigin, int radius, bool lightWalls )
       {
-         ClearFov();
-         AppendFov( xOrigin, yOrigin, radius, lightWalls );
+         _fieldOfView.ComputeFov( xOrigin, yOrigin, radius, lightWalls );
       }
 
       public void AppendFov( int xOrigin, int yOrigin, int radius, bool lightWalls )
       {
-         foreach ( Cell borderCell in GetBorderCellsInArea( xOrigin, yOrigin, radius ) )
-         {
-            foreach ( Cell cell in GetCellsAlongLine( xOrigin, yOrigin, borderCell.X, borderCell.Y ) )
-            {
-               if ( ( Math.Abs( cell.X - xOrigin ) + Math.Abs( cell.Y - yOrigin ) ) > radius )
-               {
-                  break;
-               }
-               if ( cell.IsTransparent )
-               {
-                  _isInFov[cell.X, cell.Y] = true;
-               }
-               else
-               {
-                  if ( lightWalls )
-                  {
-                     _isInFov[cell.X, cell.Y] = true;
-                  }
-                  break;
-               }
-            }
-         }
-
-         if ( lightWalls )
-         {
-            // Post processing step taken from algorithm at this website:
-            // https://sites.google.com/site/jicenospam/visibilitydetermination
-            foreach ( Cell cell in GetCellsInArea( xOrigin, yOrigin, radius ) )
-            {
-               if ( cell.X > xOrigin )
-               {
-                  if ( cell.Y > yOrigin )
-                  {
-                     PostProcessFovQuadrant( cell.X, cell.Y, Quadrant.SE );
-                  }
-                  else if ( cell.Y < yOrigin )
-                  {
-                     PostProcessFovQuadrant( cell.X, cell.Y, Quadrant.NE );
-                  }
-               }
-               else if ( cell.X < xOrigin )
-               {
-                  if ( cell.Y > yOrigin )
-                  {
-                     PostProcessFovQuadrant( cell.X, cell.Y, Quadrant.SW );
-                  }
-                  else if ( cell.Y < yOrigin )
-                  {
-                     PostProcessFovQuadrant( cell.X, cell.Y, Quadrant.NW );
-                  }
-               }
-            }
-         }
+         _fieldOfView.AppendFov( xOrigin, yOrigin, radius, lightWalls );
       }
 
       public IEnumerable<Cell> GetAllCells()
@@ -330,7 +283,7 @@ namespace RogueSharp
 
       public Cell GetCell( int x, int y )
       {
-         return new Cell( x, y, _isTransparent[x, y], _isWalkable[x, y], _isInFov[x, y], _isExplored[x, y] );
+         return new Cell( x, y, _isTransparent[x, y], _isWalkable[x, y], _fieldOfView.IsInFov( x, y ), _isExplored[x, y] );
       }
 
       public string ToString( bool useFov )
@@ -377,78 +330,41 @@ namespace RogueSharp
 
       public void Restore( MapState state )
       {
+         HashSet<int> inFov = new HashSet<int>();
+
          Initialize( state.Width, state.Height );
          foreach ( Cell cell in GetAllCells() )
          {
             MapState.CellProperties cellProperties = state.Cells[cell.Y * Width + cell.X];
-            _isInFov[cell.X, cell.Y] = cellProperties.HasFlag( MapState.CellProperties.Visible );
+            inFov.Add( IndexFor( cell.X, cell.Y ) );
             _isTransparent[cell.X, cell.Y] = cellProperties.HasFlag( MapState.CellProperties.Transparent );
             _isWalkable[cell.X, cell.Y] = cellProperties.HasFlag( MapState.CellProperties.Walkable );
          }
+
+         _fieldOfView = new FieldOfView( this, inFov );
       }
 
       public static Map Create( IMapCreationStrategy<Map> mapCreationStrategy )
       {
          return mapCreationStrategy.CreateMap();
       }
-
-      internal void SetCellProperties( int x, int y, bool isTransparent, bool isWalkable, bool isInFov, bool isExplored )
+      
+      public Cell CellFor( int index )
       {
-         _isTransparent[x, y] = isTransparent;
-         _isWalkable[x, y] = isWalkable;
-         _isInFov[x, y] = isInFov;
-         _isExplored[x, y] = isExplored;
+         int x = index % Width;
+         int y = index / Width;
+
+         return GetCell( x, y );
       }
 
-      internal void ClearFov()
+      public int IndexFor( int x, int y )
       {
-         foreach ( Cell cell in GetAllCells() )
-         {
-            _isInFov[cell.X, cell.Y] = false;
-         }
+         return ( y * Width ) + x;
       }
 
-      private void PostProcessFovQuadrant( int x, int y, Quadrant quadrant )
+      public int IndexFor( Cell cell )
       {
-         int x1 = x;
-         int y1 = y;
-         int x2 = x;
-         int y2 = y;
-         switch ( quadrant )
-         {
-            case Quadrant.NE:
-               {
-                  y1 = y + 1;
-                  x2 = x - 1;
-                  break;
-               }
-            case Quadrant.SE:
-               {
-                  y1 = y - 1;
-                  x2 = x - 1;
-                  break;
-               }
-            case Quadrant.SW:
-               {
-                  y1 = y - 1;
-                  x2 = x + 1;
-                  break;
-               }
-            case Quadrant.NW:
-               {
-                  y1 = y + 1;
-                  x2 = x + 1;
-                  break;
-               }
-         }
-         if ( !_isInFov[x, y] && !_isTransparent[x, y] )
-         {
-            if ( ( _isTransparent[x1, y1] && _isInFov[x1, y1] ) || ( _isTransparent[x2, y2] && _isInFov[x2, y2] )
-                 || ( _isTransparent[x2, y1] && _isInFov[x2, y1] ) )
-            {
-               _isInFov[x, y] = true;
-            }
-         }
+         return ( cell.Y * Width ) + cell.X;
       }
 
       private bool AddToHashSet( HashSet<Cell> hashSet, int x, int y, out Cell cell )
