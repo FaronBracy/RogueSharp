@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RogueSharp.Random;
@@ -295,6 +297,64 @@ namespace RogueSharp.Test
       }
 
       [TestMethod]
+      public void GetCellsInRadius_SmallMap_ExpectedCells()
+      {
+         string mapRepresentation = @"#################
+                                      #################
+                                      ##...#######...##
+                                      ##.............##
+                                      ###.###....#...##
+                                      ###...##.#####.##
+                                      ###...##...###..#
+                                      ####............#
+                                      ##############..#
+                                      #################";
+         IMapCreationStrategy<Map> mapCreationStrategy = new StringDeserializeMapCreationStrategy<Map>( mapRepresentation );
+         IMap map = Map.Create( mapCreationStrategy );
+         string expectedCells = "#..##......#.";
+
+         IEnumerable<Cell> cells = map.GetCellsInRadius( 3, 3, 2 )
+            .OrderBy( c => c.X )
+            .ThenBy( c => c.Y );
+         var actualCells = new StringBuilder();
+         foreach( Cell cell in cells )
+         {
+            actualCells.Append( cell.ToString() );
+         }
+
+         Assert.AreEqual( expectedCells, actualCells.ToString() );
+      }
+
+      [TestMethod]
+      public void GetBorderCellsInRadius_SmallMap_ExpectedCells()
+      {
+         string mapRepresentation = @"#################
+                                      #################
+                                      ##...#######...##
+                                      ##.............##
+                                      ###.###....#...##
+                                      ###...##.#####.##
+                                      ###...##...###..#
+                                      ####............#
+                                      ##############..#
+                                      #################";
+         IMapCreationStrategy<Map> mapCreationStrategy = new StringDeserializeMapCreationStrategy<Map>( mapRepresentation );
+         IMap map = Map.Create( mapCreationStrategy );
+         string expectedCells = "#.##..#.";
+
+         IEnumerable<Cell> cells = map.GetBorderCellsInRadius( 3, 3, 2 )
+            .OrderBy( c => c.X )
+            .ThenBy( c => c.Y );
+         var actualCells = new StringBuilder();
+         foreach ( Cell cell in cells )
+         {
+            actualCells.Append( cell.ToString() );
+         }
+
+         Assert.AreEqual( expectedCells, actualCells.ToString() );
+      }
+
+      [TestMethod]
       public void ComputeFov_X6Y1CellRadius20_ExpectedFovMap()
       {
          string mapRepresentation = @"####################################
@@ -359,6 +419,43 @@ namespace RogueSharp.Test
                                    %%%%%%.%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                    %%%%%###%%%%%%%%%%%%%%%%%%%%%%%%%%%%";
          Assert.AreEqual( expectedFovMap.Replace( " ", string.Empty ), map.ToString( true ) );
+      }
+
+      [TestMethod]
+      public void Restore_AfterComputingFovAndSaving_ExpectedMapWithFov()
+      {
+         string mapRepresentation = @"####################################
+                                      #..................................#
+                                      #..###.########....................#
+                                      #....#.#......#....................#
+                                      #....#.#......#....................#
+                                      #.............#....................#
+                                      #....#.#......######################
+                                      #....#.#...........................#
+                                      #....#.#...........................#
+                                      #..................................#
+                                      ####################################";
+         IMapCreationStrategy<Map> mapCreationStrategy = new StringDeserializeMapCreationStrategy<Map>( mapRepresentation );
+         IMap map = Map.Create( mapCreationStrategy );
+         map.ComputeFov( 6, 1, 20, true );
+         map.AppendFov( 15, 1, 5, true );
+         MapState mapState = map.Save();
+
+         IMap newMap = new Map();
+         newMap.Restore( mapState );  
+         
+         string expectedFovMap = @"###########################%%%%%%%%%
+                                   #..........................%%%%%%%%%
+                                   #..###.########...........%%%%%%%%%%
+                                   #%%%%#.#%%%%%%#....%%%%%%%%%%%%%%%%%
+                                   %%%%%#.#%%%%%%#...%%%%%%%%%%%%%%%%%%
+                                   %%%%%%.%%%%%%%#..%%%%%%%%%%%%%%%%%%%
+                                   %%%%%#.#%%%%%%####%%%%%%%%%%%%%%%%%%
+                                   %%%%%#.#%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                   %%%%%#.#%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                   %%%%%%.%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                   %%%%%###%%%%%%%%%%%%%%%%%%%%%%%%%%%%";
+         Assert.AreEqual( expectedFovMap.Replace( " ", string.Empty ), newMap.ToString( true ) );
       }
    }
 }

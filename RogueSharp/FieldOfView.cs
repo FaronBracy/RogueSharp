@@ -22,7 +22,7 @@ namespace RogueSharp
 
       public FieldOfView Clone()
       {
-         HashSet<int> inFovCopy = new HashSet<int>();
+         var inFovCopy = new HashSet<int>();
          foreach( int i in _inFov )
          {
             inFovCopy.Add( i );

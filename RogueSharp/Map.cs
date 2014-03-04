@@ -20,12 +20,6 @@ namespace RogueSharp
          Initialize( width, height );
       }
 
-      internal Map( int width, int height, FieldOfView fieldOfView )
-      {
-         Initialize( width, height );
-         _fieldOfView = fieldOfView ?? new FieldOfView( this );
-      }
-
       public int Width { get; private set; }
       public int Height { get; private set; }
 
@@ -153,7 +147,7 @@ namespace RogueSharp
 
       public IEnumerable<Cell> GetCellsInRadius( int xOrigin, int yOrigin, int radius )
       {
-         var discovered = new HashSet<Cell>();
+         var discovered = new HashSet<int>();
 
          int xMin = Math.Max( 0, xOrigin - radius );
          int xMax = Math.Min( Width - 1, xOrigin + radius );
@@ -203,7 +197,7 @@ namespace RogueSharp
 
       public IEnumerable<Cell> GetBorderCellsInRadius( int xOrigin, int yOrigin, int radius )
       {
-         var discovered = new HashSet<Cell>();
+         var discovered = new HashSet<int>();
 
          int xMin = Math.Max( 0, xOrigin - radius );
          int xMax = Math.Min( Width - 1, xOrigin + radius );
@@ -330,13 +324,16 @@ namespace RogueSharp
 
       public void Restore( MapState state )
       {
-         HashSet<int> inFov = new HashSet<int>();
+         var inFov = new HashSet<int>();
 
          Initialize( state.Width, state.Height );
          foreach ( Cell cell in GetAllCells() )
          {
             MapState.CellProperties cellProperties = state.Cells[cell.Y * Width + cell.X];
-            inFov.Add( IndexFor( cell.X, cell.Y ) );
+            if ( cellProperties.HasFlag( MapState.CellProperties.Visible ) )
+            {
+               inFov.Add( IndexFor( cell.X, cell.Y ) );
+            }
             _isTransparent[cell.X, cell.Y] = cellProperties.HasFlag( MapState.CellProperties.Transparent );
             _isWalkable[cell.X, cell.Y] = cellProperties.HasFlag( MapState.CellProperties.Walkable );
          }
@@ -367,23 +364,15 @@ namespace RogueSharp
          return ( cell.Y * Width ) + cell.X;
       }
 
-      private bool AddToHashSet( HashSet<Cell> hashSet, int x, int y, out Cell cell )
+      private bool AddToHashSet( HashSet<int> hashSet, int x, int y, out Cell cell )
       {
          cell = GetCell( x, y );
-         return hashSet.Add( cell );
+         return hashSet.Add( IndexFor( cell ) );
       }
 
       public override string ToString()
       {
          return ToString( false );
-      }
-
-      private enum Quadrant
-      {
-         NE = 1,
-         SE = 2,
-         SW = 3,
-         NW = 4
       }
    }
 }
