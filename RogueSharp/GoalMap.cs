@@ -47,6 +47,7 @@ namespace RogueSharp
       private void MultiplyAndRecomputeCellWeights( float amount )
       {
          ComputeCellWeightsIfNeeded();
+ 
          for ( int y = 0; y < _map.Height; y++ )
          {
             for ( int x = 0; x < _map.Width; x++ )
@@ -57,6 +58,7 @@ namespace RogueSharp
                }
             }
          }
+
          bool didCellWeightsChange = true;
          while ( didCellWeightsChange )
          {
@@ -83,6 +85,7 @@ namespace RogueSharp
                }
             }
          }
+
          _isRecomputeNeeded = false;
       }
 
@@ -290,18 +293,21 @@ namespace RogueSharp
       {
          private readonly GoalMap _goalMap;
          private readonly List<List<Point>> _paths;
-         private readonly Stack<Point> _visited;
+         private readonly Stack<Point> _currentPath;
+         private readonly HashSet<Point> _visited; 
 
          public GoalMapPathFinder( GoalMap goalMap )
          {
             _goalMap = goalMap;
             _paths = new List<List<Point>>();
-            _visited = new Stack<Point>();
+            _currentPath = new Stack<Point>();
+            _visited = new HashSet<Point>();
          }
 
          public List<List<Point>> FindPaths( int x, int y )
          {
             _paths.Clear();
+            _currentPath.Clear();
             _visited.Clear();
             RecursivelyFindPaths( x, y );
             return _paths;
@@ -309,30 +315,30 @@ namespace RogueSharp
 
          private void RecursivelyFindPaths( int x, int y )
          {
-            // TODO: Without this threshold it will use up too much memory on large maps. Should investigate further
-            if ( _paths.Count > 50 )
-            {
-               return;
-            }
             var currentCell = new Point
             {
                X = x,
                Y = y
             };
-            _visited.Push( currentCell );
-            List<Cell> neighbors = _goalMap.GetLowestWeightNeighbors( x, y );
-            if ( neighbors != null )
+            if ( _visited.Add( currentCell ) )
             {
-               foreach ( Cell neighbor in neighbors )
+               _currentPath.Push( currentCell );
+               List<Cell> neighbors = _goalMap.GetLowestWeightNeighbors( x, y );
+               if ( neighbors != null )
                {
-                  RecursivelyFindPaths( neighbor.X, neighbor.Y );
+                  foreach ( Cell neighbor in neighbors )
+                  {
+                     RecursivelyFindPaths( neighbor.X, neighbor.Y );
+                  }
                }
+               else
+               {
+                  // We reached our destination so remove that from the list of visited cells in case there is another path here.
+                  _visited.Remove( currentCell );
+                  _paths.Add( _currentPath.Reverse().ToList() );
+               }
+               _currentPath.Pop();
             }
-            else
-            {
-               _paths.Add( _visited.Reverse().ToList() );
-            }
-            _visited.Pop();
          }
       }
    }

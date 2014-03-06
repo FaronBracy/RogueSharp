@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace RogueSharp.Test
@@ -87,9 +88,36 @@ namespace RogueSharp.Test
          Assert.AreEqual( expectedGoalMapRepresentation.Replace( " ", string.Empty ), goalMap.ToString().Replace( " ", string.Empty ) );
       }
 
-      // TODO: Figure out why this test will use so much memory if we don't limit the iterations in GoalMap.cs GoalMapPathFinder.RecursivelyFindPaths
-      [TestMethod, Ignore]
-      public void FindPathAvoiding_BigMapFromGame_Expected()
+      [TestMethod]
+      public void FindPathAvoiding_BoxedInCornerWithObstacle_ExpectedPath()
+      {
+         string mapRepresentation = @"###########
+                                      #.....#...#
+                                      #.....#.#.#
+                                      #.....#.#.#
+                                      #.....#.#.#
+                                      #.....s.#.#
+                                      ###########";
+
+         IMapCreationStrategy<Map> mapCreationStrategy = new StringDeserializeMapCreationStrategy<Map>( mapRepresentation );
+         IMap map = Map.Create( mapCreationStrategy );
+         GoalMap goalMap = new GoalMap( map );
+         goalMap.AddGoal( 2, 2, 0 );
+         Point obstacle = new Point( 2, 2 );
+         string expectedPath = "........s...........";
+
+         List<Point> path = goalMap.FindPathAvoidingGoals( 1, 2, new List<Point> { obstacle } );
+         var actualPath = new StringBuilder();
+         foreach( Point p in path )
+         {
+            actualPath.Append( map.GetCell( p.X, p.Y ).ToString() );
+         }
+
+         Assert.AreEqual( expectedPath, actualPath.ToString() );
+      }
+
+      [TestMethod]
+      public void FindPath_BigMapFromGame_ExpectedPath()
       {
          string mapRepresentation = @"###########################################################
                                       #.....#...............#...#.....#.....#.s.....s...........#
@@ -129,16 +157,19 @@ namespace RogueSharp.Test
 
          IMapCreationStrategy<Map> mapCreationStrategy = new StringDeserializeMapCreationStrategy<Map>( mapRepresentation );
          IMap map = Map.Create( mapCreationStrategy );
-
          GoalMap goalMap = new GoalMap( map );
          goalMap.AddGoal( 51, 31, 0 );
          goalMap.AddGoal( 51, 33, 0 );
+         string expectedPath = ".....s.....s.......s...........s.....s..........s....s.......s...........s...s....s..............s.....s...s......s...s....s..s....s.....s..............s......";
 
          List<Point> path = goalMap.FindPath( 23, 7, new List<Point>() );
-         Assert.AreEqual( path, new List<Point>
+         var actualPath = new StringBuilder();
+         foreach( Point p in path )
          {
-            new Point( 12, 13 )
-         } );
+            actualPath.Append( map.GetCell( p.X, p.Y ).ToString() );
+         }
+
+         Assert.AreEqual( expectedPath, actualPath.ToString() );
       }
    }
 }
