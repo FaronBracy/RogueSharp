@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RogueSharp", "RogueSharp\RogueSharp.csproj", "{EBCA7EA9-1C80-481A-8025-A465D6BA5F71}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RogueSharp.Test", "RogueSharp.Test\RogueSharp.Test.csproj", "{A1494180-593F-46C0-8C34-47D3289A3CE6}"
@@ -23,14 +25,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dlls", "Dlls", "{AF135727-1
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RogueSharp.PerformanceTest", "RogueSharp.PerformanceTest\RogueSharp.PerformanceTest.csproj", "{F13AA419-6831-4898-BB3C-CF20177FE179}"
 EndProject
+Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "RogueSharp.Docs", "RogueSharp.Docs\RogueSharp.Docs.shfbproj", "{044928F3-D163-47D6-A8E9-E6776F69C881}"
+EndProject
 Global
-	GlobalSection(SubversionScc) = preSolution
-		Svn-Managed = True
-		Manager = AnkhSVN - Subversion Support for Visual Studio
-	EndGlobalSection
-	GlobalSection(TestCaseManagementSettings) = postSolution
-		CategoryFile = RogueSharp.vsmdi
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -48,8 +45,19 @@ Global
 		{F13AA419-6831-4898-BB3C-CF20177FE179}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F13AA419-6831-4898-BB3C-CF20177FE179}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F13AA419-6831-4898-BB3C-CF20177FE179}.Release|Any CPU.Build.0 = Release|Any CPU
+		{044928F3-D163-47D6-A8E9-E6776F69C881}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{044928F3-D163-47D6-A8E9-E6776F69C881}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{044928F3-D163-47D6-A8E9-E6776F69C881}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{044928F3-D163-47D6-A8E9-E6776F69C881}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(SubversionScc) = preSolution
+		Svn-Managed = True
+		Manager = AnkhSVN - Subversion Support for Visual Studio
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = RogueSharp.vsmdi
 	EndGlobalSection
 EndGlobal
