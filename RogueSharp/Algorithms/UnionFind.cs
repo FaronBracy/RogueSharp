@@ -2,6 +2,9 @@
 
 namespace RogueSharp.Algorithms
 {
+   /// <summary>
+   /// 
+   /// </summary>
    /// <see>
    ///    http://algs4.cs.princeton.edu/15uf/UF.java.html
    ///    http://algs4.cs.princeton.edu/15uf
@@ -11,7 +14,6 @@ namespace RogueSharp.Algorithms
    {
       private readonly int[] _id;
       private readonly int[] _size;
-
       /// <summary>
       ///    Create an empty union-find data structure with "count" isolated sets
       /// </summary>
@@ -31,9 +33,10 @@ namespace RogueSharp.Algorithms
             _size[i] = 1;
          }
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
       public int Count { get; private set; }
-
       /// <summary>
       ///    Return the id of the component corresponding to object p.
       /// </summary>
@@ -51,7 +54,6 @@ namespace RogueSharp.Algorithms
          }
          return p;
       }
-
       /// <summary>
       ///    Are objects p and q in the same set?
       /// </summary>
@@ -62,7 +64,6 @@ namespace RogueSharp.Algorithms
       {
          return Find( p ) == Find( q );
       }
-
       /// <summary>
       ///    Replace sets containing p and q with their union
       /// </summary>

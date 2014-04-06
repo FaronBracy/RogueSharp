@@ -4,10 +4,17 @@ using System.Text;
 
 namespace RogueSharp.Algorithms
 {
+   /// <summary>
+   /// 
+   /// </summary>
    public class Graph
    {
       private readonly LinkedList<int>[] _adjacent;
 
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="vertices"></param>
       public Graph( int vertices )
       {
          NumberOfVertices = vertices;
@@ -18,22 +25,41 @@ namespace RogueSharp.Algorithms
             _adjacent[v] = new LinkedList<int>();
          }
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
       public int NumberOfVertices { get; private set; }
+      /// <summary>
+      /// 
+      /// </summary>
       public int NumberOfEdges { get; private set; }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="vertexSource"></param>
+      /// <param name="vertexDestination"></param>
       public void AddEdge( int vertexSource, int vertexDestination )
       {
          NumberOfEdges++;
          _adjacent[vertexSource].AddLast( vertexDestination );
          _adjacent[vertexDestination].AddLast( vertexSource );
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="vertex"></param>
+      /// <returns></returns>
       public IEnumerable<int> Adjacent( int vertex )
       {
          return _adjacent[vertex];
       }
-
+      /// <summary>
+      /// Returns a string that represents the current object.
+      /// </summary>
+      /// <returns>
+      /// A string that represents the current object.
+      /// </returns>
+      /// <filterpriority>2</filterpriority>
       public override string ToString()
       {
          var formattedString = new StringBuilder();
@@ -51,12 +77,19 @@ namespace RogueSharp.Algorithms
       }
    }
 
+   /// <summary>
+   /// 
+   /// </summary>
    public class DepthFirstPaths
    {
       private readonly int[] _edgeTo;
       private readonly bool[] _marked;
       private readonly int _sourceVertex;
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="graph"></param>
+      /// <param name="sourceVertex"></param>
       public DepthFirstPaths( Graph graph, int sourceVertex )
       {
          _sourceVertex = sourceVertex;
@@ -77,12 +110,20 @@ namespace RogueSharp.Algorithms
             }
          }
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="destinationVertex"></param>
+      /// <returns></returns>
       public bool HasPathTo( int destinationVertex )
       {
          return _marked[destinationVertex];
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="destinationVertex"></param>
+      /// <returns></returns>
       public IEnumerable<int> PathTo( int destinationVertex )
       {
          if ( !HasPathTo( destinationVertex ) )
@@ -99,10 +140,16 @@ namespace RogueSharp.Algorithms
    }
 
    // http://algs4.cs.princeton.edu/44sp/EdgeWeightedDigraph.java.html
+   /// <summary>
+   /// 
+   /// </summary>
    public class EdgeWeightedDigraph
    {
       private readonly LinkedList<DirectedEdge>[] _adjacent;
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="vertices"></param>
       public EdgeWeightedDigraph( int vertices )
       {
          NumberOfVertices = vertices;
@@ -113,20 +160,35 @@ namespace RogueSharp.Algorithms
             _adjacent[v] = new LinkedList<DirectedEdge>();
          }
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
       public int NumberOfVertices { get; private set; }
+      /// <summary>
+      /// 
+      /// </summary>
       public int NumberOfEdges { get; private set; }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="edge"></param>
       public void AddEdge( DirectedEdge edge )
       {
          _adjacent[edge.From].AddLast( edge );
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="vertex"></param>
+      /// <returns></returns>
       public IEnumerable<DirectedEdge> Adjacent( int vertex )
       {
          return _adjacent[vertex];
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <returns></returns>
       public IEnumerable<DirectedEdge> Edges()
       {
          for ( int v = 0; v < NumberOfVertices; v++ )
@@ -137,12 +199,22 @@ namespace RogueSharp.Algorithms
             }
          }
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="vertex"></param>
+      /// <returns></returns>
       public int OutDegree( int vertex )
       {
          return _adjacent[vertex].Count;
       }
-
+      /// <summary>
+      /// Returns a string that represents the current object.
+      /// </summary>
+      /// <returns>
+      /// A string that represents the current object.
+      /// </returns>
+      /// <filterpriority>2</filterpriority>
       public override string ToString()
       {
          var formattedString = new StringBuilder();
@@ -160,31 +232,62 @@ namespace RogueSharp.Algorithms
       }
    }
 
+   /// <summary>
+   /// 
+   /// </summary>
    public class DirectedEdge
    {
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="from"></param>
+      /// <param name="to"></param>
+      /// <param name="weight"></param>
       public DirectedEdge( int from, int to, double weight )
       {
          From = from;
          To = to;
          Weight = weight;
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
       public int From { get; private set; }
+      /// <summary>
+      /// 
+      /// </summary>
       public int To { get; private set; }
+      /// <summary>
+      /// 
+      /// </summary>
       public double Weight { get; private set; }
-
+      /// <summary>
+      /// Returns a string that represents the current object.
+      /// </summary>
+      /// <returns>
+      /// A string that represents the current object.
+      /// </returns>
+      /// <filterpriority>2</filterpriority>
       public override string ToString()
       {
          return string.Format( "From: {0}, To: {1}, Weight: {2}", From, To, Weight );
       }
    }
 
+   /// <summary>
+   /// 
+   /// </summary>
    public class DijkstraShortestPath
    {
       private readonly double[] _distanceTo;
       private readonly DirectedEdge[] _edgeTo;
       private readonly IndexMinPriorityQueue<double> _priorityQueue;
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="graph"></param>
+      /// <param name="sourceVertex"></param>
+      /// <exception cref="ArgumentOutOfRangeException"></exception>
       public DijkstraShortestPath( EdgeWeightedDigraph graph, int sourceVertex )
       {
          foreach ( DirectedEdge edge in graph.Edges() )
@@ -233,17 +336,29 @@ namespace RogueSharp.Algorithms
             }
          }
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="v"></param>
+      /// <returns></returns>
       public double DistanceTo( int v )
       {
          return _distanceTo[v];
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="v"></param>
+      /// <returns></returns>
       public bool HasPathTo( int v )
       {
          return _distanceTo[v] < double.PositiveInfinity;
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="v"></param>
+      /// <returns></returns>
       public IEnumerable<DirectedEdge> PathTo( int v )
       {
          if ( !HasPathTo( v ) )
@@ -257,7 +372,12 @@ namespace RogueSharp.Algorithms
          }
          return path;
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="graph"></param>
+      /// <param name="sourceVertex"></param>
+      /// <returns></returns>
       public bool Check( EdgeWeightedDigraph graph, int sourceVertex )
       {
          if ( _distanceTo[sourceVertex] != 0.0 || _edgeTo[sourceVertex] != null )
@@ -308,13 +428,20 @@ namespace RogueSharp.Algorithms
    }
 
    // http://algs4.cs.princeton.edu/24pq/IndexMinPQ.java.html
+   /// <summary>
+   /// 
+   /// </summary>
+   /// <typeparam name="T"></typeparam>
    public class IndexMinPriorityQueue<T> where T : IComparable<T>
    {
       private readonly T[] _keys;
       private readonly int _maxSize;
       private readonly int[] _pq;
       private readonly int[] _qp;
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="maxSize"></param>
       public IndexMinPriorityQueue( int maxSize )
       {
          _maxSize = maxSize;
@@ -327,19 +454,32 @@ namespace RogueSharp.Algorithms
             _qp[i] = -1;
          }
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
       public int Size { get; private set; }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <returns></returns>
       public bool IsEmpty()
       {
          return Size == 0;
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="i"></param>
+      /// <returns></returns>
       public bool Contains( int i )
       {
          return _qp[i] != -1;
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="index"></param>
+      /// <param name="key"></param>
       public void Insert( int index, T key )
       {
          Size++;
@@ -348,17 +488,26 @@ namespace RogueSharp.Algorithms
          _keys[index] = key;
          Swim( Size );
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <returns></returns>
       public int MinIndex()
       {
          return _pq[1];
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <returns></returns>
       public T MinKey()
       {
          return _keys[_pq[1]];
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <returns></returns>
       public int DeleteMin()
       {
          int min = _pq[1];
@@ -369,31 +518,50 @@ namespace RogueSharp.Algorithms
          _pq[Size + 1] = -1;
          return min;
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="i"></param>
+      /// <returns></returns>
       public T KeyAt( int i )
       {
          return _keys[i];
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="i"></param>
+      /// <param name="key"></param>
       public void ChangeKey( int i, T key )
       {
          _keys[i] = key;
          Swim( _qp[i] );
          Sink( _qp[i] );
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="i"></param>
+      /// <param name="key"></param>
       public void DecreaseKey( int i, T key )
       {
          _keys[i] = key;
          Swim( _qp[i] );
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="i"></param>
+      /// <param name="key"></param>
       public void IncreaseKey( int i, T key )
       {
          _keys[i] = key;
          Sink( _qp[i] );
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="i"></param>
       public void Delete( int i )
       {
          int index = _qp[i];
@@ -403,12 +571,10 @@ namespace RogueSharp.Algorithms
          _keys[i] = default( T );
          _qp[i] = -1;
       }
-
       private bool Greater( int i, int j )
       {
          return _keys[_pq[i]].CompareTo( _keys[_pq[j]] ) > 0;
       }
-
       private void Exchange( int i, int j )
       {
          int swap = _pq[i];
@@ -417,7 +583,6 @@ namespace RogueSharp.Algorithms
          _qp[_pq[i]] = i;
          _qp[_pq[j]] = j;
       }
-
       private void Swim( int k )
       {
          while ( k > 1 && Greater( k / 2, k ) )
@@ -426,7 +591,6 @@ namespace RogueSharp.Algorithms
             k = k / 2;
          }
       }
-
       private void Sink( int k )
       {
          while ( 2 * k <= Size )

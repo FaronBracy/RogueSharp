@@ -4,25 +4,43 @@ using System.Text;
 
 namespace RogueSharp
 {
+   /// <summary>
+   /// 
+   /// </summary>
    public class Map : IMap
    {
       private FieldOfView _fieldOfView;
       private bool[,] _isTransparent;
       private bool[,] _isWalkable;
       private bool[,] _isExplored;
-
+      /// <summary>
+      /// 
+      /// </summary>
       public Map()
       {
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="width"></param>
+      /// <param name="height"></param>
       public Map( int width, int height )
       {
          Initialize( width, height );
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
       public int Width { get; private set; }
+      /// <summary>
+      /// 
+      /// </summary>
       public int Height { get; private set; }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="width"></param>
+      /// <param name="height"></param>
       public void Initialize( int width, int height )
       {
          Width = width;
@@ -32,34 +50,65 @@ namespace RogueSharp
          _isExplored = new bool[width, height];
          _fieldOfView = new FieldOfView( this );
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="x"></param>
+      /// <param name="y"></param>
+      /// <returns></returns>
       public bool IsTransparent( int x, int y )
       {
          return _isTransparent[x, y];
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="x"></param>
+      /// <param name="y"></param>
+      /// <returns></returns>
       public bool IsWalkable( int x, int y )
       {
          return _isWalkable[x, y];
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="x"></param>
+      /// <param name="y"></param>
+      /// <returns></returns>
       public bool IsInFov( int x, int y )
       {
          return _fieldOfView.IsInFov( x, y );
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="x"></param>
+      /// <param name="y"></param>
+      /// <returns></returns>
       public bool IsExplored( int x, int y )
       {
          return _isExplored[x, y];
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="x"></param>
+      /// <param name="y"></param>
+      /// <param name="isTransparent"></param>
+      /// <param name="isWalkable"></param>
+      /// <param name="isExplored"></param>
       public void SetCellProperties( int x, int y, bool isTransparent, bool isWalkable, bool isExplored = false )
       {
          _isTransparent[x, y] = isTransparent;
          _isWalkable[x, y] = isWalkable;
          _isExplored[x, y] = isExplored;
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="isTransparent"></param>
+      /// <param name="isWalkable"></param>
       public void Clear( bool isTransparent = false, bool isWalkable = false )
       {
          foreach ( Cell cell in GetAllCells() )
@@ -67,7 +116,10 @@ namespace RogueSharp
             SetCellProperties( cell.X, cell.Y, isTransparent, isWalkable );
          }
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <returns></returns>
       public IMap Clone()
       {
          var map = new Map( Width, Height );
@@ -77,7 +129,12 @@ namespace RogueSharp
          }
          return map;
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="sourceMap"></param>
+      /// <param name="left"></param>
+      /// <param name="top"></param>
       public void Copy( IMap sourceMap, int left, int top )
       {
          if ( sourceMap.Width + left > Width )
@@ -93,17 +150,32 @@ namespace RogueSharp
             SetCellProperties( cell.X + left, cell.Y + top, cell.IsTransparent, cell.IsWalkable, cell.IsExplored );
          }
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="xOrigin"></param>
+      /// <param name="yOrigin"></param>
+      /// <param name="radius"></param>
+      /// <param name="lightWalls"></param>
       public void ComputeFov( int xOrigin, int yOrigin, int radius, bool lightWalls )
       {
          _fieldOfView.ComputeFov( xOrigin, yOrigin, radius, lightWalls );
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="xOrigin"></param>
+      /// <param name="yOrigin"></param>
+      /// <param name="radius"></param>
+      /// <param name="lightWalls"></param>
       public void AppendFov( int xOrigin, int yOrigin, int radius, bool lightWalls )
       {
          _fieldOfView.AppendFov( xOrigin, yOrigin, radius, lightWalls );
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <returns></returns>
       public IEnumerable<Cell> GetAllCells()
       {
          for ( int y = 0; y < Height; y++ )
@@ -114,7 +186,14 @@ namespace RogueSharp
             }
          }
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="xOrigin"></param>
+      /// <param name="yOrigin"></param>
+      /// <param name="xDestination"></param>
+      /// <param name="yDestination"></param>
+      /// <returns></returns>
       public IEnumerable<Cell> GetCellsAlongLine( int xOrigin, int yOrigin, int xDestination, int yDestination )
       {
          int dx = Math.Abs( xDestination - xOrigin );
@@ -144,7 +223,13 @@ namespace RogueSharp
             }
          }
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="xOrigin"></param>
+      /// <param name="yOrigin"></param>
+      /// <param name="radius"></param>
+      /// <returns></returns>
       public IEnumerable<Cell> GetCellsInRadius( int xOrigin, int yOrigin, int radius )
       {
          var discovered = new HashSet<int>();
@@ -178,7 +263,13 @@ namespace RogueSharp
             }
          }
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="xOrigin"></param>
+      /// <param name="yOrigin"></param>
+      /// <param name="distance"></param>
+      /// <returns></returns>
       public IEnumerable<Cell> GetCellsInArea( int xOrigin, int yOrigin, int distance )
       {
          int xMin = Math.Max( 0, xOrigin - distance );
@@ -194,7 +285,13 @@ namespace RogueSharp
             }
          }
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="xOrigin"></param>
+      /// <param name="yOrigin"></param>
+      /// <param name="radius"></param>
+      /// <returns></returns>
       public IEnumerable<Cell> GetBorderCellsInRadius( int xOrigin, int yOrigin, int radius )
       {
          var discovered = new HashSet<int>();
@@ -233,7 +330,13 @@ namespace RogueSharp
             }
          }
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="xOrigin"></param>
+      /// <param name="yOrigin"></param>
+      /// <param name="distance"></param>
+      /// <returns></returns>
       public IEnumerable<Cell> GetBorderCellsInArea( int xOrigin, int yOrigin, int distance )
       {
          int xMin = Math.Max( 0, xOrigin - distance );
@@ -252,7 +355,11 @@ namespace RogueSharp
             yield return GetCell( xMax, y );
          }
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="rowNumbers"></param>
+      /// <returns></returns>
       public IEnumerable<Cell> GetCellsInRows( params int[] rowNumbers )
       {
          foreach ( int y in rowNumbers )
@@ -263,7 +370,11 @@ namespace RogueSharp
             }
          }
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="columnNumbers"></param>
+      /// <returns></returns>
       public IEnumerable<Cell> GetCellsInColumns( params int[] columnNumbers )
       {
          foreach ( int x in columnNumbers )
@@ -274,12 +385,21 @@ namespace RogueSharp
             }
          }
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="x"></param>
+      /// <param name="y"></param>
+      /// <returns></returns>
       public Cell GetCell( int x, int y )
       {
          return new Cell( x, y, _isTransparent[x, y], _isWalkable[x, y], _fieldOfView.IsInFov( x, y ), _isExplored[x, y] );
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="useFov"></param>
+      /// <returns></returns>
       public string ToString( bool useFov )
       {
          var mapRepresentation = new StringBuilder();
@@ -295,7 +415,10 @@ namespace RogueSharp
          }
          return mapRepresentation.ToString().TrimEnd( '\r', '\n' );
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <returns></returns>
       public MapState Save()
       {
          var mapState = new MapState();
@@ -321,7 +444,10 @@ namespace RogueSharp
          }
          return mapState;
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="state"></param>
       public void Restore( MapState state )
       {
          var inFov = new HashSet<int>();
@@ -340,12 +466,20 @@ namespace RogueSharp
 
          _fieldOfView = new FieldOfView( this, inFov );
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="mapCreationStrategy"></param>
+      /// <returns></returns>
       public static Map Create( IMapCreationStrategy<Map> mapCreationStrategy )
       {
          return mapCreationStrategy.CreateMap();
       }
-      
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="index"></param>
+      /// <returns></returns>
       public Cell CellFor( int index )
       {
          int x = index % Width;
@@ -353,23 +487,34 @@ namespace RogueSharp
 
          return GetCell( x, y );
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="x"></param>
+      /// <param name="y"></param>
+      /// <returns></returns>
       public int IndexFor( int x, int y )
       {
          return ( y * Width ) + x;
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="cell"></param>
+      /// <returns></returns>
       public int IndexFor( Cell cell )
       {
          return ( cell.Y * Width ) + cell.X;
       }
-
       private bool AddToHashSet( HashSet<int> hashSet, int x, int y, out Cell cell )
       {
          cell = GetCell( x, y );
          return hashSet.Add( IndexFor( cell ) );
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <returns></returns>
       public override string ToString()
       {
          return ToString( false );

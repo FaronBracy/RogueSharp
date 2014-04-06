@@ -5,6 +5,9 @@ using System.Text;
 
 namespace RogueSharp
 {
+   /// <summary>
+   /// 
+   /// </summary>
    public class GoalMap : IGoalMap
    {
       private const int Wall = int.MinValue;
@@ -12,7 +15,10 @@ namespace RogueSharp
       private readonly List<Cell> _goals;
       private readonly IMap _map;
       private bool _isRecomputeNeeded;
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="map"></param>
       public GoalMap( IMap map )
       {
          _map = map;
@@ -20,7 +26,12 @@ namespace RogueSharp
          _goals = new List<Cell>();
          _isRecomputeNeeded = true;
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="x"></param>
+      /// <param name="y"></param>
+      /// <param name="weight"></param>
       public void AddGoal( int x, int y, int weight )
       {
          _goals.Add( new Cell
@@ -31,19 +42,26 @@ namespace RogueSharp
          } );
          _isRecomputeNeeded = true;
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
       public void ClearGoals()
       {
          _goals.Clear();
          _isRecomputeNeeded = true;
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="x"></param>
+      /// <param name="y"></param>
+      /// <param name="obstacles"></param>
+      /// <returns></returns>
       public List<Point> FindPathAvoidingGoals( int x, int y, IEnumerable<Point> obstacles )
       {
          MultiplyAndRecomputeCellWeights( -1.2f );
          return FindPath( x, y, obstacles );
       }
-
       private void MultiplyAndRecomputeCellWeights( float amount )
       {
          ComputeCellWeightsIfNeeded();
@@ -88,7 +106,13 @@ namespace RogueSharp
 
          _isRecomputeNeeded = false;
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="x"></param>
+      /// <param name="y"></param>
+      /// <param name="obstacles"></param>
+      /// <returns></returns>
       public List<Point> FindPath( int x, int y, IEnumerable<Point> obstacles )
       {
          ComputeCellWeightsIfNeeded();
@@ -118,14 +142,18 @@ namespace RogueSharp
          }
          return paths[bestPathIndex];
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="x"></param>
+      /// <param name="y"></param>
+      /// <returns></returns>
       public List<List<Point>> FindAllPathsToAllGoals( int x, int y )
       {
          ComputeCellWeightsIfNeeded();
          var pathFinder = new GoalMapPathFinder( this );
          return pathFinder.FindPaths( x, y );
       }
-
       private void ComputeCellWeightsIfNeeded()
       {
          if ( _isRecomputeNeeded )
@@ -133,7 +161,6 @@ namespace RogueSharp
             ComputeCellWeights();
          }
       }
-
       private void ComputeCellWeights()
       {
          _isRecomputeNeeded = false;
@@ -183,7 +210,6 @@ namespace RogueSharp
             }
          }
       }
-
       private List<Cell> GetNeighbors( int x, int y )
       {
          var neighbors = new List<Cell>();
@@ -229,7 +255,6 @@ namespace RogueSharp
          }
          return neighbors;
       }
-
       private List<Cell> GetLowestWeightNeighbors( int x, int y )
       {
          List<Cell> neighbors = GetNeighbors( x, y );
@@ -267,7 +292,10 @@ namespace RogueSharp
          }
          return lowestWeightNeighbors;
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <returns></returns>
       public override string ToString()
       {
          var mapRepresentation = new StringBuilder();
@@ -281,14 +309,12 @@ namespace RogueSharp
          }
          return mapRepresentation.ToString().TrimEnd( '\r', '\n' );
       }
-
       private class Cell
       {
          public int X { get; set; }
          public int Y { get; set; }
          public int Weight { get; set; }
       }
-
       private class GoalMapPathFinder
       {
          private readonly GoalMap _goalMap;

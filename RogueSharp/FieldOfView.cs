@@ -3,23 +3,31 @@ using System.Collections.Generic;
 
 namespace RogueSharp
 {
+   /// <summary>
+   /// 
+   /// </summary>
    public class FieldOfView
    {
       private readonly IMap _map;
       private readonly HashSet<int> _inFov;
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="map"></param>
       public FieldOfView( IMap map )
       {
          _map = map;
          _inFov = new HashSet<int>();
       }
-
       internal FieldOfView( IMap map, HashSet<int> inFov )
       {
          _map = map;
          _inFov = inFov;
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <returns></returns>
       public FieldOfView Clone()
       {
          var inFovCopy = new HashSet<int>();
@@ -29,18 +37,37 @@ namespace RogueSharp
          }
          return new FieldOfView( _map, inFovCopy );
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="x"></param>
+      /// <param name="y"></param>
+      /// <returns></returns>
       public bool IsInFov( int x, int y )
       {
          return _inFov.Contains( _map.IndexFor( x, y ) );
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="xOrigin"></param>
+      /// <param name="yOrigin"></param>
+      /// <param name="radius"></param>
+      /// <param name="lightWalls"></param>
+      /// <returns></returns>
       public List<Cell> ComputeFov( int xOrigin, int yOrigin, int radius, bool lightWalls )
       {
          ClearFov();
          return AppendFov( xOrigin, yOrigin, radius, lightWalls );
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="xOrigin"></param>
+      /// <param name="yOrigin"></param>
+      /// <param name="radius"></param>
+      /// <param name="lightWalls"></param>
+      /// <returns></returns>
       public List<Cell> AppendFov( int xOrigin, int yOrigin, int radius, bool lightWalls )
       {
          foreach ( Cell borderCell in _map.GetBorderCellsInArea( xOrigin, yOrigin, radius ) )
@@ -99,7 +126,6 @@ namespace RogueSharp
 
          return CellsInFov();
       }
-
       private List<Cell> CellsInFov()
       {
          var cells = new List<Cell>();
@@ -109,14 +135,10 @@ namespace RogueSharp
          }
          return cells;
       }
-
-
-
       private void ClearFov()
       {
          _inFov.Clear();
       }
-
       private void PostProcessFovQuadrant( int x, int y, Quadrant quadrant )
       {
          int x1 = x;
@@ -159,7 +181,6 @@ namespace RogueSharp
             }
          }
       }
-
       private enum Quadrant
       {
          NE = 1,

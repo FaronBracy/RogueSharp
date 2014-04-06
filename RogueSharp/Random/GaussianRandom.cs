@@ -2,6 +2,9 @@
 
 namespace RogueSharp.Random
 {
+   /// <summary>
+   /// 
+   /// </summary>
    public class GaussianRandom : IRandom
    {
       private int _seed;
@@ -9,25 +12,38 @@ namespace RogueSharp.Random
       private long _numberGenerated;
       private double _nextGaussian;
       private bool _uselast = true;
-
+      /// <summary>
+      /// 
+      /// </summary>
       public GaussianRandom()
          : this( Environment.TickCount )
       {
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="seed"></param>
       public GaussianRandom( int seed )
       {
          _seed = seed;
          _random = new System.Random( _seed );
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="maxValue"></param>
+      /// <returns></returns>
       public int Next( int maxValue )
       {
          return Next( 0, maxValue );
       }
-
-      // Will approximitely give a random gaussian integer between min and max so that min and max are at
-      // 3.5 deviations from the mean (half-way of min and max).
+      /// <summary>
+      /// Will approximitely give a random gaussian integer between min and max so that min and max are at
+      /// 3.5 deviations from the mean (half-way of min and max).
+      /// </summary>
+      /// <param name="minValue"></param>
+      /// <param name="maxValue"></param>
+      /// <returns></returns>
       public int Next( int minValue, int maxValue )
       {
          _numberGenerated++;
@@ -50,7 +66,10 @@ namespace RogueSharp.Random
 
          return r;
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <returns></returns>
       public RandomState Save()
       {
          return new RandomState
@@ -62,7 +81,10 @@ namespace RogueSharp.Random
             }
          };
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="state"></param>
       public void Restore( RandomState state )
       {
          _seed = state.Seed[0];
@@ -75,7 +97,6 @@ namespace RogueSharp.Random
             Next( 1 );
          }
       }
-
       private double BoxMuller()
       {
          if ( _uselast )
@@ -101,7 +122,6 @@ namespace RogueSharp.Random
             return v1 * s;
          }
       }
-
       private double BoxMuller( double mean, double standardDeviation )
       {
          return mean + BoxMuller() * standardDeviation;

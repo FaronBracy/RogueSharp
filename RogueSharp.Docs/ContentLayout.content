@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Topics>
-  <Topic id="854cb5b5-eaa9-46ff-a676-041f84fd36fe" visible="True" isDefault="true" isSelected="true" title="Welcome to the [TODO: Add project name]">
+  <Topic id="854cb5b5-eaa9-46ff-a676-041f84fd36fe" visible="True" isDefault="true" isSelected="true" title="Welcome to RogueSharp">
     <HelpKeywords>
       <HelpKeyword index="K" term="Welcome" />
     </HelpKeywords>

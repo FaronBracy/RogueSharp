@@ -3,11 +3,17 @@ using RogueSharp.Algorithms;
 
 namespace RogueSharp
 {
+   /// <summary>
+   /// 
+   /// </summary>
    public class PathFinder
    {
       private readonly EdgeWeightedDigraph _graph;
       private readonly IMap _map;
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="map"></param>
       public PathFinder( IMap map )
       {
          _map = map;
@@ -29,7 +35,12 @@ namespace RogueSharp
             }
          }
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="source"></param>
+      /// <param name="destination"></param>
+      /// <returns></returns>
       public IEnumerable<Cell> ShortestPath( Cell source, Cell destination )
       {
          var dsp = new DijkstraShortestPath( _graph, IndexFor( source ) );
@@ -46,12 +57,10 @@ namespace RogueSharp
             }
          }
       }
-
       private int IndexFor( Cell cell )
       {
          return ( cell.Y * _map.Width ) + cell.X;
       }
-
       private Cell CellFor( int index )
       {
          int x = index % _map.Width;

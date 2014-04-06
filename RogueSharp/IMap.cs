@@ -89,31 +89,159 @@ namespace RogueSharp
       /// <param name="y">Y location of the Cell to check, starting with 0 as the top</param>
       /// <returns>True if the Cell has been flagged as being explored by the player, false otherwise</returns>
       bool IsExplored( int x, int y );
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="x"></param>
+      /// <param name="y"></param>
+      /// <param name="isTransparent"></param>
+      /// <param name="isWalkable"></param>
+      /// <param name="isExplored"></param>
       void SetCellProperties( int x, int y, bool isTransparent, bool isWalkable, bool isExplored = false );
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="isTransparent"></param>
+      /// <param name="isWalkable"></param>
       void Clear( bool isTransparent = false, bool isWalkable = false );
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <returns></returns>
       IMap Clone();
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="sourceMap"></param>
+      /// <param name="left"></param>
+      /// <param name="top"></param>
       void Copy( IMap sourceMap, int left = 0, int top = 0 );
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="xOrigin"></param>
+      /// <param name="yOrigin"></param>
+      /// <param name="radius"></param>
+      /// <param name="lightWalls"></param>
       void ComputeFov( int xOrigin, int yOrigin, int radius, bool lightWalls );
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="xOrigin"></param>
+      /// <param name="yOrigin"></param>
+      /// <param name="radius"></param>
+      /// <param name="lightWalls"></param>
       void AppendFov( int xOrigin, int yOrigin, int radius, bool lightWalls );
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <returns></returns>
       IEnumerable<Cell> GetAllCells();
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="xOrigin"></param>
+      /// <param name="yOrigin"></param>
+      /// <param name="xDestination"></param>
+      /// <param name="yDestination"></param>
+      /// <returns></returns>
       IEnumerable<Cell> GetCellsAlongLine( int xOrigin, int yOrigin, int xDestination, int yDestination );
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="xOrigin"></param>
+      /// <param name="yOrigin"></param>
+      /// <param name="radius"></param>
+      /// <returns></returns>
       IEnumerable<Cell> GetCellsInRadius( int xOrigin, int yOrigin, int radius );
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="xOrigin"></param>
+      /// <param name="yOrigin"></param>
+      /// <param name="distance"></param>
+      /// <returns></returns>
       IEnumerable<Cell> GetCellsInArea( int xOrigin, int yOrigin, int distance );
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="xOrigin"></param>
+      /// <param name="yOrigin"></param>
+      /// <param name="radius"></param>
+      /// <returns></returns>
       IEnumerable<Cell> GetBorderCellsInRadius( int xOrigin, int yOrigin, int radius );
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="xOrigin"></param>
+      /// <param name="yOrigin"></param>
+      /// <param name="distance"></param>
+      /// <returns></returns>
       IEnumerable<Cell> GetBorderCellsInArea( int xOrigin, int yOrigin, int distance );
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="rowNumbers"></param>
+      /// <returns></returns>
       IEnumerable<Cell> GetCellsInRows( params int[] rowNumbers );
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="columnNumbers"></param>
+      /// <returns></returns>
       IEnumerable<Cell> GetCellsInColumns( params int[] columnNumbers );
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="x"></param>
+      /// <param name="y"></param>
+      /// <returns></returns>
       Cell GetCell( int x, int y );
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="useFov"></param>
+      /// <returns></returns>
       string ToString( bool useFov );
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <returns></returns>
       MapState Save();
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="state"></param>
       void Restore( MapState state );
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="index"></param>
+      /// <returns></returns>
       Cell CellFor( int index );
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="x"></param>
+      /// <param name="y"></param>
+      /// <returns></returns>
       int IndexFor( int x, int y );
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="cell"></param>
+      /// <returns></returns>
       int IndexFor( Cell cell );
    }
 
+   /// <summary>
+   /// 
+   /// </summary>
    public class MapState
    {
+      /// <summary>
+      /// 
+      /// </summary>
       [Flags]
       public enum CellProperties
       {
@@ -124,8 +252,17 @@ namespace RogueSharp
          Explored = 8
       }
 
+      /// <summary>
+      /// 
+      /// </summary>
       public int Width { get; set; }
+      /// <summary>
+      /// 
+      /// </summary>
       public int Height { get; set; }
+      /// <summary>
+      /// 
+      /// </summary>
       public CellProperties[] Cells { get; set; }
    }
 }

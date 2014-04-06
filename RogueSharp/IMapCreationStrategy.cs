@@ -4,11 +4,22 @@ using RogueSharp.Random;
 
 namespace RogueSharp
 {
+   /// <summary>
+   /// 
+   /// </summary>
+   /// <typeparam name="T"></typeparam>
    public interface IMapCreationStrategy<T> where T : IMap
    {
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <returns></returns>
       T CreateMap();
    }
-
+   /// <summary>
+   /// 
+   /// </summary>
+   /// <typeparam name="T"></typeparam>
    public class RandomRoomsMapCreationStrategy<T> : IMapCreationStrategy<T> where T : IMap, new()
    {
       private static IRandom _random;
@@ -17,7 +28,15 @@ namespace RogueSharp
       private readonly int _roomMaxSize;
       private readonly int _roomMinSize;
       private readonly int _width;
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="width"></param>
+      /// <param name="height"></param>
+      /// <param name="maxRooms"></param>
+      /// <param name="roomMaxSize"></param>
+      /// <param name="roomMinSize"></param>
+      /// <param name="random"></param>
       public RandomRoomsMapCreationStrategy( int width, int height, int maxRooms, int roomMaxSize, int roomMinSize, IRandom random = null )
       {
          _width = width;
@@ -27,7 +46,10 @@ namespace RogueSharp
          _roomMinSize = roomMinSize;
          _random = random ?? new DotNetRandom();
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <returns></returns>
       public T CreateMap()
       {
          var rooms = new List<Rectangle>();
@@ -88,7 +110,6 @@ namespace RogueSharp
 
          return map;
       }
-
       private static void MakeRoom( T map, Rectangle room )
       {
          for ( int x = room.Left + 1; x < room.Right; x++ )
@@ -99,7 +120,6 @@ namespace RogueSharp
             }
          }
       }
-
       private static void MakeHorizontalTunnel( T map, int xStart, int xEnd, int yPosition )
       {
          for ( int x = Math.Min( xStart, xEnd ); x <= Math.Max( xStart, xEnd ); x++ )
@@ -107,7 +127,6 @@ namespace RogueSharp
             map.SetCellProperties( x, yPosition, true, true );
          }
       }
-
       private static void MakeVerticalTunnel( T map, int yStart, int yEnd, int xPosition )
       {
          for ( int y = Math.Min( yStart, yEnd ); y <= Math.Max( yStart, yEnd ); y++ )
@@ -116,14 +135,23 @@ namespace RogueSharp
          }
       }
    }
-
+   /// <summary>
+   /// 
+   /// </summary>
+   /// <typeparam name="T"></typeparam>
    public class DungeonCreationStrategy<T> : IMapCreationStrategy<T> where T : IMap, new()
    {
       private readonly int _height;
       private readonly IRandom _random;
       private readonly int _rooms;
       private readonly int _width;
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="width"></param>
+      /// <param name="height"></param>
+      /// <param name="rooms"></param>
+      /// <param name="random"></param>
       public DungeonCreationStrategy( int width, int height, int rooms, IRandom random = null )
       {
          if ( width % 2 == 0 )
@@ -139,7 +167,10 @@ namespace RogueSharp
          _rooms = rooms;
          _random = random ?? new DotNetRandom();
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <returns></returns>
       public T CreateMap()
       {
          var rooms = new List<Rectangle>();
@@ -180,7 +211,6 @@ namespace RogueSharp
 
          return map;
       }
-
       private int RandomSize()
       {
          int size = _random.Next( 1, 3 );
@@ -194,7 +224,6 @@ namespace RogueSharp
          }
          return size;
       }
-
       private int RandomX( int roomWidth )
       {
          int roomXPosition = _random.Next( 1, _width - roomWidth - 1 );
@@ -204,7 +233,6 @@ namespace RogueSharp
          }
          return roomXPosition;
       }
-
       private int RandomY( int roomHeight )
       {
          int roomYPosition = _random.Next( 1, _height - roomHeight - 1 );
@@ -214,7 +242,6 @@ namespace RogueSharp
          }
          return roomYPosition;
       }
-
       private static void MakeRoom( T map, Rectangle room )
       {
          for ( int x = room.Left; x < room.Right; x++ )
@@ -226,18 +253,28 @@ namespace RogueSharp
          }
       }
    }
-
+   /// <summary>
+   /// 
+   /// </summary>
+   /// <typeparam name="T"></typeparam>
    public class BorderOnlyMapCreationStrategy<T> : IMapCreationStrategy<T> where T : IMap, new()
    {
       private readonly int _height;
       private readonly int _width;
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="width"></param>
+      /// <param name="height"></param>
       public BorderOnlyMapCreationStrategy( int width, int height )
       {
          _width = width;
          _height = height;
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <returns></returns>
       public T CreateMap()
       {
          var map = new T();
@@ -257,16 +294,25 @@ namespace RogueSharp
          return map;
       }
    }
-
+   /// <summary>
+   /// 
+   /// </summary>
+   /// <typeparam name="T"></typeparam>
    public class StringDeserializeMapCreationStrategy<T> : IMapCreationStrategy<T> where T : IMap, new()
    {
-      public string _mapRepresentation;
-
+      private readonly string _mapRepresentation;
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="mapRepresentation"></param>
       public StringDeserializeMapCreationStrategy( string mapRepresentation )
       {
          _mapRepresentation = mapRepresentation;
       }
-
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <returns></returns>
       public T CreateMap()
       {
          string[] lines = _mapRepresentation.Replace( " ", "" ).Replace( "\r", "" ).Split( '\n' );
