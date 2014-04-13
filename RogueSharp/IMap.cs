@@ -44,7 +44,7 @@ namespace RogueSharp
       /// </example>
       /// <param name="x">X location of the Cell to check starting with 0 as the farthest left</param>
       /// <param name="y">Y location of the Cell to check, starting with 0 as the top</param>
-      /// <returns>True if line-of-sight is not blocked by this cell, false otherwise</returns>
+      /// <returns>True if line-of-sight is not blocked by this Cell, false otherwise</returns>
       bool IsTransparent( int x, int y );
       /// <summary>
       /// Get the walkability of the Cell i.e. if a character could normally move across the Cell without difficulty
@@ -56,7 +56,7 @@ namespace RogueSharp
       /// </example>
       /// <param name="x">X location of the Cell to check starting with 0 as the farthest left</param>
       /// <param name="y">Y location of the Cell to check, starting with 0 as the top</param>
-      /// <returns>True if a character could move across this cell, false otherwise</returns>
+      /// <returns>True if a character could move across this Cell, false otherwise</returns>
       bool IsWalkable( int x, int y );
       /// <summary>
       /// Check if the Cell is in the currently computed field-of-view
@@ -68,7 +68,7 @@ namespace RogueSharp
       /// </remarks>
       /// <example>
       /// Field-of-view c be used to simulate a character holding a light source and exploring a Map representing a dark cavern
-      /// Any cells within the FOV would be what the character could see from their current location and lighting conditions
+      /// Any Cells within the FOV would be what the character could see from their current location and lighting conditions
       /// </example>
       /// <param name="x">X location of the Cell to check starting with 0 as the farthest left</param>
       /// <param name="y">Y location of the Cell to check, starting with 0 as the top</param>
@@ -78,7 +78,7 @@ namespace RogueSharp
       /// Check if the Cell is flagged as ever having been explored by the player
       /// </summary>
       /// <remarks>
-      /// The explored property of a cell can be used to track if the Cell has ever been in the field-of-view of a character controlled by the player
+      /// The explored property of a Cell can be used to track if the Cell has ever been in the field-of-view of a character controlled by the player
       /// This property will not automatically be updated based on FOV calcuations or any other built-in functions of the RogueSharp library.
       /// </remarks>
       /// <example>
@@ -126,7 +126,7 @@ namespace RogueSharp
       /// </summary>
       /// <param name="xOrigin">X location of the Cell to perform the field-of-view calculation with 0 as the farthest left</param>
       /// <param name="yOrigin">Y location of the Cell to perform the field-of-view calculation with 0 as the top</param>
-      /// <param name="radius">The number of cells in which the field-of-view extends from the origin Cell. Think of this as the intensity of the light source.</param>
+      /// <param name="radius">The number of Cells in which the field-of-view extends from the origin Cell. Think of this as the intensity of the light source.</param>
       /// <param name="lightWalls">True if walls should be included in the field-of-view when they are within the radius of the light source. False excludes walls even when they are within range.</param>
       void ComputeFov( int xOrigin, int yOrigin, int radius, bool lightWalls );
       /// <summary>
