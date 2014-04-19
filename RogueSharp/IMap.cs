@@ -253,7 +253,8 @@ namespace RogueSharp
    }
 
    /// <summary>
-   /// POCO (Plain Old C# Object) which represents this Map and can be easily serialized and deserialized
+   /// A class representing the state of a Map which can be used to Restore a Map to a previously Saved state
+   /// This POCO (Plain Old C# Object) can be easily serialized and deserialized
    /// </summary>
    public class MapState
    {
