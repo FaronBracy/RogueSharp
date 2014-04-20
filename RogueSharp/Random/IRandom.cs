@@ -37,7 +37,7 @@
       /// <returns>A RandomState class representing the current state of this pseudo-random number generator</returns>
       RandomState Save();
       /// <summary>
-      /// Restores the state of the psudo-random number generator based on the specified state parameter
+      /// Restores the state of the pseudo-random number generator based on the specified state parameter
       /// </summary>
       /// <example>
       /// If you generated three random numbers and then called Save to store the state and 
