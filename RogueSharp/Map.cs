@@ -101,7 +101,7 @@ namespace RogueSharp
       /// Field-of-view (FOV) is basically a calculation of what is observable in the Map from a given Cell with a given light radius
       /// </remarks>
       /// <example>
-      /// Field-of-view c be used to simulate a character holding a light source and exploring a Map representing a dark cavern
+      /// Field-of-view can be used to simulate a character holding a light source and exploring a Map representing a dark cavern
       /// Any Cells within the FOV would be what the character could see from their current location and lighting conditions
       /// </example>
       /// <param name="x">X location of the Cell to check starting with 0 as the farthest left</param>
