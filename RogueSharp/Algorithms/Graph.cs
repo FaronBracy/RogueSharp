@@ -81,7 +81,7 @@ namespace RogueSharp.Algorithms
    /// The DepthFirstPaths class represents a data type for finding paths from a source vertex to 
    /// every other vertex in an undirected graph using depth-first search.
    /// </summary>
-   /// <seealso cref="http://algs4.cs.princeton.edu/41undirected/DepthFirstPaths.java.html">DepthFirstPaths class from Princeton University's Java Algorithms</seealso>
+   /// <seealso href="http://algs4.cs.princeton.edu/41undirected/DepthFirstPaths.java.html">DepthFirstPaths class from Princeton University's Java Algorithms</seealso>
    public class DepthFirstPaths
    {
       private readonly int[] _edgeTo;
@@ -145,7 +145,7 @@ namespace RogueSharp.Algorithms
    /// The EdgeWeightedDigrpah class represents an edge-weighted directed graph of vertices named 0 through V-1, where each directed edge
    /// is of type DirectedEdge and has real-valued weight.
    /// </summary>
-   /// <seealso cref="http://algs4.cs.princeton.edu/44sp/EdgeWeightedDigraph.java.html">EdgeWeightedDigraph class from Princeton University's Java Algorithms</seealso>
+   /// <seealso href="http://algs4.cs.princeton.edu/44sp/EdgeWeightedDigraph.java.html">EdgeWeightedDigraph class from Princeton University's Java Algorithms</seealso>
    public class EdgeWeightedDigraph
    {
       private readonly LinkedList<DirectedEdge>[] _adjacent;
@@ -238,7 +238,7 @@ namespace RogueSharp.Algorithms
    /// <summary>
    /// The DirectedEdge class represents a weighted edge in an edge-weighted directed graph. 
    /// </summary>
-   /// <seealso cref="http://algs4.cs.princeton.edu/44sp/DirectedEdge.java.html">DirectedEdge class from Princeton University's Java Algorithms</seealso>
+   /// <seealso href="http://algs4.cs.princeton.edu/44sp/DirectedEdge.java.html">DirectedEdge class from Princeton University's Java Algorithms</seealso>
    public class DirectedEdge
    {
       /// <summary>
@@ -281,7 +281,7 @@ namespace RogueSharp.Algorithms
    /// The DijkstraShortestPath class represents a data type for solving the single-source shortest paths problem
    /// in edge-weighted digraphs where the edge weights are non-negative
    /// </summary>
-   /// <seealso cref="http://algs4.cs.princeton.edu/44sp/DijkstraSP.java.html">DijkstraSP class from Princeton University's Java Algorithms</seealso>
+   /// <seealso href="http://algs4.cs.princeton.edu/44sp/DijkstraSP.java.html">DijkstraSP class from Princeton University's Java Algorithms</seealso>
    public class DijkstraShortestPath
    {
       private readonly double[] _distanceTo;
@@ -380,8 +380,6 @@ namespace RogueSharp.Algorithms
       // TODO: This method should be private and should be called from the bottom of the constructor
       /// <summary>
       /// check optimality conditions:
-      /// (i) for all edges e:            distTo[e.to()] <= distTo[e.from()] + e.weight()
-      /// (ii) for all edge e on the SPT: distTo[e.to()] == distTo[e.from()] + e.weight()
       /// </summary>
       /// <param name="graph">The edge-weighted directed graph</param>
       /// <param name="sourceVertex">The source vertex to check optimality conditions from</param>
@@ -438,7 +436,7 @@ namespace RogueSharp.Algorithms
    /// <summary>
    /// The IndexMinPriorityQueue class represents an indexed priority queue of generic keys.
    /// </summary>
-   /// <seealso cref="http://algs4.cs.princeton.edu/24pq/IndexMinPQ.java.html">IndexMinPQ class from Princeton University's Java Algorithms</seealso>
+   /// <seealso href="http://algs4.cs.princeton.edu/24pq/IndexMinPQ.java.html">IndexMinPQ class from Princeton University's Java Algorithms</seealso>
    /// <typeparam name="T">Type must impliment IComparable interface</typeparam>
    public class IndexMinPriorityQueue<T> where T : IComparable<T>
    {

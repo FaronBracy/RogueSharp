@@ -6,7 +6,7 @@ namespace RogueSharp
    /// <summary>
    /// A class for performing field-of-view calculations to determine what is observable in a Map from a given Cell within a given light radius
    /// </summary>
-   /// <seealso cref="https://sites.google.com/site/jicenospam/visibilitydetermination">Based on the visibility determination algorithm described here</seealso>
+   /// <seealso href="https://sites.google.com/site/jicenospam/visibilitydetermination">Based on the visibility determination algorithm described here</seealso>
    public class FieldOfView
    {
       private readonly IMap _map;
@@ -65,6 +65,7 @@ namespace RogueSharp
       /// <param name="yOrigin">Y location of the Cell to perform the field-of-view calculation with 0 as the top</param>
       /// <param name="radius">The number of Cells in which the field-of-view extends from the origin Cell. Think of this as the intensity of the light source.</param>
       /// <param name="lightWalls">True if walls should be included in the field-of-view when they are within the radius of the light source. False excludes walls even when they are within range.</param>
+      /// <returns>List of Cells representing the what is observable in the Map based on the specified parameters</returns>
       public List<Cell> ComputeFov( int xOrigin, int yOrigin, int radius, bool lightWalls )
       {
          ClearFov();
@@ -82,6 +83,7 @@ namespace RogueSharp
       /// <param name="yOrigin">Y location of the Cell to perform the field-of-view calculation with 0 as the top</param>
       /// <param name="radius">The number of Cells in which the field-of-view extends from the origin Cell. Think of this as the intensity of the light source.</param>
       /// <param name="lightWalls">True if walls should be included in the field-of-view when they are within the radius of the light source. False excludes walls even when they are within range.</param>
+      /// <returns>List of Cells representing the what is observable in the Map based on the specified parameters</returns>
       public List<Cell> AppendFov( int xOrigin, int yOrigin, int radius, bool lightWalls )
       {
          foreach ( Cell borderCell in _map.GetBorderCellsInArea( xOrigin, yOrigin, radius ) )

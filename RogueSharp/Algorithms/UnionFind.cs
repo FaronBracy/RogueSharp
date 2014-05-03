@@ -6,7 +6,7 @@ namespace RogueSharp.Algorithms
    /// The UnionFind class represents a union-find data type also known as the disjoint-sets data type.
    /// It models connectivity among a set of N sites named 0 through N - 1.
    /// </summary>
-   /// <seealso cref="http://algs4.cs.princeton.edu/15uf/UF.java.html">
+   /// <seealso href="http://algs4.cs.princeton.edu/15uf/UF.java.html">
    /// UF class from Princeton University's Java Algorithms
    /// </seealso>
    public class UnionFind

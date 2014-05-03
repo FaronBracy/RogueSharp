@@ -10,7 +10,7 @@ namespace RogueSharp
    /// </summary>
    /// <remarks>
    /// </remarks>
-   /// <seealso cref="http://www.roguebasin.com/index.php?title=The_Incredible_Power_of_Dijkstra_Maps">Inspired by the article "The Incredible Power of Dijkstra Maps on roguebasin</seealso>
+   /// <seealso href="http://www.roguebasin.com/index.php?title=The_Incredible_Power_of_Dijkstra_Maps">Inspired by the article "The Incredible Power of Dijkstra Maps on roguebasin</seealso>
    public class GoalMap : IGoalMap
    {
       private const int Wall = int.MinValue;

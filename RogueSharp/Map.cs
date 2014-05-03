@@ -425,7 +425,7 @@ namespace RogueSharp
       /// Get an IEnumerable of all the Cells in the specified column numbers
       /// </summary>
       /// <param name="columnNumbers">Integer array of column numbers with 0 as the farthest left</param>
-      /// <returns></returns>
+      /// <returns>IEnumerable of all the Cells in the specified column numbers</returns>
       public IEnumerable<Cell> GetCellsInColumns( params int[] columnNumbers )
       {
          foreach ( int x in columnNumbers )
@@ -441,7 +441,7 @@ namespace RogueSharp
       /// </summary>
       /// <param name="x">X location of the Cell to get starting with 0 as the farthest left</param>
       /// <param name="y">Y location of the Cell to get, starting with 0 as the top</param>
-      /// <returns></returns>
+      /// <returns>Cell at the specified location</returns>
       public Cell GetCell( int x, int y )
       {
          return new Cell( x, y, _isTransparent[x, y], _isWalkable[x, y], _fieldOfView.IsInFov( x, y ), _isExplored[x, y] );
