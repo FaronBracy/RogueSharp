@@ -53,13 +53,14 @@
     <BinaryTOC>True</BinaryTOC>
     <NamespaceSummaries>
       <NamespaceSummaryItem name="RogueSharp" isDocumented="True">RogueSharp is a free library written in C# to help roguelike developers get a head start on their game. RogueSharp provides many utility functions for dealing with map generation, field-of-view calculations, path finding, random number generation and more.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="RogueSharp.Algorithms" isDocumented="True">Algorithms for creating and traversing graphs which have many applications including pathfinding.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="RogueSharp.Random" isDocumented="True">Interfaces and classes for dealing with pseudo random number generation and dice. Includes predictable random number generation to be substituted in when running unit tests.</NamespaceSummaryItem></NamespaceSummaries>
+      <NamespaceSummaryItem name="RogueSharp.Algorithms" isDocumented="True">Algorithms for creating and traversing graphs which have many applications including pathfinding.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="RogueSharp.Random" isDocumented="True">Interfaces and classes for dealing with pseudo random number generation and dice. Includes predictable random number generation to be substituted in when running unit tests.</NamespaceSummaryItem>
+    </NamespaceSummaries>
     <ProjectSummary>RogueSharp is a free library written in C# to help roguelike developers get a head start on their game. RogueSharp provides many utility functions for dealing with map generation, field-of-view calculations, path finding, random number generation and more.
 
 It is loosely based on the popular libtcod %28http://doryen.eptalys.net/libtcod/%29 or &amp;quot%3bDoryen Library&amp;quot%3b though not all features overlap.
 </ProjectSummary>
-    <CopyrightHref>2014 Dreamers Design</CopyrightHref>
+    <CopyrightHref>2014 Faron Bracy</CopyrightHref>
   </PropertyGroup>
   <!-- There are no properties for these groups.  AnyCPU needs to appear in order for Visual Studio to perform
 			 the build.  The others are optional common platform types that may appear. -->

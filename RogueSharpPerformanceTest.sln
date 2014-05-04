@@ -12,6 +12,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		RogueSharp.vsmdi = RogueSharp.vsmdi
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dlls", "Dlls", "{AF135727-1FAC-44E0-9B25-317D05719438}"
+	ProjectSection(SolutionItems) = preProject
+		Dlls\libtcod-net-unmanaged.dll = Dlls\libtcod-net-unmanaged.dll
+		Dlls\libtcod-net.dll = Dlls\libtcod-net.dll
+		Dlls\libtcod-VS.dll = Dlls\libtcod-VS.dll
+		Dlls\SDL.dll = Dlls\SDL.dll
+		Dlls\zlib1.dll = Dlls\zlib1.dll
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RogueSharp.PerformanceTest", "RogueSharp.PerformanceTest\RogueSharp.PerformanceTest.csproj", "{F13AA419-6831-4898-BB3C-CF20177FE179}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +37,10 @@ Global
 		{A1494180-593F-46C0-8C34-47D3289A3CE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A1494180-593F-46C0-8C34-47D3289A3CE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A1494180-593F-46C0-8C34-47D3289A3CE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F13AA419-6831-4898-BB3C-CF20177FE179}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F13AA419-6831-4898-BB3C-CF20177FE179}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F13AA419-6831-4898-BB3C-CF20177FE179}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F13AA419-6831-4898-BB3C-CF20177FE179}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
