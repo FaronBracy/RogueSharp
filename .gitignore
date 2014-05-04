@@ -66,5 +66,8 @@ packages/
 #Beyond Compare Ignores
 *.orig
 
+#Sandcastle Generated Help Files
+RogueSharp.Docs/Help/
+
 #Necessary Dlls
 !Dlls/*

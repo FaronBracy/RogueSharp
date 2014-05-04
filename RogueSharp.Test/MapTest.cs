@@ -94,39 +94,6 @@ namespace RogueSharp.Test
       }
 
       [TestMethod]
-      public void Create_MapCreatedWithDungeonCreationStrategy_ExpectedMap()
-      {
-         int expectedWidth = 31;
-         int expectedHeight = 17;
-         IRandom random = new DotNetRandom( 1 );
-         IMapCreationStrategy<Map> mapCreationStrategy = new DungeonCreationStrategy<Map>( expectedWidth, expectedHeight, 15, random );
-         string expectedMapRepresentation = @"###############################
-                                              #########...#.......#####.....#
-                                              #########...#.......#####.....#
-                                              #.......#...#.......#...#.....#
-                                              #.......#...#.......#...#######
-                                              #.......#...#.......#...#######
-                                              #.......#############...#######
-                                              #.......###.......###...###...#
-                                              ###########.......###...###...#
-                                              #.......###.......###...###...#
-                                              #.......###.......#########...#
-                                              #.......###.......###.....#...#
-                                              #.......###.......###.....#...#
-                                              #.......###.......###.....#...#
-                                              #.......#######################
-                                              #.......#######################
-                                              ###############################";
-
-         IMap actualMap = Map.Create( mapCreationStrategy );
-         Trace.Write( actualMap );
-
-         Assert.AreEqual( expectedWidth, actualMap.Width );
-         Assert.AreEqual( expectedHeight, actualMap.Height );
-         Assert.AreEqual( expectedMapRepresentation.Replace( " ", string.Empty ), actualMap.ToString() );
-      }
-
-      [TestMethod]
       public void Create_StringDeserializeMapCreationStrategy_ExpectedMap()
       {
          string expectedMapRepresentation = @"####

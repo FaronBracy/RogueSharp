@@ -5,6 +5,12 @@ using System.Text;
 
 namespace RogueSharp
 {
+   /// <summary>
+   /// A class for assigning weights to every cell on the Map which can then be used for finding paths or building desire-driven AI
+   /// </summary>
+   /// <remarks>
+   /// </remarks>
+   /// <seealso href="http://www.roguebasin.com/index.php?title=The_Incredible_Power_of_Dijkstra_Maps">Inspired by the article "The Incredible Power of Dijkstra Maps on roguebasin</seealso>
    public class GoalMap : IGoalMap
    {
       private const int Wall = int.MinValue;
@@ -12,7 +18,10 @@ namespace RogueSharp
       private readonly List<Cell> _goals;
       private readonly IMap _map;
       private bool _isRecomputeNeeded;
-
+      /// <summary>
+      /// Constructs a new instance of a GoalMap for the specified Map
+      /// </summary>
+      /// <param name="map">The Map that this GoalMap will be created for</param>
       public GoalMap( IMap map )
       {
          _map = map;
@@ -20,7 +29,12 @@ namespace RogueSharp
          _goals = new List<Cell>();
          _isRecomputeNeeded = true;
       }
-
+      /// <summary>
+      /// Add a Goal at the specified location with the specified weight
+      /// </summary>
+      /// <param name="x">X location of the Goal starting with 0 as the farthest left</param>
+      /// <param name="y">Y location of the Goal starting with 0 as the top</param>
+      /// <param name="weight">The priority of this goal with respect to other goals with lower numbers being a higher priority</param>
       public void AddGoal( int x, int y, int weight )
       {
          _goals.Add( new Cell
@@ -31,19 +45,32 @@ namespace RogueSharp
          } );
          _isRecomputeNeeded = true;
       }
-
+      /// <summary>
+      /// Remove all goals from this GoalMap
+      /// </summary>
       public void ClearGoals()
       {
          _goals.Clear();
          _isRecomputeNeeded = true;
       }
-
+      /// <summary>
+      /// Returns an ordered List of Points representing a path from the specified location away from Goals
+      /// Distance to the goals and the weight of the goals are both used in determining the priority of avoiding the Goals
+      /// The path must not pass through any of the specified obstacles
+      /// </summary>
+      /// <exmaple>
+      /// In order to make the enemy AI try to flee from the player and his allies, Goals could be set on each object that the
+      /// AI should stay away from. Then calling this method will find a path away from those Goals
+      /// </exmaple>
+      /// <param name="x">X location of the beginning of the path, starting with 0 as the farthest left</param>
+      /// <param name="y">Y location of the beginning of the path, starting with 0 as the top</param>
+      /// <param name="obstacles">An array of points that must be avoided while calculating the path</param>
+      /// <returns>An ordered List of Points representing a path from the specified location away from Goals</returns>
       public List<Point> FindPathAvoidingGoals( int x, int y, IEnumerable<Point> obstacles )
       {
          MultiplyAndRecomputeCellWeights( -1.2f );
          return FindPath( x, y, obstacles );
       }
-
       private void MultiplyAndRecomputeCellWeights( float amount )
       {
          ComputeCellWeightsIfNeeded();
@@ -88,7 +115,15 @@ namespace RogueSharp
 
          _isRecomputeNeeded = false;
       }
-
+      /// <summary>
+      /// Returns an ordered List of Points representing a shortest path from the specified location to the Goal determined to have the highest priority
+      /// Distance to the goals and the weight of the goals are both used in determining the priority
+      /// The path must avoid the specified obstacles
+      /// </summary>
+      /// <param name="x">X location of the beginning of the path, starting with 0 as the farthest left</param>
+      /// <param name="y">Y location of the beginning of the path, starting with 0 as the top</param>
+      /// <param name="obstacles">An array of points that must be avoided while calculating the path</param>
+      /// <returns>An ordered List of Points representing a shortest path from the specified location to the Goal determined to have the highest priority</returns>
       public List<Point> FindPath( int x, int y, IEnumerable<Point> obstacles )
       {
          ComputeCellWeightsIfNeeded();
@@ -118,14 +153,18 @@ namespace RogueSharp
          }
          return paths[bestPathIndex];
       }
-
+      /// <summary>
+      /// Returns a List of ordered Lists of Points representing all of the shortest paths from the specified location to all defined Goals
+      /// </summary>
+      /// <param name="x">X location of the beginning of the path, starting with 0 as the farthest left</param>
+      /// <param name="y">Y location of the beginning of the path, starting with 0 as the top</param>
+      /// <returns>A List of ordered Lists of Points representing all of the shortest paths from the specified location to all defined Goals</returns>
       public List<List<Point>> FindAllPathsToAllGoals( int x, int y )
       {
          ComputeCellWeightsIfNeeded();
          var pathFinder = new GoalMapPathFinder( this );
          return pathFinder.FindPaths( x, y );
       }
-
       private void ComputeCellWeightsIfNeeded()
       {
          if ( _isRecomputeNeeded )
@@ -133,7 +172,6 @@ namespace RogueSharp
             ComputeCellWeights();
          }
       }
-
       private void ComputeCellWeights()
       {
          _isRecomputeNeeded = false;
@@ -183,7 +221,6 @@ namespace RogueSharp
             }
          }
       }
-
       private List<Cell> GetNeighbors( int x, int y )
       {
          var neighbors = new List<Cell>();
@@ -229,7 +266,6 @@ namespace RogueSharp
          }
          return neighbors;
       }
-
       private List<Cell> GetLowestWeightNeighbors( int x, int y )
       {
          List<Cell> neighbors = GetNeighbors( x, y );
@@ -267,7 +303,10 @@ namespace RogueSharp
          }
          return lowestWeightNeighbors;
       }
-
+      /// <summary>
+      /// Returns a string representation of the current GoalMap
+      /// </summary>
+      /// <returns>A string representing the current GoalMap</returns>
       public override string ToString()
       {
          var mapRepresentation = new StringBuilder();
@@ -281,14 +320,12 @@ namespace RogueSharp
          }
          return mapRepresentation.ToString().TrimEnd( '\r', '\n' );
       }
-
       private class Cell
       {
          public int X { get; set; }
          public int Y { get; set; }
          public int Weight { get; set; }
       }
-
       private class GoalMapPathFinder
       {
          private readonly GoalMap _goalMap;
