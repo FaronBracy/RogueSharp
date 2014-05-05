@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 
 [assembly: AssemblyTitle( "RogueSharp" )]
-[assembly: AssemblyDescription( "A library for roguelike developers to provide utilities frequently used in roguelikes. Based on libtcod" )]
+[assembly: AssemblyDescription( "A library for roguelike developers to provide utilities frequently used in roguelikes. Inspired by libtcod" )]
 [assembly: AssemblyConfiguration( "" )]
-[assembly: AssemblyCompany( "DreamersDesign" )]
+[assembly: AssemblyCompany( "Dreamers Design" )]
 [assembly: AssemblyProduct( "RogueSharp" )]
-[assembly: AssemblyCopyright( "Copyright © DreamersDesign 2012" )]
+[assembly: AssemblyCopyright( "Copyright © Faron Bracy 2014" )]
 [assembly: AssemblyTrademark( "" )]
 [assembly: AssemblyCulture( "" )]
 
@@ -35,5 +35,5 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 
-[assembly: AssemblyVersion( "1.1.0.0" )]
-[assembly: AssemblyFileVersion( "1.1.0.0" )]
+[assembly: AssemblyVersion( "1.0.1.0" )]
+[assembly: AssemblyFileVersion( "1.0.1.0" )]
