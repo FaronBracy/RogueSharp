@@ -9,8 +9,16 @@
     <licenseUrl>https://bitbucket.org/FaronBracy/roguesharp/</licenseUrl>
     <projectUrl>https://bitbucket.org/FaronBracy/roguesharp/</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>$description$</description>
-    <releaseNotes>Initial relase</releaseNotes>
+    <description>
+    A library for roguelike developers to provide utilities frequently used in roguelikes or 2D tile based games. Inspired by libtcod
+
+    New features:
+	* Added new map creation strategy for making cave-like maps
+    </description>
+    <releaseNotes>
+    New features:
+ 	* Added new map creation strategy for making cave-like maps
+    </releaseNotes>
     <copyright>Copyright 2014 Faron Bracy</copyright>
     <tags>roguelike libtcod pathfinding game map random generator field-of-view fog-of-war</tags>
   </metadata>

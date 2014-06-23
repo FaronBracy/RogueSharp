@@ -38,6 +38,42 @@ namespace RogueSharp.Test
       }
 
       [TestMethod]
+      public void Create_MapCreatedWithCaveCreationStrategy_ExpectedMap()
+      {
+         int expectedWidth = 50;
+         int expectedHeight = 20;
+         IRandom random = new DotNetRandom( 27 );
+         IMapCreationStrategy<Map> mapCreationStrategy = new CaveMapCreationStrategy<Map>( expectedWidth, expectedHeight, 45, 3, 2, random );
+         string expectedMapRepresentation = @"##################################################
+                                              ########...###################.#.#####....########
+                                              ######.......##############......#####....########
+                                              ####........###############......####......#######
+                                              ###.........#################...######........####
+                                              ##........#################.##..#####.....########
+                                              ###.......#######.#.######..##..#######.#..#######
+                                              ####......######.......#........#########..#######
+                                              #####.......#....##....###......#########..#######
+                                              ######........#####..............#########..######
+                                              #..###......########....######...#########..######
+                                              #...##......########.....#####.....#.######..#####
+                                              #............##########..######......######..#####
+                                              #...........########.....######.#....#######..####
+                                              ##...........#######.....###################..####
+                                              #............#.#####........#################..###
+                                              ##.............#####................#########..###
+                                              ###.............#####........######...........####
+                                              ####.#....#.#.#######.#.#...######################
+                                              ##################################################";
+
+         IMap actualMap = Map.Create( mapCreationStrategy );
+         Trace.Write( actualMap );
+
+         Assert.AreEqual( expectedWidth, actualMap.Width );
+         Assert.AreEqual( expectedHeight, actualMap.Height );
+         Assert.AreEqual( expectedMapRepresentation.Replace( " ", string.Empty ), actualMap.ToString() );
+      }
+
+      [TestMethod]
       public void Create_MapCreatedWithWidth40Height20BorderOnlyStrategy_ExpectedMap()
       {
          int expectedWidth = 40;
