@@ -4,7 +4,8 @@ RogueSharp is a free library written in C# to help [roguelike](http://en.wikiped
 It is loosely based on the popular [libtcod](http://doryen.eptalys.net/libtcod/ "libtcod") or "Doryen Library" though not all features overlap.
 
 ## Getting Started ##
-1. The quickest way to get started is by using the [RogueSharp nuget package](https://www.nuget.org/packages/RogueSharp/1.0.0 "RogueSharp nuget package"). 
+1. Visit the [RogueSharp Blog](http://roguesharp.wordpress.com/ "RogueSharp Blog") for tips and tutorials.
+2. The quickest way to add RogueSharp to your project is by using the [RogueSharp nuget package](https://www.nuget.org/packages/RogueSharp "RogueSharp nuget package"). 
 2. If building the assembly yourself, the solution file "RogueSharp.sln" contains the main library and unit tests. This should be all you need.
 3. The solution file "RogueSharpPerformanceTests.sln" contains a wrapper for libtcod and was only used to test performance of similar functions between RogueSharp and libtcod
 4. The solution file "RogueSharpDocumentation.sln" requires [Sandcastle Help File Builder](https://shfb.codeplex.com/ "Sandcastle Help File Builder") to be installed. It can be used to generate documentation for the library from the XML comments on public methods.
