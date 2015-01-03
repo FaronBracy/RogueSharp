@@ -12,7 +12,7 @@ namespace RogueSharp.Test.DiceNotation
    public class DiceTermTest
    {
       [TestMethod]
-      public void SetsConstructorValues()
+      public void Constructor_GoodValues_SetsAllValues()
       {
          const int multiplicity = 3;
          const int sides = 4;
@@ -27,7 +27,7 @@ namespace RogueSharp.Test.DiceNotation
 
       [TestMethod]
       [ExpectedException(typeof (ImpossibleDieException))]
-      public void ExceptionIsThrownWhenConstructingImpossibleDice()
+      public void Constructor_InvalidNumberOfSides_ThrowsImpossibleDieException()
       {
          const int invalidNumberOfSides = -1;
 
@@ -36,7 +36,7 @@ namespace RogueSharp.Test.DiceNotation
 
       [TestMethod]
       [ExpectedException( typeof( InvalidChooseException ) )]
-      public void ExceptionIsThrownWhenChoosingMoreDiceThanRolled()
+      public void Constructor_ChooseMoreDiceThanRolled_ThrowsInvalidChooseException()
       {
          const int multiplicity = 1;
          const int choose = multiplicity + 1;
@@ -46,7 +46,7 @@ namespace RogueSharp.Test.DiceNotation
 
       [TestMethod]
       [ExpectedException( typeof( InvalidChooseException ) )]
-      public void ExceptionIsThrownWhenChoosingLessThanNoDice()
+      public void Constructor_ChooseLessThanAnyDice_ThrowsInvalidChooseException()
       {
          const int multiplicity = 1;
          const int choose = -1;
@@ -56,21 +56,19 @@ namespace RogueSharp.Test.DiceNotation
 
       [TestMethod]
       [ExpectedException( typeof( InvalidMultiplicityException ) )]
-      public void ExceptionIsThrownWhenConstructingDiceWithInvalidMultiplicity()
+      public void Constructor_LessThanZeroDice_ThrowsInvalidMultiplicityException()
       {
          const int invalidMultiplicity = -1;
 
-         var rollLessThanNoDice = new DiceTerm( invalidMultiplicity, 6, 1 );
+         var lessThanNoDice = new DiceTerm( invalidMultiplicity, 6, 1 );
       }
 
       [TestMethod]
-      public void ReturnsMultiplicityResultsWhenNoChooseSpecified()
+      public void GetResults_NoChooseSpecified_ReturnsAllDice()
       {
          const int multiplicity = 6;
          const int sides = 6;
-
          var diceTerm = new DiceTerm( multiplicity, sides, 1 );
-
          var dieRoller = new MaxDieRoller();
 
          IEnumerable<TermResult> results = diceTerm.GetResults( dieRoller );
@@ -79,11 +77,10 @@ namespace RogueSharp.Test.DiceNotation
       }
 
       [TestMethod]
-      public void StringRepresentationIsCorrectForScalarOfOne()
+      public void ToString_ScalarOfOne_RepresentationIsCorrect()
       {
          const int multiplicity = 3;
          const int sides = 6;
-
          var diceTerm = new DiceTerm( multiplicity, sides, 1 );
 
          string stringRepresentation = diceTerm.ToString();
@@ -92,12 +89,11 @@ namespace RogueSharp.Test.DiceNotation
       }
 
       [TestMethod]
-      public void StringRepresentationIsCorrectForScalarOfTwo()
+      public void ToString_ScalarOfTwo_RepresentationIsCorrect()
       {
          const int multiplicity = 3;
          const int sides = 6;
          const int scalar = 2;
-
          var diceTerm = new DiceTerm( multiplicity, sides, scalar );
 
          string stringRepresentation = diceTerm.ToString();
@@ -106,7 +102,7 @@ namespace RogueSharp.Test.DiceNotation
       }
 
       [TestMethod]
-      public void StringRepresentationIsCorrectForChoose()
+      public void ToString_ChooseThree_RepresentationIsCorrect()
       {
          var diceTerm = new DiceTerm( 4, 6, 3, 1 );
 

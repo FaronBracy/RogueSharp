@@ -7,9 +7,10 @@ namespace RogueSharp.Test.DiceNotation
    public class ConstantTermTest
    {
       [TestMethod]
-      public void ToStringReturnsValue()
+      public void ToString_ConstantTerm_ReturnsValueOfConstantOnly()
       {
          const int constant = 5;
+
          var constantTerm = new ConstantTerm( constant );
 
          Assert.AreEqual( constant.ToString(), constantTerm.ToString() );

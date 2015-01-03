@@ -8,22 +8,21 @@ namespace RogueSharp.Test.DiceNotation
    public class DiceExpressionTest
    {
       [TestMethod]
-      public void ContainsAndReturnsCorrectNumberOfValues()
+      public void Roll_ExpressionBuiltFluently_ReturnsCorrectNumberOfResults()
       {
          DiceExpression diceExpression = new DiceExpression()
              .Constant( 5 )
              .Die( 8 )
              .Dice( 4, 6, choose: 3 );
-
-         DiceResult result = diceExpression.Roll( new StandardDieRoller( new System.Random() ) );
-
          const int expectedNumberOfTerms = 1 + 1 + 3;
-
+         
+         DiceResult result = diceExpression.Roll( new StandardDieRoller( new System.Random() ) );
+         
          Assert.AreEqual( expectedNumberOfTerms, result.Results.Count );
       }
 
       [TestMethod]
-      public void ToStringReturnsTermsSeparatedByPlus()
+      public void ToString_ExpressionBuiltFluently_ReturnsTermsSeparatedByPlus()
       {
          DiceExpression diceExpression = new DiceExpression().Constant( 10 ).Die( 8, -1 );
 
