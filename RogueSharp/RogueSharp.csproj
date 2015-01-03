@@ -43,6 +43,23 @@
     <Compile Include="Algorithms\Graph.cs" />
     <Compile Include="Algorithms\UnionFind.cs" />
     <Compile Include="Cell.cs" />
+    <Compile Include="DiceNotation\Dice.cs" />
+    <Compile Include="DiceNotation\DiceExpression.cs" />
+    <Compile Include="DiceNotation\DiceExtensions.cs" />
+    <Compile Include="DiceNotation\DiceParser.cs" />
+    <Compile Include="DiceNotation\DiceResult.cs" />
+    <Compile Include="DiceNotation\Exceptions\ImpossibleDieException.cs" />
+    <Compile Include="DiceNotation\Exceptions\InvalidChooseException.cs" />
+    <Compile Include="DiceNotation\Exceptions\InvalidMultiplicityException.cs" />
+    <Compile Include="DiceNotation\IDiceParser.cs" />
+    <Compile Include="DiceNotation\Rollers\IDieRoller.cs" />
+    <Compile Include="DiceNotation\Rollers\MaxDieRoller.cs" />
+    <Compile Include="DiceNotation\Rollers\MinDieRoller.cs" />
+    <Compile Include="DiceNotation\Rollers\StandardDieRoller.cs" />
+    <Compile Include="DiceNotation\TermResult.cs" />
+    <Compile Include="DiceNotation\Terms\ConstantTerm.cs" />
+    <Compile Include="DiceNotation\Terms\DiceTerm.cs" />
+    <Compile Include="DiceNotation\Terms\IDiceExpressionTerm.cs" />
     <Compile Include="FieldOfView.cs" />
     <Compile Include="GoalMap.cs" />
     <Compile Include="IGoalMap.cs" />
@@ -61,6 +78,9 @@
     <Compile Include="Random\IRandom.cs" />
     <Compile Include="Random\KnownSeriesRandom.cs" />
     <Compile Include="Rectangle.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DiceNotation\Readme.md" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

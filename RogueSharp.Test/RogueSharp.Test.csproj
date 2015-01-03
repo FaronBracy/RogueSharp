@@ -46,6 +46,10 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DiceNotation\ConstantTermTest.cs" />
+    <Compile Include="DiceNotation\DiceExpressionTest.cs" />
+    <Compile Include="DiceNotation\DiceTermTest.cs" />
+    <Compile Include="DiceNotation\DiceParserTest.cs" />
     <Compile Include="GaussianRandomTest.cs" />
     <Compile Include="DiceTest.cs" />
     <Compile Include="DotNetRandomTest.cs" />

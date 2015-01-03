@@ -1,0 +1,18 @@
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using RogueSharp.DiceNotation.Terms;
+
+namespace RogueSharp.Test.DiceNotation
+{
+   [TestClass]
+   public class ConstantTermTest
+   {
+      [TestMethod]
+      public void ToStringReturnsValue()
+      {
+         const int constant = 5;
+         var constantTerm = new ConstantTerm( constant );
+
+         Assert.AreEqual( constant.ToString(), constantTerm.ToString() );
+      }
+   }
+}

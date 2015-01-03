@@ -83,7 +83,10 @@ A more interesting way to create a map is to use the `Map` class's static method
 - [Sandcastle Help File Builder (SHFB)](https://shfb.codeplex.com/ "Sandcastle Help File Builder")
 	- Used to automatically generate documentation from the XML comments in source code
 	- [SHFB license](https://shfb.codeplex.com/SourceControl/latest#SHFB/Source/License.txt "SHFB license")
-
+- [Dice Notation .NET](https://dicenotation.codeplex.com "Dice Notation .NET")
+	- Significant portions of the code in RougeSharp DiceNotation namespace are taken directly from this great library
+	- [Dice Notation .NET source code](https://dicenotation.codeplex.com/SourceControl/latest "Dice Notation .NET source code")
+	- [Dice Notation .NET license](https://dicenotation.codeplex.com/license "Dice Notation .NET license")
 
 ## License ##
 
