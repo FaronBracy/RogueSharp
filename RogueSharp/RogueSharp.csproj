@@ -77,6 +77,8 @@
     <Compile Include="Random\IDie.cs" />
     <Compile Include="Random\IRandom.cs" />
     <Compile Include="Random\KnownSeriesRandom.cs" />
+    <Compile Include="Random\MaxRandom.cs" />
+    <Compile Include="Random\MinRandom.cs" />
     <Compile Include="Rectangle.cs" />
   </ItemGroup>
   <ItemGroup>
