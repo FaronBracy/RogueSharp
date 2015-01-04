@@ -52,10 +52,6 @@
     <Compile Include="DiceNotation\Exceptions\InvalidChooseException.cs" />
     <Compile Include="DiceNotation\Exceptions\InvalidMultiplicityException.cs" />
     <Compile Include="DiceNotation\IDiceParser.cs" />
-    <Compile Include="DiceNotation\Rollers\IDieRoller.cs" />
-    <Compile Include="DiceNotation\Rollers\MaxDieRoller.cs" />
-    <Compile Include="DiceNotation\Rollers\MinDieRoller.cs" />
-    <Compile Include="DiceNotation\Rollers\StandardDieRoller.cs" />
     <Compile Include="DiceNotation\TermResult.cs" />
     <Compile Include="DiceNotation\Terms\ConstantTerm.cs" />
     <Compile Include="DiceNotation\Terms\DiceTerm.cs" />

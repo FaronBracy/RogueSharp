@@ -1,6 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RogueSharp.DiceNotation;
-using RogueSharp.DiceNotation.Rollers;
+using RogueSharp.Random;
 
 namespace RogueSharp.Test.DiceNotation
 {
@@ -16,7 +16,7 @@ namespace RogueSharp.Test.DiceNotation
              .Dice( 4, 6, choose: 3 );
          const int expectedNumberOfTerms = 1 + 1 + 3;
          
-         DiceResult result = diceExpression.Roll( new StandardDieRoller( new System.Random() ) );
+         DiceResult result = diceExpression.Roll( new DotNetRandom() );
          
          Assert.AreEqual( expectedNumberOfTerms, result.Results.Count );
       }

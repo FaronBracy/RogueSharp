@@ -3,8 +3,8 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RogueSharp.DiceNotation;
 using RogueSharp.DiceNotation.Exceptions;
-using RogueSharp.DiceNotation.Rollers;
 using RogueSharp.DiceNotation.Terms;
+using RogueSharp.Random;
 
 namespace RogueSharp.Test.DiceNotation
 {
@@ -69,9 +69,9 @@ namespace RogueSharp.Test.DiceNotation
          const int multiplicity = 6;
          const int sides = 6;
          var diceTerm = new DiceTerm( multiplicity, sides, 1 );
-         var dieRoller = new MaxDieRoller();
+         var maxRandom = new MaxRandom();
 
-         IEnumerable<TermResult> results = diceTerm.GetResults( dieRoller );
+         IEnumerable<TermResult> results = diceTerm.GetResults( maxRandom );
 
          Assert.AreEqual( multiplicity, results.Count() );
       }

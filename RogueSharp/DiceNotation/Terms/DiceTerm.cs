@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using RogueSharp.DiceNotation.Exceptions;
-using RogueSharp.DiceNotation.Rollers;
+using RogueSharp.Random;
 
 namespace RogueSharp.DiceNotation.Terms
 {
@@ -41,13 +41,13 @@ namespace RogueSharp.DiceNotation.Terms
          Choose = choose;
       }
 
-      public IEnumerable<TermResult> GetResults( IDieRoller dieRoller )
+      public IEnumerable<TermResult> GetResults( IRandom random )
       {
          IEnumerable<TermResult> results =
              from i in Enumerable.Range( 0, Multiplicity )
              select new TermResult {
                 Scalar = Scalar,
-                Value = dieRoller.RollDie( Sides ),
+                Value = random.Next( 1, Sides ),
                 Type = "d" + Sides
              };
          return results.OrderByDescending( d => d.Value ).Take( Choose );

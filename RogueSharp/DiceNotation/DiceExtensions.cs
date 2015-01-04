@@ -1,24 +1,24 @@
-using RogueSharp.DiceNotation.Rollers;
+using RogueSharp.Random;
 
 namespace RogueSharp.DiceNotation
 {
-    public static class DiceExtensions
-    {
-        private static readonly IDieRoller DieRoller = new StandardDieRoller(new System.Random());
+   public static class DiceExtensions
+   {
+      private static readonly IRandom _random = new DotNetRandom();
 
-        public static DiceResult Roll(this DiceExpression diceExpression)
-        {
-            return diceExpression.Roll(DieRoller);
-        }
+      public static DiceResult Roll( this DiceExpression diceExpression )
+      {
+         return diceExpression.Roll( _random );
+      }
 
-        public static DiceResult MinRoll(this DiceExpression diceExpression)
-        {
-            return diceExpression.Roll(new MinDieRoller());
-        }
+      public static DiceResult MinRoll( this DiceExpression diceExpression )
+      {
+         return diceExpression.Roll( new MinRandom() );
+      }
 
-        public static DiceResult MaxRoll(this DiceExpression diceExpression)
-        {
-            return diceExpression.Roll(new MaxDieRoller());
-        }
-    }
+      public static DiceResult MaxRoll( this DiceExpression diceExpression )
+      {
+         return diceExpression.Roll( new MaxRandom() );
+      }
+   }
 }
