@@ -1,13 +1,48 @@
 ﻿using System;
+using System.Runtime.Serialization;
 
 namespace RogueSharp.DiceNotation.Exceptions
 {
-    public class InvalidChooseException : Exception
-    {
-        public InvalidChooseException(int choose, int multiplicity) : base(string.Format("Cannot choose {0} dice, only {1} were rolled", choose, multiplicity))
-        { }
+   /// <summary>
+   /// Exception that is thrown when a dice term is constructed with a 'k' choose operation to keep an invalid number of dice.
+   /// </summary>
+   [Serializable]
+   public class InvalidChooseException : Exception
+   {
+      /// <summary>
+      /// Initializes a new instance of the InvalidChooseException class.
+      /// </summary>
+      public InvalidChooseException()
+      {
+      }
 
-        public InvalidChooseException(int choose) : base("Cannot choose {0} of the dice; it is less than 0")
-        { }
-    }
+      /// <summary>
+      /// Initializes a new instance of the InvalidChooseException class with a specified error message.
+      /// </summary>
+      /// <param name="message">The error message that explains the reason for the exception.</param>
+      public InvalidChooseException( string message )
+         : base( message )
+      {
+      }
+
+      /// <summary>
+      /// Initializes a new instance of the InvalidChooseException class with a specified error message and a reference to the inner exception that is the cause of this exception.
+      /// </summary>
+      /// <param name="message">The error message that explains the reason for the exception.</param>
+      /// <param name="innerException">The exception that is the cause of the current exception. If the innerException parameter is not a null reference, the current exception is raised in a catch block that handles the inner exception.</param>
+      public InvalidChooseException( string message, Exception innerException )
+         : base( message, innerException )
+      {
+      }
+
+      /// <summary>
+      /// Initializes a new instance of the InvalidChooseException class with serialized data.
+      /// </summary>
+      /// <param name="info">The object that holds the serialized object data.</param>
+      /// <param name="context">The contextual information about the source or destination.</param>
+      protected InvalidChooseException( SerializationInfo info, StreamingContext context )
+         : base( info, context )
+      {
+      }
+   }
 }
