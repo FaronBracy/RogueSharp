@@ -12,8 +12,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		RogueSharp.vsmdi = RogueSharp.vsmdi
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RogueSharp.PCL", "RogueSharp\RogueSharp.PCL.csproj", "{FF15E4A4-47F7-4C0D-99B1-962BF9A64DE6}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,10 +26,6 @@ Global
 		{A1494180-593F-46C0-8C34-47D3289A3CE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A1494180-593F-46C0-8C34-47D3289A3CE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A1494180-593F-46C0-8C34-47D3289A3CE6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FF15E4A4-47F7-4C0D-99B1-962BF9A64DE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FF15E4A4-47F7-4C0D-99B1-962BF9A64DE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FF15E4A4-47F7-4C0D-99B1-962BF9A64DE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FF15E4A4-47F7-4C0D-99B1-962BF9A64DE6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
