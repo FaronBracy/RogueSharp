@@ -45,7 +45,6 @@
     <Compile Include="Cell.cs" />
     <Compile Include="DiceNotation\Dice.cs" />
     <Compile Include="DiceNotation\DiceExpression.cs" />
-    <Compile Include="DiceNotation\DiceExtensions.cs" />
     <Compile Include="DiceNotation\DiceParser.cs" />
     <Compile Include="DiceNotation\DiceResult.cs" />
     <Compile Include="DiceNotation\Exceptions\ImpossibleDieException.cs" />

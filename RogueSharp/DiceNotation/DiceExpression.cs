@@ -50,6 +50,16 @@ namespace RogueSharp.DiceNotation
          return new DiceResult( termResults, random );
       }
 
+      public DiceResult MinRoll()
+      {
+         return Roll( new MinRandom() );
+      }
+
+      public DiceResult MaxRoll()
+      {
+         return Roll( new MaxRandom() );
+      }
+
       public override string ToString()
       {
          return string.Join( " + ", _terms );
