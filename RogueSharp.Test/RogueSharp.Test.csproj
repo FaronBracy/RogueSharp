@@ -50,6 +50,7 @@
     <Compile Include="DiceNotation\DiceExpressionTest.cs" />
     <Compile Include="DiceNotation\DiceTermTest.cs" />
     <Compile Include="DiceNotation\DiceParserTest.cs" />
+    <Compile Include="DiceNotation\DiceTest.cs" />
     <Compile Include="GaussianRandomTest.cs" />
     <Compile Include="DiceTest.cs" />
     <Compile Include="DotNetRandomTest.cs" />
