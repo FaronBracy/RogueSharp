@@ -36,7 +36,7 @@
       }
 
       /// <summary>
-      /// Restores the state of the generator which is eseentially a no-op for this generator
+      /// Restores the state of the generator which is essentially a no-op for this generator
       /// </summary>
       /// <param name="state">Not used</param>
       public void Restore( RandomState state )
