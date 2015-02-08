@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Runtime.Serialization;
 
 namespace RogueSharp.DiceNotation.Exceptions
 {
    /// <summary>
    /// Exception that is thrown when a dice term is constructed with a 'k' choose operation to keep an invalid number of dice.
    /// </summary>
-   [Serializable]
    public class InvalidChooseException : Exception
    {
       /// <summary>
@@ -32,16 +30,6 @@ namespace RogueSharp.DiceNotation.Exceptions
       /// <param name="innerException">The exception that is the cause of the current exception. If the innerException parameter is not a null reference, the current exception is raised in a catch block that handles the inner exception.</param>
       public InvalidChooseException( string message, Exception innerException )
          : base( message, innerException )
-      {
-      }
-
-      /// <summary>
-      /// Initializes a new instance of the InvalidChooseException class with serialized data.
-      /// </summary>
-      /// <param name="info">The object that holds the serialized object data.</param>
-      /// <param name="context">The contextual information about the source or destination.</param>
-      protected InvalidChooseException( SerializationInfo info, StreamingContext context )
-         : base( info, context )
       {
       }
    }
