@@ -12,8 +12,12 @@ namespace RogueSharp.DiceNotation.Terms
          _constant = constant;
       }
 
-      public IEnumerable<TermResult> GetResults( IRandom random )
+      public IEnumerable<TermResult> GetResults( IRandom random = null )
       {
+         if ( random == null )
+         {
+            random = Singleton.DefaultRandom;
+         }
          return new[] { new TermResult { Scalar = 1, Value = _constant, Type = "constant" } };
       }
 

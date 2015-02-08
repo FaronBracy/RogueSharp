@@ -41,8 +41,12 @@ namespace RogueSharp.DiceNotation.Terms
          Choose = choose;
       }
 
-      public IEnumerable<TermResult> GetResults( IRandom random )
+      public IEnumerable<TermResult> GetResults( IRandom random = null )
       {
+         if ( random == null )
+         {
+            random = Singleton.DefaultRandom;
+         }
          IEnumerable<TermResult> results =
              from i in Enumerable.Range( 0, Multiplicity )
              select new TermResult {

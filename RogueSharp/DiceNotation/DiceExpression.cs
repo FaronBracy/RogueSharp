@@ -40,8 +40,12 @@ namespace RogueSharp.DiceNotation
          return this;
       }
 
-      public DiceResult Roll( IRandom random )
+      public DiceResult Roll( IRandom random = null )
       {
+         if ( random == null )
+         {
+            random = Singleton.DefaultRandom;
+         }
          IEnumerable<TermResult> termResults = _terms.SelectMany( t => t.GetResults( random ) ).ToList();
          return new DiceResult( termResults, random );
       }

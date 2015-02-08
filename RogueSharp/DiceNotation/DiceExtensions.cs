@@ -4,11 +4,9 @@ namespace RogueSharp.DiceNotation
 {
    public static class DiceExtensions
    {
-      private static readonly IRandom _random = new DotNetRandom();
-
       public static DiceResult Roll( this DiceExpression diceExpression )
       {
-         return diceExpression.Roll( _random );
+         return diceExpression.Roll( Singleton.DefaultRandom );
       }
 
       public static DiceResult MinRoll( this DiceExpression diceExpression )
