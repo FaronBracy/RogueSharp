@@ -5,17 +5,48 @@ using RogueSharp.Random;
 
 namespace RogueSharp.DiceNotation.Terms
 {
+   /// <summary>
+   /// The DiceTerm class represents a single "d" term in a DiceExpression
+   /// </summary>
+   /// <remarks>
+   /// In the expression "2d6+5" the term "2d6" is a DiceTerm
+   /// </remarks>
    public class DiceTerm : IDiceExpressionTerm
    {
+      /// <summary>
+      /// The number of dice
+      /// </summary>
       public int Multiplicity { get; private set; }
+      /// <summary>
+      /// The number of sides per die
+      /// </summary>
       public int Sides { get; private set; }
+      /// <summary>
+      /// The amount to multiply the final sum of the dice by
+      /// </summary>
       public int Scalar { get; private set; }
+      /// <summary>
+      /// Sum this many dice with the highest values out of those rolled
+      /// </summary>
       protected int Choose { get; private set; }
 
+      /// <summary>
+      /// Construct a new instance of the DiceTerm class using the specified values
+      /// </summary>
+      /// <param name="multiplicity">The number of dice</param>
+      /// <param name="sides">The number of sides per die</param>
+      /// <param name="scalar">The amount to multiply the final sum of the dice by</param>
       public DiceTerm( int multiplicity, int sides, int scalar )
          : this( multiplicity, sides, multiplicity, scalar )
       { }
 
+      /// <summary>
+      /// Construct a new instance of the DiceTerm class using the specified values
+      /// </summary>
+      /// <param name="multiplicity">The number of dice</param>
+      /// <param name="sides">The number of sides per die</param>
+      /// <param name="choose">Sum this many dice with the highest values out of those rolled</param>
+      /// <param name="scalar">The amount to multiply the final sum of the dice by</param>
       public DiceTerm( int multiplicity, int sides, int choose, int scalar )
       {
          if ( sides <= 0 )
@@ -41,6 +72,11 @@ namespace RogueSharp.DiceNotation.Terms
          Choose = choose;
       }
 
+      /// <summary>
+      /// Gets the TermResult for this DiceTerm which will include the random value rolled
+      /// </summary>
+      /// <param name="random">Optional parameter that defaults to DotNetRandom. If a different IRandom is provided that RNG will be used instead.</param>
+      /// <returns>An IEnumerable of TermResult which will have one item per die rolled</returns>
       public IEnumerable<TermResult> GetResults( IRandom random = null )
       {
          if ( random == null )
@@ -57,6 +93,11 @@ namespace RogueSharp.DiceNotation.Terms
          return results.OrderByDescending( d => d.Value ).Take( Choose );
       }
 
+
+      /// <summary>
+      /// Returns a string that represents this DiceTerm
+      /// </summary>
+      /// <returns>A string representing this DiceTerm</returns>
       public override string ToString()
       {
          string choose = Choose == Multiplicity ? "" : "k" + Choose;
