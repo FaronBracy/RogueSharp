@@ -47,7 +47,7 @@ namespace RogueSharp
          _maxRooms = maxRooms;
          _roomMaxSize = roomMaxSize;
          _roomMinSize = roomMinSize;
-         _random = random ?? new DotNetRandom();
+         _random = random ?? Singleton.DefaultRandom;
       }
       /// <summary>
       /// Creates a new IMap of the specified type.
@@ -280,7 +280,7 @@ namespace RogueSharp
          _fillProbability = fillProbability;
          _totalIterations = totalIterations;
          _cutoffOfBigAreaFill = cutoffOfBigAreaFill;
-         _random = random ?? new DotNetRandom();
+         _random = random ?? Singleton.DefaultRandom;
          _map = new T();
       }
       /// <summary>

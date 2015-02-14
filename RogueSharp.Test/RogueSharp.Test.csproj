@@ -46,11 +46,15 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GaussianRandomTest.cs" />
-    <Compile Include="DiceTest.cs" />
-    <Compile Include="DotNetRandomTest.cs" />
+    <Compile Include="DiceNotation\ConstantTermTest.cs" />
+    <Compile Include="DiceNotation\DiceExpressionTest.cs" />
+    <Compile Include="DiceNotation\DiceTermTest.cs" />
+    <Compile Include="DiceNotation\DiceParserTest.cs" />
+    <Compile Include="DiceNotation\DiceTest.cs" />
+    <Compile Include="Random\GaussianRandomTest.cs" />
+    <Compile Include="Random\DotNetRandomTest.cs" />
     <Compile Include="GoalMapTest.cs" />
-    <Compile Include="KnownSeriesRandomTest.cs" />
+    <Compile Include="Random\KnownSeriesRandomTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MapTest.cs" />
     <Compile Include="FieldOfViewTest.cs" />
