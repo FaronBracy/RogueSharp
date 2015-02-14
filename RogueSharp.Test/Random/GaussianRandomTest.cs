@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RogueSharp.Random;
 
-namespace RogueSharp.Test
+namespace RogueSharp.Test.Random
 {
    [TestClass]
    public class GaussianRandomTest
