@@ -64,12 +64,8 @@
     <Compile Include="PathFinder.cs" />
     <Compile Include="Point.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Random\Dice.cs" />
-    <Compile Include="Random\Die.cs" />
     <Compile Include="Random\DotNetRandom.cs" />
     <Compile Include="Random\GaussianRandom.cs" />
-    <Compile Include="Random\IDice.cs" />
-    <Compile Include="Random\IDie.cs" />
     <Compile Include="Random\IRandom.cs" />
     <Compile Include="Random\KnownSeriesRandom.cs" />
     <Compile Include="Random\MaxRandom.cs" />
