@@ -154,11 +154,11 @@ namespace RogueSharp
       /// <returns>True if the rectangles are equal; False otherwise</returns>
       public static bool operator ==( Rectangle a, Rectangle b )
       {
-         if ( a == null && b == null )
+         if ( ReferenceEquals( a, null) && ReferenceEquals( b, null) )
          {
             return true;
          }
-         if ( ( a == null ) || ( b == null ) )
+         if ( ReferenceEquals( a, null ) || ReferenceEquals( b, null ) )
          {
             return false;
          }

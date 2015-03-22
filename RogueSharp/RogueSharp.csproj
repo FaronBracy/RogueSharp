@@ -60,7 +60,6 @@
     <Compile Include="DiceNotation\Terms\DiceTerm.cs" />
     <Compile Include="DiceNotation\Terms\IDiceExpressionTerm.cs" />
     <Compile Include="FieldOfView.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="GoalMap.cs" />
     <Compile Include="IGoalMap.cs" />
     <Compile Include="IMap.cs" />

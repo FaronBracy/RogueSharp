@@ -64,12 +64,11 @@ namespace RogueSharp
       /// <returns>True if a and b are equal; False otherwise</returns>
       public static bool operator ==( Point a, Point b )
       {
-         if ( a == null && b == null )
+         if ( ReferenceEquals( a, null ) && ReferenceEquals( b, null ) )
          {
             return true;
          }
-
-         if ( a == null )
+         if ( ReferenceEquals( a, null ) )
          {
             return false;
          }
@@ -99,7 +98,7 @@ namespace RogueSharp
             return false;
          }
 
-         return ( obj is Point ) ? Equals( (Point) obj ) : false;
+         return ( obj is Point ) && Equals( (Point) obj );
       }
       /// <summary>
       /// Gets the hash code for this object which can help for quick checks of equality
