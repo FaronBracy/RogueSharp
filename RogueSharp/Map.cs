@@ -177,8 +177,15 @@ namespace RogueSharp
       /// <param name="sourceMap">An IMap which must be of smaller size and able to fit in this destination Map at the specified location</param>
       /// <param name="left">Optional parameter defaults to 0 if not provided. X location of the Cell to start copying parameters to, starting with 0 as the farthest left</param>
       /// <param name="top">Optional parameter defaults to 0 if not provided. Y location of the Cell to start copying parameters to, starting with 0 as the top</param>
+      /// <exception cref="ArgumentNullException">Thrown on null source map</exception>
+      /// <exception cref="ArgumentException">Thrown on invalid source map dimensions</exception>
       public void Copy( IMap sourceMap, int left, int top )
       {
+         if ( sourceMap == null )
+         {
+            throw new ArgumentNullException( "Source map cannot be null", "sourceMap" );
+         }
+
          if ( sourceMap.Width + left > Width )
          {
             throw new ArgumentException( "Source map 'width' + 'left' cannot be larger than the destination map width", "destinationMap" );
@@ -455,7 +462,7 @@ namespace RogueSharp
       /// - `#`: `Cell` is in field-of-view (but not transparent or walkable)
       /// </summary>
       /// <param name="useFov">True if field-of-view calculations will be used when creating the string represenation of the Map. False otherwise</param>
-      /// <returns>A string represenation of the map using special symbols to denote Cell properties</returns>
+      /// <returns>A string representation of the map using special symbols to denote Cell properties</returns>
       public string ToString( bool useFov )
       {
          var mapRepresentation = new StringBuilder();
@@ -505,8 +512,14 @@ namespace RogueSharp
       /// Restore the state of this Map from the specified MapState
       /// </summary>
       /// <param name="state">Mapstate POCO (Plain Old C# Object) which represents this Map and can be easily serialized and deserialized</param>
+      /// <exception cref="ArgumentNullException">Thrown on null map state</exception>
       public void Restore( MapState state )
       {
+         if ( state == null )
+         {
+            throw new ArgumentNullException( "Map state cannot be null", "state" );
+         }
+
          var inFov = new HashSet<int>();
 
          Initialize( state.Width, state.Height );
@@ -532,8 +545,14 @@ namespace RogueSharp
       /// </remarks>
       /// <param name="mapCreationStrategy">A class that implements IMapCreationStrategy and has CreateMap method which defines algorithms for creating interesting Maps</param>
       /// <returns>Map created by calling CreateMap from the specified IMapCreationStrategy</returns>
+      /// <exception cref="ArgumentNullException">Thrown on null map creation strategy</exception>
       public static Map Create( IMapCreationStrategy<Map> mapCreationStrategy )
       {
+         if ( mapCreationStrategy == null )
+         {
+            throw new ArgumentNullException( "Map creation strategy cannot be null", "mapCreationStrategy" );
+         }
+
          return mapCreationStrategy.CreateMap();
       }
       /// <summary>
@@ -563,8 +582,14 @@ namespace RogueSharp
       /// </summary>
       /// <param name="cell">The Cell to get the index for</param>
       /// <returns>An index for the Cell which is useful if storing Cells in a single dimensional array</returns>
+      /// <exception cref="ArgumentNullException">Thrown on null cell</exception>
       public int IndexFor( Cell cell )
       {
+         if ( cell == null )
+         {
+            throw new ArgumentNullException( "Cell cannot be null", "cell" );
+         }
+
          return ( cell.Y * Width ) + cell.X;
       }
       private bool AddToHashSet( HashSet<int> hashSet, int x, int y, out Cell cell )

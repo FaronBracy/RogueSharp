@@ -92,8 +92,14 @@ namespace RogueSharp.Algorithms
       /// </summary>
       /// <param name="graph">The Graph</param>
       /// <param name="sourceVertex">The source vertex to compute a path from</param>
+      /// <exception cref="ArgumentException">Thrown on null or invalid Graph</exception>
       public DepthFirstPaths( Graph graph, int sourceVertex )
       {
+         if ( graph == null || graph.NumberOfVertices < 0 )
+         {
+            throw new ArgumentException( "Invalid Graph", "graph" );
+         }
+
          _sourceVertex = sourceVertex;
          _edgeTo = new int[graph.NumberOfVertices];
          _marked = new bool[graph.NumberOfVertices];
@@ -175,8 +181,14 @@ namespace RogueSharp.Algorithms
       /// Adds the specified directed edge to the edge-weighted digraph
       /// </summary>
       /// <param name="edge">The DirectedEdge to add</param>
+      /// <exception cref="ArgumentException">Invalid DirectedEdge</exception>
       public void AddEdge( DirectedEdge edge )
       {
+         if ( edge == null )
+         {
+            throw new ArgumentException( "Invalid DirectedEdge", "edge" );
+         }
+
          _adjacent[edge.From].AddLast( edge );
       }
       /// <summary>
@@ -260,7 +272,7 @@ namespace RogueSharp.Algorithms
       /// <summary>
       /// Returns the start vertex of the DirectedEdge
       /// </summary>
-      public int To { get; private set; }
+      public int To { get; private set;}
       /// <summary>
       /// Returns the weight of the DirectedEdge
       /// </summary>
@@ -293,8 +305,14 @@ namespace RogueSharp.Algorithms
       /// <param name="graph">The edge-weighted directed graph</param>
       /// <param name="sourceVertex">The source vertex to compute the shortest paths tree from</param>
       /// <exception cref="ArgumentOutOfRangeException">Throws an ArgumentOutOfRangeException if an edge weight is negative</exception>
+      /// <exception cref="ArgumentNullException">Thrown if EdgeWeightedDigraph is null</exception>
       public DijkstraShortestPath( EdgeWeightedDigraph graph, int sourceVertex )
       {
+         if ( graph == null )
+         {
+            throw new ArgumentNullException( "EdgeWeightedDigraph cannot be null", "graph" );
+         }
+
          foreach ( DirectedEdge edge in graph.Edges() )
          {
             if ( edge.Weight < 0 )
@@ -384,8 +402,14 @@ namespace RogueSharp.Algorithms
       /// <param name="graph">The edge-weighted directed graph</param>
       /// <param name="sourceVertex">The source vertex to check optimality conditions from</param>
       /// <returns>True if all optimality conditions are met, false otherwise</returns>
+      /// <exception cref="ArgumentNullException">Thrown on null EdgeWeightedDigraph</exception>
       public bool Check( EdgeWeightedDigraph graph, int sourceVertex )
       {
+         if ( graph == null )
+         {
+            throw new ArgumentNullException( "EdgeWeightedDigraph cannot be null", "graph" );
+         }
+
          if ( _distanceTo[sourceVertex] != 0.0 || _edgeTo[sourceVertex] != null )
          {
             return false;

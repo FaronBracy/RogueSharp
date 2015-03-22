@@ -17,7 +17,7 @@ namespace RogueSharp
       /// </summary>
       public int Y { get; set; }
       /// <summary>
-      /// Initializes a new instace of Point
+      /// Initializes a new instance of Point
       /// </summary>
       public Point()
       {
@@ -49,6 +49,11 @@ namespace RogueSharp
       /// <returns>True if the instances are equal; False otherwise</returns>
       public bool Equals( Point other )
       {
+         if ( other == null )
+         {
+            return false;
+         }
+
          return ( ( X == other.X ) && ( Y == other.Y ) );
       }
       /// <summary>
@@ -59,6 +64,16 @@ namespace RogueSharp
       /// <returns>True if a and b are equal; False otherwise</returns>
       public static bool operator ==( Point a, Point b )
       {
+         if ( a == null && b == null )
+         {
+            return true;
+         }
+
+         if ( a == null )
+         {
+            return false;
+         }
+
          return a.Equals( b );
       }
       /// <summary>
@@ -69,8 +84,9 @@ namespace RogueSharp
       /// <returns>True if a and b are not equal; False otherwise</returns>
       public static bool operator !=( Point a, Point b )
       {
-         return !a.Equals( b );
+         return !( a == b );
       }
+
       /// <summary>
       /// Determines whether two Point instances are equal
       /// </summary>
@@ -78,6 +94,11 @@ namespace RogueSharp
       /// <returns>True if the instances are equal; False otherwise</returns>
       public override bool Equals( object obj )
       {
+         if ( obj == null )
+         {
+            return false;
+         }
+
          return ( obj is Point ) ? Equals( (Point) obj ) : false;
       }
       /// <summary>
