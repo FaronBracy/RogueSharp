@@ -311,7 +311,7 @@ namespace RogueSharp
       /// </summary>
       /// <param name="value1">The first Rectangle to compare</param>
       /// <param name="value2">The second Rectangle to compare</param>
-      /// <returns>The area wher ethe two specified Rectangles overlap. If the two Rectangles do not overlap the resulting Rectangle will be Empty</returns>
+      /// <returns>The area where the two specified Rectangles overlap. If the two Rectangles do not overlap the resulting Rectangle will be Empty</returns>
       public static Rectangle Intersect( Rectangle value1, Rectangle value2 )
       {
          Rectangle rectangle;
@@ -323,7 +323,7 @@ namespace RogueSharp
       /// </summary>
       /// <param name="value1">The first Rectangle to compare</param>
       /// <param name="value2">The second Rectangle to compare</param>
-      /// <param name="result">The area wher ethe two specified Rectangles overlap. If the two Rectangles do not overlap the resulting Rectangle will be Empty</param>
+      /// <param name="result">The area where the two specified Rectangles overlap. If the two Rectangles do not overlap the resulting Rectangle will be Empty</param>
       public static void Intersect( ref Rectangle value1, ref Rectangle value2, out Rectangle result )
       {
          if ( value1 != null && value2 != null && value1.Intersects( value2 ) )
@@ -340,7 +340,7 @@ namespace RogueSharp
          }
       }
       /// <summary>
-      /// Creates a new Rectangle that excatly contains the specified two Rectangles
+      /// Creates a new Rectangle that exactly contains the specified two Rectangles
       /// </summary>
       /// <param name="value1">The first Rectangle to contain</param>
       /// <param name="value2">The second Rectangle to contain</param>
@@ -362,7 +362,7 @@ namespace RogueSharp
          return new Rectangle( x, y, Math.Max( value1.Right, value2.Right ) - x, Math.Max( value1.Bottom, value2.Bottom ) - y );
       }
       /// <summary>
-      /// Creates a new Rectangle that excatly contains the specified two Rectangles
+      /// Creates a new Rectangle that exactly contains the specified two Rectangles
       /// </summary>
       /// <param name="value1">The first Rectangle to contain</param>
       /// <param name="value2">The second Rectangle to contain</param>
