@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RuleSet Name="Almost All Rules" Description="This ruleset has almost all rules enabled as warnings. Most of the disabled rules are related to naming." ToolsVersion="12.0">
+<RuleSet Name="Almost All Rules Debug" Description="This ruleset has almost all rules enabled as warnings. Most of the disabled rules are related to naming." ToolsVersion="12.0">
   <IncludeAll Action="Warning" />
   <Rules AnalyzerId="Microsoft.Analyzers.ManagedCodeAnalysis" RuleNamespace="Microsoft.Rules.Managed">
     <Rule Id="CA1000" Action="Warning" />
