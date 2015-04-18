@@ -139,12 +139,26 @@ namespace RogueSharp
       /// <param name="y">Y location of the Cell to set properties on, starting with 0 as the top</param>
       /// <param name="isTransparent">True if line-of-sight is not blocked by this Cell. False otherwise</param>
       /// <param name="isWalkable">True if a character could walk across the Cell normally. False otherwise</param>
-      /// <param name="isExplored">Optional parameter defaults to false if not provided. True if the Cell has ever been in the field-of-view of the player. False otherwise</param>
-      public void SetCellProperties( int x, int y, bool isTransparent, bool isWalkable, bool isExplored = false )
+      /// <param name="isExplored">True if the Cell has ever been in the field-of-view of the player. False otherwise</param>
+      public void SetCellProperties( int x, int y, bool isTransparent, bool isWalkable, bool isExplored )
       {
          _isTransparent[x, y] = isTransparent;
          _isWalkable[x, y] = isWalkable;
          _isExplored[x, y] = isExplored;
+      }
+      /// <summary>
+      /// Set the properties of an unexplored Cell to the specified values
+      /// </summary>
+      /// <remarks>
+      /// IsInFov cannot be set through this method as it is always calculated by calling ComputeFov and/or AppendFov
+      /// </remarks>
+      /// <param name="x">X location of the Cell to set properties on, starting with 0 as the farthest left</param>
+      /// <param name="y">Y location of the Cell to set properties on, starting with 0 as the top</param>
+      /// <param name="isTransparent">True if line-of-sight is not blocked by this Cell. False otherwise</param>
+      /// <param name="isWalkable">True if a character could walk across the Cell normally. False otherwise</param>
+      public void SetCellProperties( int x, int y, bool isTransparent, bool isWalkable )
+      {
+         SetCellProperties( x, y, isTransparent, isWalkable, false );
       }
       /// <summary>
       /// Sets the properties of all Cells in the Map to the specified values

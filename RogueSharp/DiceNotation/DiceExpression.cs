@@ -66,16 +66,21 @@ namespace RogueSharp.DiceNotation
       /// <summary>
       /// Roll all of the Dice that are part of this DiceExpression
       /// </summary>
-      /// <param name="random">Optional parameter that defaults to DotNetRandom. If a different IRandom is provided that RNG will be used to perform the Roll instead.</param>
+      /// <param name="random">IRandom RNG used to perform the Roll.</param>
       /// <returns>A DiceResult representing the results of this Roll</returns>
-      public DiceResult Roll( IRandom random = null )
+      public DiceResult Roll( IRandom random )
       {
-         if ( random == null )
-         {
-            random = Singleton.DefaultRandom;
-         }
          IEnumerable<TermResult> termResults = _terms.SelectMany( t => t.GetResults( random ) ).ToList();
          return new DiceResult( termResults, random );
+      }
+      /// <summary>
+      /// Roll all of the Dice that are part of this DiceExpression
+      /// </summary>
+      /// <returns>A DiceResult representing the results of this Roll</returns>
+      /// <remarks>Uses DotNetRandom as its RNG</remarks>
+      public DiceResult Roll()
+      {
+         return Roll( Singleton.DefaultRandom );
       }
       /// <summary>
       /// Roll all of the Dice that are part of this DiceExpression, but force all of the rolls to be the lowest possible result
