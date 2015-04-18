@@ -12,7 +12,6 @@ namespace RogueSharp.DiceNotation.Terms
    public class ConstantTerm : IDiceExpressionTerm
    {
       private readonly int _constant;
-
       /// <summary>
       /// Construct a new instance of the ConstantTerm class using the specified integer
       /// </summary>
@@ -21,7 +20,6 @@ namespace RogueSharp.DiceNotation.Terms
       {
          _constant = constant;
       }
-
       /// <summary>
       /// Gets the TermResult for this ConstantTerm which will always be a single result with a scalar of 1 and a value of the constant.
       /// </summary>
@@ -31,7 +29,6 @@ namespace RogueSharp.DiceNotation.Terms
       {
          return new[] { new TermResult { Scalar = 1, Value = _constant, Type = "constant" } };
       }
-
       /// <summary>
       /// Returns a string that represents this ConstantTerm
       /// </summary>
