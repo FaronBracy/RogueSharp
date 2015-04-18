@@ -53,7 +53,7 @@ namespace RogueSharp.DiceNotation
             }
             else if ( c == 'd' )
             {
-               if ( parseValues.Constant == "" )
+               if ( parseValues.Constant.Length == 0 )
                   parseValues.Constant = "1";
                parseValues.Multiplicity = int.Parse( parseValues.Constant );
                parseValues.Constant = "";
