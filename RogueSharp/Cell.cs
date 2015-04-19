@@ -115,7 +115,7 @@
       /// - `#`: `Cell` is in field-of-view (but not transparent or walkable)
       /// </summary>
       /// <param name="useFov">True if field-of-view calculations will be used when creating the string represenation of the Cell. False otherwise</param>
-      /// <returns>A string represenation of the Cell using special symbols to denote Cell properties</returns>
+      /// <returns>A string representation of the Cell using special symbols to denote Cell properties</returns>
       public string ToString( bool useFov )
       {
          if ( useFov && !IsInFov )

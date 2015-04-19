@@ -20,6 +20,5 @@ namespace RogueSharp.DiceNotation.Terms
       /// <returns>An IEnumerable of TermResult which will have one item per result</returns>
       /// <remarks>Uses DotNetRandom as its RNG</remarks>
       IEnumerable<TermResult> GetResults();
-
    }
 }

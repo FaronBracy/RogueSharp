@@ -9,7 +9,6 @@ namespace RogueSharp.DiceNotation
    public class DiceParser : IDiceParser
    {
       private readonly Regex _whitespacePattern;
-
       /// <summary>
       /// Construct a new instance of the DiceParser class
       /// </summary>
@@ -17,7 +16,6 @@ namespace RogueSharp.DiceNotation
       {
          _whitespacePattern = new Regex( @"\s+" );
       }
-
       /// <summary>
       /// Create a new DiceExpression by parsing the specified string
       /// </summary>
@@ -54,7 +52,9 @@ namespace RogueSharp.DiceNotation
             else if ( c == 'd' )
             {
                if ( parseValues.Constant.Length == 0 )
+               {
                   parseValues.Constant = "1";
+               }
                parseValues.Multiplicity = int.Parse( parseValues.Constant );
                parseValues.Constant = "";
             }
@@ -88,7 +88,6 @@ namespace RogueSharp.DiceNotation
 
          return dice;
       }
-
       private static void Append( DiceExpression dice, ParseValues parseValues )
       {
          int constant = int.Parse( parseValues.Constant );
@@ -101,14 +100,12 @@ namespace RogueSharp.DiceNotation
             dice.Dice( parseValues.Multiplicity, constant, parseValues.Scalar, parseValues.Choose );
          }
       }
-
       private struct ParseValues
       {
          public string Constant;
          public int Scalar;
          public int Multiplicity;
          public int? Choose;
-
          public ParseValues Init()
          {
             Scalar = 1;

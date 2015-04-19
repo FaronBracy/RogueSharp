@@ -18,7 +18,6 @@ namespace RogueSharp
       /// <returns>An IMap of the specified type</returns>
       T CreateMap();
    }
-
    /// <summary>
    /// The RandomRoomsMapCreationStrategy creates a Map of the specified type by placing rooms randomly and then connecting them with cooridors
    /// </summary>
@@ -162,7 +161,6 @@ namespace RogueSharp
          }
       }
    }
-
    /// <summary>
    /// The BorderOnlyMapCreationStrategy creates a Map of the specified type by making an empty map with only the outermost border being solid walls
    /// </summary>
@@ -204,7 +202,6 @@ namespace RogueSharp
          return map;
       }
    }
-
    /// <summary>
    /// The StringDeserializeMapCreationStrategy creates a Map of the specified type from a string representation of the Map
    /// </summary>
@@ -267,7 +264,6 @@ namespace RogueSharp
          return map;
       }
    }
-
    /// <summary>
    /// The CaveMapCreationStrategy creates a Map of the specified type by using a cellular automata algorithm for creating a cave-like map.
    /// </summary>

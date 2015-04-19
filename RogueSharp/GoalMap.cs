@@ -338,7 +338,6 @@ namespace RogueSharp
          private readonly List<List<Point>> _paths;
          private readonly Stack<Point> _currentPath;
          private readonly HashSet<Point> _visited;
-
          public GoalMapPathFinder( GoalMap goalMap )
          {
             _goalMap = goalMap;
@@ -346,7 +345,6 @@ namespace RogueSharp
             _currentPath = new Stack<Point>();
             _visited = new HashSet<Point>();
          }
-
          public List<List<Point>> FindPaths( int x, int y )
          {
             _paths.Clear();
@@ -355,7 +353,6 @@ namespace RogueSharp
             RecursivelyFindPaths( x, y );
             return _paths;
          }
-
          private void RecursivelyFindPaths( int x, int y )
          {
             var currentCell = new Point

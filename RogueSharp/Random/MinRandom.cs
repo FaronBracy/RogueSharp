@@ -14,7 +14,6 @@
       {
          return 0;
       }
-
       /// <summary>
       /// Gets the next integer in the series which will always be minValue
       /// </summary>
@@ -25,7 +24,6 @@
       {
          return minValue;
       }
-
       /// <summary>
       /// Save the current state of the generator which is essentially a no-op for this generator
       /// </summary>
@@ -34,7 +32,6 @@
       {
          return new RandomState();
       }
-
       /// <summary>
       /// Restores the state of the generator which is essentially a no-op for this generator
       /// </summary>

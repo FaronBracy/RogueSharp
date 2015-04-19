@@ -288,7 +288,6 @@ namespace RogueSharp.Algorithms
          return string.Format( "From: {0}, To: {1}, Weight: {2}", From, To, Weight );
       }
    }
-
    /// <summary>
    /// The DijkstraShortestPath class represents a data type for solving the single-source shortest paths problem
    /// in edge-weighted digraphs where the edge weights are non-negative
@@ -340,7 +339,6 @@ namespace RogueSharp.Algorithms
             }
          }
       }
-
       private void Relax( DirectedEdge edge )
       {
          int v = edge.From;

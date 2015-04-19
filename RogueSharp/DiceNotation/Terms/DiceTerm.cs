@@ -29,7 +29,6 @@ namespace RogueSharp.DiceNotation.Terms
       /// Sum this many dice with the highest values out of those rolled
       /// </summary>
       protected int Choose { get; private set; }
-
       /// <summary>
       /// Construct a new instance of the DiceTerm class using the specified values
       /// </summary>

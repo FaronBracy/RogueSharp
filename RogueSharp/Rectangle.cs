@@ -384,7 +384,6 @@ namespace RogueSharp
       /// <param name="value2">The second Rectangle to contain</param>
       /// <param name="result">A new Rectangle that exactly contains the specified two Rectangles</param>
       /// <exception cref="NullReferenceException">Thrown if either rectangle is null</exception>
-
       public static void Union( ref Rectangle value1, ref Rectangle value2, out Rectangle result )
       {
          if ( value1 == null )

@@ -116,7 +116,7 @@ namespace RogueSharp
       /// </summary>
       /// <remarks>
       /// The explored property of a Cell can be used to track if the Cell has ever been in the field-of-view of a character controlled by the player
-      /// This property will not automatically be updated based on FOV calcuations or any other built-in functions of the RogueSharp library.
+      /// This property will not automatically be updated based on FOV calculations or any other built-in functions of the RogueSharp library.
       /// </remarks>
       /// <example>
       /// As the player moves characters around a Map, Cells will enter and exit the currently computed field-of-view
@@ -621,7 +621,7 @@ namespace RogueSharp
       /// <remarks>
       /// This call ignores field-of-view. If field-of-view is important use the ToString overload with a "true" parameter
       /// </remarks>
-      /// <returns>A string represenation of the map using special symbols to denote Cell properties</returns>
+      /// <returns>A string representation of the map using special symbols to denote Cell properties</returns>
       public override string ToString()
       {
          return ToString( false );
