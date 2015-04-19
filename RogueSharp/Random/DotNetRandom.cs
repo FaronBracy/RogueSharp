@@ -43,8 +43,14 @@ namespace RogueSharp.Random
       /// <param name="minValue">Inclusive minimum result</param>
       /// <param name="maxValue">Inclusive maximum result</param>
       /// <returns>Returns a pseudo-random integer between the specified minValue and maxValue inclusive</returns>
+      /// <exception cref="ArgumentOutOfRangeException">Thrown if maxValue equals Int32.MaxValue</exception>
       public int Next( int minValue, int maxValue )
       {
+         if ( maxValue == int.MaxValue )
+         {
+            throw new ArgumentOutOfRangeException( "maxValue", "Value must be less than Int32.MaxValue" );
+         }
+
          _numberGenerated++;
          return _random.Next( minValue, maxValue + 1 );
       }
