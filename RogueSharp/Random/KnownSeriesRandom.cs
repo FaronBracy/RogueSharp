@@ -26,7 +26,7 @@ namespace RogueSharp.Random
       {
          if ( series == null )
          {
-            throw new ArgumentNullException( "Series cannot be null", "series" );
+            throw new ArgumentNullException( "series", "Series cannot be null" );
          }
 
          _series = new Queue<int>();
@@ -111,7 +111,7 @@ namespace RogueSharp.Random
       {
          if ( state == null )
          {
-            throw new ArgumentNullException( "RandomState cannot be null", "state");
+            throw new ArgumentNullException( "state", "RandomState cannot be null" );
          }
 
          _series = new Queue<int>();

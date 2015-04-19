@@ -20,7 +20,7 @@ namespace RogueSharp
       {
          if ( map == null )
          {
-            throw new ArgumentNullException( "Map cannot be null", "map" );
+            throw new ArgumentNullException( "map", "Map cannot be null" );
          }
 
          _map = map;

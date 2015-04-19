@@ -362,11 +362,11 @@ namespace RogueSharp
       {
          if ( value1 == null )
          {
-            throw new ArgumentNullException( "Rectangle cannot be null", "value1" );
+            throw new ArgumentNullException( "value1", "Rectangle cannot be null" );
          }
          if ( value2 == null )
          {
-            throw new ArgumentNullException( "Rectangle cannot be null", "value2" );
+            throw new ArgumentNullException( "value2", "Rectangle cannot be null" );
          }
 
          int x = Math.Min( value1.X, value2.X );
@@ -385,11 +385,11 @@ namespace RogueSharp
       {
          if ( value1 == null )
          {
-            throw new ArgumentNullException( "Rectangle cannot be null", "value1" );
+            throw new ArgumentNullException( "value1", "Rectangle cannot be null" );
          }
          if ( value2 == null )
          {
-            throw new ArgumentNullException( "Rectangle cannot be null", "value2" );
+            throw new ArgumentNullException( "value2", "Rectangle cannot be null" );
          }
 
          result = new Rectangle();

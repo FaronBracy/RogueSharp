@@ -197,7 +197,7 @@ namespace RogueSharp
       {
          if ( sourceMap == null )
          {
-            throw new ArgumentNullException( "Source map cannot be null", "sourceMap" );
+            throw new ArgumentNullException( "sourceMap", "Source map cannot be null" );
          }
 
          if ( sourceMap.Width + left > Width )
@@ -531,7 +531,7 @@ namespace RogueSharp
       {
          if ( state == null )
          {
-            throw new ArgumentNullException( "Map state cannot be null", "state" );
+            throw new ArgumentNullException( "state", "Map state cannot be null" );
          }
 
          var inFov = new HashSet<int>();
@@ -564,7 +564,7 @@ namespace RogueSharp
       {
          if ( mapCreationStrategy == null )
          {
-            throw new ArgumentNullException( "Map creation strategy cannot be null", "mapCreationStrategy" );
+            throw new ArgumentNullException( "mapCreationStrategy", "Map creation strategy cannot be null" );
          }
 
          return mapCreationStrategy.CreateMap();
@@ -601,7 +601,7 @@ namespace RogueSharp
       {
          if ( cell == null )
          {
-            throw new ArgumentNullException( "Cell cannot be null", "cell" );
+            throw new ArgumentNullException( "cell", "Cell cannot be null" );
          }
 
          return ( cell.Y * Width ) + cell.X;

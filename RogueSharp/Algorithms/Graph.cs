@@ -310,7 +310,7 @@ namespace RogueSharp.Algorithms
       {
          if ( graph == null )
          {
-            throw new ArgumentNullException( "EdgeWeightedDigraph cannot be null", "graph" );
+            throw new ArgumentNullException( "graph", "EdgeWeightedDigraph cannot be null" );
          }
 
          foreach ( DirectedEdge edge in graph.Edges() )
@@ -407,7 +407,7 @@ namespace RogueSharp.Algorithms
       {
          if ( graph == null )
          {
-            throw new ArgumentNullException( "EdgeWeightedDigraph cannot be null", "graph" );
+            throw new ArgumentNullException( "graph", "EdgeWeightedDigraph cannot be null" );
          }
 
          if ( _distanceTo[sourceVertex] != 0.0 || _edgeTo[sourceVertex] != null )
