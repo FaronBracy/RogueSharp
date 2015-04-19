@@ -456,12 +456,11 @@ namespace RogueSharp.Algorithms
          return true;
       }
    }
-
    /// <summary>
    /// The IndexMinPriorityQueue class represents an indexed priority queue of generic keys.
    /// </summary>
    /// <seealso href="http://algs4.cs.princeton.edu/24pq/IndexMinPQ.java.html">IndexMinPQ class from Princeton University's Java Algorithms</seealso>
-   /// <typeparam name="T">Type must impliment IComparable interface</typeparam>
+   /// <typeparam name="T">Type must implement IComparable interface</typeparam>
    public class IndexMinPriorityQueue<T> where T : IComparable<T>
    {
       private readonly T[] _keys;
