@@ -202,11 +202,11 @@ namespace RogueSharp
 
          if ( sourceMap.Width + left > Width )
          {
-            throw new ArgumentException( "Source map 'width' + 'left' cannot be larger than the destination map width", "destinationMap" );
+            throw new ArgumentException( "Source map 'width' + 'left' cannot be larger than the destination map width" );
          }
          if ( sourceMap.Height + top > Height )
          {
-            throw new ArgumentException( "Source map 'height' + 'top' cannot be larger than the destination map height", "destinationMap" );
+            throw new ArgumentException( "Source map 'height' + 'top' cannot be larger than the destination map height" );
          }
          foreach ( Cell cell in sourceMap.GetAllCells() )
          {

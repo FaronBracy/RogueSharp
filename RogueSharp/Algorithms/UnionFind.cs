@@ -16,7 +16,7 @@ namespace RogueSharp.Algorithms
       /// <summary>
       /// Create an empty union-find data structure with "count" isolated sets
       /// </summary>
-      /// <param name="count">The number of isolated sets in the data strucutre</param>
+      /// <param name="count">The number of isolated sets in the data structure</param>
       public UnionFind( int count )
       {
          if ( count < 0 )
@@ -47,7 +47,7 @@ namespace RogueSharp.Algorithms
       {
          if ( p < 0 || p >= _id.Length )
          {
-            throw new ArgumentOutOfRangeException();
+            throw new ArgumentOutOfRangeException( "p", "Index out of bounds" );
          }
          while ( p != _id[p] )
          {
