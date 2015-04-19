@@ -42,11 +42,12 @@ namespace RogueSharp.Algorithms
       /// </summary>
       /// <param name="p">An integer representing one object</param>
       /// <returns>The component identifier of the component containing site p</returns>
+      /// <exception cref="ArgumentOutOfRangeException"></exception>
       public int Find( int p )
       {
          if ( p < 0 || p >= _id.Length )
          {
-            throw new IndexOutOfRangeException();
+            throw new ArgumentOutOfRangeException();
          }
          while ( p != _id[p] )
          {
