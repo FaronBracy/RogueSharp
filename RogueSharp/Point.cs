@@ -98,7 +98,14 @@ namespace RogueSharp
             return false;
          }
 
-         return ( obj is Point ) && Equals( (Point) obj );
+         // If parameter cannot be cast to Point return false.
+         Point p = obj as Point;
+         if ( (Object)p == null )
+         {
+            return false;
+         }
+
+         return Equals( p );
       }
       /// <summary>
       /// Gets the hash code for this object which can help for quick checks of equality

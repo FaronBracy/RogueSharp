@@ -223,7 +223,7 @@ namespace RogueSharp
       {
          if ( offset == null )
          {
-            throw new ArgumentNullException( "Point offset cannot be null", "offset" );
+            throw new ArgumentNullException( "offset", "Point offset cannot be null" );
          }
 
          X += offset.X;
@@ -258,7 +258,19 @@ namespace RogueSharp
       /// <returns>True if the instances are equal; False otherwise</returns>
       public override bool Equals( object obj )
       {
-         return ( obj is Rectangle ) ? this == ( (Rectangle) obj ) : false;
+         if ( obj == null )
+         {
+            return false;
+         }
+
+         // If parameter cannot be cast to Rectangle return false.
+         Rectangle r = obj as Rectangle;
+         if ( (Object) r == null )
+         {
+            return false;
+         }
+
+         return Equals( r );
       }
       /// <summary>
       /// Returns a string that represents the current Rectangle
