@@ -47,6 +47,7 @@ namespace RogueSharp
       /// </summary>
       /// <param name="other">The Point to compare this instance to</param>
       /// <returns>True if the instances are equal; False otherwise</returns>
+      /// <exception cref="NullReferenceException">Thrown if .Equals is invoked on null Point</exception>
       public bool Equals( Point other )
       {
          if ( other == null )
@@ -91,21 +92,16 @@ namespace RogueSharp
       /// </summary>
       /// <param name="obj">The Object to compare this instance to</param>
       /// <returns>True if the instances are equal; False otherwise</returns>
+      /// <exception cref="NullReferenceException">Thrown if .Equals is invoked on null Point</exception>
       public override bool Equals( object obj )
       {
-         if ( obj == null )
+         Point point = obj as Point;
+         if ( point == null )
          {
             return false;
          }
 
-         // If parameter cannot be cast to Point return false.
-         Point p = obj as Point;
-         if ( (Object)p == null )
-         {
-            return false;
-         }
-
-         return Equals( p );
+         return Equals( point );
       }
       /// <summary>
       /// Gets the hash code for this object which can help for quick checks of equality

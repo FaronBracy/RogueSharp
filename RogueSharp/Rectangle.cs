@@ -142,8 +142,14 @@ namespace RogueSharp
       /// </summary>
       /// <param name="other">The Rectangle to compare this instance to</param>
       /// <returns>True if the instances are equal; False otherwise</returns>
+      /// <exception cref="NullReferenceException">Thrown if .Equals is invoked on null Rectangle</exception>
       public bool Equals( Rectangle other )
       {
+         if ( other == null )
+         {
+            return false;
+         }
+
          return this == other;
       }
       /// <summary>
@@ -257,21 +263,16 @@ namespace RogueSharp
       /// </summary>
       /// <param name="obj">The Object to compare this instance to</param>
       /// <returns>True if the instances are equal; False otherwise</returns>
+      /// <exception cref="NullReferenceException">Thrown if .Equals is invoked on null Rectangle</exception>
       public override bool Equals( object obj )
       {
-         if ( obj == null )
+         Rectangle rectangle = obj as Rectangle;
+         if ( rectangle == null )
          {
             return false;
          }
 
-         // If parameter cannot be cast to Rectangle return false.
-         Rectangle r = obj as Rectangle;
-         if ( (Object) r == null )
-         {
-            return false;
-         }
-
-         return Equals( r );
+         return Equals( rectangle );
       }
       /// <summary>
       /// Returns a string that represents the current Rectangle
