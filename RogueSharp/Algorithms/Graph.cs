@@ -181,12 +181,12 @@ namespace RogueSharp.Algorithms
       /// Adds the specified directed edge to the edge-weighted digraph
       /// </summary>
       /// <param name="edge">The DirectedEdge to add</param>
-      /// <exception cref="ArgumentException">Invalid DirectedEdge</exception>
+      /// <exception cref="ArgumentNullException">DirectedEdge cannot be null</exception>
       public void AddEdge( DirectedEdge edge )
       {
          if ( edge == null )
          {
-            throw new ArgumentException( "Invalid DirectedEdge", "edge" );
+            throw new ArgumentNullException( "edge", "DirectedEdge cannot be null" );
          }
 
          _adjacent[edge.From].AddLast( edge );

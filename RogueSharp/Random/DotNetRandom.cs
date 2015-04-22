@@ -92,7 +92,7 @@ namespace RogueSharp.Random
       {
          if ( state == null )
          {
-            throw new ArgumentException( "RandomState cannot be null", "state" );
+            throw new ArgumentNullException( "state", "RandomState cannot be null" );
          }
 
          _seed = state.Seed[0];
