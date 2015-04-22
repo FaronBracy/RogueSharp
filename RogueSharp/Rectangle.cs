@@ -244,16 +244,13 @@ namespace RogueSharp
       /// </summary>
       /// <param name="horizontalValue">Value to push the sides out by</param>
       /// <param name="verticalValue">Value to push the top and bottom out by</param>
-      /// <exception cref="OverflowException">Thrown if the new width or height exceed Int32.MaxValue</exception>
+      /// <exception cref="OverflowException">Thrown if the new width or height exceed Int32.MaxValue, or new X or Y are smaller than int32.MinValue</exception>
       public void Inflate( int horizontalValue, int verticalValue )
       {
          X -= horizontalValue;
          Y -= verticalValue;
-         checked
-         {
-            Width += horizontalValue * 2;
-            Height += verticalValue * 2;            
-         }
+         Width += horizontalValue * 2;
+         Height += verticalValue * 2;            
       }
       /// <summary>
       /// Determines whether two Rectangle instances are equal

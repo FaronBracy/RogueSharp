@@ -46,11 +46,6 @@ namespace RogueSharp.Random
       /// <exception cref="ArgumentOutOfRangeException">Thrown if maxValue equals Int32.MaxValue</exception>
       public int Next( int minValue, int maxValue )
       {
-         if ( maxValue == int.MaxValue )
-         {
-            throw new ArgumentOutOfRangeException( "maxValue", "Value must be less than Int32.MaxValue" );
-         }
-
          _numberGenerated++;
          return _random.Next( minValue, maxValue + 1 );
       }
