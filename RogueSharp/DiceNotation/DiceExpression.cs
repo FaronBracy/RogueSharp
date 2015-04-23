@@ -11,19 +11,16 @@ namespace RogueSharp.DiceNotation
    public class DiceExpression
    {
       private readonly IList<IDiceExpressionTerm> _terms;
-
       /// <summary>
       /// Construct a new DiceExpression class with an empty list of terms
       /// </summary>
       public DiceExpression()
          : this( new IDiceExpressionTerm[] { } )
       { }
-
       private DiceExpression( IEnumerable<IDiceExpressionTerm> diceTerms )
       {
          _terms = diceTerms.ToList();
       }
-
       /// <summary>
       /// Add a single Die to this DiceExpression with the specified number of sides and scalar
       /// </summary>
@@ -34,7 +31,6 @@ namespace RogueSharp.DiceNotation
       {
          return Dice( 1, sides, scalar );
       }
-
       /// <summary>
       /// Add a single Die to this DiceExpression with the specified number of sides
       /// </summary>
@@ -44,7 +40,6 @@ namespace RogueSharp.DiceNotation
       {
          return Dice( 1, sides );
       }
-
       /// <summary>
       /// Add multiple Dice to this DiceExpression with the specified parameters
       /// </summary>
@@ -58,7 +53,6 @@ namespace RogueSharp.DiceNotation
          _terms.Add( new DiceTerm( multiplicity, sides, choose ?? multiplicity, scalar ) );
          return this;
       }
-
       /// <summary>
       /// Add a constant to this DiceExpression with the specified integer value
       /// </summary>
@@ -69,22 +63,25 @@ namespace RogueSharp.DiceNotation
          _terms.Add( new ConstantTerm( constant ) );
          return this;
       }
-
       /// <summary>
       /// Roll all of the Dice that are part of this DiceExpression
       /// </summary>
-      /// <param name="random">Optional parameter that defaults to DotNetRandom. If a different IRandom is provided that RNG will be used to perform the Roll instead.</param>
+      /// <param name="random">IRandom RNG used to perform the Roll.</param>
       /// <returns>A DiceResult representing the results of this Roll</returns>
-      public DiceResult Roll( IRandom random = null )
+      public DiceResult Roll( IRandom random )
       {
-         if ( random == null )
-         {
-            random = Singleton.DefaultRandom;
-         }
          IEnumerable<TermResult> termResults = _terms.SelectMany( t => t.GetResults( random ) ).ToList();
          return new DiceResult( termResults, random );
       }
-
+      /// <summary>
+      /// Roll all of the Dice that are part of this DiceExpression
+      /// </summary>
+      /// <returns>A DiceResult representing the results of this Roll</returns>
+      /// <remarks>Uses DotNetRandom as its RNG</remarks>
+      public DiceResult Roll()
+      {
+         return Roll( Singleton.DefaultRandom );
+      }
       /// <summary>
       /// Roll all of the Dice that are part of this DiceExpression, but force all of the rolls to be the lowest possible result
       /// </summary>
@@ -93,7 +90,6 @@ namespace RogueSharp.DiceNotation
       {
          return Roll( new MinRandom() );
       }
-
       /// <summary>
       /// Roll all of the Dice that are part of this DiceExpression, but force all of the rolls to be the highest possible result
       /// </summary>
@@ -102,7 +98,6 @@ namespace RogueSharp.DiceNotation
       {
          return Roll( new MaxRandom() );
       }
-
       /// <summary>
       /// Returns a string that represents this DiceExpression
       /// </summary>

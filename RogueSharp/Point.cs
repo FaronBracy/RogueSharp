@@ -17,7 +17,7 @@ namespace RogueSharp
       /// </summary>
       public int Y { get; set; }
       /// <summary>
-      /// Initializes a new instace of Point
+      /// Initializes a new instance of Point
       /// </summary>
       public Point()
       {
@@ -47,8 +47,14 @@ namespace RogueSharp
       /// </summary>
       /// <param name="other">The Point to compare this instance to</param>
       /// <returns>True if the instances are equal; False otherwise</returns>
+      /// <exception cref="NullReferenceException">Thrown if .Equals is invoked on null Point</exception>
       public bool Equals( Point other )
       {
+         if ( other == null )
+         {
+            return false;
+         }
+
          return ( ( X == other.X ) && ( Y == other.Y ) );
       }
       /// <summary>
@@ -59,6 +65,15 @@ namespace RogueSharp
       /// <returns>True if a and b are equal; False otherwise</returns>
       public static bool operator ==( Point a, Point b )
       {
+         if ( ReferenceEquals( a, null ) && ReferenceEquals( b, null ) )
+         {
+            return true;
+         }
+         if ( ReferenceEquals( a, null ) )
+         {
+            return false;
+         }
+
          return a.Equals( b );
       }
       /// <summary>
@@ -69,16 +84,24 @@ namespace RogueSharp
       /// <returns>True if a and b are not equal; False otherwise</returns>
       public static bool operator !=( Point a, Point b )
       {
-         return !a.Equals( b );
+         return !( a == b );
       }
+
       /// <summary>
       /// Determines whether two Point instances are equal
       /// </summary>
       /// <param name="obj">The Object to compare this instance to</param>
       /// <returns>True if the instances are equal; False otherwise</returns>
+      /// <exception cref="NullReferenceException">Thrown if .Equals is invoked on null Point</exception>
       public override bool Equals( object obj )
       {
-         return ( obj is Point ) ? Equals( (Point) obj ) : false;
+         Point point = obj as Point;
+         if ( point == null )
+         {
+            return false;
+         }
+
+         return Equals( point );
       }
       /// <summary>
       /// Gets the hash code for this object which can help for quick checks of equality

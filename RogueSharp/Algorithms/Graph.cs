@@ -92,8 +92,14 @@ namespace RogueSharp.Algorithms
       /// </summary>
       /// <param name="graph">The Graph</param>
       /// <param name="sourceVertex">The source vertex to compute a path from</param>
+      /// <exception cref="ArgumentException">Thrown on null or invalid Graph</exception>
       public DepthFirstPaths( Graph graph, int sourceVertex )
       {
+         if ( graph == null || graph.NumberOfVertices < 0 )
+         {
+            throw new ArgumentException( "Invalid Graph", "graph" );
+         }
+
          _sourceVertex = sourceVertex;
          _edgeTo = new int[graph.NumberOfVertices];
          _marked = new bool[graph.NumberOfVertices];
@@ -175,8 +181,14 @@ namespace RogueSharp.Algorithms
       /// Adds the specified directed edge to the edge-weighted digraph
       /// </summary>
       /// <param name="edge">The DirectedEdge to add</param>
+      /// <exception cref="ArgumentNullException">DirectedEdge cannot be null</exception>
       public void AddEdge( DirectedEdge edge )
       {
+         if ( edge == null )
+         {
+            throw new ArgumentNullException( "edge", "DirectedEdge cannot be null" );
+         }
+
          _adjacent[edge.From].AddLast( edge );
       }
       /// <summary>
@@ -260,7 +272,7 @@ namespace RogueSharp.Algorithms
       /// <summary>
       /// Returns the start vertex of the DirectedEdge
       /// </summary>
-      public int To { get; private set; }
+      public int To { get; private set;}
       /// <summary>
       /// Returns the weight of the DirectedEdge
       /// </summary>
@@ -276,7 +288,6 @@ namespace RogueSharp.Algorithms
          return string.Format( "From: {0}, To: {1}, Weight: {2}", From, To, Weight );
       }
    }
-
    /// <summary>
    /// The DijkstraShortestPath class represents a data type for solving the single-source shortest paths problem
    /// in edge-weighted digraphs where the edge weights are non-negative
@@ -293,8 +304,14 @@ namespace RogueSharp.Algorithms
       /// <param name="graph">The edge-weighted directed graph</param>
       /// <param name="sourceVertex">The source vertex to compute the shortest paths tree from</param>
       /// <exception cref="ArgumentOutOfRangeException">Throws an ArgumentOutOfRangeException if an edge weight is negative</exception>
+      /// <exception cref="ArgumentNullException">Thrown if EdgeWeightedDigraph is null</exception>
       public DijkstraShortestPath( EdgeWeightedDigraph graph, int sourceVertex )
       {
+         if ( graph == null )
+         {
+            throw new ArgumentNullException( "graph", "EdgeWeightedDigraph cannot be null" );
+         }
+
          foreach ( DirectedEdge edge in graph.Edges() )
          {
             if ( edge.Weight < 0 )
@@ -322,7 +339,6 @@ namespace RogueSharp.Algorithms
             }
          }
       }
-
       private void Relax( DirectedEdge edge )
       {
          int v = edge.From;
@@ -384,8 +400,14 @@ namespace RogueSharp.Algorithms
       /// <param name="graph">The edge-weighted directed graph</param>
       /// <param name="sourceVertex">The source vertex to check optimality conditions from</param>
       /// <returns>True if all optimality conditions are met, false otherwise</returns>
+      /// <exception cref="ArgumentNullException">Thrown on null EdgeWeightedDigraph</exception>
       public bool Check( EdgeWeightedDigraph graph, int sourceVertex )
       {
+         if ( graph == null )
+         {
+            throw new ArgumentNullException( "graph", "EdgeWeightedDigraph cannot be null" );
+         }
+
          if ( _distanceTo[sourceVertex] != 0.0 || _edgeTo[sourceVertex] != null )
          {
             return false;
@@ -432,12 +454,11 @@ namespace RogueSharp.Algorithms
          return true;
       }
    }
-
    /// <summary>
    /// The IndexMinPriorityQueue class represents an indexed priority queue of generic keys.
    /// </summary>
    /// <seealso href="http://algs4.cs.princeton.edu/24pq/IndexMinPQ.java.html">IndexMinPQ class from Princeton University's Java Algorithms</seealso>
-   /// <typeparam name="T">Type must impliment IComparable interface</typeparam>
+   /// <typeparam name="T">Type must implement IComparable interface</typeparam>
    public class IndexMinPriorityQueue<T> where T : IComparable<T>
    {
       private readonly T[] _keys;

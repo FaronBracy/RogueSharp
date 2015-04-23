@@ -22,8 +22,14 @@ namespace RogueSharp
       /// Constructs a new instance of a GoalMap for the specified Map
       /// </summary>
       /// <param name="map">The Map that this GoalMap will be created for</param>
+      /// <exception cref="ArgumentNullException">Thrown on null map</exception>
       public GoalMap( IMap map )
       {
+         if ( map == null )
+         {
+            throw new ArgumentNullException( "map", "Map cannot be null" );
+         }
+
          _map = map;
          _cellWeights = new int[map.Width, map.Height];
          _goals = new List<Cell>();
@@ -74,7 +80,7 @@ namespace RogueSharp
       private void MultiplyAndRecomputeCellWeights( float amount )
       {
          ComputeCellWeightsIfNeeded();
- 
+
          for ( int y = 0; y < _map.Height; y++ )
          {
             for ( int x = 0; x < _map.Width; x++ )
@@ -331,8 +337,7 @@ namespace RogueSharp
          private readonly GoalMap _goalMap;
          private readonly List<List<Point>> _paths;
          private readonly Stack<Point> _currentPath;
-         private readonly HashSet<Point> _visited; 
-
+         private readonly HashSet<Point> _visited;
          public GoalMapPathFinder( GoalMap goalMap )
          {
             _goalMap = goalMap;
@@ -340,7 +345,6 @@ namespace RogueSharp
             _currentPath = new Stack<Point>();
             _visited = new HashSet<Point>();
          }
-
          public List<List<Point>> FindPaths( int x, int y )
          {
             _paths.Clear();
@@ -349,7 +353,6 @@ namespace RogueSharp
             RecursivelyFindPaths( x, y );
             return _paths;
          }
-
          private void RecursivelyFindPaths( int x, int y )
          {
             var currentCell = new Point

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using RogueSharp.Algorithms;
 
 namespace RogueSharp
@@ -14,8 +15,14 @@ namespace RogueSharp
       /// Constructs a new PathFinder instance for the specified Map
       /// </summary>
       /// <param name="map">The Map that this PathFinder instance will run shortest path algorithms on</param>
+      /// <exception cref="ArgumentNullException">Thrown on null map</exception>
       public PathFinder( IMap map )
       {
+         if ( map == null )
+         {
+            throw new ArgumentNullException( "map", "Map cannot be null" );
+         }
+
          _map = map;
          _graph = new EdgeWeightedDigraph( _map.Width * _map.Height );
          foreach ( Cell cell in _map.GetAllCells() )

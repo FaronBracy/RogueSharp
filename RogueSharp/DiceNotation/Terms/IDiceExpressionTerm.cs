@@ -11,8 +11,14 @@ namespace RogueSharp.DiceNotation.Terms
       /// <summary>
       /// Gets the TermResults for the implementation
       /// </summary>
-      /// <param name="random">Optional parameter that defaults to null. It is recommended that if this is null then a default RNG is used such as DotNetRandom</param>
+      /// <param name="random">IRandom RNG used to perform the Roll.</param>
       /// <returns>An IEnumerable of TermResult which will have one item per result</returns>
-      IEnumerable<TermResult> GetResults( IRandom random = null );
+      IEnumerable<TermResult> GetResults( IRandom random );
+      /// <summary>
+      /// Gets the TermResults for the implementation
+      /// </summary>
+      /// <returns>An IEnumerable of TermResult which will have one item per result</returns>
+      /// <remarks>Uses DotNetRandom as its RNG</remarks>
+      IEnumerable<TermResult> GetResults();
    }
 }

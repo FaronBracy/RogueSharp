@@ -107,6 +107,11 @@ namespace RogueSharp
          }
          set
          {
+            if ( value == null )
+            {
+               throw new ArgumentNullException( "value" );
+            }
+
             X = value.X;
             Y = value.Y;
          }
@@ -137,18 +142,33 @@ namespace RogueSharp
       /// </summary>
       /// <param name="other">The Rectangle to compare this instance to</param>
       /// <returns>True if the instances are equal; False otherwise</returns>
+      /// <exception cref="NullReferenceException">Thrown if .Equals is invoked on null Rectangle</exception>
       public bool Equals( Rectangle other )
       {
+         if ( other == null )
+         {
+            return false;
+         }
+
          return this == other;
       }
       /// <summary>
       /// Compares two rectangles for equality
       /// </summary>
       /// <param name="a">Rectangle on the left side of the equals sign</param>
-      /// <param name="b">Rectangle on the right side of the euqals sign</param>
+      /// <param name="b">Rectangle on the right side of the equals sign</param>
       /// <returns>True if the rectangles are equal; False otherwise</returns>
       public static bool operator ==( Rectangle a, Rectangle b )
       {
+         if ( ReferenceEquals( a, null) && ReferenceEquals( b, null) )
+         {
+            return true;
+         }
+         if ( ReferenceEquals( a, null ) || ReferenceEquals( b, null ) )
+         {
+            return false;
+         }
+
          return ( ( a.X == b.X ) && ( a.Y == b.Y ) && ( a.Width == b.Width ) && ( a.Height == b.Height ) );
       }
       /// <summary>
@@ -168,6 +188,11 @@ namespace RogueSharp
       /// <returns>True if the specified Point is contained within this Rectangle; False otherwise</returns>
       public bool Contains( Point value )
       {
+         if ( value == null )
+         {
+            return false;
+         }
+
          return ( ( ( ( X <= value.X ) && ( value.X < ( X + Width ) ) ) && ( Y <= value.Y ) ) && ( value.Y < ( Y + Height ) ) );
       }
       /// <summary>
@@ -177,6 +202,11 @@ namespace RogueSharp
       /// <returns>True if this Rectangle entirely contains the specified Rectangle; False otherwise</returns>
       public bool Contains( Rectangle value )
       {
+         if ( value == null )
+         {
+            return false;
+         }
+
          return ( ( ( ( X <= value.X ) && ( ( value.X + value.Width ) <= ( X + Width ) ) ) && ( Y <= value.Y ) )
                   && ( ( value.Y + value.Height ) <= ( Y + Height ) ) );
       }
@@ -184,7 +214,7 @@ namespace RogueSharp
       /// Compares two rectangles for inequality
       /// </summary>
       /// <param name="a">Rectangle on the left side of the equals sign</param>
-      /// <param name="b">Rectangle on the right side of the euqals sign</param>
+      /// <param name="b">Rectangle on the right side of the equals sign</param>
       /// <returns>True if the rectangles are not equal; False otherwise</returns>
       public static bool operator !=( Rectangle a, Rectangle b )
       {
@@ -194,8 +224,14 @@ namespace RogueSharp
       /// Changes the position of the Rectangles by the values of the specified Point
       /// </summary>
       /// <param name="offset">The values to adjust the position of the Rectangle by</param>
+      /// <exception cref="ArgumentNullException">Thrown if offset is null</exception>
       public void Offset( Point offset )
       {
+         if ( offset == null )
+         {
+            throw new ArgumentNullException( "offset", "Point offset cannot be null" );
+         }
+
          X += offset.X;
          Y += offset.Y;
       }
@@ -214,21 +250,29 @@ namespace RogueSharp
       /// </summary>
       /// <param name="horizontalValue">Value to push the sides out by</param>
       /// <param name="verticalValue">Value to push the top and bottom out by</param>
+      /// <exception cref="OverflowException">Thrown if the new width or height exceed Int32.MaxValue, or new X or Y are smaller than int32.MinValue</exception>
       public void Inflate( int horizontalValue, int verticalValue )
       {
          X -= horizontalValue;
          Y -= verticalValue;
          Width += horizontalValue * 2;
-         Height += verticalValue * 2;
+         Height += verticalValue * 2;            
       }
       /// <summary>
       /// Determines whether two Rectangle instances are equal
       /// </summary>
       /// <param name="obj">The Object to compare this instance to</param>
       /// <returns>True if the instances are equal; False otherwise</returns>
+      /// <exception cref="NullReferenceException">Thrown if .Equals is invoked on null Rectangle</exception>
       public override bool Equals( object obj )
       {
-         return ( obj is Rectangle ) ? this == ( (Rectangle) obj ) : false;
+         Rectangle rectangle = obj as Rectangle;
+         if ( rectangle == null )
+         {
+            return false;
+         }
+
+         return Equals( rectangle );
       }
       /// <summary>
       /// Returns a string that represents the current Rectangle
@@ -254,9 +298,13 @@ namespace RogueSharp
       /// <returns>True if the specified Rectangle intersects with this one; False otherwise</returns>
       public bool Intersects( Rectangle value )
       {
+         if ( value == null )
+         {
+            return false;
+         }
+
          return value.Left < Right && Left < value.Right && value.Top < Bottom && Top < value.Bottom;
       }
-
       /// <summary>
       /// Determines whether this Rectangle intersects with the specified Rectangle
       /// </summary>
@@ -264,6 +312,12 @@ namespace RogueSharp
       /// <param name="result">True if the specified Rectangle intersects with this one; False otherwise</param>
       public void Intersects( ref Rectangle value, out bool result )
       {
+         if ( value == null )
+         {
+            result = false;
+            return;
+         }
+
          result = value.Left < Right && Left < value.Right && value.Top < Bottom && Top < value.Bottom;
       }
       /// <summary>
@@ -271,7 +325,7 @@ namespace RogueSharp
       /// </summary>
       /// <param name="value1">The first Rectangle to compare</param>
       /// <param name="value2">The second Rectangle to compare</param>
-      /// <returns>The area wher ethe two specified Rectangles overlap. If the two Rectangles do not overlap the resulting Rectangle will be Empty</returns>
+      /// <returns>The area where the two specified Rectangles overlap. If the two Rectangles do not overlap the resulting Rectangle will be Empty</returns>
       public static Rectangle Intersect( Rectangle value1, Rectangle value2 )
       {
          Rectangle rectangle;
@@ -283,10 +337,10 @@ namespace RogueSharp
       /// </summary>
       /// <param name="value1">The first Rectangle to compare</param>
       /// <param name="value2">The second Rectangle to compare</param>
-      /// <param name="result">The area wher ethe two specified Rectangles overlap. If the two Rectangles do not overlap the resulting Rectangle will be Empty</param>
+      /// <param name="result">The area where the two specified Rectangles overlap. If the two Rectangles do not overlap the resulting Rectangle will be Empty</param>
       public static void Intersect( ref Rectangle value1, ref Rectangle value2, out Rectangle result )
       {
-         if ( value1.Intersects( value2 ) )
+         if ( value1 != null && value2 != null && value1.Intersects( value2 ) )
          {
             int rightSide = Math.Min( value1.X + value1.Width, value2.X + value2.Width );
             int leftSide = Math.Max( value1.X, value2.X );
@@ -300,25 +354,45 @@ namespace RogueSharp
          }
       }
       /// <summary>
-      /// Creates a new Rectangle that excatly contains the specified two Rectangles
+      /// Creates a new Rectangle that exactly contains the specified two Rectangles
       /// </summary>
       /// <param name="value1">The first Rectangle to contain</param>
       /// <param name="value2">The second Rectangle to contain</param>
       /// <returns>A new Rectangle that exactly contains the specified two Rectangles</returns>
+      /// <exception cref="NullReferenceException">Thrown if either rectangle is null</exception>
       public static Rectangle Union( Rectangle value1, Rectangle value2 )
       {
+         if ( value1 == null )
+         {
+            throw new ArgumentNullException( "value1", "Rectangle cannot be null" );
+         }
+         if ( value2 == null )
+         {
+            throw new ArgumentNullException( "value2", "Rectangle cannot be null" );
+         }
+
          int x = Math.Min( value1.X, value2.X );
          int y = Math.Min( value1.Y, value2.Y );
          return new Rectangle( x, y, Math.Max( value1.Right, value2.Right ) - x, Math.Max( value1.Bottom, value2.Bottom ) - y );
       }
       /// <summary>
-      /// Creates a new Rectangle that excatly contains the specified two Rectangles
+      /// Creates a new Rectangle that exactly contains the specified two Rectangles
       /// </summary>
       /// <param name="value1">The first Rectangle to contain</param>
       /// <param name="value2">The second Rectangle to contain</param>
       /// <param name="result">A new Rectangle that exactly contains the specified two Rectangles</param>
+      /// <exception cref="NullReferenceException">Thrown if either rectangle is null</exception>
       public static void Union( ref Rectangle value1, ref Rectangle value2, out Rectangle result )
       {
+         if ( value1 == null )
+         {
+            throw new ArgumentNullException( "value1", "Rectangle cannot be null" );
+         }
+         if ( value2 == null )
+         {
+            throw new ArgumentNullException( "value2", "Rectangle cannot be null" );
+         }
+
          result = new Rectangle();
          result.X = Math.Min( value1.X, value2.X );
          result.Y = Math.Min( value1.Y, value2.Y );

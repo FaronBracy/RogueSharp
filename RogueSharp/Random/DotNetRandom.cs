@@ -13,7 +13,7 @@ namespace RogueSharp.Random
       private System.Random _random = new System.Random();
       /// <summary>
       /// Constructs a new pseudo-random number generator 
-      /// with a seed based on the number of milliseconds ellapsed since the system started
+      /// with a seed based on the number of milliseconds elapsed since the system started
       /// </summary>
       public DotNetRandom()
          : this( Environment.TickCount )
@@ -43,6 +43,7 @@ namespace RogueSharp.Random
       /// <param name="minValue">Inclusive minimum result</param>
       /// <param name="maxValue">Inclusive maximum result</param>
       /// <returns>Returns a pseudo-random integer between the specified minValue and maxValue inclusive</returns>
+      /// <exception cref="ArgumentOutOfRangeException">Thrown if maxValue equals Int32.MaxValue</exception>
       public int Next( int minValue, int maxValue )
       {
          _numberGenerated++;
@@ -81,8 +82,14 @@ namespace RogueSharp.Random
       /// generated the first time after Save was called.
       /// </example>
       /// <param name="state">The state to restore to, usually obtained from calling the Save method</param>
+      /// <exception cref="ArgumentNullException">RandomState cannot be null</exception>
       public void Restore( RandomState state )
       {
+         if ( state == null )
+         {
+            throw new ArgumentNullException( "state", "RandomState cannot be null" );
+         }
+
          _seed = state.Seed[0];
          _random = new System.Random( _seed );
          for ( long i = 0; i < state.NumberGenerated; i++ )

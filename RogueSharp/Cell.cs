@@ -14,7 +14,7 @@
       /// <param name="isWalkable">Could a character could normally walk across the Cell without difficulty</param>
       /// <param name="isInFov">Is the Cell currently in the currently observable field-of-view</param>
       /// <param name="isExplored">Has this Cell ever been explored by the player</param>
-      public Cell( int x, int y, bool isTransparent, bool isWalkable, bool isInFov, bool isExplored = false )
+      public Cell( int x, int y, bool isTransparent, bool isWalkable, bool isInFov, bool isExplored )
       {
          X = x;
          Y = y;
@@ -22,6 +22,23 @@
          IsWalkable = isWalkable;
          IsInFov = isInFov;
          IsExplored = isExplored;
+      }
+      /// <summary>
+      /// Construct a new unexplored Cell located at the specified x and y location with the specified properties
+      /// </summary>
+      /// <param name="x">X location of the Cell starting with 0 as the farthest left</param>
+      /// <param name="y">Y location of the Cell starting with 0 as the top</param>
+      /// <param name="isTransparent">Is there a clear line-of-sight through this Cell</param>
+      /// <param name="isWalkable">Could a character could normally walk across the Cell without difficulty</param>
+      /// <param name="isInFov">Is the Cell currently in the currently observable field-of-view</param>
+      public Cell( int x, int y, bool isTransparent, bool isWalkable, bool isInFov )
+      {
+         X = x;
+         Y = y;
+         IsTransparent = isTransparent;
+         IsWalkable = isWalkable;
+         IsInFov = isInFov;
+         IsExplored = false;
       }
       /// <summary>
       /// Gets the X location of the Cell starting with 0 as the farthest left
@@ -98,7 +115,7 @@
       /// - `#`: `Cell` is in field-of-view (but not transparent or walkable)
       /// </summary>
       /// <param name="useFov">True if field-of-view calculations will be used when creating the string represenation of the Cell. False otherwise</param>
-      /// <returns>A string represenation of the Cell using special symbols to denote Cell properties</returns>
+      /// <returns>A string representation of the Cell using special symbols to denote Cell properties</returns>
       public string ToString( bool useFov )
       {
          if ( useFov && !IsInFov )

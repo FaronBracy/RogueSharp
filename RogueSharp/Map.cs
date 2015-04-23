@@ -116,7 +116,7 @@ namespace RogueSharp
       /// </summary>
       /// <remarks>
       /// The explored property of a Cell can be used to track if the Cell has ever been in the field-of-view of a character controlled by the player
-      /// This property will not automatically be updated based on FOV calcuations or any other built-in functions of the RogueSharp library.
+      /// This property will not automatically be updated based on FOV calculations or any other built-in functions of the RogueSharp library.
       /// </remarks>
       /// <example>
       /// As the player moves characters around a Map, Cells will enter and exit the currently computed field-of-view
@@ -139,12 +139,26 @@ namespace RogueSharp
       /// <param name="y">Y location of the Cell to set properties on, starting with 0 as the top</param>
       /// <param name="isTransparent">True if line-of-sight is not blocked by this Cell. False otherwise</param>
       /// <param name="isWalkable">True if a character could walk across the Cell normally. False otherwise</param>
-      /// <param name="isExplored">Optional parameter defaults to false if not provided. True if the Cell has ever been in the field-of-view of the player. False otherwise</param>
-      public void SetCellProperties( int x, int y, bool isTransparent, bool isWalkable, bool isExplored = false )
+      /// <param name="isExplored">True if the Cell has ever been in the field-of-view of the player. False otherwise</param>
+      public void SetCellProperties( int x, int y, bool isTransparent, bool isWalkable, bool isExplored )
       {
          _isTransparent[x, y] = isTransparent;
          _isWalkable[x, y] = isWalkable;
          _isExplored[x, y] = isExplored;
+      }
+      /// <summary>
+      /// Set the properties of an unexplored Cell to the specified values
+      /// </summary>
+      /// <remarks>
+      /// IsInFov cannot be set through this method as it is always calculated by calling ComputeFov and/or AppendFov
+      /// </remarks>
+      /// <param name="x">X location of the Cell to set properties on, starting with 0 as the farthest left</param>
+      /// <param name="y">Y location of the Cell to set properties on, starting with 0 as the top</param>
+      /// <param name="isTransparent">True if line-of-sight is not blocked by this Cell. False otherwise</param>
+      /// <param name="isWalkable">True if a character could walk across the Cell normally. False otherwise</param>
+      public void SetCellProperties( int x, int y, bool isTransparent, bool isWalkable )
+      {
+         SetCellProperties( x, y, isTransparent, isWalkable, false );
       }
       /// <summary>
       /// Sets the properties of all Cells in the Map to the specified values
@@ -177,15 +191,22 @@ namespace RogueSharp
       /// <param name="sourceMap">An IMap which must be of smaller size and able to fit in this destination Map at the specified location</param>
       /// <param name="left">Optional parameter defaults to 0 if not provided. X location of the Cell to start copying parameters to, starting with 0 as the farthest left</param>
       /// <param name="top">Optional parameter defaults to 0 if not provided. Y location of the Cell to start copying parameters to, starting with 0 as the top</param>
+      /// <exception cref="ArgumentNullException">Thrown on null source map</exception>
+      /// <exception cref="ArgumentException">Thrown on invalid source map dimensions</exception>
       public void Copy( IMap sourceMap, int left, int top )
       {
+         if ( sourceMap == null )
+         {
+            throw new ArgumentNullException( "sourceMap", "Source map cannot be null" );
+         }
+
          if ( sourceMap.Width + left > Width )
          {
-            throw new ArgumentException( "Source map 'width' + 'left' cannot be larger than the destination map width", "destinationMap" );
+            throw new ArgumentException( "Source map 'width' + 'left' cannot be larger than the destination map width" );
          }
          if ( sourceMap.Height + top > Height )
          {
-            throw new ArgumentException( "Source map 'height' + 'top' cannot be larger than the destination map height", "destinationMap" );
+            throw new ArgumentException( "Source map 'height' + 'top' cannot be larger than the destination map height" );
          }
          foreach ( Cell cell in sourceMap.GetAllCells() )
          {
@@ -455,7 +476,7 @@ namespace RogueSharp
       /// - `#`: `Cell` is in field-of-view (but not transparent or walkable)
       /// </summary>
       /// <param name="useFov">True if field-of-view calculations will be used when creating the string represenation of the Map. False otherwise</param>
-      /// <returns>A string represenation of the map using special symbols to denote Cell properties</returns>
+      /// <returns>A string representation of the map using special symbols to denote Cell properties</returns>
       public string ToString( bool useFov )
       {
          var mapRepresentation = new StringBuilder();
@@ -505,8 +526,14 @@ namespace RogueSharp
       /// Restore the state of this Map from the specified MapState
       /// </summary>
       /// <param name="state">Mapstate POCO (Plain Old C# Object) which represents this Map and can be easily serialized and deserialized</param>
+      /// <exception cref="ArgumentNullException">Thrown on null map state</exception>
       public void Restore( MapState state )
       {
+         if ( state == null )
+         {
+            throw new ArgumentNullException( "state", "Map state cannot be null" );
+         }
+
          var inFov = new HashSet<int>();
 
          Initialize( state.Width, state.Height );
@@ -532,8 +559,14 @@ namespace RogueSharp
       /// </remarks>
       /// <param name="mapCreationStrategy">A class that implements IMapCreationStrategy and has CreateMap method which defines algorithms for creating interesting Maps</param>
       /// <returns>Map created by calling CreateMap from the specified IMapCreationStrategy</returns>
+      /// <exception cref="ArgumentNullException">Thrown on null map creation strategy</exception>
       public static Map Create( IMapCreationStrategy<Map> mapCreationStrategy )
       {
+         if ( mapCreationStrategy == null )
+         {
+            throw new ArgumentNullException( "mapCreationStrategy", "Map creation strategy cannot be null" );
+         }
+
          return mapCreationStrategy.CreateMap();
       }
       /// <summary>
@@ -563,8 +596,14 @@ namespace RogueSharp
       /// </summary>
       /// <param name="cell">The Cell to get the index for</param>
       /// <returns>An index for the Cell which is useful if storing Cells in a single dimensional array</returns>
+      /// <exception cref="ArgumentNullException">Thrown on null cell</exception>
       public int IndexFor( Cell cell )
       {
+         if ( cell == null )
+         {
+            throw new ArgumentNullException( "cell", "Cell cannot be null" );
+         }
+
          return ( cell.Y * Width ) + cell.X;
       }
       private bool AddToHashSet( HashSet<int> hashSet, int x, int y, out Cell cell )
@@ -582,7 +621,7 @@ namespace RogueSharp
       /// <remarks>
       /// This call ignores field-of-view. If field-of-view is important use the ToString overload with a "true" parameter
       /// </remarks>
-      /// <returns>A string represenation of the map using special symbols to denote Cell properties</returns>
+      /// <returns>A string representation of the map using special symbols to denote Cell properties</returns>
       public override string ToString()
       {
          return ToString( false );

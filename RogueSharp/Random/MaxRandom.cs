@@ -14,7 +14,6 @@
       {
          return maxValue;
       }
-
       /// <summary>
       /// Gets the next integer in the series which will always be maxValue
       /// </summary>
@@ -25,7 +24,6 @@
       {
          return maxValue;
       }
-
       /// <summary>
       /// Save the current state of the generator which is essentially a no-op for this generator
       /// </summary>
@@ -34,7 +32,6 @@
       {
          return new RandomState();
       }
-
       /// <summary>
       /// Restores the state of the generator which is essentially a no-op for this generator
       /// </summary>

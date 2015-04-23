@@ -18,7 +18,6 @@ namespace RogueSharp
       /// <returns>An IMap of the specified type</returns>
       T CreateMap();
    }
-
    /// <summary>
    /// The RandomRoomsMapCreationStrategy creates a Map of the specified type by placing rooms randomly and then connecting them with cooridors
    /// </summary>
@@ -40,14 +39,32 @@ namespace RogueSharp
       /// <param name="roomMaxSize">The maximum width and height of each room that will be generated in the Map</param>
       /// <param name="roomMinSize">The minimum width and height of each room that will be generated in the Map</param>
       /// <param name="random">A class implementing IRandom that will be used to generate pseudo-random numbers necessary to create the Map</param>
-      public RandomRoomsMapCreationStrategy( int width, int height, int maxRooms, int roomMaxSize, int roomMinSize, IRandom random = null )
+      public RandomRoomsMapCreationStrategy( int width, int height, int maxRooms, int roomMaxSize, int roomMinSize, IRandom random )
       {
          _width = width;
          _height = height;
          _maxRooms = maxRooms;
          _roomMaxSize = roomMaxSize;
          _roomMinSize = roomMinSize;
-         _random = random ?? Singleton.DefaultRandom;
+         _random = random;
+      }
+      /// <summary>
+      /// Constructs a new RandomRoomsMapCreationStrategy with the specified parameters
+      /// </summary>
+      /// <param name="width">The width of the Map to be created</param>
+      /// <param name="height">The height of the Map to be created</param>
+      /// <param name="maxRooms">The maximum number of rooms that will exist in the generated Map</param>
+      /// <param name="roomMaxSize">The maximum width and height of each room that will be generated in the Map</param>
+      /// <param name="roomMinSize">The minimum width and height of each room that will be generated in the Map</param>
+      /// <remarks>Uses DotNetRandom as its RNG</remarks>
+      public RandomRoomsMapCreationStrategy( int width, int height, int maxRooms, int roomMaxSize, int roomMinSize )
+      {
+         _width = width;
+         _height = height;
+         _maxRooms = maxRooms;
+         _roomMaxSize = roomMaxSize;
+         _roomMinSize = roomMinSize;
+         _random = Singleton.DefaultRandom;
       }
       /// <summary>
       /// Creates a new IMap of the specified type.
@@ -144,7 +161,6 @@ namespace RogueSharp
          }
       }
    }
-
    /// <summary>
    /// The BorderOnlyMapCreationStrategy creates a Map of the specified type by making an empty map with only the outermost border being solid walls
    /// </summary>
@@ -186,7 +202,6 @@ namespace RogueSharp
          return map;
       }
    }
-
    /// <summary>
    /// The StringDeserializeMapCreationStrategy creates a Map of the specified type from a string representation of the Map
    /// </summary>
@@ -249,7 +264,6 @@ namespace RogueSharp
          return map;
       }
    }
-
    /// <summary>
    /// The CaveMapCreationStrategy creates a Map of the specified type by using a cellular automata algorithm for creating a cave-like map.
    /// </summary>
@@ -273,14 +287,33 @@ namespace RogueSharp
       /// <param name="totalIterations">Recommend int between 2 and 5. Number of times to execute the cellular automata algorithm.</param>
       /// <param name="cutoffOfBigAreaFill">Recommend int less than 4. The interation number to switch from the large area fill algorithm to a nearest neighbor algorithm</param>
       /// <param name="random">A class implementing IRandom that will be used to generate pseudo-random numbers necessary to create the Map</param>
-      public CaveMapCreationStrategy( int width, int height, int fillProbability, int totalIterations, int cutoffOfBigAreaFill, IRandom random = null )
+      public CaveMapCreationStrategy( int width, int height, int fillProbability, int totalIterations, int cutoffOfBigAreaFill, IRandom random )
       {
          _width = width;
          _height = height;
          _fillProbability = fillProbability;
          _totalIterations = totalIterations;
          _cutoffOfBigAreaFill = cutoffOfBigAreaFill;
-         _random = random ?? Singleton.DefaultRandom;
+         _random = random;
+         _map = new T();
+      }
+      /// <summary>
+      /// Constructs a new CaveMapCreationStrategy with the specified parameters
+      /// </summary>
+      /// <param name="width">The width of the Map to be created</param>
+      /// <param name="height">The height of the Map to be created</param>
+      /// <param name="fillProbability">Recommend int between 40 and 60. Percent chance that a given cell will be a floor when randomizing all cells.</param>
+      /// <param name="totalIterations">Recommend int between 2 and 5. Number of times to execute the cellular automata algorithm.</param>
+      /// <param name="cutoffOfBigAreaFill">Recommend int less than 4. The interation number to switch from the large area fill algorithm to a nearest neighbor algorithm</param>
+      /// <remarks>Uses DotNetRandom as its RNG</remarks>
+      public CaveMapCreationStrategy( int width, int height, int fillProbability, int totalIterations, int cutoffOfBigAreaFill )
+      {
+         _width = width;
+         _height = height;
+         _fillProbability = fillProbability;
+         _totalIterations = totalIterations;
+         _cutoffOfBigAreaFill = cutoffOfBigAreaFill;
+         _random = Singleton.DefaultRandom;
          _map = new T();
       }
       /// <summary>
