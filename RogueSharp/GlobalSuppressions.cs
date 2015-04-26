@@ -15,3 +15,5 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "1", Scope = "member", Target = "RogueSharp.Rectangle.#Union(RogueSharp.Rectangle&,RogueSharp.Rectangle&,RogueSharp.Rectangle&)" )]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes", Scope = "member", Target = "RogueSharp.Random.Singleton.#DefaultRandom" )]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Usage", "CA2233:OperationsShouldNotOverflow", MessageId = "maxValue+1", Scope = "member", Target = "RogueSharp.Random.DotNetRandom.#Next(System.Int32,System.Int32)" )]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Design", "CA1020:AvoidNamespacesWithFewTypes", Scope = "namespace", Target = "RogueSharp.DiceNotation.Terms" )]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Design", "CA1020:AvoidNamespacesWithFewTypes", Scope = "namespace", Target = "RogueSharp.DiceNotation.Exceptions" )]
