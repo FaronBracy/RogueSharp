@@ -223,17 +223,17 @@ namespace RogueSharp
       /// <summary>
       /// Changes the position of the Rectangles by the values of the specified Point
       /// </summary>
-      /// <param name="offset">The values to adjust the position of the Rectangle by</param>
+      /// <param name="offsetPoint">The values to adjust the position of the Rectangle by</param>
       /// <exception cref="ArgumentNullException">Thrown if offset is null</exception>
-      public void Offset( Point offset )
+      public void Offset( Point offsetPoint )
       {
-         if ( offset == null )
+         if ( offsetPoint == null )
          {
-            throw new ArgumentNullException( "offset", "Point offset cannot be null" );
+            throw new ArgumentNullException( "offsetPoint", "Point offset cannot be null" );
          }
 
-         X += offset.X;
-         Y += offset.Y;
+         X += offsetPoint.X;
+         Y += offsetPoint.Y;
       }
       /// <summary>
       /// Changes the position of the Rectangle by the specified x and y offsets

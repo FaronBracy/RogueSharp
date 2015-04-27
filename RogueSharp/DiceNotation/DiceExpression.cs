@@ -56,11 +56,11 @@ namespace RogueSharp.DiceNotation
       /// <summary>
       /// Add a constant to this DiceExpression with the specified integer value
       /// </summary>
-      /// <param name="constant">An integer constant to add to this DiceExpression</param>
+      /// <param name="value">An integer constant to add to this DiceExpression</param>
       /// <returns>A DiceExpression representing the previous terms in this DiceExpression plus this newly added Constant</returns>
-      public DiceExpression Constant( int constant )
+      public DiceExpression Constant( int value )
       {
-         _terms.Add( new ConstantTerm( constant ) );
+         _terms.Add( new ConstantTerm( value ) );
          return this;
       }
       /// <summary>
