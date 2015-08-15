@@ -17,3 +17,8 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Usage", "CA2233:OperationsShouldNotOverflow", MessageId = "maxValue+1", Scope = "member", Target = "RogueSharp.Random.DotNetRandom.#Next(System.Int32,System.Int32)" )]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Design", "CA1020:AvoidNamespacesWithFewTypes", Scope = "namespace", Target = "RogueSharp.DiceNotation.Terms" )]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Design", "CA1020:AvoidNamespacesWithFewTypes", Scope = "namespace", Target = "RogueSharp.DiceNotation.Exceptions" )]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Performance", "CA1814:PreferJaggedArraysOverMultidimensional", MessageId = "Body", Scope = "member", Target = "RogueSharp.Map.#Initialize(System.Int32,System.Int32)" )]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Performance", "CA1814:PreferJaggedArraysOverMultidimensional", MessageId = "Member", Scope = "member", Target = "RogueSharp.Map.#_isTransparent" )]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Performance", "CA1814:PreferJaggedArraysOverMultidimensional", MessageId = "Member", Scope = "member", Target = "RogueSharp.Map.#_isWalkable" )]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Performance", "CA1814:PreferJaggedArraysOverMultidimensional", MessageId = "Member", Scope = "member", Target = "RogueSharp.Map.#_isExplored" )]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Performance", "CA1814:PreferJaggedArraysOverMultidimensional", MessageId = "Member", Scope = "member", Target = "RogueSharp.GoalMap.#_cellWeights" )]
