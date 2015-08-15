@@ -352,7 +352,7 @@ namespace RogueSharp
             _currentPath.Clear();
             _visited.Clear();
             RecursivelyFindPaths( x, y );
-            List<ReadOnlyCollection<Point>> paths = new List<ReadOnlyCollection<Point>>();
+            var paths = new List<ReadOnlyCollection<Point>>();
             foreach ( var path in _paths )
             {
                paths.Add( new ReadOnlyCollection<Point>( path ) );
