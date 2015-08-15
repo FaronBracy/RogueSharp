@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace RogueSharp
 {
@@ -66,7 +67,7 @@ namespace RogueSharp
       /// <param name="radius">The number of Cells in which the field-of-view extends from the origin Cell. Think of this as the intensity of the light source.</param>
       /// <param name="lightWalls">True if walls should be included in the field-of-view when they are within the radius of the light source. False excludes walls even when they are within range.</param>
       /// <returns>List of Cells representing the what is observable in the Map based on the specified parameters</returns>
-      public List<Cell> ComputeFov( int xOrigin, int yOrigin, int radius, bool lightWalls )
+      public ReadOnlyCollection<Cell> ComputeFov( int xOrigin, int yOrigin, int radius, bool lightWalls )
       {
          ClearFov();
          return AppendFov( xOrigin, yOrigin, radius, lightWalls );
@@ -84,7 +85,7 @@ namespace RogueSharp
       /// <param name="radius">The number of Cells in which the field-of-view extends from the origin Cell. Think of this as the intensity of the light source.</param>
       /// <param name="lightWalls">True if walls should be included in the field-of-view when they are within the radius of the light source. False excludes walls even when they are within range.</param>
       /// <returns>List of Cells representing the what is observable in the Map based on the specified parameters</returns>
-      public List<Cell> AppendFov( int xOrigin, int yOrigin, int radius, bool lightWalls )
+      public ReadOnlyCollection<Cell> AppendFov( int xOrigin, int yOrigin, int radius, bool lightWalls )
       {
          foreach ( Cell borderCell in _map.GetBorderCellsInArea( xOrigin, yOrigin, radius ) )
          {
@@ -142,14 +143,14 @@ namespace RogueSharp
 
          return CellsInFov();
       }
-      private List<Cell> CellsInFov()
+      private ReadOnlyCollection<Cell> CellsInFov()
       {
          var cells = new List<Cell>();
          foreach ( int index in _inFov )
          {
             cells.Add( _map.CellFor( index ) );
          }
-         return cells;
+         return new ReadOnlyCollection<Cell>( cells );
       }
       private void ClearFov()
       {

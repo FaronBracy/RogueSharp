@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace RogueSharp
 {
@@ -27,7 +28,7 @@ namespace RogueSharp
       /// <param name="x">X location of the beginning of the path, starting with 0 as the farthest left</param>
       /// <param name="y">Y location of the beginning of the path, starting with 0 as the top</param>
       /// <returns>A List of ordered Lists of Points representing all of the shortest paths from the specified location to all defined Goals</returns>
-      List<List<Point>> FindAllPathsToAllGoals( int x, int y );
+      ReadOnlyCollection<ReadOnlyCollection<Point>> FindAllPathsToAllGoals( int x, int y );
       /// <summary>
       /// Returns an ordered List of Points representing a shortest path from the specified location to the Goal determined to have the highest priority
       /// Distance to the goals and the weight of the goals are both used in determining the priority
@@ -37,7 +38,7 @@ namespace RogueSharp
       /// <param name="y">Y location of the beginning of the path, starting with 0 as the top</param>
       /// <param name="obstacles">An array of points that must be avoided while calculating the path</param>
       /// <returns>An ordered List of Points representing a shortest path from the specified location to the Goal determined to have the highest priority</returns>
-      List<Point> FindPath( int x, int y, IEnumerable<Point> obstacles );
+      ReadOnlyCollection<Point> FindPath( int x, int y, IEnumerable<Point> obstacles );
       /// <summary>
       /// Returns an ordered List of Points representing a path from the specified location away from Goals
       /// Distance to the goals and the weight of the goals are both used in determining the priority of avoiding the Goals
@@ -51,6 +52,6 @@ namespace RogueSharp
       /// <param name="y">Y location of the beginning of the path, starting with 0 as the top</param>
       /// <param name="obstacles">An array of points that must be avoided while calculating the path</param>
       /// <returns>An ordered List of Points representing a path from the specified location away from Goals</returns>
-      List<Point> FindPathAvoidingGoals( int x, int y, IEnumerable<Point> obstacles );
+      ReadOnlyCollection<Point> FindPathAvoidingGoals( int x, int y, IEnumerable<Point> obstacles );
    }
 }

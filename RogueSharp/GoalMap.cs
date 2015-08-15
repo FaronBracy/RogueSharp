@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 
@@ -72,7 +73,7 @@ namespace RogueSharp
       /// <param name="y">Y location of the beginning of the path, starting with 0 as the top</param>
       /// <param name="obstacles">An array of points that must be avoided while calculating the path</param>
       /// <returns>An ordered List of Points representing a path from the specified location away from Goals</returns>
-      public List<Point> FindPathAvoidingGoals( int x, int y, IEnumerable<Point> obstacles )
+      public ReadOnlyCollection<Point> FindPathAvoidingGoals( int x, int y, IEnumerable<Point> obstacles )
       {
          MultiplyAndRecomputeCellWeights( -1.2f );
          return FindPath( x, y, obstacles );
@@ -130,15 +131,15 @@ namespace RogueSharp
       /// <param name="y">Y location of the beginning of the path, starting with 0 as the top</param>
       /// <param name="obstacles">An array of points that must be avoided while calculating the path</param>
       /// <returns>An ordered List of Points representing a shortest path from the specified location to the Goal determined to have the highest priority</returns>
-      public List<Point> FindPath( int x, int y, IEnumerable<Point> obstacles )
+      public ReadOnlyCollection<Point> FindPath( int x, int y, IEnumerable<Point> obstacles )
       {
          ComputeCellWeightsIfNeeded();
          int bestPathIndex = 0;
          int bestPathLength = 0;
-         List<List<Point>> paths = FindAllPathsToAllGoals( x, y );
+         ReadOnlyCollection<ReadOnlyCollection<Point>> paths = FindAllPathsToAllGoals( x, y );
          for ( int i = 0; i < paths.Count; i++ )
          {
-            List<Point> currentPath = paths[i];
+            ReadOnlyCollection<Point> currentPath = paths[i];
             for ( int j = 0; j < currentPath.Count; j++ )
             {
                if ( obstacles.Contains( currentPath[j] ) )
@@ -165,7 +166,7 @@ namespace RogueSharp
       /// <param name="x">X location of the beginning of the path, starting with 0 as the farthest left</param>
       /// <param name="y">Y location of the beginning of the path, starting with 0 as the top</param>
       /// <returns>A List of ordered Lists of Points representing all of the shortest paths from the specified location to all defined Goals</returns>
-      public List<List<Point>> FindAllPathsToAllGoals( int x, int y )
+      public ReadOnlyCollection<ReadOnlyCollection<Point>> FindAllPathsToAllGoals( int x, int y )
       {
          ComputeCellWeightsIfNeeded();
          var pathFinder = new GoalMapPathFinder( this );
@@ -345,13 +346,18 @@ namespace RogueSharp
             _currentPath = new Stack<Point>();
             _visited = new HashSet<Point>();
          }
-         public List<List<Point>> FindPaths( int x, int y )
+         public ReadOnlyCollection<ReadOnlyCollection<Point>> FindPaths( int x, int y )
          {
             _paths.Clear();
             _currentPath.Clear();
             _visited.Clear();
             RecursivelyFindPaths( x, y );
-            return _paths;
+            List<ReadOnlyCollection<Point>> paths = new List<ReadOnlyCollection<Point>>();
+            foreach ( var path in _paths )
+            {
+               paths.Add( new ReadOnlyCollection<Point>( path ) );
+            }
+            return new ReadOnlyCollection<ReadOnlyCollection<Point>>( paths );
          }
          private void RecursivelyFindPaths( int x, int y )
          {

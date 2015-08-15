@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -22,7 +23,7 @@ namespace RogueSharp.Test
          GoalMap goalMap = new GoalMap( map );
          goalMap.AddGoal( 1, 1, 0 );
          goalMap.AddGoal( 6, 1, 0 );
-         List<List<Point>> paths = goalMap.FindAllPathsToAllGoals( 3, 4 );
+         ReadOnlyCollection<ReadOnlyCollection<Point>> paths = goalMap.FindAllPathsToAllGoals( 3, 4 );
 
          string expectedGoalMapRepresentation = @"#    #    #    #    #    #    #    #
                                                   #    0    1    2    3    #    0    #
@@ -52,7 +53,7 @@ namespace RogueSharp.Test
          goalMap.AddGoal( 1, 1, 0 );
          goalMap.AddGoal( 6, 1, 0 );
          List<Point> obstacles = new List<Point> { new Point( 1, 2 ), new Point( 3, 2 ) };
-         List<Point> path = goalMap.FindPath( 3, 4, obstacles );
+         ReadOnlyCollection<Point> path = goalMap.FindPath( 3, 4, obstacles );
 
          Assert.AreEqual( 6, path.Count );
          Assert.AreEqual( new Point( 2, 4 ), path[1] );
@@ -75,7 +76,7 @@ namespace RogueSharp.Test
          goalMap.AddGoal( 6, 1, 0 );
          goalMap.ClearGoals();
          List<Point> obstacles = new List<Point> { new Point( 1, 2 ), new Point( 3, 2 ) };
-         List<Point> path = goalMap.FindPath( 3, 4, obstacles );
+         ReadOnlyCollection<Point> path = goalMap.FindPath( 3, 4, obstacles );
 
          Assert.AreEqual( 1, path.Count );
          Assert.AreEqual( new Point( 3, 4 ), path[0] );
@@ -106,7 +107,7 @@ namespace RogueSharp.Test
          Point obstacle = new Point( 2, 2 );
          string expectedPath = "........s...........";
 
-         List<Point> path = goalMap.FindPathAvoidingGoals( 1, 2, new List<Point> { obstacle } );
+         ReadOnlyCollection<Point> path = goalMap.FindPathAvoidingGoals( 1, 2, new List<Point> { obstacle } );
          var actualPath = new StringBuilder();
          foreach( Point p in path )
          {
@@ -162,7 +163,7 @@ namespace RogueSharp.Test
          goalMap.AddGoal( 51, 33, 0 );
          string expectedPath = ".....s.....s.......s...........s.....s..........s....s.......s...........s...s....s..............s.....s...s......s...s....s..s....s.....s..............s......";
 
-         List<Point> path = goalMap.FindPath( 23, 7, new List<Point>() );
+         ReadOnlyCollection<Point> path = goalMap.FindPath( 23, 7, new List<Point>() );
          var actualPath = new StringBuilder();
          foreach( Point p in path )
          {
