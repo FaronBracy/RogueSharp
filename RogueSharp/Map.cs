@@ -161,11 +161,18 @@ namespace RogueSharp
          SetCellProperties( x, y, isTransparent, isWalkable, false );
       }
       /// <summary>
+      /// Sets the properties of all Cells in the Map to be transparent and walkable
+      /// </summary>
+      public void Clear()
+      {
+         Clear( false, false );
+      }
+      /// <summary>
       /// Sets the properties of all Cells in the Map to the specified values
       /// </summary>
       /// <param name="isTransparent">Optional parameter defaults to false if not provided. True if line-of-sight is not blocked by this Cell. False otherwise</param>
       /// <param name="isWalkable">Optional parameter defaults to false if not provided. True if a character could walk across the Cell normally. False otherwise</param>
-      public void Clear( bool isTransparent = false, bool isWalkable = false )
+      public void Clear( bool isTransparent, bool isWalkable )
       {
          foreach ( Cell cell in GetAllCells() )
          {
@@ -184,6 +191,14 @@ namespace RogueSharp
             map.SetCellProperties( cell.X, cell.Y, cell.IsTransparent, cell.IsWalkable, cell.IsExplored );
          }
          return map;
+      }
+      /// <summary>
+      /// Copies the Cell properties of a smaller source Map into this destination Map at location (0,0)
+      /// </summary>
+      /// <param name="sourceMap">An IMap which must be of smaller size and able to fit in this destination Map at the specified location</param>
+      public void Copy( IMap sourceMap )
+      {
+         Copy( sourceMap, 0, 0 );
       }
       /// <summary>
       /// Copies the Cell properties of a smaller source Map into this destination Map at the specified location

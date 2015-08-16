@@ -113,23 +113,32 @@ namespace RogueSharp
       /// <param name="isWalkable">True if a character could walk across the Cell normally. False otherwise</param>
       void SetCellProperties( int x, int y, bool isTransparent, bool isWalkable );
       /// <summary>
+      /// Sets the properties of all Cells in the Map to be transparent and walkable
+      /// </summary>
+      void Clear();
+      /// <summary>
       /// Sets the properties of all Cells in the Map to the specified values
       /// </summary>
       /// <param name="isTransparent">Optional parameter defaults to false if not provided. True if line-of-sight is not blocked by this Cell. False otherwise</param>
       /// <param name="isWalkable">Optional parameter defaults to false if not provided. True if a character could walk across the Cell normally. False otherwise</param>
-      void Clear( bool isTransparent = false, bool isWalkable = false );
+      void Clear( bool isTransparent, bool isWalkable );
       /// <summary>
       /// Create and return a deep copy of an existing Map
       /// </summary>
       /// <returns>IMap deep copy of the original Map</returns>
       IMap Clone();
       /// <summary>
+      /// Copies the Cell properties of a smaller source Map into this destination Map at location (0,0)
+      /// </summary>
+      /// <param name="sourceMap">An IMap which must be of smaller size and able to fit in this destination Map at the specified location</param>
+      void Copy( IMap sourceMap );
+      /// <summary>
       /// Copies the Cell properties of a smaller source Map into this destination Map at the specified location
       /// </summary>
       /// <param name="sourceMap">An IMap which must be of smaller size and able to fit in this destination Map at the specified location</param>
       /// <param name="left">Optional parameter defaults to 0 if not provided. X location of the Cell to start copying parameters to, starting with 0 as the farthest left</param>
       /// <param name="top">Optional parameter defaults to 0 if not provided. Y location of the Cell to start copying parameters to, starting with 0 as the top</param>
-      void Copy( IMap sourceMap, int left = 0, int top = 0 );
+      void Copy( IMap sourceMap, int left, int top );
       /// <summary>
       /// Performs a field-of-view calculation with the specified parameters.
       /// Field-of-view (FOV) is basically a calculation of what is observable in the Map from a given Cell with a given light radius.
