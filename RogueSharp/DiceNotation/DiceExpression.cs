@@ -45,10 +45,31 @@ namespace RogueSharp.DiceNotation
       /// </summary>
       /// <param name="multiplicity">The number of Dice</param>
       /// <param name="sides">The number of sides per Die</param>
+      /// <returns>A DiceExpression representing the previous terms in this DiceExpression plus these newly added Dice</returns>
+      public DiceExpression Dice( int multiplicity, int sides )
+      {
+         return Dice( multiplicity, sides, 1, null );
+      }
+      /// <summary>
+      /// Add multiple Dice to this DiceExpression with the specified parameters
+      /// </summary>
+      /// <param name="multiplicity">The number of Dice</param>
+      /// <param name="sides">The number of sides per Die</param>
+      /// <param name="scalar">The value to multiply the result of the Roll of these Dice by</param>
+      /// <returns>A DiceExpression representing the previous terms in this DiceExpression plus these newly added Dice</returns>
+      public DiceExpression Dice( int multiplicity, int sides, int scalar )
+      {
+         return Dice( multiplicity, sides, scalar, null );
+      }
+      /// <summary>
+      /// Add multiple Dice to this DiceExpression with the specified parameters
+      /// </summary>
+      /// <param name="multiplicity">The number of Dice</param>
+      /// <param name="sides">The number of sides per Die</param>
       /// <param name="scalar">The value to multiply the result of the Roll of these Dice by</param>
       /// <param name="choose">Optional number of dice to choose out of the total rolled. The highest rolled Dice will be choosen.</param>
       /// <returns>A DiceExpression representing the previous terms in this DiceExpression plus these newly added Dice</returns>
-      public DiceExpression Dice( int multiplicity, int sides, int scalar = 1, int? choose = null )
+      public DiceExpression Dice( int multiplicity, int sides, int scalar, int? choose )
       {
          _terms.Add( new DiceTerm( multiplicity, sides, choose ?? multiplicity, scalar ) );
          return this;
