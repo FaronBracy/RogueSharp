@@ -81,7 +81,7 @@ namespace RogueSharp.DiceNotation.Terms
              select new TermResult {
                 Scalar = Scalar,
                 Value = random.Next( 1, Sides ),
-                Type = "d" + Sides
+                TermType = "d" + Sides
              };
          return results.OrderByDescending( d => d.Value ).Take( Choose );
       }

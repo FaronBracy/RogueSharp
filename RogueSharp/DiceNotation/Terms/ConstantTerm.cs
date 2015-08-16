@@ -35,7 +35,7 @@ namespace RogueSharp.DiceNotation.Terms
       /// <returns>An IEnumerable of TermResult which will always have a single result with a scalar of 1 and a value of the constant</returns>
       public IEnumerable<TermResult> GetResults()
       {
-         return new[] { new TermResult { Scalar = 1, Value = _constant, Type = "constant" } };
+         return new[] { new TermResult { Scalar = 1, Value = _constant, TermType = "constant" } };
       }
       /// <summary>
       /// Returns a string that represents this ConstantTerm
