@@ -24,3 +24,5 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Performance", "CA1814:PreferJaggedArraysOverMultidimensional", MessageId = "Member", Scope = "member", Target = "RogueSharp.GoalMap.#_cellWeights" )]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Next", Scope = "member", Target = "RogueSharp.Random.IRandom.#Next(System.Int32,System.Int32)" )]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Next", Scope = "member", Target = "RogueSharp.Random.IRandom.#Next(System.Int32)" )]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays", Scope = "member", Target = "RogueSharp.Random.RandomState.#Seed" )]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays", Scope = "member", Target = "RogueSharp.MapState.#Cells" )]
