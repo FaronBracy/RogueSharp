@@ -34,3 +34,4 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "2#", Scope = "member", Target = "RogueSharp.Rectangle.#Intersect(RogueSharp.Rectangle&,RogueSharp.Rectangle&,RogueSharp.Rectangle&)" )]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Design", "CA1045:DoNotPassTypesByReference", MessageId = "1#", Scope = "member", Target = "RogueSharp.Rectangle.#Union(RogueSharp.Rectangle&,RogueSharp.Rectangle&,RogueSharp.Rectangle&)" )]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Design", "CA1045:DoNotPassTypesByReference", MessageId = "0#", Scope = "member", Target = "RogueSharp.Rectangle.#Union(RogueSharp.Rectangle&,RogueSharp.Rectangle&,RogueSharp.Rectangle&)" )]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Scope = "member", Target = "RogueSharp.IMap.#GetAllCells()" )]
