@@ -513,7 +513,7 @@ namespace RogueSharp
                {
                   var shortestPath = _pathFinder.ShortestPath( cell, mapSection.Cells.First() );
 
-                  if ( shortestPath.First() != null )
+                  if ( shortestPath.Start != null )
                   {
                      mapSection.AddCell( cell );
                      foundSection = true;
