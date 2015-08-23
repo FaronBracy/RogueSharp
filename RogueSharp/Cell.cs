@@ -145,5 +145,76 @@
             }
          }
       }
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="other"></param>
+      /// <returns></returns>
+      protected bool Equals( Cell other )
+      {
+         if ( other == null )
+         {
+            return false;
+         }
+         return X == other.X && Y == other.Y && IsTransparent.Equals( other.IsTransparent ) && IsWalkable.Equals( other.IsWalkable ) && IsInFov.Equals( other.IsInFov ) && IsExplored.Equals( other.IsExplored );
+      }
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="obj"></param>
+      /// <returns></returns>
+      public override bool Equals( object obj )
+      {
+         if ( ReferenceEquals( null, obj ) )
+         {
+            return false;
+         }
+         if ( ReferenceEquals( this, obj ) )
+         {
+            return true;
+         }
+         if ( obj.GetType() != this.GetType() )
+         {
+            return false;
+         }
+         return Equals( (Cell) obj );
+      }
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <returns></returns>
+      public override int GetHashCode()
+      {
+         unchecked
+         {
+            var hashCode = X;
+            hashCode = ( hashCode * 397 ) ^ Y;
+            hashCode = ( hashCode * 397 ) ^ IsTransparent.GetHashCode();
+            hashCode = ( hashCode * 397 ) ^ IsWalkable.GetHashCode();
+            hashCode = ( hashCode * 397 ) ^ IsInFov.GetHashCode();
+            hashCode = ( hashCode * 397 ) ^ IsExplored.GetHashCode();
+            return hashCode;
+         }
+      }
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="left"></param>
+      /// <param name="right"></param>
+      /// <returns></returns>
+      public static bool operator ==( Cell left, Cell right )
+      {
+         return Equals( left, right );
+      }
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="left"></param>
+      /// <param name="right"></param>
+      /// <returns></returns>
+      public static bool operator !=( Cell left, Cell right )
+      {
+         return !Equals( left, right );
+      }
    }
 }

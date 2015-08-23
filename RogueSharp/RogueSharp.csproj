@@ -29,7 +29,7 @@
     <CodeAnalysisRuleSet>..\FxCopRules\FxCop.Debug.Warnings.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>true</RunCodeAnalysis>
     <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -72,6 +72,7 @@
     <Compile Include="IMap.cs" />
     <Compile Include="IMapCreationStrategy.cs" />
     <Compile Include="Map.cs" />
+    <Compile Include="Path.cs" />
     <Compile Include="PathFinder.cs" />
     <Compile Include="Point.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
