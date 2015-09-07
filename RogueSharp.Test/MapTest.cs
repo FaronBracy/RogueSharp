@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using RogueSharp.MapCreation;
 using RogueSharp.Random;
 
 namespace RogueSharp.Test

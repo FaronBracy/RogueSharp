@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using RogueSharp.MapCreation;
 
 namespace RogueSharp.Test
 {

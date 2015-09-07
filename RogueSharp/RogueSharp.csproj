@@ -70,8 +70,12 @@
     <Compile Include="GoalMap.cs" />
     <Compile Include="IGoalMap.cs" />
     <Compile Include="IMap.cs" />
-    <Compile Include="IMapCreationStrategy.cs" />
+    <Compile Include="MapCreation\BorderOnlyMapCreationStrategy.cs" />
+    <Compile Include="MapCreation\CaveMapCreationStrategy.cs" />
+    <Compile Include="MapCreation\IMapCreationStrategy.cs" />
     <Compile Include="Map.cs" />
+    <Compile Include="MapCreation\RandomRoomsMapCreationStrategy.cs" />
+    <Compile Include="MapCreation\StringDeserializeMapCreationStrategy.cs" />
     <Compile Include="Path.cs" />
     <Compile Include="PathFinder.cs" />
     <Compile Include="Point.cs" />
