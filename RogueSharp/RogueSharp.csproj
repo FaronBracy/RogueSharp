@@ -50,7 +50,12 @@
     <!-- A reference to the entire .NET Framework is automatically included -->
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Algorithms\DepthFirstPaths.cs" />
+    <Compile Include="Algorithms\DijkstraShortestPath.cs" />
+    <Compile Include="Algorithms\DirectedEdge.cs" />
+    <Compile Include="Algorithms\EdgeWeightedDigraph.cs" />
     <Compile Include="Algorithms\Graph.cs" />
+    <Compile Include="Algorithms\IndexMinPriorityQueue.cs" />
     <Compile Include="Algorithms\UnionFind.cs" />
     <Compile Include="Cell.cs" />
     <Compile Include="DiceNotation\Dice.cs" />
