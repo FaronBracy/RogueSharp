@@ -84,7 +84,7 @@ namespace RogueSharp.Test
       {
          var path = new Path( _pathFromX1Y1ToX1Y4 );
 
-         Cell previousStep = path.TakeStepBackward();
+         Cell previousStep = path.StepBackward();
       }
       [TestMethod]
       public void StepBackward_NewPathFromX1Y1ToX1Y4_AfterNoMoreStepsExceptionCurrentStepDoesNotChange()
@@ -94,7 +94,7 @@ namespace RogueSharp.Test
 
          try
          {
-            path.TakeStepBackward();
+            path.StepBackward();
          }
          catch ( NoMoreStepsException )
          {
