@@ -93,6 +93,10 @@ namespace RogueSharp
       /// <param name="obstacles">An enumeration of points representing X, Y locations of Obstacles to avoid when pathfinding</param>
       public void AddObstacles( IEnumerable<Point> obstacles )
       {
+         if ( obstacles == null )
+         {
+            return;
+         }
          foreach ( Point obstacle in obstacles )
          {
             _obstacles.Add( obstacle );
