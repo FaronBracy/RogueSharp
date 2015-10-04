@@ -11,6 +11,7 @@ namespace RogueSharp.Random
       private int _seed;
       private long _numberGenerated;
       private System.Random _random = new System.Random();
+
       /// <summary>
       /// Constructs a new pseudo-random number generator 
       /// with a seed based on the number of milliseconds elapsed since the system started
@@ -19,6 +20,7 @@ namespace RogueSharp.Random
          : this( Environment.TickCount )
       {
       }
+
       /// <summary>
       /// Constructs a new pseudo-random number generator with the specified seed
       /// </summary>
@@ -28,6 +30,7 @@ namespace RogueSharp.Random
          _seed = seed;
          _random = new System.Random( _seed );
       }
+
       /// <summary>
       /// Gets the next pseudo-random integer between 0 and the specified maxValue inclusive
       /// </summary>
@@ -37,6 +40,7 @@ namespace RogueSharp.Random
       {
          return Next( 0, maxValue );
       }
+
       /// <summary>
       /// Gets the next pseudo-random integer between the specified minValue and maxValue inclusive
       /// </summary>
@@ -49,6 +53,7 @@ namespace RogueSharp.Random
          _numberGenerated++;
          return _random.Next( minValue, maxValue + 1 );
       }
+
       /// <summary>
       /// Saves the current state of the pseudo-random number generator
       /// </summary>
@@ -71,6 +76,7 @@ namespace RogueSharp.Random
             }
          };
       }
+
       /// <summary>
       /// Restores the state of the pseudo-random number generator based on the specified state parameter
       /// </summary>

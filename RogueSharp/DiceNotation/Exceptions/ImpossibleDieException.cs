@@ -7,12 +7,14 @@ namespace RogueSharp.DiceNotation.Exceptions
    /// </summary>
    public class ImpossibleDieException : Exception
    {
+
       /// <summary>
       /// Initializes a new instance of the ImpossibleDieException class.
       /// </summary>
       public ImpossibleDieException()
       {
       }
+
       /// <summary>
       /// Initializes a new instance of the ImpossibleDieException class with a specified error message.
       /// </summary>
@@ -21,6 +23,7 @@ namespace RogueSharp.DiceNotation.Exceptions
          : base( message )
       {
       }
+
       /// <summary>
       /// Initializes a new instance of the ImpossibleDieException class with a specified error message and a reference to the inner exception that is the cause of this exception.
       /// </summary>

@@ -17,6 +17,7 @@ namespace RogueSharp.DiceNotation
       {
          return _diceParser.Parse( expression );
       }
+
       /// <summary>
       /// A convenience method for parsing a dice expression from a string, rolling the dice, and returning the total.
       /// </summary>
@@ -27,6 +28,7 @@ namespace RogueSharp.DiceNotation
       {
          return Parse( expression ).Roll( random ).Value;
       }
+
       /// <summary>
       /// A convenience method for parsing a dice expression from a string, rolling the dice, and returning the total.
       /// </summary>

@@ -13,7 +13,7 @@ namespace RogueSharp.Test.DiceNotation
          DiceExpression diceExpression = new DiceExpression()
              .Constant( 5 )
              .Die( 8 )
-             .Dice( 4, 6, choose: 3 );
+             .Dice( 4, 6, 1, 3 );
          const int expectedNumberOfTerms = 1 + 1 + 3;
          
          DiceResult result = diceExpression.Roll( new DotNetRandom() );

@@ -11,6 +11,7 @@ namespace RogueSharp
    {
       private readonly EdgeWeightedDigraph _graph;
       private readonly IMap _map;
+
       /// <summary>
       /// Constructs a new PathFinder instance for the specified Map
       /// </summary>
@@ -42,13 +43,19 @@ namespace RogueSharp
             }
          }
       }
+
       /// <summary>
       /// Returns an ordered IEnumerable of Cells representing the shortest path from a specified source Cell to a destination Cell
       /// </summary>
       /// <param name="source">The Cell which is at the start of the path</param>
       /// <param name="destination">The Cell which is at the end of the path</param>
       /// <returns>Returns an ordered IEnumerable of Cells representing the shortest path from a specified source Cell to a destination Cell</returns>
-      public IEnumerable<Cell> ShortestPath( Cell source, Cell destination )
+      public Path ShortestPath( Cell source, Cell destination )
+      {
+         return new Path( ShortestPathCells( source, destination ) );
+      }
+
+      private IEnumerable<Cell> ShortestPathCells( Cell source, Cell destination )
       {
          var dsp = new DijkstraShortestPath( _graph, IndexFor( source ) );
          IEnumerable<DirectedEdge> path = dsp.PathTo( IndexFor( destination ) );
@@ -64,10 +71,12 @@ namespace RogueSharp
             }
          }
       }
+
       private int IndexFor( Cell cell )
       {
          return ( cell.Y * _map.Width ) + cell.X;
       }
+
       private Cell CellFor( int index )
       {
          int x = index % _map.Width;

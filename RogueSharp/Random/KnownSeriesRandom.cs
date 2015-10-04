@@ -14,6 +14,7 @@ namespace RogueSharp.Random
    {
       private long _numberGenerated;
       private Queue<int> _series;
+
       /// <summary>
       /// Constructs a new integer generator with the specified series of integers in an array.
       /// When the Next method is called on this generator it will return the first integer in the series,
@@ -35,6 +36,7 @@ namespace RogueSharp.Random
             _series.Enqueue( number );
          }
       }
+
       /// <summary>
       /// Return the first integer in the series that was specified when this generator was constructed,
       /// followed by the next integer and so on until it reaches the end of the array.
@@ -49,6 +51,7 @@ namespace RogueSharp.Random
       {
          return Next( 0, maxValue );
       }
+
       /// <summary>
       /// Return the first integer in the series that was specified when this generator was constructed,
       /// followed by the next integer and so on until it reaches the end of the array.
@@ -76,6 +79,7 @@ namespace RogueSharp.Random
          _numberGenerated++;
          return value;
       }
+
       /// <summary>
       /// Saves the current state of the number generator
       /// </summary>
@@ -95,6 +99,7 @@ namespace RogueSharp.Random
             Seed = _series.ToArray()
          };
       }
+
       /// <summary>
       /// Restores the state of the number generator based on the specified state parameter
       /// </summary>

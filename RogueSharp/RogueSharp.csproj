@@ -29,7 +29,7 @@
     <CodeAnalysisRuleSet>..\FxCopRules\FxCop.Debug.Warnings.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>true</RunCodeAnalysis>
     <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -50,7 +50,12 @@
     <!-- A reference to the entire .NET Framework is automatically included -->
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Algorithms\DepthFirstPaths.cs" />
+    <Compile Include="Algorithms\DijkstraShortestPath.cs" />
+    <Compile Include="Algorithms\DirectedEdge.cs" />
+    <Compile Include="Algorithms\EdgeWeightedDigraph.cs" />
     <Compile Include="Algorithms\Graph.cs" />
+    <Compile Include="Algorithms\IndexMinPriorityQueue.cs" />
     <Compile Include="Algorithms\UnionFind.cs" />
     <Compile Include="Cell.cs" />
     <Compile Include="DiceNotation\Dice.cs" />
@@ -70,8 +75,13 @@
     <Compile Include="GoalMap.cs" />
     <Compile Include="IGoalMap.cs" />
     <Compile Include="IMap.cs" />
-    <Compile Include="IMapCreationStrategy.cs" />
+    <Compile Include="MapCreation\BorderOnlyMapCreationStrategy.cs" />
+    <Compile Include="MapCreation\CaveMapCreationStrategy.cs" />
+    <Compile Include="MapCreation\IMapCreationStrategy.cs" />
     <Compile Include="Map.cs" />
+    <Compile Include="MapCreation\RandomRoomsMapCreationStrategy.cs" />
+    <Compile Include="MapCreation\StringDeserializeMapCreationStrategy.cs" />
+    <Compile Include="Path.cs" />
     <Compile Include="PathFinder.cs" />
     <Compile Include="Point.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

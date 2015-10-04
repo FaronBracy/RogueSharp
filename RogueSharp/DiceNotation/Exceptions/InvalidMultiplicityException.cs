@@ -13,6 +13,7 @@ namespace RogueSharp.DiceNotation.Exceptions
       public InvalidMultiplicityException()
       {
       }
+
       /// <summary>
       /// Initializes a new instance of the InvalidMultiplicityException class with a specified error message.
       /// </summary>
@@ -21,6 +22,7 @@ namespace RogueSharp.DiceNotation.Exceptions
          : base( message )
       {
       }
+
       /// <summary>
       /// Initializes a new instance of the InvalidMultiplicityException class with a specified error message and a reference to the inner exception that is the cause of this exception.
       /// </summary>

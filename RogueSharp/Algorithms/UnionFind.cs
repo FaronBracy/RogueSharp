@@ -13,6 +13,7 @@ namespace RogueSharp.Algorithms
    {
       private readonly int[] _id;
       private readonly int[] _size;
+
       /// <summary>
       /// Create an empty union-find data structure with "count" isolated sets
       /// </summary>
@@ -32,11 +33,13 @@ namespace RogueSharp.Algorithms
             _size[i] = 1;
          }
       }
+
       /// <summary>
       /// Returns the number of components in this data structure
       /// </summary>
       /// <returns>The number of components in this data structure</returns>
       public int Count { get; private set; }
+
       /// <summary>
       /// Returns the component identifier of the component containing site p
       /// </summary>
@@ -55,6 +58,7 @@ namespace RogueSharp.Algorithms
          }
          return p;
       }
+
       /// <summary>
       /// Are objects p and q in the same set?
       /// </summary>
@@ -65,6 +69,7 @@ namespace RogueSharp.Algorithms
       {
          return Find( p ) == Find( q );
       }
+
       /// <summary>
       /// Merges the component containing site p with the component containing site q
       /// </summary>
