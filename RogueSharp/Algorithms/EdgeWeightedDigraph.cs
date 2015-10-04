@@ -12,6 +12,7 @@ namespace RogueSharp.Algorithms
    public class EdgeWeightedDigraph
    {
       private readonly LinkedList<DirectedEdge>[] _adjacent;
+
       /// <summary>
       /// Constructs an empty edge-weighted digraph with the specified number of vertices and 0 edges
       /// </summary>

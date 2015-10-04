@@ -1,4 +1,6 @@
-﻿namespace RogueSharp
+﻿using System;
+
+namespace RogueSharp
 {
    /// <summary>
    /// A class that defines a square on a Map with all of its associated properties
@@ -23,6 +25,7 @@
          IsInFov = isInFov;
          IsExplored = isExplored;
       }
+
       /// <summary>
       /// Construct a new unexplored Cell located at the specified x and y location with the specified properties
       /// </summary>
@@ -40,14 +43,17 @@
          IsInFov = isInFov;
          IsExplored = false;
       }
+
       /// <summary>
       /// Gets the X location of the Cell starting with 0 as the farthest left
       /// </summary>
       public int X { get; private set; }
+
       /// <summary>
       /// Y location of the Cell starting with 0 as the top
       /// </summary>
       public int Y { get; private set; }
+
       /// <summary>
       /// Get the transparency of the Cell i.e. if line of sight would be blocked by this Cell
       /// </summary>
@@ -57,6 +63,7 @@
       /// A Cell representing a solid stone wall would not be transparent
       /// </example>
       public bool IsTransparent { get; private set; }
+
       /// <summary>
       /// Get the walkability of the Cell i.e. if a character could normally move across the Cell without difficulty
       /// </summary>
@@ -66,6 +73,7 @@
       /// A Cell representing a solid stone wall would not be walkable
       /// </example>
       public bool IsWalkable { get; private set; }
+
       /// <summary>
       /// Check if the Cell is in the currently computed field-of-view
       /// For newly initialized maps a field-of-view will not exist so all Cells will return false
@@ -79,6 +87,7 @@
       /// Any Cells within the FOV would be what the character could see from their current location and lighting conditions
       /// </example>
       public bool IsInFov { get; private set; }
+
       /// <summary>
       /// Check if the Cell is flagged as ever having been explored by the player
       /// </summary>
@@ -91,6 +100,7 @@
       /// This property can be used to keep track of those Cells that have been "seen" and could be used to show fog-of-war type effects when rendering the map
       /// </example>
       public bool IsExplored { get; private set; }
+
       /// <summary>
       /// Provides a simple visual representation of the Cell using the following symbols:
       /// - `.`: `Cell` is transparent and walkable
@@ -106,6 +116,7 @@
       {
          return ToString( false );
       }
+
       /// <summary>
       /// Provides a simple visual representation of the Cell using the following symbols:
       /// - `%`: `Cell` is not in field-of-view
@@ -145,11 +156,13 @@
             }
          }
       }
+
       /// <summary>
-      /// 
+      /// Determines whether two Cell instances are equal
       /// </summary>
-      /// <param name="other"></param>
-      /// <returns></returns>
+      /// <param name="other">The Cell to compare this instance to</param>
+      /// <returns>True if the instances are equal; False otherwise</returns>
+      /// <exception cref="NullReferenceException">Thrown if .Equals is invoked on null Cell</exception>
       protected bool Equals( Cell other )
       {
          if ( other == null )
@@ -158,11 +171,13 @@
          }
          return X == other.X && Y == other.Y && IsTransparent.Equals( other.IsTransparent ) && IsWalkable.Equals( other.IsWalkable ) && IsInFov.Equals( other.IsInFov ) && IsExplored.Equals( other.IsExplored );
       }
+
       /// <summary>
-      /// 
+      /// Determines whether two Cell instances are equal
       /// </summary>
-      /// <param name="obj"></param>
-      /// <returns></returns>
+      /// <param name="obj">The Object to compare this instance to</param>
+      /// <returns>True if the instances are equal; False otherwise</returns>
+      /// <exception cref="NullReferenceException">Thrown if .Equals is invoked on null Cell</exception>
       public override bool Equals( object obj )
       {
          if ( ReferenceEquals( null, obj ) )
@@ -179,10 +194,12 @@
          }
          return Equals( (Cell) obj );
       }
+
       /// <summary>
-      /// 
+      /// Gets the hash code for this object which can help for quick checks of equality
+      /// or when inserting this Cell into a hash-based collection such as a Dictionary or Hashtable 
       /// </summary>
-      /// <returns></returns>
+      /// <returns>An integer hash used to identify this Cell</returns>
       public override int GetHashCode()
       {
          unchecked
@@ -196,22 +213,24 @@
             return hashCode;
          }
       }
+
       /// <summary>
-      /// 
+      /// Determines whether two Cell instances are equal
       /// </summary>
-      /// <param name="left"></param>
-      /// <param name="right"></param>
-      /// <returns></returns>
+      /// <param name="left">Cell on the left side of the equal sign</param>
+      /// <param name="right">Cell on the right side of the equal sign</param>
+      /// <returns>True if a and b are equal; False otherwise</returns>
       public static bool operator ==( Cell left, Cell right )
       {
          return Equals( left, right );
       }
+
       /// <summary>
-      /// 
+      /// Determines whether two Cell instances are not equal
       /// </summary>
-      /// <param name="left"></param>
-      /// <param name="right"></param>
-      /// <returns></returns>
+      /// <param name="left">Cell on the left side of the equal sign</param>
+      /// <param name="right">Cell on the right side of the equal sign</param>
+      /// <returns>True if a and b are not equal; False otherwise</returns>
       public static bool operator !=( Cell left, Cell right )
       {
          return !Equals( left, right );

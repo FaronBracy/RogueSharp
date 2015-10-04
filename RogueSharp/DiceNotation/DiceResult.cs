@@ -14,10 +14,12 @@ namespace RogueSharp.DiceNotation
       /// The random number generator used to get this result
       /// </summary>
       public IRandom RandomUsed { get; private set; }
+
       /// <summary>
       /// A Collection of TermResults that represents one result for each DiceTerm in the DiceExpression
       /// </summary>
       public ReadOnlyCollection<TermResult> Results { get; private set; }
+
       /// <summary>
       /// The total result of the the roll
       /// </summary>

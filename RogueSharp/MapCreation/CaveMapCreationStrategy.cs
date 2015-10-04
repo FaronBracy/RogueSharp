@@ -211,6 +211,7 @@ namespace RogueSharp.MapCreation
             }
          }
       }
+
       private static int FindNearestMapSection( IList<MapSection> mapSections, int mapSectionIndex, UnionFind unionFind )
       {
          MapSection start = mapSections[mapSectionIndex];
@@ -284,6 +285,7 @@ namespace RogueSharp.MapCreation
             return _mapSections;
          }
       }
+
       private class MapSection
       {
          private int _top;

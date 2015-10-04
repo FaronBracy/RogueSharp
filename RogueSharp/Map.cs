@@ -15,12 +15,14 @@ namespace RogueSharp
       private bool[,] _isTransparent;
       private bool[,] _isWalkable;
       private bool[,] _isExplored;
+
       /// <summary>
       /// Constructor creates a new uninitialized Map
       /// </summary>
       public Map()
       {
       }
+
       /// <summary>
       /// Constructor creates a new Map and immediately initializes it
       /// </summary>
@@ -30,6 +32,7 @@ namespace RogueSharp
       {
          Initialize( width, height );
       }
+
       /// <summary>
       /// How many Cells wide the Map is
       /// </summary>
@@ -38,6 +41,7 @@ namespace RogueSharp
       /// Cells with an X value of 0 will be the leftmost Cells
       /// </remarks>
       public int Width { get; private set; }
+
       /// <summary>
       /// How many Cells tall the Map is
       /// </summary>
@@ -46,6 +50,7 @@ namespace RogueSharp
       /// Cells with an Y value of 0 will be the topmost Cells
       /// </remarks>
       public int Height { get; private set; }
+
       /// <summary>
       /// Create a new map with the properties of all Cells set to false
       /// </summary>
@@ -63,6 +68,7 @@ namespace RogueSharp
          _isExplored = new bool[width, height];
          _fieldOfView = new FieldOfView( this );
       }
+
       /// <summary>
       /// Get the transparency of the Cell i.e. if line of sight would be blocked by this Cell
       /// </summary>
@@ -78,6 +84,7 @@ namespace RogueSharp
       {
          return _isTransparent[x, y];
       }
+
       /// <summary>
       /// Get the walkability of the Cell i.e. if a character could normally move across the Cell without difficulty
       /// </summary>
@@ -93,6 +100,7 @@ namespace RogueSharp
       {
          return _isWalkable[x, y];
       }
+
       /// <summary>
       /// Check if the Cell is in the currently computed field-of-view
       /// For newly initialized maps a field-of-view will not exist so all Cells will return false
@@ -112,6 +120,7 @@ namespace RogueSharp
       {
          return _fieldOfView.IsInFov( x, y );
       }
+
       /// <summary>
       /// Check if the Cell is flagged as ever having been explored by the player
       /// </summary>
@@ -130,6 +139,7 @@ namespace RogueSharp
       {
          return _isExplored[x, y];
       }
+
       /// <summary>
       /// Set the properties of a Cell to the specified values
       /// </summary>
@@ -147,6 +157,7 @@ namespace RogueSharp
          _isWalkable[x, y] = isWalkable;
          _isExplored[x, y] = isExplored;
       }
+
       /// <summary>
       /// Set the properties of an unexplored Cell to the specified values
       /// </summary>
@@ -161,6 +172,7 @@ namespace RogueSharp
       {
          SetCellProperties( x, y, isTransparent, isWalkable, false );
       }
+
       /// <summary>
       /// Sets the properties of all Cells in the Map to be transparent and walkable
       /// </summary>
@@ -168,6 +180,7 @@ namespace RogueSharp
       {
          Clear( false, false );
       }
+
       /// <summary>
       /// Sets the properties of all Cells in the Map to the specified values
       /// </summary>
@@ -180,6 +193,7 @@ namespace RogueSharp
             SetCellProperties( cell.X, cell.Y, isTransparent, isWalkable );
          }
       }
+
       /// <summary>
       /// Create and return a deep copy of an existing Map
       /// </summary>
@@ -193,6 +207,7 @@ namespace RogueSharp
          }
          return map;
       }
+
       /// <summary>
       /// Copies the Cell properties of a smaller source Map into this destination Map at location (0,0)
       /// </summary>
@@ -201,6 +216,7 @@ namespace RogueSharp
       {
          Copy( sourceMap, 0, 0 );
       }
+
       /// <summary>
       /// Copies the Cell properties of a smaller source Map into this destination Map at the specified location
       /// </summary>
@@ -229,6 +245,7 @@ namespace RogueSharp
             SetCellProperties( cell.X + left, cell.Y + top, cell.IsTransparent, cell.IsWalkable, cell.IsExplored );
          }
       }
+
       /// <summary>
       /// Performs a field-of-view calculation with the specified parameters.
       /// Field-of-view (FOV) is basically a calculation of what is observable in the Map from a given Cell with a given light radius.
@@ -242,6 +259,7 @@ namespace RogueSharp
       {
          _fieldOfView.ComputeFov( xOrigin, yOrigin, radius, lightWalls );
       }
+
       /// <summary>
       /// Performs a field-of-view calculation with the specified parameters and appends it any existing field-of-view calculations.
       /// Field-of-view (FOV) is basically a calculation of what is observable in the Map from a given Cell with a given light radius.
@@ -258,6 +276,7 @@ namespace RogueSharp
       {
          _fieldOfView.AppendFov( xOrigin, yOrigin, radius, lightWalls );
       }
+
       /// <summary>
       /// Get an IEnumerable of all Cells in the Map
       /// </summary>
@@ -272,6 +291,7 @@ namespace RogueSharp
             }
          }
       }
+
       /// <summary>
       /// Get an IEnumerable of Cells in a line from the Origin Cell to the Destination Cell
       /// The resulting IEnumerable includes the Origin and Destination Cells
@@ -311,6 +331,7 @@ namespace RogueSharp
             }
          }
       }
+
       /// <summary>
       /// Get an IEnumerable of Cells in a circular Radius around the Origin Cell
       /// </summary>
@@ -351,6 +372,7 @@ namespace RogueSharp
             }
          }
       }
+
       /// <summary>
       /// Get an IEnumerable of Cells in a square area around the Origin Cell
       /// </summary>
@@ -373,6 +395,7 @@ namespace RogueSharp
             }
          }
       }
+
       /// <summary>
       /// Get an IEnumerable of the outermost border Cells in a circular Radius around the Origin Cell
       /// </summary>
@@ -418,6 +441,7 @@ namespace RogueSharp
             }
          }
       }
+
       /// <summary>
       /// Get an IEnumerable of the outermost border Cells in a square around the Origin Cell
       /// </summary>
@@ -443,6 +467,7 @@ namespace RogueSharp
             yield return GetCell( xMax, y );
          }
       }
+
       /// <summary>
       /// Get an IEnumerable of all the Cells in the specified row numbers
       /// </summary>
@@ -458,6 +483,7 @@ namespace RogueSharp
             }
          }
       }
+
       /// <summary>
       /// Get an IEnumerable of all the Cells in the specified column numbers
       /// </summary>
@@ -473,6 +499,7 @@ namespace RogueSharp
             }
          }
       }
+
       /// <summary>
       /// Get a Cell at the specified location
       /// </summary>
@@ -483,6 +510,7 @@ namespace RogueSharp
       {
          return new Cell( x, y, _isTransparent[x, y], _isWalkable[x, y], _fieldOfView.IsInFov( x, y ), _isExplored[x, y] );
       }
+
       /// <summary>
       /// Provides a simple visual representation of the map using the following symbols:
       /// - `%`: `Cell` is not in field-of-view
@@ -508,6 +536,7 @@ namespace RogueSharp
          }
          return mapRepresentation.ToString().TrimEnd( '\r', '\n' );
       }
+
       /// <summary>
       /// Get a MapState POCO which represents this Map and can be easily serialized
       /// Use Restore with the MapState to get back a full Map
@@ -538,6 +567,7 @@ namespace RogueSharp
          }
          return mapState;
       }
+
       /// <summary>
       /// Restore the state of this Map from the specified MapState
       /// </summary>
@@ -566,6 +596,7 @@ namespace RogueSharp
 
          _fieldOfView = new FieldOfView( this, inFov );
       }
+
       /// <summary>
       /// Static factory method which creates a new Map using the specified IMapCreationStrategy
       /// </summary>
@@ -585,6 +616,7 @@ namespace RogueSharp
 
          return mapCreationStrategy.CreateMap();
       }
+
       /// <summary>
       /// Get the Cell at the specified single dimensional array index using the formulas: x = index % Width; y = index / Width;
       /// </summary>
@@ -597,6 +629,7 @@ namespace RogueSharp
 
          return GetCell( x, y );
       }
+
       /// <summary>
       /// Get the single dimensional array index for a Cell at the specified location using the formula: index = ( y * Width ) + x
       /// </summary>
@@ -607,6 +640,7 @@ namespace RogueSharp
       {
          return ( y * Width ) + x;
       }
+
       /// <summary>
       /// Get the single dimensional array index for the specified Cell
       /// </summary>
@@ -622,11 +656,13 @@ namespace RogueSharp
 
          return ( cell.Y * Width ) + cell.X;
       }
+
       private bool AddToHashSet( HashSet<int> hashSet, int x, int y, out Cell cell )
       {
          cell = GetCell( x, y );
          return hashSet.Add( IndexFor( cell ) );
       }
+
       /// <summary>
       /// Provides a simple visual representation of the map using the following symbols:
       /// - `.`: `Cell` is transparent and walkable

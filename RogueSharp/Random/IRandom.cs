@@ -17,6 +17,7 @@
       /// <param name="maxValue">Inclusive maximum result</param>
       /// <returns>Returns a pseudo-random integer between 0 and the specified maxValue inclusive</returns>
       int Next( int maxValue );
+
       /// <summary>
       /// Gets the next pseudo-random integer between the specified minValue and maxValue inclusive
       /// </summary>
@@ -24,6 +25,7 @@
       /// <param name="maxValue">Inclusive maximum result</param>
       /// <returns>Returns a pseudo-random integer between the specified minValue and maxValue inclusive</returns>
       int Next( int minValue, int maxValue );
+
       /// <summary>
       /// Saves the current state of the pseudo-random number generator
       /// </summary>
@@ -36,6 +38,7 @@
       /// </example>
       /// <returns>A RandomState class representing the current state of this pseudo-random number generator</returns>
       RandomState Save();
+
       /// <summary>
       /// Restores the state of the pseudo-random number generator based on the specified state parameter
       /// </summary>
@@ -64,6 +67,7 @@
       /// so that is why Seed is expressed as an array of integers here
       /// </remarks>
       public int[] Seed { get; set; }
+
       /// <summary>
       /// The number of times that the Next method has been called on the pseudo-random number generator being used
       /// </summary>

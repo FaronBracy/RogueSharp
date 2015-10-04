@@ -13,6 +13,7 @@ namespace RogueSharp.Algorithms
       private readonly int[] _edgeTo;
       private readonly bool[] _marked;
       private readonly int _sourceVertex;
+
       /// <summary>
       /// Computes a path between the specified sourceVertex and every other vertex in the Graph
       /// </summary>

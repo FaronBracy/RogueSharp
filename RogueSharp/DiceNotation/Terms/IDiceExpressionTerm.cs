@@ -14,6 +14,7 @@ namespace RogueSharp.DiceNotation.Terms
       /// <param name="random">IRandom RNG used to perform the Roll.</param>
       /// <returns>An IEnumerable of TermResult which will have one item per result</returns>
       IEnumerable<TermResult> GetResults( IRandom random );
+
       /// <summary>
       /// Gets the TermResults for the implementation
       /// </summary>

@@ -8,20 +8,24 @@ namespace RogueSharp
    public class Point : IEquatable<Point>
    {
       private static readonly Point _zeroPoint = new Point();
+
       /// <summary>
       /// Specifies the x-coordinate of the Point
       /// </summary>
       public int X { get; set; }
+
       /// <summary>
       /// Specifies the y-coordinate of the Point
       /// </summary>
       public int Y { get; set; }
+
       /// <summary>
       /// Initializes a new instance of Point
       /// </summary>
       public Point()
       {
       }
+
       /// <summary>
       /// Initializes a new instance of Point
       /// </summary>
@@ -32,6 +36,7 @@ namespace RogueSharp
          X = x;
          Y = y;
       }
+
       /// <summary>
       /// Returns the point (0,0)
       /// </summary>
@@ -42,6 +47,7 @@ namespace RogueSharp
             return _zeroPoint;
          }
       }
+
       /// <summary>
       /// Determines whether two Point instances are equal
       /// </summary>
@@ -57,6 +63,7 @@ namespace RogueSharp
 
          return ( ( X == other.X ) && ( Y == other.Y ) );
       }
+
       /// <summary>
       /// Determines whether two Point instances are equal
       /// </summary>
@@ -76,6 +83,7 @@ namespace RogueSharp
 
          return a.Equals( b );
       }
+
       /// <summary>
       /// Determines whether two Point instances are not equal
       /// </summary>
@@ -103,6 +111,7 @@ namespace RogueSharp
 
          return Equals( point );
       }
+
       /// <summary>
       /// Gets the hash code for this object which can help for quick checks of equality
       /// or when inserting this Point into a hash-based collection such as a Dictionary or Hashtable 
@@ -112,6 +121,7 @@ namespace RogueSharp
       {
          return X ^ Y;
       }
+
       /// <summary>
       /// Returns a string that represents the current Point
       /// </summary>

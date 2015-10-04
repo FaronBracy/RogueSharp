@@ -19,6 +19,7 @@ namespace RogueSharp.Random
       private long _numberGenerated;
       private double _nextGaussian;
       private bool _uselast = true;
+
       /// <summary>
       /// Constructs a new Gaussian pseudo-random number generator 
       /// with a seed based on the number of milliseconds elapsed since the system started
@@ -27,6 +28,7 @@ namespace RogueSharp.Random
          : this( Environment.TickCount )
       {
       }
+
       /// <summary>
       /// Constructs a new Gaussian pseudo-random number generator with the specified seed
       /// </summary>
@@ -36,6 +38,7 @@ namespace RogueSharp.Random
          _seed = seed;
          _random = new System.Random( _seed );
       }
+
       /// <summary>
       /// Will approximately give the next Gaussian pseudo-random integer between 0 and that specified max value inclusively
       /// so that min and max are at 3.5 deviations from the mean (half-way of min and max).
@@ -46,6 +49,7 @@ namespace RogueSharp.Random
       {
          return Next( 0, maxValue );
       }
+
       /// <summary>
       /// Will approximately give the next random Gaussian integer between the specified min and max values inclusively 
       /// so that min and max are at 3.5 deviations from the mean (half-way of min and max).
@@ -69,6 +73,7 @@ namespace RogueSharp.Random
 
          return r;
       }
+
       /// <summary>
       /// Saves the current state of the pseudo-random number generator
       /// </summary>
@@ -91,6 +96,7 @@ namespace RogueSharp.Random
             }
          };
       }
+
       /// <summary>
       /// Restores the state of the pseudo-random number generator based on the specified state parameter
       /// </summary>

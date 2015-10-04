@@ -141,6 +141,7 @@ namespace RogueSharp
          MultiplyAndRecomputeCellWeights( -1.2f );
          return FindPath( x, y );
       }
+
       private void MultiplyAndRecomputeCellWeights( float amount )
       {
          ComputeCellWeightsIfNeeded();
@@ -392,6 +393,7 @@ namespace RogueSharp
          private readonly List<Path> _paths;
          private readonly Stack<Cell> _currentPath;
          private readonly HashSet<Cell> _visited;
+
          public GoalMapPathFinder( GoalMap goalMap )
          {
             _goalMap = goalMap;
@@ -399,6 +401,7 @@ namespace RogueSharp
             _currentPath = new Stack<Cell>();
             _visited = new HashSet<Cell>();
          }
+
          public ReadOnlyCollection<Path> FindPaths( int x, int y )
          {
             _paths.Clear();
@@ -412,6 +415,7 @@ namespace RogueSharp
             }
             return new ReadOnlyCollection<Path>( paths );
          }
+
          private void RecursivelyFindPaths( int x, int y )
          {
             var currentCell = _goalMap._map.GetCell( x, y );

@@ -7,6 +7,7 @@ namespace RogueSharp.MapCreation
    public class StringDeserializeMapCreationStrategy<T> : IMapCreationStrategy<T> where T : IMap, new()
    {
       private readonly string _mapRepresentation;
+
       /// <summary>
       /// Constructs a new StringDeserializeMapCreationStrategy with the specified parameters
       /// </summary>

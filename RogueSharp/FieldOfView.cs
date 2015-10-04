@@ -12,6 +12,7 @@ namespace RogueSharp
    {
       private readonly IMap _map;
       private readonly HashSet<int> _inFov;
+
       /// <summary>
       /// Constructs a new FieldOfView class for the specified Map
       /// </summary>
@@ -21,11 +22,13 @@ namespace RogueSharp
          _map = map;
          _inFov = new HashSet<int>();
       }
+
       internal FieldOfView( IMap map, HashSet<int> inFov )
       {
          _map = map;
          _inFov = inFov;
       }
+
       /// <summary>
       /// Create and return a deep copy of an existing FieldOfView class
       /// </summary>
@@ -39,6 +42,7 @@ namespace RogueSharp
          }
          return new FieldOfView( _map, inFovCopy );
       }
+
       /// <summary>
       /// Check if the Cell is in the currently computed field-of-view
       /// Field-of-view must first be calculated by calling ComputeFov and/or AppendFov
@@ -57,6 +61,7 @@ namespace RogueSharp
       {
          return _inFov.Contains( _map.IndexFor( x, y ) );
       }
+
       /// <summary>
       /// Performs a field-of-view calculation with the specified parameters.
       /// Field-of-view (FOV) is basically a calculation of what is observable in the Map from a given Cell with a given light radius.
@@ -72,6 +77,7 @@ namespace RogueSharp
          ClearFov();
          return AppendFov( xOrigin, yOrigin, radius, lightWalls );
       }
+
       /// <summary>
       /// Performs a field-of-view calculation with the specified parameters and appends it any existing field-of-view calculations.
       /// Field-of-view (FOV) is basically a calculation of what is observable in the Map from a given Cell with a given light radius.
@@ -143,6 +149,7 @@ namespace RogueSharp
 
          return CellsInFov();
       }
+
       private ReadOnlyCollection<Cell> CellsInFov()
       {
          var cells = new List<Cell>();
@@ -152,10 +159,12 @@ namespace RogueSharp
          }
          return new ReadOnlyCollection<Cell>( cells );
       }
+
       private void ClearFov()
       {
          _inFov.Clear();
       }
+
       private void PostProcessFovQuadrant( int x, int y, Quadrant quadrant )
       {
          int x1 = x;
@@ -198,6 +207,7 @@ namespace RogueSharp
             }
          }
       }
+
       private enum Quadrant
       {
          NE = 1,

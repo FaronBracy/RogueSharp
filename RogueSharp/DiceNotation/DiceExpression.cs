@@ -17,10 +17,12 @@ namespace RogueSharp.DiceNotation
       public DiceExpression()
          : this( new IDiceExpressionTerm[] { } )
       { }
+
       private DiceExpression( IEnumerable<IDiceExpressionTerm> diceTerms )
       {
          _terms = diceTerms.ToList();
       }
+
       /// <summary>
       /// Add a single Die to this DiceExpression with the specified number of sides and scalar
       /// </summary>
@@ -31,6 +33,7 @@ namespace RogueSharp.DiceNotation
       {
          return Dice( 1, sides, scalar );
       }
+
       /// <summary>
       /// Add a single Die to this DiceExpression with the specified number of sides
       /// </summary>
@@ -40,6 +43,7 @@ namespace RogueSharp.DiceNotation
       {
          return Dice( 1, sides );
       }
+
       /// <summary>
       /// Add multiple Dice to this DiceExpression with the specified parameters
       /// </summary>
@@ -50,6 +54,7 @@ namespace RogueSharp.DiceNotation
       {
          return Dice( multiplicity, sides, 1, null );
       }
+
       /// <summary>
       /// Add multiple Dice to this DiceExpression with the specified parameters
       /// </summary>
@@ -61,6 +66,7 @@ namespace RogueSharp.DiceNotation
       {
          return Dice( multiplicity, sides, scalar, null );
       }
+
       /// <summary>
       /// Add multiple Dice to this DiceExpression with the specified parameters
       /// </summary>
@@ -74,6 +80,7 @@ namespace RogueSharp.DiceNotation
          _terms.Add( new DiceTerm( multiplicity, sides, choose ?? multiplicity, scalar ) );
          return this;
       }
+
       /// <summary>
       /// Add a constant to this DiceExpression with the specified integer value
       /// </summary>
@@ -84,6 +91,7 @@ namespace RogueSharp.DiceNotation
          _terms.Add( new ConstantTerm( value ) );
          return this;
       }
+
       /// <summary>
       /// Roll all of the Dice that are part of this DiceExpression
       /// </summary>
@@ -94,6 +102,7 @@ namespace RogueSharp.DiceNotation
          IEnumerable<TermResult> termResults = _terms.SelectMany( t => t.GetResults( random ) ).ToList();
          return new DiceResult( termResults, random );
       }
+
       /// <summary>
       /// Roll all of the Dice that are part of this DiceExpression
       /// </summary>
@@ -103,6 +112,7 @@ namespace RogueSharp.DiceNotation
       {
          return Roll( Singleton.DefaultRandom );
       }
+
       /// <summary>
       /// Roll all of the Dice that are part of this DiceExpression, but force all of the rolls to be the lowest possible result
       /// </summary>
@@ -111,6 +121,7 @@ namespace RogueSharp.DiceNotation
       {
          return Roll( new MinRandom() );
       }
+
       /// <summary>
       /// Roll all of the Dice that are part of this DiceExpression, but force all of the rolls to be the highest possible result
       /// </summary>
@@ -119,6 +130,7 @@ namespace RogueSharp.DiceNotation
       {
          return Roll( new MaxRandom() );
       }
+
       /// <summary>
       /// Returns a string that represents this DiceExpression
       /// </summary>

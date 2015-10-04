@@ -54,7 +54,7 @@ namespace RogueSharp
       }
 
       /// <summary>
-      /// How many steps are in this Path
+      /// The number of steps in this Path
       /// </summary>
       public int Length
       {
@@ -65,7 +65,7 @@ namespace RogueSharp
       }
 
       /// <summary>
-      /// The Cell represeting the step that we are currently on in this Path
+      /// The Cell represeting the step that is currently occupied in this Path
       /// </summary>
       public Cell CurrentStep
       {
