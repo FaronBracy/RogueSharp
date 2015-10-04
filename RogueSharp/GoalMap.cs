@@ -145,6 +145,11 @@ namespace RogueSharp
       {
          ComputeCellWeightsIfNeeded();
 
+         foreach ( var goal in _goals )
+         {
+            _cellWeights[goal.X, goal.Y] = Wall;
+         }
+
          for ( int y = 0; y < _map.Height; y++ )
          {
             for ( int x = 0; x < _map.Width; x++ )
