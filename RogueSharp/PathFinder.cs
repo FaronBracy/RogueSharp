@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using RogueSharp.Algorithms;
 
 namespace RogueSharp
@@ -49,10 +50,27 @@ namespace RogueSharp
       /// </summary>
       /// <param name="source">The Cell which is at the start of the path</param>
       /// <param name="destination">The Cell which is at the end of the path</param>
+      /// <exception cref="ArgumentNullException">Thrown when source or destination is null</exception>
+      /// <exception cref="PathNotFoundException">Thrown when there is not a path from the source to the destination</exception>
       /// <returns>Returns an ordered IEnumerable of Cells representing the shortest path from a specified source Cell to a destination Cell</returns>
       public Path ShortestPath( Cell source, Cell destination )
       {
-         return new Path( ShortestPathCells( source, destination ) );
+         if ( source == null )
+         {
+            throw new ArgumentNullException( "source" );
+         }
+
+         if ( destination == null )
+         {
+            throw new ArgumentNullException( "destination" );
+         }
+
+         var cells = ShortestPathCells( source, destination ).ToList();
+         if ( cells[0] == null )
+         {
+            throw new PathNotFoundException( string.Format( "Path from ({0}, {1}) to ({2}, {3}) not found", source.X, source.Y, destination.X, destination.Y ) );
+         }
+         return new Path( cells );
       }
 
       private IEnumerable<Cell> ShortestPathCells( Cell source, Cell destination )

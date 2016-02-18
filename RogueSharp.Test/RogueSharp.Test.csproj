@@ -46,6 +46,7 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PathFinderTest.cs" />
     <Compile Include="DiceNotation\ConstantTermTest.cs" />
     <Compile Include="DiceNotation\DiceExpressionTest.cs" />
     <Compile Include="DiceNotation\DiceTermTest.cs" />
