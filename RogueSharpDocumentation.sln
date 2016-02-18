@@ -1,14 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RogueSharp", "RogueSharp\RogueSharp.csproj", "{EBCA7EA9-1C80-481A-8025-A465D6BA5F71}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EC8DBBC4-3542-4859-A2C7-BAE76D5FF83E}"
 	ProjectSection(SolutionItems) = preProject
 		RogueSharp.vsmdi = RogueSharp.vsmdi
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RogueSharp", "RogueSharp\RogueSharp.csproj", "{EBCA7EA9-1C80-481A-8025-A465D6BA5F71}"
 EndProject
 Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "RogueSharp.Docs", "RogueSharp.Docs\RogueSharp.Docs.shfbproj", "{044928F3-D163-47D6-A8E9-E6776F69C881}"
 EndProject
