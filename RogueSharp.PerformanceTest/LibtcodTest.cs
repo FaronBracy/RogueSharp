@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using RogueSharp.MapCreation;
 using RogueSharp.Random;
 
 namespace RogueSharp.PerformanceTest

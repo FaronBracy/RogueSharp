@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using RogueSharp.MapCreation;
 
 namespace RogueSharp.PerformanceTest
 {
