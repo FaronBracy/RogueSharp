@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using libtcod;
+using RogueSharp.MapCreation;
 
 namespace RogueSharp.PerformanceTest
 {
@@ -61,9 +62,19 @@ namespace RogueSharp.PerformanceTest
          throw new NotImplementedException();
       }
 
-      public void SetCellProperties( int x, int y, bool isTransparent, bool isWalkable, bool isExplored = false )
+      public void SetCellProperties( int x, int y, bool isTransparent, bool isWalkable, bool isExplored )
       {
          TCODMap.setProperties( x, y, isTransparent, isWalkable );
+      }
+
+      public void SetCellProperties( int x, int y, bool isTransparent, bool isWalkable )
+      {
+         TCODMap.setProperties( x, y, isTransparent, isWalkable );
+      }
+
+      public void Clear()
+      {
+         throw new NotImplementedException();
       }
 
       public void Clear( bool isTransparent = false, bool isWalkable = false )
@@ -76,6 +87,11 @@ namespace RogueSharp.PerformanceTest
          TCODMap map = new TCODMap( Width, Height );
          map.copy( TCODMap );
          return new LibtcodMap( map );
+      }
+
+      public void Copy( IMap sourceMap )
+      {
+         throw new NotImplementedException();
       }
 
       public void Copy( IMap sourceMap, int left = 0, int top = 0 )

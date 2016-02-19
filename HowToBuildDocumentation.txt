@@ -1,0 +1,11 @@
+https://github.com/maxtoroq/sandcastle-md
+Convert sandcastle help files to markdown
+C:\GitProjects\sandcastle-md\src\sandcastle-md\bin\Debug\sandcastle-md.exe C:\GitProjects\RogueSharp\RogueSharp.Docs\Help\ c:\gitprojects\wiki\
+
+http://fart-it.sourceforge.net/
+Preview replacing of &lt; with < sign
+C:\GitProjects\sandcastle-md\src\sandcastle-md\bin\Debug\fart.exe -r -c -p  c:\gitprojects\wiki\ "&lt;" "<"
+Replace for real
+C:\GitProjects\sandcastle-md\src\sandcastle-md\bin\Debug\fart.exe -r -c  c:\gitprojects\wiki\ "&lt;" "<"
+
+C:\GitProjects\sandcastle-md\src\sandcastle-md\bin\Debug\fart.exe -r -c -p  c:\gitprojects\wiki\ "Dreamers Design" "Faron Bracy"

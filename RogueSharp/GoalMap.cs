@@ -197,6 +197,7 @@ namespace RogueSharp
       /// Distance to the goals and the weight of the goals are both used in determining the priority
       /// The path must not pass through any obstacles specified in this GoalMap instance
       /// </summary>
+      /// <exception cref="PathNotFoundException">Thrown when there is not a path from the Source x,y to any Goal or a Goal is not set</exception>
       /// <param name="x">X location of the beginning of the path, starting with 0 as the farthest left</param>
       /// <param name="y">Y location of the beginning of the path, starting with 0 as the top</param>
       /// <returns>An ordered List of Points representing a shortest path from the specified location to the Goal determined to have the highest priority</returns>
@@ -212,14 +213,37 @@ namespace RogueSharp
       /// This method is useful when there are multiple paths that would all work and we want to have some additional logic to pick one of the best paths
       /// The FindPath( int x, int y ) method in the GoalMap class uses this method and then chooses the first path.
       /// </summary>
+      /// <exception cref="PathNotFoundException">Thrown when there is not a path from the Source x,y to any Goal or a Goal is not set</exception>
       /// <param name="x">X location of the beginning of the path, starting with 0 as the farthest left</param>
       /// <param name="y">Y location of the beginning of the path, starting with 0 as the top</param>
       /// <returns>A ReadOnlyCollection of Paths representing all of the shortest paths from the specified location to the Goal or Goals determined to have the highest priority</returns>
       public ReadOnlyCollection<Path> FindPaths( int x, int y )
       {
+         if ( _goals.Count < 1 )
+         {
+            throw new PathNotFoundException( "A goal must be set to find a path" );
+         }
+
+         if ( !_map.IsWalkable( x, y ) )
+         {
+            throw new PathNotFoundException( string.Format( "Source ({0}, {1}) must be walkable to find a path", x, y ) );
+         }
+
+         if ( !_goals.Any( g => _map.IsWalkable( g.X, g.Y ) ) )
+         {
+            throw new PathNotFoundException( "A goal must be walkable to find a path" );
+         }  
+
          ComputeCellWeightsIfNeeded();
          var pathFinder = new GoalMapPathFinder( this );
-         return pathFinder.FindPaths( x, y );
+         var paths = pathFinder.FindPaths( x, y );
+
+         if ( paths.Count <= 1 && paths[0].Length <= 1 )
+         {
+            throw new PathNotFoundException( string.Format( "A path from Source ({0}, {1}) to any goal was not found", x, y ) );
+         }
+
+         return paths;
       }
 
       private void ComputeCellWeightsIfNeeded()

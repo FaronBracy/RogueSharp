@@ -266,9 +266,16 @@ namespace RogueSharp.MapCreation
                bool foundSection = false;
                foreach ( MapSection mapSection in _mapSections )
                {
-                  var shortestPath = _pathFinder.ShortestPath( cell, mapSection.Cells.First() );
+                  Path shortestPath = null;
+                  try
+                  {
+                     shortestPath = _pathFinder.ShortestPath( cell, mapSection.Cells.First() );
+                  }
+                  catch ( PathNotFoundException )
+                  {
+                  }
 
-                  if ( shortestPath.Start != null )
+                  if ( shortestPath != null )
                   {
                      mapSection.AddCell( cell );
                      foundSection = true;
