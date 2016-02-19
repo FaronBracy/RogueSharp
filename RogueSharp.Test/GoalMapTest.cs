@@ -80,17 +80,7 @@ namespace RogueSharp.Test
          goalMap.AddGoal( 6, 1, 0 );
          goalMap.ClearGoals();
 
-         Path path = goalMap.FindPath( 3, 4 );
-
-         //Assert.AreEqual( 1, path.Length );
-         //Assert.AreEqual( new Cell( 3, 4, true, true, false ), path.Start );
-         //string expectedGoalMapRepresentation = @"#    #    #    #    #    #    #    #
-         //                                         #   48   48   48   48    #   48    #
-         //                                         #    #    #    #   48    #   48    #
-         //                                         #   48    #   48   48    #   48    #
-         //                                         #   48   48   48   48   48   48    #
-         //                                         #    #    #    #    #    #    #    #";
-         //Assert.AreEqual( expectedGoalMapRepresentation.Replace( " ", string.Empty ), goalMap.ToString().Replace( " ", string.Empty ) );
+         goalMap.FindPath( 3, 4 );
       }
 
       [TestMethod]
@@ -108,10 +98,7 @@ namespace RogueSharp.Test
          GoalMap goalMap = new GoalMap( map );
          goalMap.AddGoal( 6, 1, 0 );
 
-         Path path = goalMap.FindPath( 1, 1 );
-
-         //Assert.AreEqual( 1, path.Length );
-         //Assert.AreEqual( map.GetCell( 0, 1 ), path.Start );
+         goalMap.FindPath( 1, 1 );
       }
 
       [TestMethod]
@@ -129,10 +116,7 @@ namespace RogueSharp.Test
          GoalMap goalMap = new GoalMap( map );
          goalMap.AddGoal( 1, 1, 0 );
 
-         Path path = goalMap.FindPath( 0, 1 );
-
-         //Assert.AreEqual( 1, path.Length );
-         //Assert.AreEqual( map.GetCell( 0, 1 ), path.Start );
+         goalMap.FindPath( 0, 1 );
       }
 
       [TestMethod]
@@ -150,11 +134,7 @@ namespace RogueSharp.Test
          GoalMap goalMap = new GoalMap( map );
          goalMap.AddGoal( 0, 1, 0 );
 
-         Path path = goalMap.FindPath( 1, 1 );
-
-         //Assert.AreEqual( 2, path.Length );
-         //Assert.AreEqual( map.GetCell( 1, 1 ), path.Start );
-         //Assert.AreEqual( map.GetCell( 0, 1 ), path.End );
+         goalMap.FindPath( 1, 1 );
       }
 
       [TestMethod]
@@ -172,11 +152,7 @@ namespace RogueSharp.Test
          GoalMap goalMap = new GoalMap( map );
          goalMap.AddGoal( 7, 1, 0 );
 
-         Path path = goalMap.FindPath( 1, 1 );
-
-         //Assert.AreEqual( 13, path.Length );
-         //Assert.AreEqual( map.GetCell( 1, 1 ), path.Start );
-         //Assert.AreEqual( map.GetCell( 7, 1 ), path.End );
+         goalMap.FindPath( 1, 1 );
       }
 
       [TestMethod]

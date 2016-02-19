@@ -22,10 +22,7 @@ namespace RogueSharp.Test
          Cell source = map.GetCell( 0, 1 );
          Cell destination = map.GetCell( 1, 1 );
 
-         Path path = pathFinder.ShortestPath( source, destination );
-
-         //Assert.AreEqual( 1, path.Length );
-         //Assert.AreEqual( null, path.Start );
+         pathFinder.ShortestPath( source, destination );
       }
 
       [TestMethod]
@@ -44,10 +41,7 @@ namespace RogueSharp.Test
          Cell source = map.GetCell( 1, 1 );
          Cell destination = map.GetCell( 0, 1 );
 
-         Path path = pathFinder.ShortestPath( source, destination );
-
-         //Assert.AreEqual( 1, path.Length );
-         //Assert.AreEqual( null, path.Start );
+         pathFinder.ShortestPath( source, destination );
       }
 
       [TestMethod]
@@ -66,10 +60,7 @@ namespace RogueSharp.Test
          Cell source = map.GetCell( 1, 1 );
          Cell destination = map.GetCell( 6, 1 );
 
-         Path path = pathFinder.ShortestPath( source, destination );
-
-         //Assert.AreEqual( 1, path.Length );
-         //Assert.AreEqual( null, path.Start );
+         pathFinder.ShortestPath( source, destination );
       }
    }
 }
