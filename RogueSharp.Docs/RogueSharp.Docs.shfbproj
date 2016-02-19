@@ -63,7 +63,8 @@
 
 It is loosely based on the popular libtcod %28http://doryen.eptalys.net/libtcod/%29 or &amp;quot%3bDoryen Library&amp;quot%3b though not all features overlap.
 </ProjectSummary>
-    <CopyrightHref>2014 Faron Bracy</CopyrightHref>
+    <CopyrightHref>2014-2016 Faron Bracy</CopyrightHref>
+    <HelpFileVersion>3.0.0.0</HelpFileVersion>
   </PropertyGroup>
   <!-- There are no properties for these groups.  AnyCPU needs to appear in order for Visual Studio to perform
 			 the build.  The others are optional common platform types that may appear. -->
