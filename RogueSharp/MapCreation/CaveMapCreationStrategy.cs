@@ -296,13 +296,17 @@ namespace RogueSharp.MapCreation
                 new[] { 0, -1 }, new[] { -1, 0 }, new[] { 1, 0 }, new[] { 0, 1 }
             };
 
-            private readonly bool[,] _visited;
+            private readonly bool[][] _visited;
 
             public FloodFillAnalyzer( IMap map )
             {
                 _map = map;
                 _mapSections = new List<MapSection>();
-                _visited = new bool[map.Width, map.Height];
+                _visited = new bool[_map.Height][];
+                for ( int i = 0 ; i < _visited.Length ; i++ )
+                {
+                    _visited[i] = new bool[_map.Width];
+                }
             }
 
             public List<MapSection> GetMapSections()
@@ -328,15 +332,15 @@ namespace RogueSharp.MapCreation
                 while ( stack.Count != 0 )
                 {
                     cell = stack.Pop();
-                    if ( _visited[cell.X, cell.Y] || !cell.IsWalkable )
+                    if ( _visited[cell.Y][cell.X] || !cell.IsWalkable )
                     {
                         continue;
                     }
                     mapsection.AddCell( cell );
-                    _visited[cell.X, cell.Y] = true;
+                    _visited[cell.Y][cell.X] = true;
                     foreach ( Cell neighbor in GetNeighbors( cell ) )
                     {
-                        if ( cell.IsWalkable == neighbor.IsWalkable && !_visited[neighbor.X, neighbor.Y] )
+                        if ( cell.IsWalkable == neighbor.IsWalkable && !_visited[neighbor.Y][neighbor.X] )
                         {
                             stack.Push( neighbor );
                         }
