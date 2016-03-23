@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -406,9 +407,27 @@ namespace RogueSharp
          return mapRepresentation.ToString().TrimEnd( '\r', '\n' );
       }
 
-      private class WeightedPoint : Point
+      private struct WeightedPoint : IEquatable<WeightedPoint>
       {
+         public Point Point;
          public int Weight { get; set; }
+
+         public int X
+         {
+            get { return Point.X; }
+            set { Point.X = value; }
+         }
+
+         public int Y
+         {
+            get { return Point.Y; }
+            set { Point.Y = value; }
+         }
+
+         public bool Equals( WeightedPoint other )
+         {
+            return X == other.X && Y == other.Y && Weight == other.Weight;
+         }
       }
 
       private class GoalMapPathFinder
