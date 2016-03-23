@@ -5,7 +5,7 @@ namespace RogueSharp
    /// <summary>
    /// A class that defines a rectangle
    /// </summary>
-   public class Rectangle : IEquatable<Rectangle>
+   public struct Rectangle : IEquatable<Rectangle>
    {
       private static readonly Rectangle _emptyRectangle = new Rectangle();
 
@@ -31,27 +31,42 @@ namespace RogueSharp
       /// </summary>
       public int Y { get; set; }
 
+
+
+
+      #region Constructors
+
       /// <summary>
-      /// Initializes a new instance of Rectangle
+      /// Creates a new instance of <see cref="Rectangle"/> struct, with the specified
+      /// position, width, and height.
       /// </summary>
-      public Rectangle()
+      /// <param name="x">The x coordinate of the top-left corner of the created <see cref="Rectangle"/>.</param>
+      /// <param name="y">The y coordinate of the top-left corner of the created <see cref="Rectangle"/>.</param>
+      /// <param name="width">The width of the created <see cref="Rectangle"/>.</param>
+      /// <param name="height">The height of the created <see cref="Rectangle"/>.</param>
+      public Rectangle(int x, int y, int width, int height) : this()
       {
+         this.X = x;
+         this.Y = y;
+         this.Width = width;
+         this.Height = height;
       }
 
       /// <summary>
-      /// Initializes a new instance of Rectangle
+      /// Creates a new instance of <see cref="Rectangle"/> struct, with the specified
+      /// location and size.
       /// </summary>
-      /// <param name="x">The x-coordinate of the Rectangle with 0 being to the left</param>
-      /// <param name="y">The y-coordinate of the Rectangle with 0 being at the top</param>
-      /// <param name="width">Width of the Rectangle</param>
-      /// <param name="height">Height of the Rectangle</param>
-      public Rectangle( int x, int y, int width, int height )
+      /// <param name="location">The x and y coordinates of the top-left corner of the created <see cref="Rectangle"/>.</param>
+      /// <param name="size">The width and height of the created <see cref="Rectangle"/>.</param>
+      public Rectangle(Point location, Point size) : this()
       {
-         X = x;
-         Y = y;
-         Width = width;
-         Height = height;
+         this.X = location.X;
+         this.Y = location.Y;
+         this.Width = size.X;
+         this.Height = size.Y;
       }
+
+      #endregion
 
       /// <summary>
       /// Returns a Rectangle with all of its values set to zero
@@ -283,20 +298,13 @@ namespace RogueSharp
       }
 
       /// <summary>
-      /// Determines whether two Rectangle instances are equal
+      /// Compares whether current instance is equal to specified <see cref="Object"/>.
       /// </summary>
-      /// <param name="obj">The Object to compare this instance to</param>
-      /// <returns>True if the instances are equal; False otherwise</returns>
-      /// <exception cref="NullReferenceException">Thrown if .Equals is invoked on null Rectangle</exception>
-      public override bool Equals( object obj )
+      /// <param name="obj">The <see cref="Object"/> to compare.</param>
+      /// <returns><c>true</c> if the instances are equal; <c>false</c> otherwise.</returns>
+      public override bool Equals(object obj)
       {
-         Rectangle rectangle = obj as Rectangle;
-         if ( rectangle == null )
-         {
-            return false;
-         }
-
-         return Equals( rectangle );
+         return (obj is Rectangle) && this == ((Rectangle)obj);
       }
 
       /// <summary>
