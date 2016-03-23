@@ -3,9 +3,8 @@
 namespace RogueSharp
 {
    /// <summary>
-   ///   A class that defines a point in 2D space
+   ///   A struct that defines a point in 2D space
    /// </summary>
-   // Based on the Monogame Point
    public struct Point : IEquatable<Point>
    {
       private static readonly Point _zeroPoint = new Point();
