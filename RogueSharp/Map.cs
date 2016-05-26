@@ -178,14 +178,14 @@ namespace RogueSharp
       /// </summary>
       public void Clear()
       {
-         Clear( false, false );
+         Clear( true, true );
       }
 
       /// <summary>
       /// Sets the properties of all Cells in the Map to the specified values
       /// </summary>
-      /// <param name="isTransparent">Optional parameter defaults to false if not provided. True if line-of-sight is not blocked by this Cell. False otherwise</param>
-      /// <param name="isWalkable">Optional parameter defaults to false if not provided. True if a character could walk across the Cell normally. False otherwise</param>
+      /// <param name="isTransparent">Optional parameter defaults to true if not provided. True if line-of-sight is not blocked by this Cell. False otherwise</param>
+      /// <param name="isWalkable">Optional parameter defaults to true if not provided. True if a character could walk across the Cell normally. False otherwise</param>
       public void Clear( bool isTransparent, bool isWalkable )
       {
          foreach ( Cell cell in GetAllCells() )
