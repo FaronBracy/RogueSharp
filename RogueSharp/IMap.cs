@@ -182,7 +182,7 @@ namespace RogueSharp
       /// Get an IEnumerable of all Cells in the Map
       /// </summary>
       /// <returns>IEnumerable of all Cells in the Map</returns>
-      IEnumerable<Cell> GetAllCells();
+      IEnumerable<ICell> GetAllCells();
 
       /// <summary>
       /// Get an IEnumerable of Cells in a line from the Origin Cell to the Destination Cell
@@ -194,7 +194,7 @@ namespace RogueSharp
       /// <param name="xDestination">X location of the Destination Cell at the end of the line with 0 as the farthest left</param>
       /// <param name="yDestination">Y location of the Destination Cell at the end of the line with 0 as the top</param>
       /// <returns>IEnumerable of Cells in a line from the Origin Cell to the Destination Cell which includes the Origin and Destination Cells</returns>
-      IEnumerable<Cell> GetCellsAlongLine( int xOrigin, int yOrigin, int xDestination, int yDestination );
+      IEnumerable<ICell> GetCellsAlongLine( int xOrigin, int yOrigin, int xDestination, int yDestination );
 
       /// <summary>
       /// Get an IEnumerable of Cells in a circular Radius around the Origin Cell
@@ -203,7 +203,7 @@ namespace RogueSharp
       /// <param name="yOrigin">Y location of the Origin Cell with 0 as the top</param>
       /// <param name="radius">The number of Cells to get in a radius from the Origin Cell</param>
       /// <returns>IEnumerable of Cells in a circular Radius around the Origin Cell</returns>
-      IEnumerable<Cell> GetCellsInRadius( int xOrigin, int yOrigin, int radius );
+      IEnumerable<ICell> GetCellsInRadius( int xOrigin, int yOrigin, int radius );
 
       /// <summary>
       /// Get an IEnumerable of Cells in a square area around the Origin Cell
@@ -212,7 +212,7 @@ namespace RogueSharp
       /// <param name="yOrigin">Y location of the Origin Cell with 0 as the top</param>
       /// <param name="distance">The number of Cells to get in each direction from the Origin Cell</param>
       /// <returns>IEnumerable of Cells in a square area around the Origin Cell</returns>
-      IEnumerable<Cell> GetCellsInArea( int xOrigin, int yOrigin, int distance );
+      IEnumerable<ICell> GetCellsInArea( int xOrigin, int yOrigin, int distance );
 
       /// <summary>
       /// Get an IEnumerable of the outermost border Cells in a circular Radius around the Origin Cell
@@ -221,7 +221,7 @@ namespace RogueSharp
       /// <param name="yOrigin">Y location of the Origin Cell with 0 as the top</param>
       /// <param name="radius">The radius from the Origin Cell in which the border Cells lie</param>
       /// <returns>IEnumerable of the outermost border Cells in a circular Radius around the Origin Cell</returns>
-      IEnumerable<Cell> GetBorderCellsInRadius( int xOrigin, int yOrigin, int radius );
+      IEnumerable<ICell> GetBorderCellsInRadius( int xOrigin, int yOrigin, int radius );
 
       /// <summary>
       /// Get an IEnumerable of the outermost border Cells in a square around the Origin Cell
@@ -230,21 +230,21 @@ namespace RogueSharp
       /// <param name="yOrigin">Y location of the Origin Cell with 0 as the top</param>
       /// <param name="distance">The distance from the Origin Cell in which the border Cells lie</param>
       /// <returns> IEnumerable of the outermost border Cells in a square around the Origin Cell</returns>
-      IEnumerable<Cell> GetBorderCellsInArea( int xOrigin, int yOrigin, int distance );
+      IEnumerable<ICell> GetBorderCellsInArea( int xOrigin, int yOrigin, int distance );
 
       /// <summary>
       /// Get an IEnumerable of all the Cells in the specified row numbers
       /// </summary>
       /// <param name="rowNumbers">Integer array of row numbers with 0 as the top</param>
       /// <returns>IEnumerable of all the Cells in the specified row numbers</returns>
-      IEnumerable<Cell> GetCellsInRows( params int[] rowNumbers );
+      IEnumerable<ICell> GetCellsInRows( params int[] rowNumbers );
 
       /// <summary>
       /// Get an IEnumerable of all the Cells in the specified column numbers
       /// </summary>
       /// <param name="columnNumbers">Integer array of column numbers with 0 as the farthest left</param>
       /// <returns>IEnumerable of all the Cells in the specified column numbers</returns>
-      IEnumerable<Cell> GetCellsInColumns( params int[] columnNumbers );
+      IEnumerable<ICell> GetCellsInColumns( params int[] columnNumbers );
 
       /// <summary>
       /// Get a Cell at the specified location
@@ -252,7 +252,7 @@ namespace RogueSharp
       /// <param name="x">X location of the Cell to get starting with 0 as the farthest left</param>
       /// <param name="y">Y location of the Cell to get, starting with 0 as the top</param>
       /// <returns>Cell at the specified location</returns>
-      Cell GetCell( int x, int y );
+      ICell GetCell( int x, int y );
 
       /// <summary>
       /// Provides a simple visual representation of the map using the following symbols:
@@ -284,7 +284,7 @@ namespace RogueSharp
       /// </summary>
       /// <param name="index">The single dimensional array index for the Cell that we want to get</param>
       /// <returns>Cell at the specified single dimensional array index</returns>
-      Cell CellFor( int index );
+      ICell CellFor( int index );
 
       /// <summary>
       /// Get the single dimensional array index for a Cell at the specified location using the formula: index = ( y * Width ) + x
@@ -299,7 +299,7 @@ namespace RogueSharp
       /// </summary>
       /// <param name="cell">The Cell to get the index for</param>
       /// <returns>An index for the Cell which is useful if storing Cells in a single dimensional array</returns>
-      int IndexFor( Cell cell );
+      int IndexFor( ICell cell );
    }
 
    /// <summary>

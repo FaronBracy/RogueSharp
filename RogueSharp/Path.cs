@@ -10,8 +10,8 @@ namespace RogueSharp
    /// </summary>
    public class Path
    {
-      private readonly LinkedList<Cell> _steps;
-      private LinkedListNode<Cell> _currentStep;
+      private readonly LinkedList<ICell> _steps;
+      private LinkedListNode<ICell> _currentStep;
 
       /// <summary>
       /// Construct a new Path from the specified ordered list of Cells
@@ -19,9 +19,9 @@ namespace RogueSharp
       /// <param name="steps">An IEnumerable of Cells that represent the ordered steps along this Path from Start to End</param>
       /// <exception cref="ArgumentNullException">Thrown when the specified steps parameter is null</exception>
       /// <exception cref="ArgumentException">Thrown when the specified steps parameter is empty</exception>
-      public Path( IEnumerable<Cell> steps )
+      public Path( IEnumerable<ICell> steps )
       {
-         _steps = new LinkedList<Cell>( steps );
+         _steps = new LinkedList<ICell>( steps );
 
          if ( _steps.Count < 1 )
          {
@@ -34,7 +34,7 @@ namespace RogueSharp
       /// <summary>
       /// The Cell representing the first step or Start of this Path
       /// </summary>
-      public Cell Start
+      public ICell Start
       {
          get
          {
@@ -45,7 +45,7 @@ namespace RogueSharp
       /// <summary>
       /// The Cell representing the last step or End of this Path
       /// </summary>
-      public Cell End
+      public ICell End
       {
          get
          {
@@ -67,7 +67,7 @@ namespace RogueSharp
       /// <summary>
       /// The Cell represeting the step that is currently occupied in this Path
       /// </summary>
-      public Cell CurrentStep
+      public ICell CurrentStep
       {
          get
          {
@@ -78,7 +78,7 @@ namespace RogueSharp
       /// <summary>
       /// All of the Cells representing the Steps in this Path from Start to End as an IEnumerable
       /// </summary>
-      public IEnumerable<Cell> Steps
+      public IEnumerable<ICell> Steps
       {
          get
          {
@@ -91,9 +91,9 @@ namespace RogueSharp
       /// </summary>
       /// <returns>A Cell representing the Step that was moved to as we advanced along the Path</returns>
       /// <exception cref="NoMoreStepsException">Thrown when attempting to move forward along a Path on which we are currently at the End</exception>
-      public Cell StepForward()
+      public ICell StepForward()
       {
-         LinkedListNode<Cell> nextStep = _currentStep.Next;
+         LinkedListNode<ICell> nextStep = _currentStep.Next;
          if ( nextStep == null )
          {
             throw new NoMoreStepsException( "Cannot take a step foward when at the end of the path" );
@@ -107,9 +107,9 @@ namespace RogueSharp
       /// </summary>
       /// <returns>A Cell representing the Step that was moved to as we advanced along the Path</returns>
       /// <exception cref="NoMoreStepsException">Thrown when attempting to move backward along a Path on which we are currently at the Start</exception>
-      public Cell StepBackward()
+      public ICell StepBackward()
       {
-         LinkedListNode<Cell> previousStep = _currentStep.Previous;
+         LinkedListNode<ICell> previousStep = _currentStep.Previous;
          if ( previousStep == null )
          {
             throw new NoMoreStepsException( "Cannot take a step backward when at the start of the path" );

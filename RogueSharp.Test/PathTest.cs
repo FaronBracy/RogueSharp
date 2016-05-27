@@ -7,7 +7,7 @@ namespace RogueSharp.Test
    [TestClass]
    public class PathTest
    {
-      private readonly List<Cell> _pathFromX1Y1ToX1Y4 = new List<Cell>
+      private readonly List<ICell> _pathFromX1Y1ToX1Y4 = new List<ICell>
       {
          new Cell( 1, 1, true, true, true ), 
          new Cell( 1, 2, true, true, true ), 
@@ -26,7 +26,7 @@ namespace RogueSharp.Test
       [ExpectedException( typeof( ArgumentException ) )]
       public void Constructor_EmptyList_ThrowsArgumentException()
       {
-         var emptyList = new List<Cell>();
+         var emptyList = new List<ICell>();
 
          var path = new Path( emptyList );
       }
@@ -68,7 +68,7 @@ namespace RogueSharp.Test
       {
          var path = new Path( _pathFromX1Y1ToX1Y4 );
 
-         Cell nextStep = path.StepForward();
+         ICell nextStep = path.StepForward();
 
          Assert.AreEqual( new Cell( 1, 2, true, true, true ), nextStep );
          Assert.AreEqual( new Cell( 1, 2, true, true, true ), path.CurrentStep );
@@ -81,7 +81,7 @@ namespace RogueSharp.Test
 
          path.StepForward();
          path.StepForward();
-         Cell nextStep = path.StepForward();
+         ICell nextStep = path.StepForward();
 
          Assert.AreEqual( new Cell( 1, 4, true, true, true ), nextStep );
          Assert.AreEqual( new Cell( 1, 4, true, true, true ), path.CurrentStep );
@@ -93,14 +93,14 @@ namespace RogueSharp.Test
       {
          var path = new Path( _pathFromX1Y1ToX1Y4 );
 
-         Cell previousStep = path.StepBackward();
+         ICell previousStep = path.StepBackward();
       }
 
       [TestMethod]
       public void StepBackward_NewPathFromX1Y1ToX1Y4_AfterNoMoreStepsExceptionCurrentStepDoesNotChange()
       {
          var path = new Path( _pathFromX1Y1ToX1Y4 );
-         Cell currentStep = path.CurrentStep;
+         ICell currentStep = path.CurrentStep;
 
          try
          {
