@@ -94,7 +94,7 @@ namespace RogueSharp.MapCreation
 
       private void RandomlyFillCells()
       {
-         foreach ( Cell cell in _map.GetAllCells() )
+         foreach ( ICell cell in _map.GetAllCells() )
          {
             if ( IsBorderCell( cell ) )
             {
@@ -115,7 +115,7 @@ namespace RogueSharp.MapCreation
       {
          var updatedMap = _map.Clone() as T;
 
-         foreach ( Cell cell in _map.GetAllCells() )
+         foreach ( ICell cell in _map.GetAllCells() )
          {
             if ( IsBorderCell( cell ) )
             {
@@ -138,7 +138,7 @@ namespace RogueSharp.MapCreation
       {
          var updatedMap = _map.Clone() as T;
 
-         foreach ( Cell cell in _map.GetAllCells() )
+         foreach ( ICell cell in _map.GetAllCells() )
          {
             if ( IsBorderCell( cell ) )
             {
@@ -157,16 +157,16 @@ namespace RogueSharp.MapCreation
          _map = updatedMap;
       }
 
-      private bool IsBorderCell( Cell cell )
+      private bool IsBorderCell( ICell cell )
       {
          return cell.X == 0 || cell.X == _map.Width - 1
                 || cell.Y == 0 || cell.Y == _map.Height - 1;
       }
 
-      private int CountWallsNear( Cell cell, int distance )
+      private int CountWallsNear( ICell cell, int distance )
       {
          int count = 0;
-         foreach ( Cell nearbyCell in _map.GetCellsInArea( cell.X, cell.Y, distance ) )
+         foreach ( ICell nearbyCell in _map.GetCellsInArea( cell.X, cell.Y, distance ) )
          {
             if ( nearbyCell.X == cell.X && nearbyCell.Y == cell.Y )
             {
@@ -191,10 +191,10 @@ namespace RogueSharp.MapCreation
             {
                int closestMapSectionIndex = FindNearestMapSection( mapSections, i, unionFind );
                MapSection closestMapSection = mapSections[closestMapSectionIndex];
-               IEnumerable<Cell> tunnelCells = _map.GetCellsAlongLine( mapSections[i].Bounds.Center.X, mapSections[i].Bounds.Center.Y,
+               IEnumerable<ICell> tunnelCells = _map.GetCellsAlongLine( mapSections[i].Bounds.Center.X, mapSections[i].Bounds.Center.Y,
                   closestMapSection.Bounds.Center.X, closestMapSection.Bounds.Center.Y );
-               Cell previousCell = null;
-               foreach ( Cell cell in tunnelCells )
+               ICell previousCell = null;
+               foreach ( ICell cell in tunnelCells )
                {
                   _map.SetCellProperties( cell.X, cell.Y, true, true );
                   if ( previousCell != null )
@@ -266,8 +266,8 @@ namespace RogueSharp.MapCreation
 
          public List<MapSection> GetMapSections()
          {
-            IEnumerable<Cell> cells = _map.GetAllCells();
-            foreach ( Cell cell in cells )
+            IEnumerable<ICell> cells = _map.GetAllCells();
+            foreach ( ICell cell in cells )
             {
                MapSection section = Visit(cell);
                if ( section.Cells.Count > 0 )
@@ -279,9 +279,9 @@ namespace RogueSharp.MapCreation
             return _mapSections;
          }
 
-         private MapSection Visit(Cell cell)
+         private MapSection Visit(ICell cell)
          {
-            Stack<Cell> stack = new Stack<Cell>(new List<Cell>());
+            Stack<ICell> stack = new Stack<ICell>(new List<ICell>());
             MapSection mapsection = new MapSection();
             stack.Push(cell);
             while ( stack.Count != 0 )
@@ -293,7 +293,7 @@ namespace RogueSharp.MapCreation
                }
                mapsection.AddCell( cell );
                _visited[cell.Y][cell.X] = true;
-               foreach ( Cell neighbor in GetNeighbors(cell) )
+               foreach ( ICell neighbor in GetNeighbors(cell) )
                {
                   if ( cell.IsWalkable == neighbor.IsWalkable && !_visited[neighbor.Y][neighbor.X] )
                   {
@@ -304,7 +304,7 @@ namespace RogueSharp.MapCreation
             return mapsection;
          }
 
-         private Cell GetCell( int x, int y )
+         private ICell GetCell( int x, int y )
          {
             if (x < 0 || y < 0)
             {
@@ -317,9 +317,9 @@ namespace RogueSharp.MapCreation
             return _map.GetCell( x, y );
          }
 
-         private IEnumerable<Cell> GetNeighbors( Cell cell )
+         private IEnumerable<ICell> GetNeighbors( ICell cell )
          {
-            List<Cell> neighbors = new List<Cell>(8);
+            List<ICell> neighbors = new List<ICell>(8);
             foreach (int[] offset in _offsets)
             {
                var neighbor = GetCell(cell.X + offset[0], cell.Y + offset[1]);
@@ -349,22 +349,22 @@ namespace RogueSharp.MapCreation
             }
          }
 
-         public HashSet<Cell> Cells { get; private set; }
+         public HashSet<ICell> Cells { get; private set; }
 
          public MapSection()
          {
-            Cells = new HashSet<Cell>();
+            Cells = new HashSet<ICell>();
             _top = int.MaxValue;
             _left = int.MaxValue;
          }
 
-         public void AddCell( Cell cell )
+         public void AddCell( ICell cell )
          {
             Cells.Add( cell );
             UpdateBounds( cell );
          }
 
-         private void UpdateBounds( Cell cell )
+         private void UpdateBounds( ICell cell )
          {
             if ( cell.X > _right )
             {

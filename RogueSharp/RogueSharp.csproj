@@ -73,6 +73,7 @@
     <Compile Include="FieldOfView.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="GoalMap.cs" />
+    <Compile Include="ICell.cs" />
     <Compile Include="IGoalMap.cs" />
     <Compile Include="IMap.cs" />
     <Compile Include="MapCreation\BorderOnlyMapCreationStrategy.cs" />

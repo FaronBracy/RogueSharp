@@ -30,12 +30,12 @@ namespace RogueSharp.MapCreation
          map.Initialize( _width, _height );
          map.Clear( true, true );
 
-         foreach ( Cell cell in map.GetCellsInRows( 0, _height - 1 ) )
+         foreach ( ICell cell in map.GetCellsInRows( 0, _height - 1 ) )
          {
             map.SetCellProperties( cell.X, cell.Y, false, false );
          }
 
-         foreach ( Cell cell in map.GetCellsInColumns( 0, _width - 1 ) )
+         foreach ( ICell cell in map.GetCellsInColumns( 0, _width - 1 ) )
          {
             map.SetCellProperties( cell.X, cell.Y, false, false );
          }
