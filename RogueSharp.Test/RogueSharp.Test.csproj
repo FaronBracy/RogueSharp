@@ -53,6 +53,7 @@
     <Compile Include="DiceNotation\DiceParserTest.cs" />
     <Compile Include="DiceNotation\DiceTest.cs" />
     <Compile Include="PathTest.cs" />
+    <Compile Include="PointTest.cs" />
     <Compile Include="Random\GaussianRandomTest.cs" />
     <Compile Include="Random\DotNetRandomTest.cs" />
     <Compile Include="GoalMapTest.cs" />

@@ -171,7 +171,6 @@ namespace RogueSharp
          return new Point( source.X / divisor.X, source.Y / divisor.Y );
       }
 
-
       /// <summary>
       ///   Compares whether current instance is equal to specified <see cref="Object" />.
       /// </summary>
