@@ -17,14 +17,17 @@ namespace RogueSharp.DiceNotation.Terms
       /// The number of dice
       /// </summary>
       public int Multiplicity { get; private set; }
+
       /// <summary>
       /// The number of sides per die
       /// </summary>
       public int Sides { get; private set; }
+
       /// <summary>
       /// The amount to multiply the final sum of the dice by
       /// </summary>
       public int Scalar { get; private set; }
+
       /// <summary>
       /// Sum this many dice with the highest values out of those rolled
       /// </summary>
@@ -75,24 +78,29 @@ namespace RogueSharp.DiceNotation.Terms
       /// <summary>
       /// Gets the TermResult for this DiceTerm which will include the random value rolled
       /// </summary>
-      /// <param name="random">Optional parameter that defaults to DotNetRandom. If a different IRandom is provided that RNG will be used instead.</param>
+      /// <param name="random">IRandom RNG used to perform the Roll.</param>
       /// <returns>An IEnumerable of TermResult which will have one item per die rolled</returns>
-      public IEnumerable<TermResult> GetResults( IRandom random = null )
+      public IEnumerable<TermResult> GetResults( IRandom random )
       {
-         if ( random == null )
-         {
-            random = Singleton.DefaultRandom;
-         }
          IEnumerable<TermResult> results =
              from i in Enumerable.Range( 0, Multiplicity )
              select new TermResult {
                 Scalar = Scalar,
                 Value = random.Next( 1, Sides ),
-                Type = "d" + Sides
+                TermType = "d" + Sides
              };
          return results.OrderByDescending( d => d.Value ).Take( Choose );
       }
 
+      /// <summary>
+      /// Gets the TermResult for this DiceTerm which will include the random value rolled
+      /// </summary>
+      /// <returns>An IEnumerable of TermResult which will have one item per die rolled</returns>
+      /// <remarks>Uses DotNetRandom as its RNG</remarks>
+      public IEnumerable<TermResult> GetResults()
+      {
+         return GetResults( Singleton.DefaultRandom );
+      }
 
       /// <summary>
       /// Returns a string that represents this DiceTerm

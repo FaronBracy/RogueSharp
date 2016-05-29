@@ -3,7 +3,7 @@
    /// <summary>
    /// A class that defines a square on a Map with all of its associated properties
    /// </summary>
-   public class Cell
+   public class Cell : ICell
    {
       /// <summary>
       /// Construct a new Cell located at the specified x and y location with the specified properties
@@ -14,7 +14,7 @@
       /// <param name="isWalkable">Could a character could normally walk across the Cell without difficulty</param>
       /// <param name="isInFov">Is the Cell currently in the currently observable field-of-view</param>
       /// <param name="isExplored">Has this Cell ever been explored by the player</param>
-      public Cell( int x, int y, bool isTransparent, bool isWalkable, bool isInFov, bool isExplored = false )
+      public Cell( int x, int y, bool isTransparent, bool isWalkable, bool isInFov, bool isExplored )
       {
          X = x;
          Y = y;
@@ -23,14 +23,35 @@
          IsInFov = isInFov;
          IsExplored = isExplored;
       }
+
+      /// <summary>
+      /// Construct a new unexplored Cell located at the specified x and y location with the specified properties
+      /// </summary>
+      /// <param name="x">X location of the Cell starting with 0 as the farthest left</param>
+      /// <param name="y">Y location of the Cell starting with 0 as the top</param>
+      /// <param name="isTransparent">Is there a clear line-of-sight through this Cell</param>
+      /// <param name="isWalkable">Could a character could normally walk across the Cell without difficulty</param>
+      /// <param name="isInFov">Is the Cell currently in the currently observable field-of-view</param>
+      public Cell( int x, int y, bool isTransparent, bool isWalkable, bool isInFov )
+      {
+         X = x;
+         Y = y;
+         IsTransparent = isTransparent;
+         IsWalkable = isWalkable;
+         IsInFov = isInFov;
+         IsExplored = false;
+      }
+
       /// <summary>
       /// Gets the X location of the Cell starting with 0 as the farthest left
       /// </summary>
       public int X { get; private set; }
+
       /// <summary>
       /// Y location of the Cell starting with 0 as the top
       /// </summary>
       public int Y { get; private set; }
+
       /// <summary>
       /// Get the transparency of the Cell i.e. if line of sight would be blocked by this Cell
       /// </summary>
@@ -40,6 +61,7 @@
       /// A Cell representing a solid stone wall would not be transparent
       /// </example>
       public bool IsTransparent { get; private set; }
+
       /// <summary>
       /// Get the walkability of the Cell i.e. if a character could normally move across the Cell without difficulty
       /// </summary>
@@ -49,6 +71,7 @@
       /// A Cell representing a solid stone wall would not be walkable
       /// </example>
       public bool IsWalkable { get; private set; }
+
       /// <summary>
       /// Check if the Cell is in the currently computed field-of-view
       /// For newly initialized maps a field-of-view will not exist so all Cells will return false
@@ -62,6 +85,7 @@
       /// Any Cells within the FOV would be what the character could see from their current location and lighting conditions
       /// </example>
       public bool IsInFov { get; private set; }
+
       /// <summary>
       /// Check if the Cell is flagged as ever having been explored by the player
       /// </summary>
@@ -74,6 +98,7 @@
       /// This property can be used to keep track of those Cells that have been "seen" and could be used to show fog-of-war type effects when rendering the map
       /// </example>
       public bool IsExplored { get; private set; }
+
       /// <summary>
       /// Provides a simple visual representation of the Cell using the following symbols:
       /// - `.`: `Cell` is transparent and walkable
@@ -89,6 +114,7 @@
       {
          return ToString( false );
       }
+
       /// <summary>
       /// Provides a simple visual representation of the Cell using the following symbols:
       /// - `%`: `Cell` is not in field-of-view
@@ -98,7 +124,7 @@
       /// - `#`: `Cell` is in field-of-view (but not transparent or walkable)
       /// </summary>
       /// <param name="useFov">True if field-of-view calculations will be used when creating the string represenation of the Cell. False otherwise</param>
-      /// <returns>A string represenation of the Cell using special symbols to denote Cell properties</returns>
+      /// <returns>A string representation of the Cell using special symbols to denote Cell properties</returns>
       public string ToString( bool useFov )
       {
          if ( useFov && !IsInFov )
@@ -127,6 +153,71 @@
                return "#";
             }
          }
-      }
-   }
+        }
+
+        /// <summary>
+        /// Determines whether two Cell instances are equal
+        /// </summary>
+        /// <param name="other">The Cell to compare this instance to</param>
+        /// <returns>True if the instances are equal; False otherwise</returns>
+        public bool Equals(ICell other)
+        {
+            if (other == null) return false;
+            return X == other.X && Y == other.Y && IsTransparent == other.IsTransparent && IsWalkable == other.IsWalkable && IsInFov == other.IsInFov && IsExplored == other.IsExplored;
+        }
+
+        /// <summary>
+        /// Determines whether two Cell instances are equal
+        /// </summary>
+        /// <param name="obj">The Object to compare this instance to</param>
+        /// <returns>True if the instances are equal; False otherwise</returns>
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != typeof(ICell)) return false;
+            return Equals((Cell)obj);
+        }
+
+        /// <summary>
+        /// Determines whether two Cell instances are equal
+        /// </summary>
+        /// <param name="left">Cell on the left side of the equal sign</param>
+        /// <param name="right">Cell on the right side of the equal sign</param>
+        /// <returns>True if a and b are equal; False otherwise</returns>
+        public static bool operator ==(Cell left, Cell right)
+        {
+            return Equals(left, right);
+        }
+
+        /// <summary>
+        /// Determines whether two Cell instances are not equal
+        /// </summary>
+        /// <param name="left">Cell on the left side of the equal sign</param>
+        /// <param name="right">Cell on the right side of the equal sign</param>
+        /// <returns>True if a and b are not equal; False otherwise</returns>
+        public static bool operator !=(Cell left, Cell right)
+        {
+            return !Equals(left, right);
+        }
+
+        /// <summary>
+        /// Gets the hash code for this object which can help for quick checks of equality
+        /// or when inserting this Cell into a hash-based collection such as a Dictionary or Hashtable 
+        /// </summary>
+        /// <returns>An integer hash used to identify this Cell</returns>
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = X;
+                hashCode = (hashCode * 397) ^ Y;
+                hashCode = (hashCode * 397) ^ IsTransparent.GetHashCode();
+                hashCode = (hashCode * 397) ^ IsWalkable.GetHashCode();
+                hashCode = (hashCode * 397) ^ IsInFov.GetHashCode();
+                hashCode = (hashCode * 397) ^ IsExplored.GetHashCode();
+                return hashCode;
+            }
+        }
+    }
 }

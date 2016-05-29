@@ -9,23 +9,40 @@
     <licenseUrl>https://bitbucket.org/FaronBracy/roguesharp/</licenseUrl>
     <projectUrl>https://bitbucket.org/FaronBracy/roguesharp/</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
+	<summary>
+	A portable class library for roguelike developers to provide utilities frequently used in roguelikes or 2D tile based games. Inspired by libtcod
+	</summary>
     <description>
     A portable class library for roguelike developers to provide utilities frequently used in roguelikes or 2D tile based games. Inspired by libtcod
 
     New features:
-	* Added DiceNotation namespace adapted from DiceNotation.Net library for parsing and rolling Dice
+       * Reworked GoalMap interface to be more consistent with Pathfinder class 
+       * Added Path class
+       * Bug fixes
+       * FxCop clean up
     Breaking changes:
-        * The Dice and Die classes in the Random namespace have been removed in favor of the new classes in DiceNotation
-        * See 2.0 release notes on https://roguesharp.wordpress.com for examples of usage
+       * Pathfinder now returns Path type instead of IEnumerable
+       * GoalMap now returns Path type instead of IEnumerable
+       * Map creation algorithms moved to their own namespace
+       * DiceNotation "Type" renamed to "TermType" to avoid being a keyword
+       * Pathfinders can now throw PathNotFoundException
+       * See 3.0 release notes on https://roguesharp.wordpress.com for additional details
     </description>
     <releaseNotes>
     New features:
- 	* Added DiceNotation namespace adapted from DiceNotation.Net library for parsing and rolling Dice
+       * Reworked GoalMap interface to be more consistent with Pathfinder class 
+       * Added Path class
+       * Bug fixes
+       * FxCop clean up
     Breaking changes:
-        * The Dice and Die classes in the Random namespace have been removed in favor of the new classes in DiceNotation
-        * See 2.0 release notes on https://roguesharp.wordpress.com for examples of usage
+       * Pathfinder now returns Path type instead of IEnumerable
+       * GoalMap now returns Path type instead of IEnumerable
+       * Map creation algorithms moved to their own namespace
+       * DiceNotation "Type" renamed to "TermType" to avoid being a keyword
+       * Pathfinders can now throw PathNotFoundException
+       * See 3.0 release notes on https://roguesharp.wordpress.com for additional details
     </releaseNotes>
-    <copyright>Copyright 2014-2015 Faron Bracy</copyright>
+    <copyright>Copyright 2014-2016 Faron Bracy</copyright>
     <tags>roguelike libtcod pathfinding game map random generator field-of-view fog-of-war dice</tags>
   </metadata>
 </package>

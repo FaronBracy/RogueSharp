@@ -14,6 +14,7 @@ namespace RogueSharp.Random
    {
       private long _numberGenerated;
       private Queue<int> _series;
+
       /// <summary>
       /// Constructs a new integer generator with the specified series of integers in an array.
       /// When the Next method is called on this generator it will return the first integer in the series,
@@ -21,14 +22,21 @@ namespace RogueSharp.Random
       /// If the Next method is called once it is at the end of the array, it will start back over at the beginning.
       /// </summary>
       /// <param name="series">A known series of integers that will be returned in order from this generator</param>
+      /// <exception cref="ArgumentNullException">Thrown on null series</exception>
       public KnownSeriesRandom( params int[] series )
       {
+         if ( series == null )
+         {
+            throw new ArgumentNullException( "series", "Series cannot be null" );
+         }
+
          _series = new Queue<int>();
          foreach ( int number in series )
          {
             _series.Enqueue( number );
          }
       }
+
       /// <summary>
       /// Return the first integer in the series that was specified when this generator was constructed,
       /// followed by the next integer and so on until it reaches the end of the array.
@@ -38,11 +46,12 @@ namespace RogueSharp.Random
       /// <exception cref="ArgumentOutOfRangeException">
       /// Thrown when the Next integer in the series for this generator is not between 0 and the specified maxValue inclusive
       /// </exception>
-      /// <returns>The next integer in the series specified upon consturction of this class</returns>
+      /// <returns>The next integer in the series specified upon construction of this class</returns>
       public int Next( int maxValue )
       {
          return Next( 0, maxValue );
       }
+
       /// <summary>
       /// Return the first integer in the series that was specified when this generator was constructed,
       /// followed by the next integer and so on until it reaches the end of the array.
@@ -54,7 +63,7 @@ namespace RogueSharp.Random
       /// Thrown when the Next integer in the series for this generator is not between 
       /// the specified minValue and maxValue inclusive
       /// </exception>
-      /// <returns>The next integer in the series specified upon consturction of this class</returns>
+      /// <returns>The next integer in the series specified upon construction of this class</returns>
       public int Next( int minValue, int maxValue )
       {
          int value = _series.Dequeue();
@@ -70,6 +79,7 @@ namespace RogueSharp.Random
          _numberGenerated++;
          return value;
       }
+
       /// <summary>
       /// Saves the current state of the number generator
       /// </summary>
@@ -89,6 +99,7 @@ namespace RogueSharp.Random
             Seed = _series.ToArray()
          };
       }
+
       /// <summary>
       /// Restores the state of the number generator based on the specified state parameter
       /// </summary>
@@ -100,8 +111,14 @@ namespace RogueSharp.Random
       /// generated the first time after Save was called.
       /// </example>
       /// <param name="state">The state to restore to, usually obtained from calling the Save method</param>
+      /// <exception cref="ArgumentNullException">Thrown on null RandomState</exception>
       public void Restore( RandomState state )
       {
+         if ( state == null )
+         {
+            throw new ArgumentNullException( "state", "RandomState cannot be null" );
+         }
+
          _series = new Queue<int>();
          foreach ( int i in state.Seed )
          {

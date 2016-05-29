@@ -23,8 +23,14 @@ namespace RogueSharp.DiceNotation
       /// </summary>
       /// <param name="expression">A dice notation string expression. Ex. 3d6+3</param>
       /// <returns>A DiceExpression parsed from the specified string</returns>
+      /// <exception cref="ArgumentException">Invalid dice notation supplied</exception>
       public DiceExpression Parse( string expression )
       {
+         if ( string.IsNullOrEmpty( expression ) )
+         {
+            throw new ArgumentException( "A dice notation expression must be supplied.", "expression" );
+         }
+
          string cleanExpression = _whitespacePattern.Replace( expression.ToLower(), "" );
          cleanExpression = cleanExpression.Replace( "+-", "-" );
 
@@ -47,8 +53,10 @@ namespace RogueSharp.DiceNotation
             }
             else if ( c == 'd' )
             {
-               if ( parseValues.Constant == "" )
+               if ( parseValues.Constant.Length == 0 )
+               {
                   parseValues.Constant = "1";
+               }
                parseValues.Multiplicity = int.Parse( parseValues.Constant );
                parseValues.Constant = "";
             }

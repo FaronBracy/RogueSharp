@@ -1,0 +1,8 @@
+// Switch to local Nuget Directory
+cd c:\gitprojects\nuget
+
+// Package based on AssemblyInfo
+Nuget pack C:\GitProjects\RogueSharp\RogueSharp\RogueSharp.csproj -Build -Symbols -Properties Configuration=Release -Build
+
+// Push to Nuget.org
+Nuget push C:\GitProjects\Nuget\RogueSharp.<version>.nupkg

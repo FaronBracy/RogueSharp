@@ -26,6 +26,11 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Debug\RogueSharp.XML</DocumentationFile>
+    <CodeAnalysisRuleSet>..\FxCopRules\FxCop.Debug.Warnings.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -35,12 +40,22 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Release\RogueSharp.XML</DocumentationFile>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+    <CodeAnalysisRuleSet>..\FxCopRules\FxCop.Release.Errors.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Algorithms\DepthFirstPaths.cs" />
+    <Compile Include="Algorithms\DijkstraShortestPath.cs" />
+    <Compile Include="Algorithms\DirectedEdge.cs" />
+    <Compile Include="Algorithms\EdgeWeightedDigraph.cs" />
     <Compile Include="Algorithms\Graph.cs" />
+    <Compile Include="Algorithms\IndexMinPriorityQueue.cs" />
     <Compile Include="Algorithms\UnionFind.cs" />
     <Compile Include="Cell.cs" />
     <Compile Include="DiceNotation\Dice.cs" />
@@ -56,11 +71,18 @@
     <Compile Include="DiceNotation\Terms\DiceTerm.cs" />
     <Compile Include="DiceNotation\Terms\IDiceExpressionTerm.cs" />
     <Compile Include="FieldOfView.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="GoalMap.cs" />
+    <Compile Include="ICell.cs" />
     <Compile Include="IGoalMap.cs" />
     <Compile Include="IMap.cs" />
-    <Compile Include="IMapCreationStrategy.cs" />
+    <Compile Include="MapCreation\BorderOnlyMapCreationStrategy.cs" />
+    <Compile Include="MapCreation\CaveMapCreationStrategy.cs" />
+    <Compile Include="MapCreation\IMapCreationStrategy.cs" />
     <Compile Include="Map.cs" />
+    <Compile Include="MapCreation\RandomRoomsMapCreationStrategy.cs" />
+    <Compile Include="MapCreation\StringDeserializeMapCreationStrategy.cs" />
+    <Compile Include="Path.cs" />
     <Compile Include="PathFinder.cs" />
     <Compile Include="Point.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

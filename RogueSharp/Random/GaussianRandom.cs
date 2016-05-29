@@ -4,7 +4,7 @@ namespace RogueSharp.Random
 {
    /// <summary>
    /// A class implementing IRandom which uses the Box-Muller transformation 
-   /// to help generate Gaussian pseudo-randdom numbers
+   /// to help generate Gaussian pseudo-random numbers
    /// </summary>
    /// <remarks>
    /// Gaussian pseudo-random generation can be useful if you want a bell shaped curve distribution of numbers.
@@ -19,14 +19,16 @@ namespace RogueSharp.Random
       private long _numberGenerated;
       private double _nextGaussian;
       private bool _uselast = true;
+
       /// <summary>
       /// Constructs a new Gaussian pseudo-random number generator 
-      /// with a seed based on the number of milliseconds ellapsed since the system started
+      /// with a seed based on the number of milliseconds elapsed since the system started
       /// </summary>
       public GaussianRandom()
          : this( Environment.TickCount )
       {
       }
+
       /// <summary>
       /// Constructs a new Gaussian pseudo-random number generator with the specified seed
       /// </summary>
@@ -36,8 +38,9 @@ namespace RogueSharp.Random
          _seed = seed;
          _random = new System.Random( _seed );
       }
+
       /// <summary>
-      /// Will approximately give the next Gaussian pseudo-random integer between 0 and thet specified max value inclusively
+      /// Will approximately give the next Gaussian pseudo-random integer between 0 and that specified max value inclusively
       /// so that min and max are at 3.5 deviations from the mean (half-way of min and max).
       /// </summary>
       /// <param name="maxValue">Inclusive maximum result</param>
@@ -46,8 +49,9 @@ namespace RogueSharp.Random
       {
          return Next( 0, maxValue );
       }
+
       /// <summary>
-      /// Will approximately give the next random Gaussian integer between the specified min and max values incluesively 
+      /// Will approximately give the next random Gaussian integer between the specified min and max values inclusively 
       /// so that min and max are at 3.5 deviations from the mean (half-way of min and max).
       /// </summary>
       /// <param name="minValue">Inclusive minimum result</param>
@@ -69,6 +73,7 @@ namespace RogueSharp.Random
 
          return r;
       }
+
       /// <summary>
       /// Saves the current state of the pseudo-random number generator
       /// </summary>
@@ -91,6 +96,7 @@ namespace RogueSharp.Random
             }
          };
       }
+
       /// <summary>
       /// Restores the state of the pseudo-random number generator based on the specified state parameter
       /// </summary>
@@ -102,8 +108,14 @@ namespace RogueSharp.Random
       /// generated the first time after Save was called.
       /// </example>
       /// <param name="state">The state to restore to, usually obtained from calling the Save method</param>
+      /// <exception cref="ArgumentNullException">Thrown on null RandomState</exception>
       public void Restore( RandomState state )
       {
+         if ( state == null )
+         {
+            throw new ArgumentNullException( "state", "RandomState cannot be null" );
+         }
+
          _seed = state.Seed[0];
          _random = new System.Random( _seed );
          _numberGenerated = default( long );

@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using RogueSharp.MapCreation;
 
 namespace RogueSharp.Test
 {
@@ -8,7 +10,7 @@ namespace RogueSharp.Test
    public class GoalMapTest
    {
       [TestMethod]
-      public void FindAllPathsToAllGoals_SmallMapWithTwoGoals_Finds2PathsWith6Points()
+      public void FindPaths_SmallMapWithTwoGoalsOfEqualWeightAndDistance_Finds2PathsWith6Points()
       {
          string mapRepresentation = @"########
                                       #....#.#
@@ -22,7 +24,7 @@ namespace RogueSharp.Test
          GoalMap goalMap = new GoalMap( map );
          goalMap.AddGoal( 1, 1, 0 );
          goalMap.AddGoal( 6, 1, 0 );
-         List<List<Point>> paths = goalMap.FindAllPathsToAllGoals( 3, 4 );
+         ReadOnlyCollection<Path> paths = goalMap.FindPaths( 3, 4 );
 
          string expectedGoalMapRepresentation = @"#    #    #    #    #    #    #    #
                                                   #    0    1    2    3    #    0    #
@@ -32,8 +34,8 @@ namespace RogueSharp.Test
                                                   #    #    #    #    #    #    #    #";
          Assert.AreEqual( expectedGoalMapRepresentation.Replace( " ", string.Empty ), goalMap.ToString().Replace( " ", string.Empty ) );
          Assert.AreEqual( 2, paths.Count );
-         Assert.AreEqual( 6, paths[0].Count );
-         Assert.AreEqual( 6, paths[1].Count );
+         Assert.AreEqual( 6, paths[0].Length );
+         Assert.AreEqual( 6, paths[1].Length );
       }
 
       [TestMethod]
@@ -52,14 +54,17 @@ namespace RogueSharp.Test
          goalMap.AddGoal( 1, 1, 0 );
          goalMap.AddGoal( 6, 1, 0 );
          List<Point> obstacles = new List<Point> { new Point( 1, 2 ), new Point( 3, 2 ) };
-         List<Point> path = goalMap.FindPath( 3, 4, obstacles );
+         goalMap.AddObstacles( obstacles );
+         Path path = goalMap.FindPath( 3, 4 );
 
-         Assert.AreEqual( 6, path.Count );
-         Assert.AreEqual( new Point( 2, 4 ), path[1] );
+         Assert.AreEqual( 7, path.Length );
+         ICell stepForward = path.StepForward();
+         Assert.AreEqual( new Cell( 4, 4, true, true, false ), stepForward );
       }
 
       [TestMethod]
-      public void FindPath_SmallMapAfterAddingAndClearingGoals_PathHasOnePointAndAllCellsAreMax()
+      [ExpectedException( typeof( PathNotFoundException ) )]
+      public void FindPath_SmallMapAfterAddingAndClearingGoals_ThrowsPathNotFoundException()
       {
          string mapRepresentation = @"########
                                       #....#.#
@@ -74,46 +79,105 @@ namespace RogueSharp.Test
          goalMap.AddGoal( 1, 1, 0 );
          goalMap.AddGoal( 6, 1, 0 );
          goalMap.ClearGoals();
-         List<Point> obstacles = new List<Point> { new Point( 1, 2 ), new Point( 3, 2 ) };
-         List<Point> path = goalMap.FindPath( 3, 4, obstacles );
 
-         Assert.AreEqual( 1, path.Count );
-         Assert.AreEqual( new Point( 3, 4 ), path[0] );
-         string expectedGoalMapRepresentation = @"#    #    #    #    #    #    #    #
-                                                  #   48   48   48   48    #   48    #
-                                                  #   48    #   48   48    #   48    #
-                                                  #   48    #   48   48    #   48    #
-                                                  #   48   48   48   48   48   48    #
-                                                  #    #    #    #    #    #    #    #";
-         Assert.AreEqual( expectedGoalMapRepresentation.Replace( " ", string.Empty ), goalMap.ToString().Replace( " ", string.Empty ) );
+         goalMap.FindPath( 3, 4 );
+      }
+
+      [TestMethod]
+      [ExpectedException( typeof( PathNotFoundException ) )]
+      public void FindPath_DestinationUnreachable_ThrowsPathNotFoundException()
+      {
+         string mapRepresentation = @"########
+                                      #....#.#
+                                      #.#..#.#
+                                      #.#..#.#
+                                      #....#.#
+                                      ########";
+         IMapCreationStrategy<Map> mapCreationStrategy = new StringDeserializeMapCreationStrategy<Map>( mapRepresentation );
+         IMap map = Map.Create( mapCreationStrategy );
+         GoalMap goalMap = new GoalMap( map );
+         goalMap.AddGoal( 6, 1, 0 );
+
+         goalMap.FindPath( 1, 1 );
+      }
+
+      [TestMethod]
+      [ExpectedException( typeof( PathNotFoundException ) )]
+      public void FindPath_SourceCellNotWalkable_ThrowsPathNotFoundException()
+      {
+         string mapRepresentation = @"########
+                                      #....#.#
+                                      #.#..#.#
+                                      #.#..#.#
+                                      #......#
+                                      ########";
+         IMapCreationStrategy<Map> mapCreationStrategy = new StringDeserializeMapCreationStrategy<Map>( mapRepresentation );
+         IMap map = Map.Create( mapCreationStrategy );
+         GoalMap goalMap = new GoalMap( map );
+         goalMap.AddGoal( 1, 1, 0 );
+
+         goalMap.FindPath( 0, 1 );
+      }
+
+      [TestMethod]
+      [ExpectedException( typeof( PathNotFoundException ) )]
+      public void FindPath_DestinationNotWalkableAndAdjacentToSource_ThrowsPathNotFoundException()
+      {
+         string mapRepresentation = @"########
+                                      #....#.#
+                                      #.#..#.#
+                                      #.#..#.#
+                                      #......#
+                                      ########";
+         IMapCreationStrategy<Map> mapCreationStrategy = new StringDeserializeMapCreationStrategy<Map>( mapRepresentation );
+         IMap map = Map.Create( mapCreationStrategy );
+         GoalMap goalMap = new GoalMap( map );
+         goalMap.AddGoal( 0, 1, 0 );
+
+         goalMap.FindPath( 1, 1 );
+      }
+
+      [TestMethod]
+      [ExpectedException( typeof( PathNotFoundException ) )]
+      public void FindPath_DestinationNotWalkableAnd13StepsAway_ThrowsPathNotFoundException()
+      {
+         string mapRepresentation = @"########
+                                      #....#.#
+                                      #.#..#.#
+                                      #.#..#.#
+                                      #......#
+                                      ########";
+         IMapCreationStrategy<Map> mapCreationStrategy = new StringDeserializeMapCreationStrategy<Map>( mapRepresentation );
+         IMap map = Map.Create( mapCreationStrategy );
+         GoalMap goalMap = new GoalMap( map );
+         goalMap.AddGoal( 7, 1, 0 );
+
+         goalMap.FindPath( 1, 1 );
       }
 
       [TestMethod]
       public void FindPathAvoiding_BoxedInCornerWithObstacle_ExpectedPath()
       {
-         string mapRepresentation = @"###########
-                                      #.....#...#
-                                      #.....#.#.#
-                                      #.....#.#.#
-                                      #.....#.#.#
-                                      #.....s.#.#
-                                      ###########";
+         string mapRepresentation = @"###############################################
+                                      #..........#......................##..........#
+                                      #..........#..........##..........##..........#
+                                      #..........#..........##..........##..........#
+                                      #..........#..........##..........##..........#
+                                      #.....................##......................#
+                                      ###############################################";
 
          IMapCreationStrategy<Map> mapCreationStrategy = new StringDeserializeMapCreationStrategy<Map>( mapRepresentation );
          IMap map = Map.Create( mapCreationStrategy );
          GoalMap goalMap = new GoalMap( map );
          goalMap.AddGoal( 2, 2, 0 );
-         Point obstacle = new Point( 2, 2 );
-         string expectedPath = "........s...........";
+         goalMap.AddObstacle( 2, 1 );
 
-         List<Point> path = goalMap.FindPathAvoidingGoals( 1, 2, new List<Point> { obstacle } );
-         var actualPath = new StringBuilder();
-         foreach( Point p in path )
-         {
-            actualPath.Append( map.GetCell( p.X, p.Y ).ToString() );
-         }
+         Path path = goalMap.FindPathAvoidingGoals( 1, 1 );
 
-         Assert.AreEqual( expectedPath, actualPath.ToString() );
+         Assert.AreEqual( 61, path.Length );
+         Assert.AreEqual( map.GetCell( 1, 2 ), path.StepForward() );
+         Assert.AreEqual( map.GetCell( 1, 1 ), path.Start );
+         Assert.AreEqual( map.GetCell( 45, 1 ), path.End );
       }
 
       [TestMethod]
@@ -162,11 +226,11 @@ namespace RogueSharp.Test
          goalMap.AddGoal( 51, 33, 0 );
          string expectedPath = ".....s.....s.......s...........s.....s..........s....s.......s...........s...s....s..............s.....s...s......s...s....s..s....s.....s..............s......";
 
-         List<Point> path = goalMap.FindPath( 23, 7, new List<Point>() );
+         Path path = goalMap.FindPath( 23, 7 );
          var actualPath = new StringBuilder();
-         foreach( Point p in path )
+         foreach ( ICell cell in path.Steps )
          {
-            actualPath.Append( map.GetCell( p.X, p.Y ).ToString() );
+            actualPath.Append( cell.ToString() );
          }
 
          Assert.AreEqual( expectedPath, actualPath.ToString() );

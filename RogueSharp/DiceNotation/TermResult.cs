@@ -19,6 +19,6 @@
       /// A string representing the type of this Term. Possible values are "constant" or "d(sides)"
       /// In 1d6 + 5, the 1d6 term is of type "d6" and the 5 term is of type "constant"
       /// </summary>
-      public string Type { get; set; }
+      public string TermType { get; set; }
    }
 }

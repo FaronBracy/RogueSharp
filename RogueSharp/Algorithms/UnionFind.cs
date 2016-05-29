@@ -13,10 +13,11 @@ namespace RogueSharp.Algorithms
    {
       private readonly int[] _id;
       private readonly int[] _size;
+
       /// <summary>
       /// Create an empty union-find data structure with "count" isolated sets
       /// </summary>
-      /// <param name="count">The number of isolated sets in the data strucutre</param>
+      /// <param name="count">The number of isolated sets in the data structure</param>
       public UnionFind( int count )
       {
          if ( count < 0 )
@@ -32,21 +33,24 @@ namespace RogueSharp.Algorithms
             _size[i] = 1;
          }
       }
+
       /// <summary>
       /// Returns the number of components in this data structure
       /// </summary>
       /// <returns>The number of components in this data structure</returns>
       public int Count { get; private set; }
+
       /// <summary>
       /// Returns the component identifier of the component containing site p
       /// </summary>
       /// <param name="p">An integer representing one object</param>
       /// <returns>The component identifier of the component containing site p</returns>
+      /// <exception cref="ArgumentOutOfRangeException"></exception>
       public int Find( int p )
       {
          if ( p < 0 || p >= _id.Length )
          {
-            throw new IndexOutOfRangeException();
+            throw new ArgumentOutOfRangeException( "p", "Index out of bounds" );
          }
          while ( p != _id[p] )
          {
@@ -54,6 +58,7 @@ namespace RogueSharp.Algorithms
          }
          return p;
       }
+
       /// <summary>
       /// Are objects p and q in the same set?
       /// </summary>
@@ -64,6 +69,7 @@ namespace RogueSharp.Algorithms
       {
          return Find( p ) == Find( q );
       }
+
       /// <summary>
       /// Merges the component containing site p with the component containing site q
       /// </summary>

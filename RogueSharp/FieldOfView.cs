@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace RogueSharp
 {
@@ -11,6 +12,7 @@ namespace RogueSharp
    {
       private readonly IMap _map;
       private readonly HashSet<int> _inFov;
+
       /// <summary>
       /// Constructs a new FieldOfView class for the specified Map
       /// </summary>
@@ -20,11 +22,13 @@ namespace RogueSharp
          _map = map;
          _inFov = new HashSet<int>();
       }
+
       internal FieldOfView( IMap map, HashSet<int> inFov )
       {
          _map = map;
          _inFov = inFov;
       }
+
       /// <summary>
       /// Create and return a deep copy of an existing FieldOfView class
       /// </summary>
@@ -38,6 +42,7 @@ namespace RogueSharp
          }
          return new FieldOfView( _map, inFovCopy );
       }
+
       /// <summary>
       /// Check if the Cell is in the currently computed field-of-view
       /// Field-of-view must first be calculated by calling ComputeFov and/or AppendFov
@@ -56,6 +61,7 @@ namespace RogueSharp
       {
          return _inFov.Contains( _map.IndexFor( x, y ) );
       }
+
       /// <summary>
       /// Performs a field-of-view calculation with the specified parameters.
       /// Field-of-view (FOV) is basically a calculation of what is observable in the Map from a given Cell with a given light radius.
@@ -66,11 +72,12 @@ namespace RogueSharp
       /// <param name="radius">The number of Cells in which the field-of-view extends from the origin Cell. Think of this as the intensity of the light source.</param>
       /// <param name="lightWalls">True if walls should be included in the field-of-view when they are within the radius of the light source. False excludes walls even when they are within range.</param>
       /// <returns>List of Cells representing the what is observable in the Map based on the specified parameters</returns>
-      public List<Cell> ComputeFov( int xOrigin, int yOrigin, int radius, bool lightWalls )
+      public ReadOnlyCollection<ICell> ComputeFov( int xOrigin, int yOrigin, int radius, bool lightWalls )
       {
          ClearFov();
          return AppendFov( xOrigin, yOrigin, radius, lightWalls );
       }
+
       /// <summary>
       /// Performs a field-of-view calculation with the specified parameters and appends it any existing field-of-view calculations.
       /// Field-of-view (FOV) is basically a calculation of what is observable in the Map from a given Cell with a given light radius.
@@ -84,11 +91,11 @@ namespace RogueSharp
       /// <param name="radius">The number of Cells in which the field-of-view extends from the origin Cell. Think of this as the intensity of the light source.</param>
       /// <param name="lightWalls">True if walls should be included in the field-of-view when they are within the radius of the light source. False excludes walls even when they are within range.</param>
       /// <returns>List of Cells representing the what is observable in the Map based on the specified parameters</returns>
-      public List<Cell> AppendFov( int xOrigin, int yOrigin, int radius, bool lightWalls )
+      public ReadOnlyCollection<ICell> AppendFov( int xOrigin, int yOrigin, int radius, bool lightWalls )
       {
-         foreach ( Cell borderCell in _map.GetBorderCellsInArea( xOrigin, yOrigin, radius ) )
+         foreach ( ICell borderCell in _map.GetBorderCellsInArea( xOrigin, yOrigin, radius ) )
          {
-            foreach ( Cell cell in _map.GetCellsAlongLine( xOrigin, yOrigin, borderCell.X, borderCell.Y ) )
+            foreach ( ICell cell in _map.GetCellsAlongLine( xOrigin, yOrigin, borderCell.X, borderCell.Y ) )
             {
                if ( ( Math.Abs( cell.X - xOrigin ) + Math.Abs( cell.Y - yOrigin ) ) > radius )
                {
@@ -113,7 +120,7 @@ namespace RogueSharp
          {
             // Post processing step created based on the algorithm at this website:
             // https://sites.google.com/site/jicenospam/visibilitydetermination
-            foreach ( Cell cell in _map.GetCellsInArea( xOrigin, yOrigin, radius ) )
+            foreach ( ICell cell in _map.GetCellsInArea( xOrigin, yOrigin, radius ) )
             {
                if ( cell.X > xOrigin )
                {
@@ -142,19 +149,22 @@ namespace RogueSharp
 
          return CellsInFov();
       }
-      private List<Cell> CellsInFov()
+
+      private ReadOnlyCollection<ICell> CellsInFov()
       {
-         var cells = new List<Cell>();
+         var cells = new List<ICell>();
          foreach ( int index in _inFov )
          {
             cells.Add( _map.CellFor( index ) );
          }
-         return cells;
+         return new ReadOnlyCollection<ICell>( cells );
       }
+
       private void ClearFov()
       {
          _inFov.Clear();
       }
+
       private void PostProcessFovQuadrant( int x, int y, Quadrant quadrant )
       {
          int x1 = x;
@@ -197,6 +207,7 @@ namespace RogueSharp
             }
          }
       }
+
       private enum Quadrant
       {
          NE = 1,

@@ -1,5 +1,5 @@
-﻿using System.Reflection;
-using System.Runtime.InteropServices;
+﻿using System;
+using System.Reflection;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration( "" )]
 [assembly: AssemblyCompany( "Dreamers Design" )]
 [assembly: AssemblyProduct( "RogueSharp" )]
-[assembly: AssemblyCopyright( "Copyright © Faron Bracy 2014" )]
+[assembly: AssemblyCopyright( "Copyright © Faron Bracy 2014-2016" )]
 [assembly: AssemblyTrademark( "" )]
 [assembly: AssemblyCulture( "" )]
 
@@ -25,5 +25,8 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 
-[assembly: AssemblyVersion( "2.0.0.0" )]
-[assembly: AssemblyFileVersion( "2.0.0.0" )]
+[assembly: AssemblyVersion( "3.0.0" )]
+[assembly: AssemblyFileVersion( "3.0.0" )]
+[assembly: AssemblyInformationalVersion( "3.0.0" )]
+
+[assembly: CLSCompliant(false)]

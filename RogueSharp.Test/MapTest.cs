@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using RogueSharp.MapCreation;
 using RogueSharp.Random;
 
 namespace RogueSharp.Test
@@ -30,7 +31,7 @@ namespace RogueSharp.Test
 
          map.Clear( true, false );
 
-         foreach ( Cell cell in map.GetAllCells() )
+         foreach ( ICell cell in map.GetAllCells() )
          {
             Assert.IsTrue( map.IsTransparent( cell.X, cell.Y ) );
             Assert.IsFalse( map.IsWalkable( cell.X, cell.Y ) );
@@ -231,7 +232,7 @@ namespace RogueSharp.Test
          string expectedPath = "#.s#";
 
          StringBuilder actualPath = new StringBuilder();
-         foreach ( Cell cell in map.GetCellsAlongLine( 3, 0, 0, 3 ) )
+         foreach ( ICell cell in map.GetCellsAlongLine( 3, 0, 0, 3 ) )
          {
             actualPath.Append( cell.ToString() );
          }
@@ -251,7 +252,7 @@ namespace RogueSharp.Test
          string expectedPath = "#o.#";
 
          StringBuilder actualPath = new StringBuilder();
-         foreach ( Cell cell in map.GetCellsAlongLine( 3, 3, 0, 0 ) )
+         foreach ( ICell cell in map.GetCellsAlongLine( 3, 3, 0, 0 ) )
          {
             actualPath.Append( cell.ToString() );
          }
@@ -271,7 +272,7 @@ namespace RogueSharp.Test
          string expectedPath = "#so#";
 
          StringBuilder actualPath = new StringBuilder();
-         foreach ( Cell cell in map.GetCellsAlongLine( 0, 2, 3, 2 ) )
+         foreach ( ICell cell in map.GetCellsAlongLine( 0, 2, 3, 2 ) )
          {
             actualPath.Append( cell.ToString() );
          }
@@ -291,7 +292,7 @@ namespace RogueSharp.Test
          string expectedPath = "#os#";
 
          StringBuilder actualPath = new StringBuilder();
-         foreach ( Cell cell in map.GetCellsAlongLine( 3, 2, 0, 2 ) )
+         foreach ( ICell cell in map.GetCellsAlongLine( 3, 2, 0, 2 ) )
          {
             actualPath.Append( cell.ToString() );
          }
@@ -316,11 +317,11 @@ namespace RogueSharp.Test
          IMap map = Map.Create( mapCreationStrategy );
          string expectedCells = "#..##......#.";
 
-         IEnumerable<Cell> cells = map.GetCellsInRadius( 3, 3, 2 )
+         IEnumerable<ICell> cells = map.GetCellsInRadius( 3, 3, 2 )
             .OrderBy( c => c.X )
             .ThenBy( c => c.Y );
          var actualCells = new StringBuilder();
-         foreach( Cell cell in cells )
+         foreach( ICell cell in cells )
          {
             actualCells.Append( cell.ToString() );
          }
@@ -345,11 +346,11 @@ namespace RogueSharp.Test
          IMap map = Map.Create( mapCreationStrategy );
          string expectedCells = "#.##..#.";
 
-         IEnumerable<Cell> cells = map.GetBorderCellsInRadius( 3, 3, 2 )
+         IEnumerable<ICell> cells = map.GetBorderCellsInRadius( 3, 3, 2 )
             .OrderBy( c => c.X )
             .ThenBy( c => c.Y );
          var actualCells = new StringBuilder();
-         foreach ( Cell cell in cells )
+         foreach ( ICell cell in cells )
          {
             actualCells.Append( cell.ToString() );
          }
