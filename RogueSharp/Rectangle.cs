@@ -12,26 +12,24 @@ namespace RogueSharp
       /// <summary>
       /// Specifies the Height of the Rectangle
       /// </summary>
-      public int Height;
+      public int Height { get; set; }
 
       /// <summary>
       /// Specifies the Width of the Rectangle
       /// </summary>
-      public int Width;
+      public int Width { get; set; }
 
       /// <summary>
       /// Specifies the x-coordinate of the Rectangle with 0 being to the left
       /// and increasing as the Rectangle is moved to the right
       /// </summary>
-      public int X;
+      public int X { get; set; }
 
       /// <summary>
       /// Specifies the y-coordinate of the Rectangle with 0 being at the top 
       /// and increasing as the Rectangle is moved downwards
       /// </summary>
-      public int Y;
-
-
+      public int Y { get; set; }
 
 
       #region Constructors
@@ -44,7 +42,7 @@ namespace RogueSharp
       /// <param name="y">The y coordinate of the top-left corner of the created <see cref="Rectangle"/>.</param>
       /// <param name="width">The width of the created <see cref="Rectangle"/>.</param>
       /// <param name="height">The height of the created <see cref="Rectangle"/>.</param>
-      public Rectangle(int x, int y, int width, int height)
+      public Rectangle( int x, int y, int width, int height )
       {
          this.X = x;
          this.Y = y;
@@ -58,7 +56,7 @@ namespace RogueSharp
       /// </summary>
       /// <param name="location">The x and y coordinates of the top-left corner of the created <see cref="Rectangle"/>.</param>
       /// <param name="size">The width and height of the created <see cref="Rectangle"/>.</param>
-      public Rectangle(Point location, Point size)
+      public Rectangle( Point location, Point size )
       {
          this.X = location.X;
          this.Y = location.Y;
@@ -167,7 +165,6 @@ namespace RogueSharp
       /// </summary>
       /// <param name="other">The Rectangle to compare this instance to</param>
       /// <returns>True if the instances are equal; False otherwise</returns>
-      /// <exception cref="NullReferenceException">Thrown if .Equals is invoked on null Rectangle</exception>
       public bool Equals( Rectangle other )
       {
          return this == other;
@@ -231,7 +228,6 @@ namespace RogueSharp
       /// Changes the position of the Rectangles by the values of the specified Point
       /// </summary>
       /// <param name="offsetPoint">The values to adjust the position of the Rectangle by</param>
-      /// <exception cref="ArgumentNullException">Thrown if offset is null</exception>
       public void Offset( Point offsetPoint )
       {
          X += offsetPoint.X;
@@ -260,7 +256,7 @@ namespace RogueSharp
          X -= horizontalValue;
          Y -= verticalValue;
          Width += horizontalValue * 2;
-         Height += verticalValue * 2;            
+         Height += verticalValue * 2;
       }
 
       /// <summary>
@@ -268,9 +264,9 @@ namespace RogueSharp
       /// </summary>
       /// <param name="obj">The <see cref="Object"/> to compare.</param>
       /// <returns><c>true</c> if the instances are equal; <c>false</c> otherwise.</returns>
-      public override bool Equals(object obj)
+      public override bool Equals( object obj )
       {
-         return (obj is Rectangle) && this == ((Rectangle)obj);
+         return ( obj is Rectangle ) && this == ( (Rectangle) obj );
       }
 
       /// <summary>
@@ -312,7 +308,7 @@ namespace RogueSharp
       /// <param name="result">True if the specified Rectangle intersects with this one; False otherwise</param>
       public void Intersects( ref Rectangle value, out bool result )
       {
-         result = value.Left < Right && 
+         result = value.Left < Right &&
                   Left < value.Right &&
                   value.Top < Bottom &&
                   Top < value.Bottom;
@@ -339,17 +335,17 @@ namespace RogueSharp
       /// <param name="result">The area where the two specified Rectangles overlap. If the two Rectangles do not overlap the resulting Rectangle will be Empty</param>
       public static void Intersect( ref Rectangle value1, ref Rectangle value2, out Rectangle result )
       {
-         if (value1.Intersects(value2))
+         if ( value1.Intersects( value2 ) )
          {
-            int right_side = Math.Min(value1.X + value1.Width, value2.X + value2.Width);
-            int left_side = Math.Max(value1.X, value2.X);
-            int top_side = Math.Max(value1.Y, value2.Y);
-            int bottom_side = Math.Min(value1.Y + value1.Height, value2.Y + value2.Height);
-            result = new Rectangle(left_side, top_side, right_side - left_side, bottom_side - top_side);
+            int rightSide = Math.Min( value1.X + value1.Width, value2.X + value2.Width );
+            int leftSide = Math.Max( value1.X, value2.X );
+            int topSide = Math.Max( value1.Y, value2.Y );
+            int bottomSide = Math.Min( value1.Y + value1.Height, value2.Y + value2.Height );
+            result = new Rectangle( leftSide, topSide, rightSide - leftSide, bottomSide - topSide );
          }
          else
          {
-            result = new Rectangle(0, 0, 0, 0);
+            result = new Rectangle( 0, 0, 0, 0 );
          }
       }
 
@@ -359,10 +355,8 @@ namespace RogueSharp
       /// <param name="value1">The first Rectangle to contain</param>
       /// <param name="value2">The second Rectangle to contain</param>
       /// <returns>A new Rectangle that exactly contains the specified two Rectangles</returns>
-      /// <exception cref="NullReferenceException">Thrown if either rectangle is null</exception>
       public static Rectangle Union( Rectangle value1, Rectangle value2 )
       {
-
          int x = Math.Min( value1.X, value2.X );
          int y = Math.Min( value1.Y, value2.Y );
          return new Rectangle( x, y, Math.Max( value1.Right, value2.Right ) - x, Math.Max( value1.Bottom, value2.Bottom ) - y );
@@ -376,10 +370,7 @@ namespace RogueSharp
       /// <param name="result">The union of the two rectangles as an output parameter.</param>
       public static void Union( ref Rectangle value1, ref Rectangle value2, out Rectangle result )
       {
-         result.X = Math.Min( value1.X, value2.X );
-         result.Y = Math.Min( value1.Y, value2.Y );
-         result.Width = Math.Max( value1.Right, value2.Right ) - result.X;
-         result.Height = Math.Max( value1.Bottom, value2.Bottom ) - result.Y;
+         result = Union( value1, value2 );
       }
    }
 }
