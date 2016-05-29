@@ -12,12 +12,13 @@ namespace RogueSharp
       /// <summary>
       ///   The x coordinate of this <see cref="Point" />.
       /// </summary>
-      public int X;
+      public int X { get; set; }
+
 
       /// <summary>
       ///   The y coordinate of this <see cref="Point" />.
       /// </summary>
-      public int Y;
+      public int Y { get; set; }
 
       #region Constructors
 
@@ -27,6 +28,7 @@ namespace RogueSharp
       /// <param name="x">The x coordinate in 2d-space.</param>
       /// <param name="y">The y coordinate in 2d-space.</param>
       public Point( int x, int y )
+         : this()
       {
          X = x;
          Y = y;
@@ -37,6 +39,7 @@ namespace RogueSharp
       /// </summary>
       /// <param name="value">The x and y coordinates in 2d-space.</param>
       public Point( int value )
+         : this()
       {
          X = value;
          Y = value;
@@ -168,7 +171,6 @@ namespace RogueSharp
          return new Point( source.X / divisor.X, source.Y / divisor.Y );
       }
 
-
       /// <summary>
       ///   Compares whether current instance is equal to specified <see cref="Object" />.
       /// </summary>
@@ -221,19 +223,6 @@ namespace RogueSharp
       }
 
       /// <summary>
-      ///   Calculates the distance between two points.
-      /// </summary>
-      /// <param name="value1">Source vector.</param>
-      /// <param name="value2">Source vector.</param>
-      /// <param name="result">The distance between two points as an output parameter.</param>
-      public static void Distance( Point value1, Point value2, out float result )
-      {
-         float v1 = value1.X - value2.X, v2 = value1.Y - value2.Y;
-         result = (float) Math.Sqrt( v1 * v1 + v2 * v2 );
-      }
-
-
-      /// <summary>
       ///   Creates a new <see cref="Point" /> that contains the specified vector inversion.
       /// </summary>
       /// <param name="value">Source <see cref="Point" />.</param>
@@ -243,17 +232,6 @@ namespace RogueSharp
          value.X = -value.X;
          value.Y = -value.Y;
          return value;
-      }
-
-      /// <summary>
-      ///   Creates a new <see cref="Point" /> that contains the specified vector inversion.
-      /// </summary>
-      /// <param name="value">Source <see cref="Point" />.</param>
-      /// <param name="result">The result of the vector inversion as an output parameter.</param>
-      public static void Negate( ref Point value, out Point result )
-      {
-         result.X = -value.X;
-         result.Y = -value.Y;
       }
 
       #endregion
