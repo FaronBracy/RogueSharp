@@ -1,0 +1,25 @@
+#---------------------------------#
+#    environment configuration    #
+#---------------------------------#
+os: Windows Server 2012 R2
+
+# Set newline options for Git
+init:
+  - git config --global core.autocrlf true
+
+# clone directory
+clone_folder: c:\projects\RogueSharp
+
+#---------------------------------#
+#       build configuration       #
+#---------------------------------#
+# build platform, i.e. x86, x64, Any CPU. This setting is optional.
+
+platform: Any CPU
+
+configuration: Release
+
+build:
+  project: RogueSharp.sln
+  publish_nuget: true
+  verbosity: minimal
