@@ -71,7 +71,7 @@ namespace RogueSharp
       /// <param name="yOrigin">Y location of the Cell to perform the field-of-view calculation with 0 as the top</param>
       /// <param name="radius">The number of Cells in which the field-of-view extends from the origin Cell. Think of this as the intensity of the light source.</param>
       /// <param name="lightWalls">True if walls should be included in the field-of-view when they are within the radius of the light source. False excludes walls even when they are within range.</param>
-      /// <returns>List of Cells representing the what is observable in the Map based on the specified parameters</returns>
+      /// <returns>List of Cells representing what is observable in the Map based on the specified parameters</returns>
       public ReadOnlyCollection<ICell> ComputeFov( int xOrigin, int yOrigin, int radius, bool lightWalls )
       {
          ClearFov();
@@ -90,7 +90,7 @@ namespace RogueSharp
       /// <param name="yOrigin">Y location of the Cell to perform the field-of-view calculation with 0 as the top</param>
       /// <param name="radius">The number of Cells in which the field-of-view extends from the origin Cell. Think of this as the intensity of the light source.</param>
       /// <param name="lightWalls">True if walls should be included in the field-of-view when they are within the radius of the light source. False excludes walls even when they are within range.</param>
-      /// <returns>List of Cells representing the what is observable in the Map based on the specified parameters</returns>
+      /// <returns>List of Cells representing what is observable in the Map based on the specified parameters</returns>
       public ReadOnlyCollection<ICell> AppendFov( int xOrigin, int yOrigin, int radius, bool lightWalls )
       {
          foreach ( ICell borderCell in _map.GetBorderCellsInArea( xOrigin, yOrigin, radius ) )
