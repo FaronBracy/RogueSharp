@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using RogueSharp.MapCreation;
 
@@ -255,9 +256,10 @@ namespace RogueSharp
       /// <param name="yOrigin">Y location of the Cell to perform the field-of-view calculation with 0 as the top</param>
       /// <param name="radius">The number of Cells in which the field-of-view extends from the origin Cell. Think of this as the intensity of the light source.</param>
       /// <param name="lightWalls">True if walls should be included in the field-of-view when they are within the radius of the light source. False excludes walls even when they are within range.</param>
-      public void ComputeFov( int xOrigin, int yOrigin, int radius, bool lightWalls )
+      /// <returns>List of Cells representing what is observable in the Map based on the specified parameters</returns>
+      public ReadOnlyCollection<ICell> ComputeFov( int xOrigin, int yOrigin, int radius, bool lightWalls )
       {
-         _fieldOfView.ComputeFov( xOrigin, yOrigin, radius, lightWalls );
+         return _fieldOfView.ComputeFov( xOrigin, yOrigin, radius, lightWalls );
       }
 
       /// <summary>
@@ -272,9 +274,10 @@ namespace RogueSharp
       /// <param name="yOrigin">Y location of the Cell to perform the field-of-view calculation with 0 as the top</param>
       /// <param name="radius">The number of Cells in which the field-of-view extends from the origin Cell. Think of this as the intensity of the light source.</param>
       /// <param name="lightWalls">True if walls should be included in the field-of-view when they are within the radius of the light source. False excludes walls even when they are within range.</param>
-      public void AppendFov( int xOrigin, int yOrigin, int radius, bool lightWalls )
+      /// <returns>List of Cells representing what is observable in the Map based on the specified parameters</returns>
+      public ReadOnlyCollection<ICell> AppendFov( int xOrigin, int yOrigin, int radius, bool lightWalls )
       {
-         _fieldOfView.AppendFov( xOrigin, yOrigin, radius, lightWalls );
+         return _fieldOfView.AppendFov( xOrigin, yOrigin, radius, lightWalls );
       }
 
       /// <summary>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace RogueSharp
 {
@@ -162,7 +163,8 @@ namespace RogueSharp
       /// <param name="yOrigin">Y location of the Cell to perform the field-of-view calculation with 0 as the top</param>
       /// <param name="radius">The number of Cells in which the field-of-view extends from the origin Cell. Think of this as the intensity of the light source.</param>
       /// <param name="lightWalls">True if walls should be included in the field-of-view when they are within the radius of the light source. False excludes walls even when they are within range.</param>
-      void ComputeFov( int xOrigin, int yOrigin, int radius, bool lightWalls );
+      /// <returns>List of Cells representing what is observable in the Map based on the specified parameters</returns>
+      ReadOnlyCollection<ICell> ComputeFov( int xOrigin, int yOrigin, int radius, bool lightWalls );
 
       /// <summary>
       /// Performs a field-of-view calculation with the specified parameters and appends it any existing field-of-view calculations.
@@ -176,7 +178,8 @@ namespace RogueSharp
       /// <param name="yOrigin">Y location of the Cell to perform the field-of-view calculation with 0 as the top</param>
       /// <param name="radius">The number of Cells in which the field-of-view extends from the origin Cell. Think of this as the intensity of the light source.</param>
       /// <param name="lightWalls">True if walls should be included in the field-of-view when they are within the radius of the light source. False excludes walls even when they are within range.</param>
-      void AppendFov( int xOrigin, int yOrigin, int radius, bool lightWalls );
+      /// <returns>List of Cells representing what is observable in the Map based on the specified parameters</returns>
+      ReadOnlyCollection<ICell> AppendFov( int xOrigin, int yOrigin, int radius, bool lightWalls );
 
       /// <summary>
       /// Get an IEnumerable of all Cells in the Map

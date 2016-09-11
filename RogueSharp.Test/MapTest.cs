@@ -375,7 +375,7 @@ namespace RogueSharp.Test
          IMapCreationStrategy<Map> mapCreationStrategy = new StringDeserializeMapCreationStrategy<Map>( mapRepresentation );
          IMap map = Map.Create( mapCreationStrategy );
 
-         map.ComputeFov( 6, 1, 20, true );
+         var visibleCells = map.ComputeFov( 6, 1, 20, true );
 
          string expectedFovMap = @"###########################%%%%%%%%%
                                    #..........................%%%%%%%%%
@@ -389,6 +389,7 @@ namespace RogueSharp.Test
                                    %%%%%%.%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                    %%%%%###%%%%%%%%%%%%%%%%%%%%%%%%%%%%";
          Assert.AreEqual( expectedFovMap.Replace( " ", string.Empty ), map.ToString( true ) );
+         Assert.AreEqual( 99, visibleCells.Count );
       }
 
       [TestMethod]
@@ -409,7 +410,7 @@ namespace RogueSharp.Test
          IMap map = Map.Create( mapCreationStrategy );
 
          map.ComputeFov( 6, 1, 20, true );
-         map.AppendFov( 15, 1, 5, true );
+         var visibleCells = map.AppendFov( 15, 1, 5, true );
 
          string expectedFovMap = @"###########################%%%%%%%%%
                                    #..........................%%%%%%%%%
@@ -423,6 +424,7 @@ namespace RogueSharp.Test
                                    %%%%%%.%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                    %%%%%###%%%%%%%%%%%%%%%%%%%%%%%%%%%%";
          Assert.AreEqual( expectedFovMap.Replace( " ", string.Empty ), map.ToString( true ) );
+         Assert.AreEqual( 117, visibleCells.Count );
       }
 
       [TestMethod]
