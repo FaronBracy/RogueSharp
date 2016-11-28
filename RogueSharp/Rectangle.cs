@@ -42,7 +42,8 @@ namespace RogueSharp
       /// <param name="y">The y coordinate of the top-left corner of the created <see cref="Rectangle"/>.</param>
       /// <param name="width">The width of the created <see cref="Rectangle"/>.</param>
       /// <param name="height">The height of the created <see cref="Rectangle"/>.</param>
-      public Rectangle( int x, int y, int width, int height )
+      public Rectangle( int x, int y, int width, int height ) 
+         : this()
       {
          this.X = x;
          this.Y = y;
@@ -56,7 +57,8 @@ namespace RogueSharp
       /// </summary>
       /// <param name="location">The x and y coordinates of the top-left corner of the created <see cref="Rectangle"/>.</param>
       /// <param name="size">The width and height of the created <see cref="Rectangle"/>.</param>
-      public Rectangle( Point location, Point size )
+      public Rectangle( Point location, Point size ) 
+         : this()
       {
          this.X = location.X;
          this.Y = location.Y;
