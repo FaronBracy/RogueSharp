@@ -83,6 +83,7 @@ namespace RogueSharp
          }
          else
          {
+            yield return source;
             foreach ( DirectedEdge edge in path )
             {
                yield return CellFor( edge.To );
