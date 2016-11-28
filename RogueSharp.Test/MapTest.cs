@@ -393,6 +393,40 @@ namespace RogueSharp.Test
       }
 
       [TestMethod]
+      public void ComputeFov_EmptyMap_ExpectedCollectionOfVisibleCells()
+      {
+         string mapRepresentation = @"####################################
+                                      #..................................#
+                                      #..................................#
+                                      #..................................#
+                                      #..................................#
+                                      #..................................#
+                                      #..................................#
+                                      #..................................#
+                                      #..................................#
+                                      #..................................#
+                                      ####################################";
+
+         IMapCreationStrategy<Map> mapCreationStrategy = new StringDeserializeMapCreationStrategy<Map>( mapRepresentation );
+         IMap map = Map.Create( mapCreationStrategy );
+
+         map.ComputeFov( 15, 5, 3, false );
+
+         string expectedFovMap = @"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                   %%%%%%%%%%%%%%%.%%%%%%%%%%%%%%%%%%%%
+                                   %%%%%%%%%%%%%%...%%%%%%%%%%%%%%%%%%%
+                                   %%%%%%%%%%%%%.....%%%%%%%%%%%%%%%%%%
+                                   %%%%%%%%%%%%.......%%%%%%%%%%%%%%%%%
+                                   %%%%%%%%%%%%%.....%%%%%%%%%%%%%%%%%%
+                                   %%%%%%%%%%%%%%...%%%%%%%%%%%%%%%%%%%
+                                   %%%%%%%%%%%%%%%.%%%%%%%%%%%%%%%%%%%%
+                                   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%";
+         Assert.AreEqual( expectedFovMap.Replace( " ", string.Empty ), map.ToString( true ) );
+      }
+
+      [TestMethod]
       public void AppendFov_X6Y1CellRadius20AndX15Y1CellRadius5_ExpectedFovMap()
       {
          string mapRepresentation = @"####################################
