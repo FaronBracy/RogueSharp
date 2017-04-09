@@ -93,10 +93,26 @@ namespace RogueSharp
       /// <exception cref="NoMoreStepsException">Thrown when attempting to move forward along a Path on which we are currently at the End</exception>
       public ICell StepForward()
       {
+         ICell cell = TryStepForward();
+
+         if ( cell == null )
+         {
+            throw new NoMoreStepsException( "Cannot take a step foward when at the end of the path" );
+         }
+
+         return cell;
+      }
+
+      /// <summary>
+      /// Move forward along this Path and advance the CurrentStep to the next Step in the Path
+      /// </summary>
+      /// <returns>A Cell representing the Step that was moved to as we advanced along the Path. If there is not another Cell in the path to advance to null is returned</returns>
+      public ICell TryStepForward()
+      {
          LinkedListNode<ICell> nextStep = _currentStep.Next;
          if ( nextStep == null )
          {
-            throw new NoMoreStepsException( "Cannot take a step foward when at the end of the path" );
+            return null;
          }
          _currentStep = nextStep;
          return nextStep.Value;
@@ -105,14 +121,30 @@ namespace RogueSharp
       /// <summary>
       /// Move backwards along this Path and rewind the CurrentStep to the previous Step in the Path
       /// </summary>
-      /// <returns>A Cell representing the Step that was moved to as we advanced along the Path</returns>
+      /// <returns>A Cell representing the Step that was moved to as we back up along the Path</returns>
       /// <exception cref="NoMoreStepsException">Thrown when attempting to move backward along a Path on which we are currently at the Start</exception>
       public ICell StepBackward()
+      {
+         ICell cell = TryStepBackward();
+
+         if ( cell == null )
+         {
+            throw new NoMoreStepsException( "Cannot take a step backward when at the start of the path" );
+         }
+
+         return cell;
+      }
+
+      /// <summary>
+      /// Move backwards along this Path and rewind the CurrentStep to the next Step in the Path
+      /// </summary>
+      /// <returns>A Cell representing the Step that was moved to as we back up along the Path. If there is not another Cell in the path to back up to null is returned</returns>
+      public ICell TryStepBackward()
       {
          LinkedListNode<ICell> previousStep = _currentStep.Previous;
          if ( previousStep == null )
          {
-            throw new NoMoreStepsException( "Cannot take a step backward when at the start of the path" );
+            return null;
          }
          _currentStep = previousStep;
          return previousStep.Value;

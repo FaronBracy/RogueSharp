@@ -9,9 +9,9 @@ namespace RogueSharp.Test
    {
       private readonly List<ICell> _pathFromX1Y1ToX1Y4 = new List<ICell>
       {
-         new Cell( 1, 1, true, true, true ), 
-         new Cell( 1, 2, true, true, true ), 
-         new Cell( 1, 3, true, true, true ), 
+         new Cell( 1, 1, true, true, true ),
+         new Cell( 1, 2, true, true, true ),
+         new Cell( 1, 3, true, true, true ),
          new Cell( 1, 4, true, true, true )
       };
 
@@ -89,11 +89,48 @@ namespace RogueSharp.Test
 
       [TestMethod]
       [ExpectedException( typeof( NoMoreStepsException ) )]
+      public void StepForward_FourTimesOnNewPathFromX1Y1ToX1Y4_NoMoreStepsException()
+      {
+         var path = new Path( _pathFromX1Y1ToX1Y4 );
+
+         path.StepForward();
+         path.StepForward();
+         path.StepForward();
+         path.StepForward();
+      }
+
+      [TestMethod]
+      public void TryStepForward_FourTimesOnNewPathFromX1Y1ToX1Y4_Null()
+      {
+         var path = new Path( _pathFromX1Y1ToX1Y4 );
+
+         path.TryStepForward();
+         path.TryStepForward();
+         path.TryStepForward();
+         ICell nextStep = path.TryStepForward();
+
+         Assert.IsNull( nextStep );
+         Assert.AreEqual( new Cell( 1, 4, true, true, true ), path.CurrentStep );
+      }
+
+      [TestMethod]
+      [ExpectedException( typeof( NoMoreStepsException ) )]
       public void StepBackward_NewPathFromX1Y1ToX1Y4_NoMoreStepsException()
       {
          var path = new Path( _pathFromX1Y1ToX1Y4 );
 
          ICell previousStep = path.StepBackward();
+      }
+
+      [TestMethod]
+      public void TryStepBackward_NewPathFromX1Y1ToX1Y4_Null()
+      {
+         var path = new Path( _pathFromX1Y1ToX1Y4 );
+
+         ICell previousStep = path.TryStepBackward();
+
+         Assert.IsNull( previousStep );
+         Assert.AreEqual( new Cell( 1, 1, true, true, true ), path.CurrentStep );
       }
 
       [TestMethod]
@@ -110,6 +147,17 @@ namespace RogueSharp.Test
          {
             Assert.AreEqual( currentStep, path.CurrentStep );
          }
+      }
+
+      [TestMethod]
+      public void StepBackward_AfterStepForwardOnNewPathFromX1Y1ToX1Y4_CellX1Y1()
+      {
+         var path = new Path( _pathFromX1Y1ToX1Y4 );
+         path.StepForward();
+
+         ICell previousStep = path.StepBackward();
+
+         Assert.AreEqual( new Cell( 1, 1, true, true, true ), previousStep );
       }
 
       [TestMethod]
