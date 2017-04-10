@@ -46,14 +46,33 @@ namespace RogueSharp
       }
 
       /// <summary>
-      /// Returns an ordered IEnumerable of Cells representing the shortest path from a specified source Cell to a destination Cell
+      /// Returns a shortest Path containing a list of Cells from a specified source Cell to a destination Cell
       /// </summary>
       /// <param name="source">The Cell which is at the start of the path</param>
       /// <param name="destination">The Cell which is at the end of the path</param>
       /// <exception cref="ArgumentNullException">Thrown when source or destination is null</exception>
       /// <exception cref="PathNotFoundException">Thrown when there is not a path from the source to the destination</exception>
-      /// <returns>Returns an ordered IEnumerable of Cells representing the shortest path from a specified source Cell to a destination Cell</returns>
+      /// <returns>Returns a shortest Path containing a list of Cells from a specified source Cell to a destination Cell</returns>
       public Path ShortestPath( ICell source, ICell destination )
+      {
+         Path shortestPath = TryFindShortestPath( source, destination );
+
+         if ( shortestPath == null )
+         {
+            throw new PathNotFoundException( string.Format( "Path from ({0}, {1}) to ({2}, {3}) not found", source.X, source.Y, destination.X, destination.Y ) );
+         }
+
+         return shortestPath;
+      }
+
+      /// <summary>
+      /// Returns a shortest Path containing a list of Cells from a specified source Cell to a destination Cell
+      /// </summary>
+      /// <param name="source">The Cell which is at the start of the path</param>
+      /// <param name="destination">The Cell which is at the end of the path</param>
+      /// <exception cref="ArgumentNullException">Thrown when source or destination is null</exception>
+      /// <returns>Returns a shortest Path containing a list of Cells from a specified source Cell to a destination Cell. If no path is found null will be returned</returns>
+      public Path TryFindShortestPath( ICell source, ICell destination )
       {
          if ( source == null )
          {
@@ -68,7 +87,7 @@ namespace RogueSharp
          var cells = ShortestPathCells( source, destination ).ToList();
          if ( cells[0] == null )
          {
-            throw new PathNotFoundException( string.Format( "Path from ({0}, {1}) to ({2}, {3}) not found", source.X, source.Y, destination.X, destination.Y ) );
+            return null;
          }
          return new Path( cells );
       }
