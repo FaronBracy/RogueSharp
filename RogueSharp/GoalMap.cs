@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -134,6 +133,7 @@ namespace RogueSharp
       /// In order to make the enemy AI try to flee from the player and his allies, Goals could be set on each object that the
       /// AI should stay away from. Then calling this method will find a path away from those Goals
       /// </exmaple>
+      /// <exception cref="PathNotFoundException">Thrown when there are no possible paths</exception>
       /// <param name="x">X location of the beginning of the path, starting with 0 as the farthest left</param>
       /// <param name="y">Y location of the beginning of the path, starting with 0 as the top</param>
       /// <returns>A Path representing ordered List of Points from the specified location away from Goals and avoiding Obstacles</returns>
@@ -141,6 +141,25 @@ namespace RogueSharp
       {
          MultiplyAndRecomputeCellWeights( -1.2f );
          return FindPath( x, y );
+      }
+
+      /// <summary>
+      /// Returns a Path representing an ordered list of Points from the specified location away from Goals specified in this GoalMap instance
+      /// Distance to the goals and the weight of the goals are both used in determining the priority of avoiding the Goals
+      /// The path must not pass through any Obstacles specified in this GoalMap instance
+      /// Returns null if a Path is not found
+      /// </summary>
+      /// <exmaple>
+      /// In order to make the enemy AI try to flee from the player and his allies, Goals could be set on each object that the
+      /// AI should stay away from. Then calling this method will find a path away from those Goals
+      /// </exmaple>
+      /// <param name="x">X location of the beginning of the path, starting with 0 as the farthest left</param>
+      /// <param name="y">Y location of the beginning of the path, starting with 0 as the top</param>
+      /// <returns>A Path representing ordered List of Points from the specified location away from Goals and avoiding Obstacles. Returns null if a Path is not found</returns>
+      public Path TryFindPathAvoidingGoals( int x, int y )
+      {
+         MultiplyAndRecomputeCellWeights( -1.2f );
+         return TryFindPath( x, y );
       }
 
       private void MultiplyAndRecomputeCellWeights( float amount )
@@ -210,6 +229,28 @@ namespace RogueSharp
       }
 
       /// <summary>
+      /// Returns a shortest Path representing an ordered List of Points from the specified location to the Goal determined to have the highest priority
+      /// Distance to the goals and the weight of the goals are both used in determining the priority
+      /// The path must not pass through any obstacles specified in this GoalMap instance
+      /// null will be returned if a path cannot be found
+      /// </summary>
+      /// <param name="x">X location of the beginning of the path, starting with 0 as the farthest left</param>
+      /// <param name="y">Y location of the beginning of the path, starting with 0 as the top</param>
+      /// <returns>An ordered List of Points representing a shortest path from the specified location to the Goal determined to have the highest priority. null is returned if a path cannot be found</returns>
+      public Path TryFindPath( int x, int y )
+      {
+         ComputeCellWeightsIfNeeded();
+         ReadOnlyCollection<Path> paths = TryFindPaths( x, y );
+
+         if ( paths == null )
+         {
+            return null;
+         }
+
+         return paths.First();
+      }
+
+      /// <summary>
       /// Returns a ReadOnlyCollection of Paths representing all of the shortest paths from the specified location to the Goal or Goals determined to have the highest priority
       /// This method is useful when there are multiple paths that would all work and we want to have some additional logic to pick one of the best paths
       /// The FindPath( int x, int y ) method in the GoalMap class uses this method and then chooses the first path.
@@ -242,6 +283,43 @@ namespace RogueSharp
          if ( paths.Count <= 1 && paths[0].Length <= 1 )
          {
             throw new PathNotFoundException( string.Format( "A path from Source ({0}, {1}) to any goal was not found", x, y ) );
+         }
+
+         return paths;
+      }
+
+      /// <summary>
+      /// Returns a ReadOnlyCollection of Paths representing all of the shortest paths from the specified location to the Goal or Goals determined to have the highest priority
+      /// This method is useful when there are multiple paths that would all work and we want to have some additional logic to pick one of the best paths
+      /// The FindPath( int x, int y ) method in the GoalMap class uses this method and then chooses the first path.
+      /// </summary>
+      /// <param name="x">X location of the beginning of the path, starting with 0 as the farthest left</param>
+      /// <param name="y">Y location of the beginning of the path, starting with 0 as the top</param>
+      /// <returns>A ReadOnlyCollection of Paths representing all of the shortest paths from the specified location to the Goal or Goals determined to have the highest priority. Returns null if no path is found.</returns>
+      public ReadOnlyCollection<Path> TryFindPaths( int x, int y )
+      {
+         if ( _goals.Count < 1 )
+         {
+            return null;
+         }
+
+         if ( !_map.IsWalkable( x, y ) )
+         {
+            return null;
+         }
+
+         if ( !_goals.Any( g => _map.IsWalkable( g.X, g.Y ) ) )
+         {
+            return null;
+         }
+
+         ComputeCellWeightsIfNeeded();
+         var pathFinder = new GoalMapPathFinder( this );
+         var paths = pathFinder.FindPaths( x, y );
+
+         if ( paths.Count <= 1 && paths[0].Length <= 1 )
+         {
+            return null;
          }
 
          return paths;
@@ -409,19 +487,19 @@ namespace RogueSharp
 
       private struct WeightedPoint : IEquatable<WeightedPoint>
       {
-         public Point Point;
+         private Point _point;
          public int Weight { get; set; }
 
          public int X
          {
-            get { return Point.X; }
-            set { Point.X = value; }
+            get { return _point.X; }
+            set { _point.X = value; }
          }
 
          public int Y
          {
-            get { return Point.Y; }
-            set { Point.Y = value; }
+            get { return _point.Y; }
+            set { _point.Y = value; }
          }
 
          public bool Equals( WeightedPoint other )
