@@ -19,14 +19,26 @@ namespace RogueSharp
       private readonly List<WeightedPoint> _goals;
       private readonly HashSet<Point> _obstacles;
       private readonly IMap _map;
+      private readonly bool _allowDiagonalMovement;
       private bool _isRecomputeNeeded;
 
       /// <summary>
-      /// Constructs a new instance of a GoalMap for the specified Map
+      /// Constructs a new instance of a GoalMap for the specified Map that will not consider diagonal movements to be valid.
       /// </summary>
       /// <param name="map">The Map that this GoalMap will be created for</param>
       /// <exception cref="ArgumentNullException">Thrown on null map</exception>
       public GoalMap( IMap map )
+         : this( map, false )
+      {
+      }
+
+      /// <summary>
+      /// Constructs a new instance of a GoalMap for the specified Map that will consider diagonal movments to be valid if allowDiagonalMovement is set to true.
+      /// </summary>
+      /// <param name="map">The Map that this GoalMap will be created for</param>
+      /// <param name="allowDiagonalMovement">True if diagonal movements are allowed. False otherwise</param>
+      /// <exception cref="ArgumentNullException">Thrown on null map</exception>
+      public GoalMap( IMap map, bool allowDiagonalMovement )
       {
          if ( map == null )
          {
@@ -37,6 +49,7 @@ namespace RogueSharp
          _cellWeights = new int[map.Width, map.Height];
          _goals = new List<WeightedPoint>();
          _obstacles = new HashSet<Point>();
+         _allowDiagonalMovement = allowDiagonalMovement;
          _isRecomputeNeeded = true;
       }
 
@@ -48,7 +61,8 @@ namespace RogueSharp
       /// <param name="weight">The priority of this goal with respect to other goals with lower numbers being a higher priority</param>
       public void AddGoal( int x, int y, int weight )
       {
-         _goals.Add( new WeightedPoint {
+         _goals.Add( new WeightedPoint
+         {
             X = x,
             Y = y,
             Weight = weight
@@ -274,7 +288,7 @@ namespace RogueSharp
          if ( !_goals.Any( g => _map.IsWalkable( g.X, g.Y ) ) )
          {
             throw new PathNotFoundException( "A goal must be walkable to find a path" );
-         }  
+         }
 
          ComputeCellWeightsIfNeeded();
          var pathFinder = new GoalMapPathFinder( this );
@@ -390,19 +404,11 @@ namespace RogueSharp
       private List<WeightedPoint> GetNeighbors( int x, int y )
       {
          var neighbors = new List<WeightedPoint>();
-         if ( y + 1 < _map.Height && _cellWeights[x, y + 1] != Wall )
-         {
-            // Direction = Direction.Down
-            neighbors.Add( new WeightedPoint {
-               X = x,
-               Y = y + 1,
-               Weight = _cellWeights[x, y + 1]
-            } );
-         }
          if ( y > 0 && _cellWeights[x, y - 1] != Wall )
          {
-            // Direction = Direction.Up
-            neighbors.Add( new WeightedPoint {
+            // NORTH
+            neighbors.Add( new WeightedPoint
+            {
                X = x,
                Y = y - 1,
                Weight = _cellWeights[x, y - 1]
@@ -410,22 +416,79 @@ namespace RogueSharp
          }
          if ( x + 1 < _map.Width && _cellWeights[x + 1, y] != Wall )
          {
-            // Direction = Direction.Right
-            neighbors.Add( new WeightedPoint {
+            // EAST
+            neighbors.Add( new WeightedPoint
+            {
                X = x + 1,
                Y = y,
                Weight = _cellWeights[x + 1, y]
             } );
          }
+         if ( y + 1 < _map.Height && _cellWeights[x, y + 1] != Wall )
+         {
+            // SOUTH
+            neighbors.Add( new WeightedPoint
+            {
+               X = x,
+               Y = y + 1,
+               Weight = _cellWeights[x, y + 1]
+            } );
+         }
          if ( x > 0 && _cellWeights[x - 1, y] != Wall )
          {
-            // Direction = Direction.Up
-            neighbors.Add( new WeightedPoint {
+            // WEST
+            neighbors.Add( new WeightedPoint
+            {
                X = x - 1,
                Y = y,
                Weight = _cellWeights[x - 1, y]
             } );
          }
+
+         if ( _allowDiagonalMovement )
+         {
+            if ( y > 0 && x + 1 < _map.Width && _cellWeights[x + 1, y - 1] != Wall )
+            {
+               // NORTH_EAST
+               neighbors.Add( new WeightedPoint
+               {
+                  X = x + 1,
+                  Y = y - 1,
+                  Weight = _cellWeights[x + 1, y - 1]
+               } );
+            }
+            if ( x > 0 && y > 0 && _cellWeights[x - 1, y - 1] != Wall )
+            {
+               // NORTH_WEST
+               neighbors.Add( new WeightedPoint
+               {
+                  X = x - 1,
+                  Y = y - 1,
+                  Weight = _cellWeights[x - 1, y - 1]
+               } );
+            }
+            if ( y + 1 < _map.Height && x + 1 < _map.Width && _cellWeights[x + 1, y + 1] != Wall )
+            {
+               // SOUTH_EAST
+               neighbors.Add( new WeightedPoint
+               {
+                  X = x + 1,
+                  Y = y + 1,
+                  Weight = _cellWeights[x + 1, y + 1]
+               } );
+            }
+            if ( y + 1 < _map.Height && x > 0 && _cellWeights[x - 1, y + 1] != Wall )
+            {
+               // SOUTH_WEST
+               neighbors.Add( new WeightedPoint
+               {
+                  X = x - 1,
+                  Y = y + 1,
+                  Weight = _cellWeights[x - 1, y + 1]
+               } );
+            }
+         }
+
          return neighbors;
       }
 
@@ -488,18 +551,33 @@ namespace RogueSharp
       private struct WeightedPoint : IEquatable<WeightedPoint>
       {
          private Point _point;
-         public int Weight { get; set; }
+         public int Weight
+         {
+            get; set;
+         }
 
          public int X
          {
-            get { return _point.X; }
-            set { _point.X = value; }
+            get
+            {
+               return _point.X;
+            }
+            set
+            {
+               _point.X = value;
+            }
          }
 
          public int Y
          {
-            get { return _point.Y; }
-            set { _point.Y = value; }
+            get
+            {
+               return _point.Y;
+            }
+            set
+            {
+               _point.Y = value;
+            }
          }
 
          public bool Equals( WeightedPoint other )
