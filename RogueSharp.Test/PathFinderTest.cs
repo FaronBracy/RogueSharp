@@ -16,6 +16,13 @@ namespace RogueSharp.Test
 
       [TestMethod]
       [ExpectedException( typeof( ArgumentNullException ) )]
+      public void Constructor_NullMapWithDiagonalCostSet_ThrowsArgumentNullException()
+      {
+         var pathFinder = new PathFinder( null, 1.41 );
+      }
+
+      [TestMethod]
+      [ExpectedException( typeof( ArgumentNullException ) )]
       public void ShortestPath_SourceIsNull_ThrowsArgumentNullException()
       {
          string mapRepresentation = @"########
@@ -73,6 +80,30 @@ namespace RogueSharp.Test
          Assert.AreEqual( source, shortestPath.Start );
          Assert.AreEqual( destination, shortestPath.End );
          Assert.AreEqual( map.GetCell( 2, 4 ), shortestPath.StepForward() );
+      }
+
+      [TestMethod]
+      public void ShortestPath_DestinationReachableFromSourceAndDiagonalMovementIsAllowed_ExpectedPath()
+      {
+         string mapRepresentation = @"########
+                                      #....#.#
+                                      #.#..#.#
+                                      #.#..#.#
+                                      #......#
+                                      ########";
+         IMapCreationStrategy<Map> mapCreationStrategy = new StringDeserializeMapCreationStrategy<Map>( mapRepresentation );
+         IMap map = Map.Create( mapCreationStrategy );
+         PathFinder pathFinder = new PathFinder( map, 1.41 );
+         ICell source = map.GetCell( 1, 1 );
+         ICell destination = map.GetCell( 6, 4 );
+
+         Path shortestPath = pathFinder.ShortestPath( source, destination );
+
+         Assert.AreEqual( 6, shortestPath.Length );
+         Assert.AreEqual( source, shortestPath.Start );
+         Assert.AreEqual( destination, shortestPath.End );
+         Assert.AreEqual( map.GetCell( 2, 1 ), shortestPath.StepForward() );
+         Assert.AreEqual( map.GetCell( 3, 2 ), shortestPath.StepForward() );
       }
 
       [TestMethod]
@@ -153,6 +184,30 @@ namespace RogueSharp.Test
          Assert.AreEqual( source, shortestPath.Start );
          Assert.AreEqual( destination, shortestPath.End );
          Assert.AreEqual( map.GetCell( 2, 4 ), shortestPath.StepForward() );
+      }
+
+      [TestMethod]
+      public void TryFindShortestPath_DestinationReachableFromSourceAndDiagonalMovementIsAllowed_ExpectedPath()
+      {
+         string mapRepresentation = @"########
+                                      #....#.#
+                                      #.#..#.#
+                                      #.#..#.#
+                                      #......#
+                                      ########";
+         IMapCreationStrategy<Map> mapCreationStrategy = new StringDeserializeMapCreationStrategy<Map>( mapRepresentation );
+         IMap map = Map.Create( mapCreationStrategy );
+         PathFinder pathFinder = new PathFinder( map, 1.41 );
+         ICell source = map.GetCell( 1, 1 );
+         ICell destination = map.GetCell( 6, 4 );
+
+         Path shortestPath = pathFinder.TryFindShortestPath( source, destination );
+
+         Assert.AreEqual( 6, shortestPath.Length );
+         Assert.AreEqual( source, shortestPath.Start );
+         Assert.AreEqual( destination, shortestPath.End );
+         Assert.AreEqual( map.GetCell( 2, 1 ), shortestPath.StepForward() );
+         Assert.AreEqual( map.GetCell( 3, 2 ), shortestPath.StepForward() );
       }
 
       [TestMethod]
