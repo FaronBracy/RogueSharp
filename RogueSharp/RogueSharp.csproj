@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Algorithms\DepthFirstPaths.cs" />
+    <Compile Include="Algorithms\DijkstraShortestPathOnly.cs" />
     <Compile Include="Algorithms\DijkstraShortestPath.cs" />
     <Compile Include="Algorithms\DirectedEdge.cs" />
     <Compile Include="Algorithms\EdgeWeightedDigraph.cs" />

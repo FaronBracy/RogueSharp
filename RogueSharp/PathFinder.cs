@@ -139,8 +139,8 @@ namespace RogueSharp
 
       private IEnumerable<ICell> ShortestPathCells( ICell source, ICell destination )
       {
-         var dsp = new DijkstraShortestPath( _graph, IndexFor( source ) );
-         IEnumerable<DirectedEdge> path = dsp.PathTo( IndexFor( destination ) );
+         var dsp = new DijkstraShortestPathOnly( _graph, IndexFor( source ), IndexFor ( destination ) );
+         IEnumerable<DirectedEdge> path = dsp.PathTo( );
          if ( path == null )
          {
             yield return null;
