@@ -199,6 +199,8 @@ namespace RogueSharp
       /// <returns>IEnumerable of Cells in a line from the Origin Cell to the Destination Cell which includes the Origin and Destination Cells</returns>
       IEnumerable<ICell> GetCellsAlongLine( int xOrigin, int yOrigin, int xDestination, int yDestination );
 
+      IEnumerable<ICell> GetCellsInCircle( int xOrigin, int yOrigin, int radius );
+
       /// <summary>
       /// Get an IEnumerable of Cells in a circular Radius around the Origin Cell
       /// </summary>
@@ -216,6 +218,8 @@ namespace RogueSharp
       /// <param name="distance">The number of Cells to get in each direction from the Origin Cell</param>
       /// <returns>IEnumerable of Cells in a square area around the Origin Cell</returns>
       IEnumerable<ICell> GetCellsInArea( int xOrigin, int yOrigin, int distance );
+
+      IEnumerable<ICell> GetBorderCellsInCircle( int xOrigin, int yOrigin, int radius );
 
       /// <summary>
       /// Get an IEnumerable of the outermost border Cells in a circular Radius around the Origin Cell

@@ -41,7 +41,10 @@ namespace RogueSharp
       /// A Map with a Width of 10 will have Cells with X locations of 0 through 9
       /// Cells with an X value of 0 will be the leftmost Cells
       /// </remarks>
-      public int Width { get; private set; }
+      public int Width
+      {
+         get; private set;
+      }
 
       /// <summary>
       /// How many Cells tall the Map is
@@ -50,7 +53,10 @@ namespace RogueSharp
       /// A Map with a Height of 20 will have Cells with Y locations of 0 through 19
       /// Cells with an Y value of 0 will be the topmost Cells
       /// </remarks>
-      public int Height { get; private set; }
+      public int Height
+      {
+         get; private set;
+      }
 
       /// <summary>
       /// Create a new map with the properties of all Cells set to false
@@ -307,6 +313,11 @@ namespace RogueSharp
       /// <returns>IEnumerable of Cells in a line from the Origin Cell to the Destination Cell which includes the Origin and Destination Cells</returns>
       public IEnumerable<ICell> GetCellsAlongLine( int xOrigin, int yOrigin, int xDestination, int yDestination )
       {
+         xOrigin = ClampX( xOrigin );
+         yOrigin = ClampY( yOrigin );
+         xDestination = ClampX( xDestination );
+         yDestination = ClampY( yDestination );
+
          int dx = Math.Abs( xDestination - xOrigin );
          int dy = Math.Abs( yDestination - yOrigin );
 
@@ -333,6 +344,69 @@ namespace RogueSharp
                yOrigin = yOrigin + sy;
             }
          }
+      }
+
+      private int ClampX( int x )
+      {
+         return ( x < 0 ) ? 0 : ( x > Width - 1 ) ? Width - 1 : x;
+      }
+
+      private int ClampY( int y )
+      {
+         return ( y < 0 ) ? 0 : ( y > Height - 1 ) ? Height - 1 : y;
+      }
+
+      // Based on Bresenham's midpoint circle algorithm - https://en.wikipedia.org/wiki/Midpoint_circle_algorithm
+      public IEnumerable<ICell> GetCellsInCircle( int xOrigin, int yOrigin, int radius )
+      {
+         var discovered = new HashSet<int>();
+
+         int d = ( 5 - radius * 4 ) / 4;
+         int x = 0;
+         int y = radius;
+
+         do
+         {
+            foreach ( ICell cell in GetCellsAlongLine( xOrigin + x, yOrigin + y, xOrigin - x, yOrigin + y ) )
+            {
+               if ( AddToHashSet( discovered, cell ) )
+               {
+                  yield return cell;
+               }
+            }
+            foreach ( ICell cell in GetCellsAlongLine( xOrigin - x, yOrigin - y, xOrigin + x, yOrigin - y ) )
+            {
+               if ( AddToHashSet( discovered, cell ) )
+               {
+                  yield return cell;
+               }
+            }
+            foreach ( ICell cell in GetCellsAlongLine( xOrigin + y, yOrigin + x, xOrigin - y, yOrigin + x ) )
+            {
+               if ( AddToHashSet( discovered, cell ) )
+               {
+                  yield return cell;
+               }
+            }
+            foreach ( ICell cell in GetCellsAlongLine( xOrigin + y, yOrigin - x, xOrigin - y, yOrigin - x ) )
+            {
+               if ( AddToHashSet( discovered, cell ) )
+               {
+                  yield return cell;
+               }
+            }
+
+            if ( d < 0 )
+            {
+               d += 2 * x + 1;
+            }
+            else
+            {
+               d += 2 * ( x - y ) + 1;
+               y--;
+            }
+            x++;
+         } while ( x <= y );
       }
 
       /// <summary>
@@ -397,6 +471,64 @@ namespace RogueSharp
                yield return GetCell( x, y );
             }
          }
+      }
+
+      // Based on Bresenham's midpoint circle algorithm - https://en.wikipedia.org/wiki/Midpoint_circle_algorithm
+      public IEnumerable<ICell> GetBorderCellsInCircle( int xOrigin, int yOrigin, int radius )
+      {
+         var discovered = new HashSet<int>();
+
+         int d = ( 5 - radius * 4 ) / 4;
+         int x = 0;
+         int y = radius;
+
+         do
+         {
+            ICell cell;
+            if ( AddToHashSet( discovered, ClampX( xOrigin + x ), ClampY( yOrigin + y ), out cell ) )
+            {
+               yield return cell;
+            }
+            if ( AddToHashSet( discovered, ClampX( xOrigin + x ), ClampY( yOrigin - y ), out cell ) )
+            {
+               yield return cell;
+            }
+            if ( AddToHashSet( discovered, ClampX( xOrigin - x ), ClampY( yOrigin + y ), out cell ) )
+            {
+               yield return cell;
+            }
+            if ( AddToHashSet( discovered, ClampX( xOrigin - x ), ClampY( yOrigin - y ), out cell ) )
+            {
+               yield return cell;
+            }
+            if ( AddToHashSet( discovered, ClampX( xOrigin + y ), ClampY( yOrigin + x ), out cell ) )
+            {
+               yield return cell;
+            }
+            if ( AddToHashSet( discovered, ClampX( xOrigin + y ), ClampY( yOrigin - x ), out cell ) )
+            {
+               yield return cell;
+            }
+            if ( AddToHashSet( discovered, ClampX( xOrigin - y ), ClampY( yOrigin + x ), out cell ) )
+            {
+               yield return cell;
+            }
+            if ( AddToHashSet( discovered, ClampX( xOrigin - y ), ClampY( yOrigin - x ), out cell ) )
+            {
+               yield return cell;
+            }
+
+            if ( d < 0 )
+            {
+               d += 2 * x + 1;
+            }
+            else
+            {
+               d += 2 * ( x - y ) + 1;
+               y--;
+            }
+            x++;
+         } while ( x <= y );
       }
 
       /// <summary>
@@ -530,7 +662,7 @@ namespace RogueSharp
          int lastY = 0;
          foreach ( ICell iCell in GetAllCells() )
          {
-            Cell cell = ( Cell ) iCell;
+            Cell cell = (Cell) iCell;
             if ( cell.Y != lastY )
             {
                lastY = cell.Y;
@@ -664,6 +796,11 @@ namespace RogueSharp
       private bool AddToHashSet( HashSet<int> hashSet, int x, int y, out ICell cell )
       {
          cell = GetCell( x, y );
+         return hashSet.Add( IndexFor( cell ) );
+      }
+
+      private bool AddToHashSet( HashSet<int> hashSet, ICell cell )
+      {
          return hashSet.Add( IndexFor( cell ) );
       }
 
