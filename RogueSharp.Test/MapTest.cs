@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RogueSharp.MapCreation;
 using RogueSharp.Random;
@@ -71,7 +72,7 @@ namespace RogueSharp.Test
 
          Assert.AreEqual( expectedWidth, actualMap.Width );
          Assert.AreEqual( expectedHeight, actualMap.Height );
-         Assert.AreEqual( expectedMapRepresentation.Replace( " ", string.Empty ), actualMap.ToString() );
+         Assert.AreEqual( RemoveWhiteSpace( expectedMapRepresentation ), RemoveWhiteSpace( actualMap.ToString() ) );
       }
 
       [TestMethod]
@@ -127,7 +128,7 @@ namespace RogueSharp.Test
 
          Assert.AreEqual( expectedWidth, actualMap.Width );
          Assert.AreEqual( expectedHeight, actualMap.Height );
-         Assert.AreEqual( expectedMapRepresentation.Replace( " ", string.Empty ), actualMap.ToString() );
+         Assert.AreEqual( RemoveWhiteSpace( expectedMapRepresentation ), RemoveWhiteSpace( actualMap.ToString() ) );
       }
 
       [TestMethod]
@@ -141,7 +142,7 @@ namespace RogueSharp.Test
          IMapCreationStrategy<Map> mapCreationStrategy = new StringDeserializeMapCreationStrategy<Map>( expectedMapRepresentation );
          IMap actualMap = Map.Create( mapCreationStrategy );
 
-         Assert.AreEqual( expectedMapRepresentation.Replace( " ", string.Empty ), actualMap.ToString() );
+         Assert.AreEqual( RemoveWhiteSpace( expectedMapRepresentation ), RemoveWhiteSpace( actualMap.ToString() ) );
       }
 
       [TestMethod]
@@ -157,7 +158,7 @@ namespace RogueSharp.Test
          IMap clonedMap = originalMap.Clone();
 
          Assert.AreNotEqual( originalMap, clonedMap );
-         Assert.AreEqual( originalMap.ToString(), clonedMap.ToString() );
+         Assert.AreEqual( RemoveWhiteSpace( originalMap.ToString() ), RemoveWhiteSpace( clonedMap.ToString() ) );
       }
 
       [TestMethod]
@@ -217,7 +218,7 @@ namespace RogueSharp.Test
 
          destinationMap.Copy( sourceMap, 1, 2 );
 
-         Assert.AreEqual( expectedRepresentationAfterCopy.Replace( " ", string.Empty ), destinationMap.ToString() );
+         Assert.AreEqual( RemoveWhiteSpace( expectedRepresentationAfterCopy.ToString() ), RemoveWhiteSpace( destinationMap.ToString() ) );
       }
 
       [TestMethod]
@@ -524,7 +525,7 @@ namespace RogueSharp.Test
                                    %%%%%#.#%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                    %%%%%%.%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                    %%%%%###%%%%%%%%%%%%%%%%%%%%%%%%%%%%";
-         Assert.AreEqual( expectedFovMap.Replace( " ", string.Empty ), map.ToString( true ) );
+         Assert.AreEqual( RemoveWhiteSpace( expectedFovMap ), RemoveWhiteSpace( map.ToString( true ) ) );
          Assert.AreEqual( 99, visibleCells.Count );
       }
 
@@ -559,7 +560,7 @@ namespace RogueSharp.Test
                                    %%%%%%%%%%%%%%%.%%%%%%%%%%%%%%%%%%%%
                                    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%";
-         Assert.AreEqual( expectedFovMap.Replace( " ", string.Empty ), map.ToString( true ) );
+         Assert.AreEqual( RemoveWhiteSpace( expectedFovMap ), RemoveWhiteSpace( map.ToString( true ) ) );
       }
 
       [TestMethod]
@@ -593,7 +594,7 @@ namespace RogueSharp.Test
                                    %%%%%#.#%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                    %%%%%%.%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                    %%%%%###%%%%%%%%%%%%%%%%%%%%%%%%%%%%";
-         Assert.AreEqual( expectedFovMap.Replace( " ", string.Empty ), map.ToString( true ) );
+         Assert.AreEqual( RemoveWhiteSpace( expectedFovMap ), RemoveWhiteSpace( map.ToString( true ) ) );
          Assert.AreEqual( 117, visibleCells.Count );
       }
 
@@ -631,7 +632,12 @@ namespace RogueSharp.Test
                                    %%%%%#.#%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                    %%%%%%.%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                    %%%%%###%%%%%%%%%%%%%%%%%%%%%%%%%%%%";
-         Assert.AreEqual( expectedFovMap.Replace( " ", string.Empty ), newMap.ToString( true ) );
+         Assert.AreEqual( RemoveWhiteSpace( expectedFovMap ), RemoveWhiteSpace( map.ToString( true ) ) );
+      }
+
+      private static string RemoveWhiteSpace( string source )
+      {
+         return Regex.Replace( source, @"\s+", string.Empty );
       }
    }
 }

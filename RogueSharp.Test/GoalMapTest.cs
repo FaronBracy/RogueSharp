@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using System.Text.RegularExpressions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RogueSharp.MapCreation;
 
@@ -42,7 +43,7 @@ namespace RogueSharp.Test
                                                   #    2    #    4    5    #    2    #
                                                   #    3    4    5    5    4    3    #
                                                   #    #    #    #    #    #    #    #";
-         Assert.AreEqual( expectedGoalMapRepresentation.Replace( " ", string.Empty ), goalMap.ToString().Replace( " ", string.Empty ) );
+         Assert.AreEqual( RemoveWhiteSpace( expectedGoalMapRepresentation ), RemoveWhiteSpace( goalMap.ToString() ) );
          Assert.AreEqual( 2, paths.Count );
          Assert.AreEqual( 6, paths[0].Length );
          Assert.AreEqual( 6, paths[1].Length );
@@ -347,7 +348,7 @@ namespace RogueSharp.Test
                                                   #    2    #    4    5    #    2    #
                                                   #    3    4    5    5    4    3    #
                                                   #    #    #    #    #    #    #    #";
-         Assert.AreEqual( expectedGoalMapRepresentation.Replace( " ", string.Empty ), goalMap.ToString().Replace( " ", string.Empty ) );
+         Assert.AreEqual( RemoveWhiteSpace( expectedGoalMapRepresentation ), RemoveWhiteSpace( goalMap.ToString() ) );
          Assert.AreEqual( 2, paths.Count );
          Assert.AreEqual( 6, paths[0].Length );
          Assert.AreEqual( 6, paths[1].Length );
@@ -633,6 +634,11 @@ namespace RogueSharp.Test
          Path path = goalMap.TryFindPathAvoidingGoals( 1, 1 );
 
          Assert.AreEqual( null, path );
+      }
+
+      private static string RemoveWhiteSpace( string source )
+      {
+         return Regex.Replace( source, @"\s+", string.Empty );
       }
    }
 }
