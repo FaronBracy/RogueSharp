@@ -32,7 +32,7 @@ namespace RogueSharp
             if ( cell.IsWalkable )
             {
                int v = IndexFor( cell );
-               foreach ( ICell neighbor in _map.GetBorderCellsInRadius( cell.X, cell.Y, 1 ) )
+               foreach ( ICell neighbor in _map.GetBorderCellsInDiamond( cell.X, cell.Y, 1 ) )
                {
                   if ( neighbor.IsWalkable )
                   {
@@ -69,7 +69,7 @@ namespace RogueSharp
             if ( cell.IsWalkable )
             {
                int v = IndexFor( cell );
-               foreach ( ICell neighbor in _map.GetBorderCellsInArea( cell.X, cell.Y, 1 ) )
+               foreach ( ICell neighbor in _map.GetBorderCellsInSquare( cell.X, cell.Y, 1 ) )
                {
                   if ( neighbor.IsWalkable )
                   {

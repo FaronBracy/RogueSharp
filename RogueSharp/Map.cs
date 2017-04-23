@@ -356,8 +356,15 @@ namespace RogueSharp
          return ( y < 0 ) ? 0 : ( y > Height - 1 ) ? Height - 1 : y;
       }
 
-      // Based on Bresenham's midpoint circle algorithm - https://en.wikipedia.org/wiki/Midpoint_circle_algorithm
-      public IEnumerable<ICell> GetCellsInCircle( int xOrigin, int yOrigin, int radius )
+      /// <summary>
+      /// Get an IEnumerable of Cells in a circle around the center Cell up to the specified radius using Bresenham's midpoint circle algorithm
+      /// </summary>
+      /// <seealso href="https://en.wikipedia.org/wiki/Midpoint_circle_algorithm">Based on Bresenham's midpoint circle algorithm</seealso>
+      /// <param name="xCenter">X location of the center Cell with 0 as the farthest left</param>
+      /// <param name="yCenter">Y location of the center Cell with 0 as the top</param>
+      /// <param name="radius">The number of Cells to get in a radius from the center Cell</param>
+      /// <returns>IEnumerable of Cells in a circle around the center Cell</returns>
+      public IEnumerable<ICell> GetCellsInCircle( int xCenter, int yCenter, int radius )
       {
          var discovered = new HashSet<int>();
 
@@ -367,28 +374,28 @@ namespace RogueSharp
 
          do
          {
-            foreach ( ICell cell in GetCellsAlongLine( xOrigin + x, yOrigin + y, xOrigin - x, yOrigin + y ) )
+            foreach ( ICell cell in GetCellsAlongLine( xCenter + x, yCenter + y, xCenter - x, yCenter + y ) )
             {
                if ( AddToHashSet( discovered, cell ) )
                {
                   yield return cell;
                }
             }
-            foreach ( ICell cell in GetCellsAlongLine( xOrigin - x, yOrigin - y, xOrigin + x, yOrigin - y ) )
+            foreach ( ICell cell in GetCellsAlongLine( xCenter - x, yCenter - y, xCenter + x, yCenter - y ) )
             {
                if ( AddToHashSet( discovered, cell ) )
                {
                   yield return cell;
                }
             }
-            foreach ( ICell cell in GetCellsAlongLine( xOrigin + y, yOrigin + x, xOrigin - y, yOrigin + x ) )
+            foreach ( ICell cell in GetCellsAlongLine( xCenter + y, yCenter + x, xCenter - y, yCenter + x ) )
             {
                if ( AddToHashSet( discovered, cell ) )
                {
                   yield return cell;
                }
             }
-            foreach ( ICell cell in GetCellsAlongLine( xOrigin + y, yOrigin - x, xOrigin - y, yOrigin - x ) )
+            foreach ( ICell cell in GetCellsAlongLine( xCenter + y, yCenter - x, xCenter - y, yCenter - x ) )
             {
                if ( AddToHashSet( discovered, cell ) )
                {
@@ -410,39 +417,39 @@ namespace RogueSharp
       }
 
       /// <summary>
-      /// Get an IEnumerable of Cells in a circular Radius around the Origin Cell
+      /// Get an IEnumerable of Cells in a diamond (Rhombus) shape around the center Cell up to the specified distance
       /// </summary>
-      /// <param name="xOrigin">X location of the Origin Cell with 0 as the farthest left</param>
-      /// <param name="yOrigin">Y location of the Origin Cell with 0 as the top</param>
-      /// <param name="radius">The number of Cells to get in a radius from the Origin Cell</param>
-      /// <returns>IEnumerable of Cells in a circular Radius around the Origin Cell</returns>
-      public IEnumerable<ICell> GetCellsInRadius( int xOrigin, int yOrigin, int radius )
+      /// <param name="xCenter">X location of the center Cell with 0 as the farthest left</param>
+      /// <param name="yCenter">Y location of the center Cell with 0 as the top</param>
+      /// <param name="distance">The number of Cells to get in a distance from the center Cell</param>
+      /// <returns>IEnumerable of Cells in a diamond (Rhombus) shape around the center Cell</returns>
+      public IEnumerable<ICell> GetCellsInDiamond( int xCenter, int yCenter, int distance )
       {
          var discovered = new HashSet<int>();
 
-         int xMin = Math.Max( 0, xOrigin - radius );
-         int xMax = Math.Min( Width - 1, xOrigin + radius );
-         int yMin = Math.Max( 0, yOrigin - radius );
-         int yMax = Math.Min( Height - 1, yOrigin + radius );
+         int xMin = Math.Max( 0, xCenter - distance );
+         int xMax = Math.Min( Width - 1, xCenter + distance );
+         int yMin = Math.Max( 0, yCenter - distance );
+         int yMax = Math.Min( Height - 1, yCenter + distance );
 
-         for ( int i = 0; i <= radius; i++ )
+         for ( int i = 0; i <= distance; i++ )
          {
-            for ( int j = radius; j >= 0 + i; j-- )
+            for ( int j = distance; j >= 0 + i; j-- )
             {
                ICell cell;
-               if ( AddToHashSet( discovered, Math.Max( xMin, xOrigin - i ), Math.Min( yMax, yOrigin + radius - j ), out cell ) )
+               if ( AddToHashSet( discovered, Math.Max( xMin, xCenter - i ), Math.Min( yMax, yCenter + distance - j ), out cell ) )
                {
                   yield return cell;
                }
-               if ( AddToHashSet( discovered, Math.Max( xMin, xOrigin - i ), Math.Max( yMin, yOrigin - radius + j ), out cell ) )
+               if ( AddToHashSet( discovered, Math.Max( xMin, xCenter - i ), Math.Max( yMin, yCenter - distance + j ), out cell ) )
                {
                   yield return cell;
                }
-               if ( AddToHashSet( discovered, Math.Min( xMax, xOrigin + i ), Math.Min( yMax, yOrigin + radius - j ), out cell ) )
+               if ( AddToHashSet( discovered, Math.Min( xMax, xCenter + i ), Math.Min( yMax, yCenter + distance - j ), out cell ) )
                {
                   yield return cell;
                }
-               if ( AddToHashSet( discovered, Math.Min( xMax, xOrigin + i ), Math.Max( yMin, yOrigin - radius + j ), out cell ) )
+               if ( AddToHashSet( discovered, Math.Min( xMax, xCenter + i ), Math.Max( yMin, yCenter - distance + j ), out cell ) )
                {
                   yield return cell;
                }
@@ -451,18 +458,18 @@ namespace RogueSharp
       }
 
       /// <summary>
-      /// Get an IEnumerable of Cells in a square area around the Origin Cell
+      /// Get an IEnumerable of Cells in a square area around the center Cell up to the specified distance
       /// </summary>
-      /// <param name="xOrigin">X location of the Origin Cell with 0 as the farthest left</param>
-      /// <param name="yOrigin">Y location of the Origin Cell with 0 as the top</param>
-      /// <param name="distance">The number of Cells to get in each direction from the Origin Cell</param>
-      /// <returns>IEnumerable of Cells in a square area around the Origin Cell</returns>
-      public IEnumerable<ICell> GetCellsInArea( int xOrigin, int yOrigin, int distance )
+      /// <param name="xCenter">X location of the center Cell with 0 as the farthest left</param>
+      /// <param name="yCenter">Y location of the center Cell with 0 as the top</param>
+      /// <param name="distance">The number of Cells to get in each direction from the center Cell</param>
+      /// <returns>IEnumerable of Cells in a square area around the center Cell</returns>
+      public IEnumerable<ICell> GetCellsInSquare( int xCenter, int yCenter, int distance )
       {
-         int xMin = Math.Max( 0, xOrigin - distance );
-         int xMax = Math.Min( Width - 1, xOrigin + distance );
-         int yMin = Math.Max( 0, yOrigin - distance );
-         int yMax = Math.Min( Height - 1, yOrigin + distance );
+         int xMin = Math.Max( 0, xCenter - distance );
+         int xMax = Math.Min( Width - 1, xCenter + distance );
+         int yMin = Math.Max( 0, yCenter - distance );
+         int yMax = Math.Min( Height - 1, yCenter + distance );
 
          for ( int y = yMin; y <= yMax; y++ )
          {
@@ -473,8 +480,15 @@ namespace RogueSharp
          }
       }
 
-      // Based on Bresenham's midpoint circle algorithm - https://en.wikipedia.org/wiki/Midpoint_circle_algorithm
-      public IEnumerable<ICell> GetBorderCellsInCircle( int xOrigin, int yOrigin, int radius )
+      /// <summary>
+      /// Get an IEnumerable of outermost border Cells in a circle around the center Cell up to the specified radius using Bresenham's midpoint circle algorithm
+      /// </summary>
+      /// <seealso href="https://en.wikipedia.org/wiki/Midpoint_circle_algorithm">Based on Bresenham's midpoint circle algorithm</seealso>
+      /// <param name="xCenter">X location of the center Cell with 0 as the farthest left</param>
+      /// <param name="yCenter">Y location of the center Cell with 0 as the top</param>
+      /// <param name="radius">The number of Cells to get in a radius from the center Cell</param>
+      /// <returns>IEnumerable of outermost border Cells in a circle around the center Cell</returns>
+      public IEnumerable<ICell> GetBorderCellsInCircle( int xCenter, int yCenter, int radius )
       {
          var discovered = new HashSet<int>();
 
@@ -485,35 +499,35 @@ namespace RogueSharp
          do
          {
             ICell cell;
-            if ( AddToHashSet( discovered, ClampX( xOrigin + x ), ClampY( yOrigin + y ), out cell ) )
+            if ( AddToHashSet( discovered, ClampX( xCenter + x ), ClampY( yCenter + y ), out cell ) )
             {
                yield return cell;
             }
-            if ( AddToHashSet( discovered, ClampX( xOrigin + x ), ClampY( yOrigin - y ), out cell ) )
+            if ( AddToHashSet( discovered, ClampX( xCenter + x ), ClampY( yCenter - y ), out cell ) )
             {
                yield return cell;
             }
-            if ( AddToHashSet( discovered, ClampX( xOrigin - x ), ClampY( yOrigin + y ), out cell ) )
+            if ( AddToHashSet( discovered, ClampX( xCenter - x ), ClampY( yCenter + y ), out cell ) )
             {
                yield return cell;
             }
-            if ( AddToHashSet( discovered, ClampX( xOrigin - x ), ClampY( yOrigin - y ), out cell ) )
+            if ( AddToHashSet( discovered, ClampX( xCenter - x ), ClampY( yCenter - y ), out cell ) )
             {
                yield return cell;
             }
-            if ( AddToHashSet( discovered, ClampX( xOrigin + y ), ClampY( yOrigin + x ), out cell ) )
+            if ( AddToHashSet( discovered, ClampX( xCenter + y ), ClampY( yCenter + x ), out cell ) )
             {
                yield return cell;
             }
-            if ( AddToHashSet( discovered, ClampX( xOrigin + y ), ClampY( yOrigin - x ), out cell ) )
+            if ( AddToHashSet( discovered, ClampX( xCenter + y ), ClampY( yCenter - x ), out cell ) )
             {
                yield return cell;
             }
-            if ( AddToHashSet( discovered, ClampX( xOrigin - y ), ClampY( yOrigin + x ), out cell ) )
+            if ( AddToHashSet( discovered, ClampX( xCenter - y ), ClampY( yCenter + x ), out cell ) )
             {
                yield return cell;
             }
-            if ( AddToHashSet( discovered, ClampX( xOrigin - y ), ClampY( yOrigin - x ), out cell ) )
+            if ( AddToHashSet( discovered, ClampX( xCenter - y ), ClampY( yCenter - x ), out cell ) )
             {
                yield return cell;
             }
@@ -532,45 +546,45 @@ namespace RogueSharp
       }
 
       /// <summary>
-      /// Get an IEnumerable of the outermost border Cells in a circular Radius around the Origin Cell
+      /// Get an IEnumerable of outermost border Cells in a diamond (Rhombus) shape around the center Cell up to the specified distance
       /// </summary>
-      /// <param name="xOrigin">X location of the Origin Cell with 0 as the farthest left</param>
-      /// <param name="yOrigin">Y location of the Origin Cell with 0 as the top</param>
-      /// <param name="radius">The radius from the Origin Cell in which the border Cells lie</param>
-      /// <returns>IEnumerable of the outermost border Cells in a circular Radius around the Origin Cell</returns>
-      public IEnumerable<ICell> GetBorderCellsInRadius( int xOrigin, int yOrigin, int radius )
+      /// <param name="xCenter">X location of the center Cell with 0 as the farthest left</param>
+      /// <param name="yCenter">Y location of the center Cell with 0 as the top</param>
+      /// <param name="distance">The number of Cells to get in a distance from the center Cell</param>
+      /// <returns>IEnumerable of outermost border Cells in a diamond (Rhombus) shape around the center Cell</returns>
+      public IEnumerable<ICell> GetBorderCellsInDiamond( int xCenter, int yCenter, int distance )
       {
          var discovered = new HashSet<int>();
 
-         int xMin = Math.Max( 0, xOrigin - radius );
-         int xMax = Math.Min( Width - 1, xOrigin + radius );
-         int yMin = Math.Max( 0, yOrigin - radius );
-         int yMax = Math.Min( Height - 1, yOrigin + radius );
+         int xMin = Math.Max( 0, xCenter - distance );
+         int xMax = Math.Min( Width - 1, xCenter + distance );
+         int yMin = Math.Max( 0, yCenter - distance );
+         int yMax = Math.Min( Height - 1, yCenter + distance );
 
          ICell cell;
-         if ( AddToHashSet( discovered, xOrigin, yMin, out cell ) )
+         if ( AddToHashSet( discovered, xCenter, yMin, out cell ) )
          {
             yield return cell;
          }
-         if ( AddToHashSet( discovered, xOrigin, yMax, out cell ) )
+         if ( AddToHashSet( discovered, xCenter, yMax, out cell ) )
          {
             yield return cell;
          }
-         for ( int i = 1; i <= radius; i++ )
+         for ( int i = 1; i <= distance; i++ )
          {
-            if ( AddToHashSet( discovered, Math.Max( xMin, xOrigin - i ), Math.Min( yMax, yOrigin + radius - i ), out cell ) )
+            if ( AddToHashSet( discovered, Math.Max( xMin, xCenter - i ), Math.Min( yMax, yCenter + distance - i ), out cell ) )
             {
                yield return cell;
             }
-            if ( AddToHashSet( discovered, Math.Max( xMin, xOrigin - i ), Math.Max( yMin, yOrigin - radius + i ), out cell ) )
+            if ( AddToHashSet( discovered, Math.Max( xMin, xCenter - i ), Math.Max( yMin, yCenter - distance + i ), out cell ) )
             {
                yield return cell;
             }
-            if ( AddToHashSet( discovered, Math.Min( xMax, xOrigin + i ), Math.Min( yMax, yOrigin + radius - i ), out cell ) )
+            if ( AddToHashSet( discovered, Math.Min( xMax, xCenter + i ), Math.Min( yMax, yCenter + distance - i ), out cell ) )
             {
                yield return cell;
             }
-            if ( AddToHashSet( discovered, Math.Min( xMax, xOrigin + i ), Math.Max( yMin, yOrigin - radius + i ), out cell ) )
+            if ( AddToHashSet( discovered, Math.Min( xMax, xCenter + i ), Math.Max( yMin, yCenter - distance + i ), out cell ) )
             {
                yield return cell;
             }
@@ -578,25 +592,25 @@ namespace RogueSharp
       }
 
       /// <summary>
-      /// Get an IEnumerable of the outermost border Cells in a square around the Origin Cell
+      /// Get an IEnumerable of outermost border Cells in a square area around the center Cell up to the specified distance
       /// </summary>
-      /// <param name="xOrigin">X location of the Origin Cell with 0 as the farthest left</param>
-      /// <param name="yOrigin">Y location of the Origin Cell with 0 as the top</param>
-      /// <param name="distance">The distance from the Origin Cell in which the border Cells lie</param>
-      /// <returns> IEnumerable of the outermost border Cells in a square around the Origin Cell</returns>
-      public IEnumerable<ICell> GetBorderCellsInArea( int xOrigin, int yOrigin, int distance )
+      /// <param name="xCenter">X location of the center Cell with 0 as the farthest left</param>
+      /// <param name="yCenter">Y location of the center Cell with 0 as the top</param>
+      /// <param name="distance">The number of Cells to get in each direction from the center Cell</param>
+      /// <returns>IEnumerable of outermost border Cells in a square area around the center Cell</returns>
+      public IEnumerable<ICell> GetBorderCellsInSquare( int xCenter, int yCenter, int distance )
       {
-         int xMin = Math.Max( 0, xOrigin - distance );
-         int xMax = Math.Min( Width - 1, xOrigin + distance );
-         int yMin = Math.Max( 0, yOrigin - distance );
-         int yMax = Math.Min( Height - 1, yOrigin + distance );
+         int xMin = Math.Max( 0, xCenter - distance );
+         int xMax = Math.Min( Width - 1, xCenter + distance );
+         int yMin = Math.Max( 0, yCenter - distance );
+         int yMax = Math.Min( Height - 1, yCenter + distance );
 
          for ( int x = xMin; x <= xMax; x++ )
          {
             yield return GetCell( x, yMin );
             yield return GetCell( x, yMax );
          }
-         for ( int y = yMin; y <= yMax; y++ )
+         for ( int y = yMin + 1; y <= yMax - 1; y++ )
          {
             yield return GetCell( xMin, y );
             yield return GetCell( xMax, y );

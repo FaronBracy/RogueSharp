@@ -93,7 +93,7 @@ namespace RogueSharp
       /// <returns>List of Cells representing what is observable in the Map based on the specified parameters</returns>
       public ReadOnlyCollection<ICell> AppendFov( int xOrigin, int yOrigin, int radius, bool lightWalls )
       {
-         foreach ( ICell borderCell in _map.GetBorderCellsInArea( xOrigin, yOrigin, radius ) )
+         foreach ( ICell borderCell in _map.GetBorderCellsInSquare( xOrigin, yOrigin, radius ) )
          {
             foreach ( ICell cell in _map.GetCellsAlongLine( xOrigin, yOrigin, borderCell.X, borderCell.Y ) )
             {
@@ -120,7 +120,7 @@ namespace RogueSharp
          {
             // Post processing step created based on the algorithm at this website:
             // https://sites.google.com/site/jicenospam/visibilitydetermination
-            foreach ( ICell cell in _map.GetCellsInArea( xOrigin, yOrigin, radius ) )
+            foreach ( ICell cell in _map.GetCellsInSquare( xOrigin, yOrigin, radius ) )
             {
                if ( cell.X > xOrigin )
                {
