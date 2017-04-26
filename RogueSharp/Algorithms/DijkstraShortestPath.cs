@@ -22,6 +22,11 @@ namespace RogueSharp.Algorithms
       /// <exception cref="ArgumentOutOfRangeException">Throws an ArgumentOutOfRangeException if an edge weight is negative</exception>
       /// <exception cref="ArgumentNullException">Thrown if EdgeWeightedDigraph is null</exception>
       public DijkstraShortestPath( EdgeWeightedDigraph graph, int sourceVertex )
+         : this( graph, sourceVertex, null )
+      {
+      }
+
+      private DijkstraShortestPath( EdgeWeightedDigraph graph, int sourceVertex, int? destinationVertex )
       {
          if ( graph == null )
          {
@@ -49,11 +54,32 @@ namespace RogueSharp.Algorithms
          while ( !_priorityQueue.IsEmpty() )
          {
             int v = _priorityQueue.DeleteMin();
+
+            if ( destinationVertex.HasValue && v == destinationVertex.Value )
+            {
+               return;
+            }
+
             foreach ( DirectedEdge edge in graph.Adjacent( v ) )
             {
                Relax( edge );
             }
          }
+      }
+
+      /// <summary>
+      /// Returns an IEnumerable of DirectedEdges representing a shortest path from the specified sourceVertex to the specified destinationVertex
+      /// This is more efficent than creating a new DijkstraShorestPath instance and calling PathTo( destinationVertex ) when we only
+      /// want a single path from Source to Destination and don't want many paths from the source to multiple different destinations.
+      /// </summary>
+      /// <param name="graph">The edge-weighted directed graph</param>
+      /// <param name="sourceVertex">The source vertext to find a shortest path from</param>
+      /// <param name="destinationVertex">The destination vertex to find a shortest path to</param>
+      /// <returns>IEnumerable of DirectedEdges representing a shortest path from the sourceVertex to the specified destinationVertex</returns>
+      public static IEnumerable<DirectedEdge> FindPath( EdgeWeightedDigraph graph, int sourceVertex, int destinationVertex )
+      {
+         var dijkstraShortestPath = new DijkstraShortestPath( graph, sourceVertex, destinationVertex );
+         return dijkstraShortestPath.PathTo( destinationVertex );
       }
 
       private void Relax( DirectedEdge edge )

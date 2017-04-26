@@ -166,7 +166,7 @@ namespace RogueSharp.MapCreation
       private int CountWallsNear( ICell cell, int distance )
       {
          int count = 0;
-         foreach ( ICell nearbyCell in _map.GetCellsInArea( cell.X, cell.Y, distance ) )
+         foreach ( ICell nearbyCell in _map.GetCellsInSquare( cell.X, cell.Y, distance ) )
          {
             if ( nearbyCell.X == cell.X && nearbyCell.Y == cell.Y )
             {

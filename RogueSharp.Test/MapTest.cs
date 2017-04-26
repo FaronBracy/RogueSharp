@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RogueSharp.MapCreation;
 using RogueSharp.Random;
@@ -71,7 +72,7 @@ namespace RogueSharp.Test
 
          Assert.AreEqual( expectedWidth, actualMap.Width );
          Assert.AreEqual( expectedHeight, actualMap.Height );
-         Assert.AreEqual( expectedMapRepresentation.Replace( " ", string.Empty ), actualMap.ToString() );
+         Assert.AreEqual( RemoveWhiteSpace( expectedMapRepresentation ), RemoveWhiteSpace( actualMap.ToString() ) );
       }
 
       [TestMethod]
@@ -127,7 +128,7 @@ namespace RogueSharp.Test
 
          Assert.AreEqual( expectedWidth, actualMap.Width );
          Assert.AreEqual( expectedHeight, actualMap.Height );
-         Assert.AreEqual( expectedMapRepresentation.Replace( " ", string.Empty ), actualMap.ToString() );
+         Assert.AreEqual( RemoveWhiteSpace( expectedMapRepresentation ), RemoveWhiteSpace( actualMap.ToString() ) );
       }
 
       [TestMethod]
@@ -141,7 +142,7 @@ namespace RogueSharp.Test
          IMapCreationStrategy<Map> mapCreationStrategy = new StringDeserializeMapCreationStrategy<Map>( expectedMapRepresentation );
          IMap actualMap = Map.Create( mapCreationStrategy );
 
-         Assert.AreEqual( expectedMapRepresentation.Replace( " ", string.Empty ), actualMap.ToString() );
+         Assert.AreEqual( RemoveWhiteSpace( expectedMapRepresentation ), RemoveWhiteSpace( actualMap.ToString() ) );
       }
 
       [TestMethod]
@@ -157,7 +158,7 @@ namespace RogueSharp.Test
          IMap clonedMap = originalMap.Clone();
 
          Assert.AreNotEqual( originalMap, clonedMap );
-         Assert.AreEqual( originalMap.ToString(), clonedMap.ToString() );
+         Assert.AreEqual( RemoveWhiteSpace( originalMap.ToString() ), RemoveWhiteSpace( clonedMap.ToString() ) );
       }
 
       [TestMethod]
@@ -217,7 +218,7 @@ namespace RogueSharp.Test
 
          destinationMap.Copy( sourceMap, 1, 2 );
 
-         Assert.AreEqual( expectedRepresentationAfterCopy.Replace( " ", string.Empty ), destinationMap.ToString() );
+         Assert.AreEqual( RemoveWhiteSpace( expectedRepresentationAfterCopy.ToString() ), RemoveWhiteSpace( destinationMap.ToString() ) );
       }
 
       [TestMethod]
@@ -301,7 +302,85 @@ namespace RogueSharp.Test
       }
 
       [TestMethod]
-      public void GetCellsInRadius_SmallMap_ExpectedCells()
+      public void GetCellsAlongLine_ToDestinationOutsideMap_TrimsLineAtMapEdgeAndReturnsExpectedCells()
+      {
+         string mapRepresentation = @"####
+                                      #..#
+                                      #so#
+                                      ####";
+         IMapCreationStrategy<Map> mapCreationStrategy = new StringDeserializeMapCreationStrategy<Map>( mapRepresentation );
+         IMap map = Map.Create( mapCreationStrategy );
+         string expectedPath = "#.o#";
+
+         StringBuilder actualPath = new StringBuilder();
+         foreach ( ICell cell in map.GetCellsAlongLine( 0, 0, 10, 10 ) )
+         {
+            actualPath.Append( cell.ToString() );
+         }
+
+         Assert.AreEqual( expectedPath, actualPath.ToString() );
+      }
+
+      [TestMethod]
+      public void GetCellsInCircle_SmallMap_ExpectedCells()
+      {
+         string mapRepresentation = @"#################
+                                      #################
+                                      ##...#######...##
+                                      ##.............##
+                                      ###.###....#...##
+                                      ###...##.#####.##
+                                      ###...##...###..#
+                                      ####............#
+                                      ##############..#
+                                      #################";
+         IMapCreationStrategy<Map> mapCreationStrategy = new StringDeserializeMapCreationStrategy<Map>( mapRepresentation );
+         IMap map = Map.Create( mapCreationStrategy );
+         string expectedCells = "##########..#####.....##..#..##.#.#.#";
+
+         IEnumerable<ICell> cells = map.GetCellsInCircle( 3, 3, 3 )
+            .OrderBy( c => c.X )
+            .ThenBy( c => c.Y );
+         var actualCells = new StringBuilder();
+         foreach ( ICell cell in cells )
+         {
+            actualCells.Append( cell.ToString() );
+         }
+
+         Assert.AreEqual( expectedCells, actualCells.ToString() );
+      }
+
+      [TestMethod]
+      public void GetBorderCellsInCircle_SmallMap_ExpectedCells()
+      {
+         string mapRepresentation = @"#################
+                                      #################
+                                      ##...#######...##
+                                      ##.............##
+                                      ###.###....#...##
+                                      ###...##.#####.##
+                                      ###...##...###..#
+                                      ####............#
+                                      ##############..#
+                                      #################";
+         IMapCreationStrategy<Map> mapCreationStrategy = new StringDeserializeMapCreationStrategy<Map>( mapRepresentation );
+         IMap map = Map.Create( mapCreationStrategy );
+         string expectedCells = "########.#.#.#.#";
+
+         IEnumerable<ICell> cells = map.GetBorderCellsInCircle( 3, 3, 3 )
+            .OrderBy( c => c.X )
+            .ThenBy( c => c.Y );
+         var actualCells = new StringBuilder();
+         foreach ( ICell cell in cells )
+         {
+            actualCells.Append( cell.ToString() );
+         }
+
+         Assert.AreEqual( expectedCells, actualCells.ToString() );
+      }
+
+      [TestMethod]
+      public void GetCellsInDiamond_SmallMap_ExpectedCells()
       {
          string mapRepresentation = @"#################
                                       #################
@@ -317,11 +396,11 @@ namespace RogueSharp.Test
          IMap map = Map.Create( mapCreationStrategy );
          string expectedCells = "#..##......#.";
 
-         IEnumerable<ICell> cells = map.GetCellsInRadius( 3, 3, 2 )
+         IEnumerable<ICell> cells = map.GetCellsInDiamond( 3, 3, 2 )
             .OrderBy( c => c.X )
             .ThenBy( c => c.Y );
          var actualCells = new StringBuilder();
-         foreach( ICell cell in cells )
+         foreach ( ICell cell in cells )
          {
             actualCells.Append( cell.ToString() );
          }
@@ -330,7 +409,7 @@ namespace RogueSharp.Test
       }
 
       [TestMethod]
-      public void GetBorderCellsInRadius_SmallMap_ExpectedCells()
+      public void GetBorderCellsInDiamond_SmallMap_ExpectedCells()
       {
          string mapRepresentation = @"#################
                                       #################
@@ -346,7 +425,65 @@ namespace RogueSharp.Test
          IMap map = Map.Create( mapCreationStrategy );
          string expectedCells = "#.##..#.";
 
-         IEnumerable<ICell> cells = map.GetBorderCellsInRadius( 3, 3, 2 )
+         IEnumerable<ICell> cells = map.GetBorderCellsInDiamond( 3, 3, 2 )
+            .OrderBy( c => c.X )
+            .ThenBy( c => c.Y );
+         var actualCells = new StringBuilder();
+         foreach ( ICell cell in cells )
+         {
+            actualCells.Append( cell.ToString() );
+         }
+
+         Assert.AreEqual( expectedCells, actualCells.ToString() );
+      }
+
+      [TestMethod]
+      public void GetCellsInSquare_SmallMap_ExpectedCells()
+      {
+         string mapRepresentation = @"#################
+                                      #################
+                                      ##...#######...##
+                                      ##.............##
+                                      ###.###....#...##
+                                      ###...##.#####.##
+                                      ###...##...###..#
+                                      ####............#
+                                      ##############..#
+                                      #################";
+         IMapCreationStrategy<Map> mapCreationStrategy = new StringDeserializeMapCreationStrategy<Map>( mapRepresentation );
+         IMap map = Map.Create( mapCreationStrategy );
+         string expectedCells = "######..###....#..#.##.#.";
+
+         IEnumerable<ICell> cells = map.GetCellsInSquare( 3, 3, 2 )
+            .OrderBy( c => c.X )
+            .ThenBy( c => c.Y );
+         var actualCells = new StringBuilder();
+         foreach ( ICell cell in cells )
+         {
+            actualCells.Append( cell.ToString() );
+         }
+
+         Assert.AreEqual( expectedCells, actualCells.ToString() );
+      }
+
+      [TestMethod]
+      public void GetBorderCellsInSquare_SmallMap_ExpectedCells()
+      {
+         string mapRepresentation = @"#################
+                                      #################
+                                      ##...#######...##
+                                      ##.............##
+                                      ###.###....#...##
+                                      ###...##.#####.##
+                                      ###...##...###..#
+                                      ####............#
+                                      ##############..#
+                                      #################";
+         IMapCreationStrategy<Map> mapCreationStrategy = new StringDeserializeMapCreationStrategy<Map>( mapRepresentation );
+         IMap map = Map.Create( mapCreationStrategy );
+         string expectedCells = "########.#.##.#.";
+
+         IEnumerable<ICell> cells = map.GetBorderCellsInSquare( 3, 3, 2 )
             .OrderBy( c => c.X )
             .ThenBy( c => c.Y );
          var actualCells = new StringBuilder();
@@ -375,7 +512,7 @@ namespace RogueSharp.Test
          IMapCreationStrategy<Map> mapCreationStrategy = new StringDeserializeMapCreationStrategy<Map>( mapRepresentation );
          IMap map = Map.Create( mapCreationStrategy );
 
-         map.ComputeFov( 6, 1, 20, true );
+         var visibleCells = map.ComputeFov( 6, 1, 20, true );
 
          string expectedFovMap = @"###########################%%%%%%%%%
                                    #..........................%%%%%%%%%
@@ -388,7 +525,42 @@ namespace RogueSharp.Test
                                    %%%%%#.#%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                    %%%%%%.%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                    %%%%%###%%%%%%%%%%%%%%%%%%%%%%%%%%%%";
-         Assert.AreEqual( expectedFovMap.Replace( " ", string.Empty ), map.ToString( true ) );
+         Assert.AreEqual( RemoveWhiteSpace( expectedFovMap ), RemoveWhiteSpace( map.ToString( true ) ) );
+         Assert.AreEqual( 99, visibleCells.Count );
+      }
+
+      [TestMethod]
+      public void ComputeFov_EmptyMap_ExpectedCollectionOfVisibleCells()
+      {
+         string mapRepresentation = @"####################################
+                                      #..................................#
+                                      #..................................#
+                                      #..................................#
+                                      #..................................#
+                                      #..................................#
+                                      #..................................#
+                                      #..................................#
+                                      #..................................#
+                                      #..................................#
+                                      ####################################";
+
+         IMapCreationStrategy<Map> mapCreationStrategy = new StringDeserializeMapCreationStrategy<Map>( mapRepresentation );
+         IMap map = Map.Create( mapCreationStrategy );
+
+         map.ComputeFov( 15, 5, 3, false );
+
+         string expectedFovMap = @"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                   %%%%%%%%%%%%%%%.%%%%%%%%%%%%%%%%%%%%
+                                   %%%%%%%%%%%%%%...%%%%%%%%%%%%%%%%%%%
+                                   %%%%%%%%%%%%%.....%%%%%%%%%%%%%%%%%%
+                                   %%%%%%%%%%%%.......%%%%%%%%%%%%%%%%%
+                                   %%%%%%%%%%%%%.....%%%%%%%%%%%%%%%%%%
+                                   %%%%%%%%%%%%%%...%%%%%%%%%%%%%%%%%%%
+                                   %%%%%%%%%%%%%%%.%%%%%%%%%%%%%%%%%%%%
+                                   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%";
+         Assert.AreEqual( RemoveWhiteSpace( expectedFovMap ), RemoveWhiteSpace( map.ToString( true ) ) );
       }
 
       [TestMethod]
@@ -409,7 +581,7 @@ namespace RogueSharp.Test
          IMap map = Map.Create( mapCreationStrategy );
 
          map.ComputeFov( 6, 1, 20, true );
-         map.AppendFov( 15, 1, 5, true );
+         var visibleCells = map.AppendFov( 15, 1, 5, true );
 
          string expectedFovMap = @"###########################%%%%%%%%%
                                    #..........................%%%%%%%%%
@@ -422,7 +594,8 @@ namespace RogueSharp.Test
                                    %%%%%#.#%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                    %%%%%%.%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                    %%%%%###%%%%%%%%%%%%%%%%%%%%%%%%%%%%";
-         Assert.AreEqual( expectedFovMap.Replace( " ", string.Empty ), map.ToString( true ) );
+         Assert.AreEqual( RemoveWhiteSpace( expectedFovMap ), RemoveWhiteSpace( map.ToString( true ) ) );
+         Assert.AreEqual( 117, visibleCells.Count );
       }
 
       [TestMethod]
@@ -446,8 +619,8 @@ namespace RogueSharp.Test
          MapState mapState = map.Save();
 
          IMap newMap = new Map();
-         newMap.Restore( mapState );  
-         
+         newMap.Restore( mapState );
+
          string expectedFovMap = @"###########################%%%%%%%%%
                                    #..........................%%%%%%%%%
                                    #..###.########...........%%%%%%%%%%
@@ -459,7 +632,12 @@ namespace RogueSharp.Test
                                    %%%%%#.#%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                    %%%%%%.%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                    %%%%%###%%%%%%%%%%%%%%%%%%%%%%%%%%%%";
-         Assert.AreEqual( expectedFovMap.Replace( " ", string.Empty ), newMap.ToString( true ) );
+         Assert.AreEqual( RemoveWhiteSpace( expectedFovMap ), RemoveWhiteSpace( map.ToString( true ) ) );
+      }
+
+      private static string RemoveWhiteSpace( string source )
+      {
+         return Regex.Replace( source, @"\s+", string.Empty );
       }
    }
 }

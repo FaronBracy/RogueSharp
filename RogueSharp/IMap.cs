@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace RogueSharp
 {
@@ -16,7 +17,10 @@ namespace RogueSharp
       /// A Map with a Width of 10 will have Cells with X locations of 0 through 9
       /// Cells with an X value of 0 will be the leftmost Cells
       /// </remarks>
-      int Width { get; }
+      int Width
+      {
+         get;
+      }
 
       /// <summary>
       /// How many Cells tall the Map is
@@ -25,7 +29,10 @@ namespace RogueSharp
       /// A Map with a Height of 20 will have Cells with Y locations of 0 through 19
       /// Cells with an Y value of 0 will be the topmost Cells
       /// </remarks>
-      int Height { get; }
+      int Height
+      {
+         get;
+      }
 
       /// <summary>
       /// Create a new map with the properties of all Cells set to false
@@ -162,7 +169,8 @@ namespace RogueSharp
       /// <param name="yOrigin">Y location of the Cell to perform the field-of-view calculation with 0 as the top</param>
       /// <param name="radius">The number of Cells in which the field-of-view extends from the origin Cell. Think of this as the intensity of the light source.</param>
       /// <param name="lightWalls">True if walls should be included in the field-of-view when they are within the radius of the light source. False excludes walls even when they are within range.</param>
-      void ComputeFov( int xOrigin, int yOrigin, int radius, bool lightWalls );
+      /// <returns>List of Cells representing what is observable in the Map based on the specified parameters</returns>
+      ReadOnlyCollection<ICell> ComputeFov( int xOrigin, int yOrigin, int radius, bool lightWalls );
 
       /// <summary>
       /// Performs a field-of-view calculation with the specified parameters and appends it any existing field-of-view calculations.
@@ -176,7 +184,8 @@ namespace RogueSharp
       /// <param name="yOrigin">Y location of the Cell to perform the field-of-view calculation with 0 as the top</param>
       /// <param name="radius">The number of Cells in which the field-of-view extends from the origin Cell. Think of this as the intensity of the light source.</param>
       /// <param name="lightWalls">True if walls should be included in the field-of-view when they are within the radius of the light source. False excludes walls even when they are within range.</param>
-      void AppendFov( int xOrigin, int yOrigin, int radius, bool lightWalls );
+      /// <returns>List of Cells representing what is observable in the Map based on the specified parameters</returns>
+      ReadOnlyCollection<ICell> AppendFov( int xOrigin, int yOrigin, int radius, bool lightWalls );
 
       /// <summary>
       /// Get an IEnumerable of all Cells in the Map
@@ -197,40 +206,60 @@ namespace RogueSharp
       IEnumerable<ICell> GetCellsAlongLine( int xOrigin, int yOrigin, int xDestination, int yDestination );
 
       /// <summary>
-      /// Get an IEnumerable of Cells in a circular Radius around the Origin Cell
+      /// Get an IEnumerable of Cells in a circle around the center Cell up to the specified radius using Bresenham's midpoint circle algorithm
       /// </summary>
-      /// <param name="xOrigin">X location of the Origin Cell with 0 as the farthest left</param>
-      /// <param name="yOrigin">Y location of the Origin Cell with 0 as the top</param>
-      /// <param name="radius">The number of Cells to get in a radius from the Origin Cell</param>
-      /// <returns>IEnumerable of Cells in a circular Radius around the Origin Cell</returns>
-      IEnumerable<ICell> GetCellsInRadius( int xOrigin, int yOrigin, int radius );
+      /// <seealso href="https://en.wikipedia.org/wiki/Midpoint_circle_algorithm">Based on Bresenham's midpoint circle algorithm</seealso>
+      /// <param name="xCenter">X location of the center Cell with 0 as the farthest left</param>
+      /// <param name="yCenter">Y location of the center Cell with 0 as the top</param>
+      /// <param name="radius">The number of Cells to get in a radius from the center Cell</param>
+      /// <returns>IEnumerable of Cells in a circle around the center Cell</returns>
+      IEnumerable<ICell> GetCellsInCircle( int xCenter, int yCenter, int radius );
 
       /// <summary>
-      /// Get an IEnumerable of Cells in a square area around the Origin Cell
+      /// Get an IEnumerable of Cells in a diamond (Rhombus) shape around the center Cell up to the specified distance
       /// </summary>
-      /// <param name="xOrigin">X location of the Origin Cell with 0 as the farthest left</param>
-      /// <param name="yOrigin">Y location of the Origin Cell with 0 as the top</param>
-      /// <param name="distance">The number of Cells to get in each direction from the Origin Cell</param>
-      /// <returns>IEnumerable of Cells in a square area around the Origin Cell</returns>
-      IEnumerable<ICell> GetCellsInArea( int xOrigin, int yOrigin, int distance );
+      /// <param name="xCenter">X location of the center Cell with 0 as the farthest left</param>
+      /// <param name="yCenter">Y location of the center Cell with 0 as the top</param>
+      /// <param name="distance">The number of Cells to get in a distance from the center Cell</param>
+      /// <returns>IEnumerable of Cells in a diamond (Rhombus) shape around the center Cell</returns>
+      IEnumerable<ICell> GetCellsInDiamond( int xCenter, int yCenter, int distance );
 
       /// <summary>
-      /// Get an IEnumerable of the outermost border Cells in a circular Radius around the Origin Cell
+      /// Get an IEnumerable of Cells in a square area around the center Cell up to the specified distance
       /// </summary>
-      /// <param name="xOrigin">X location of the Origin Cell with 0 as the farthest left</param>
-      /// <param name="yOrigin">Y location of the Origin Cell with 0 as the top</param>
-      /// <param name="radius">The radius from the Origin Cell in which the border Cells lie</param>
-      /// <returns>IEnumerable of the outermost border Cells in a circular Radius around the Origin Cell</returns>
-      IEnumerable<ICell> GetBorderCellsInRadius( int xOrigin, int yOrigin, int radius );
+      /// <param name="xCenter">X location of the center Cell with 0 as the farthest left</param>
+      /// <param name="yCenter">Y location of the center Cell with 0 as the top</param>
+      /// <param name="distance">The number of Cells to get in each direction from the center Cell</param>
+      /// <returns>IEnumerable of Cells in a square area around the center Cell</returns>
+      IEnumerable<ICell> GetCellsInSquare( int xCenter, int yCenter, int distance );
 
       /// <summary>
-      /// Get an IEnumerable of the outermost border Cells in a square around the Origin Cell
+      /// Get an IEnumerable of outermost border Cells in a circle around the center Cell up to the specified radius using Bresenham's midpoint circle algorithm
       /// </summary>
-      /// <param name="xOrigin">X location of the Origin Cell with 0 as the farthest left</param>
-      /// <param name="yOrigin">Y location of the Origin Cell with 0 as the top</param>
-      /// <param name="distance">The distance from the Origin Cell in which the border Cells lie</param>
-      /// <returns> IEnumerable of the outermost border Cells in a square around the Origin Cell</returns>
-      IEnumerable<ICell> GetBorderCellsInArea( int xOrigin, int yOrigin, int distance );
+      /// <seealso href="https://en.wikipedia.org/wiki/Midpoint_circle_algorithm">Based on Bresenham's midpoint circle algorithm</seealso>
+      /// <param name="xCenter">X location of the center Cell with 0 as the farthest left</param>
+      /// <param name="yCenter">Y location of the center Cell with 0 as the top</param>
+      /// <param name="radius">The number of Cells to get in a radius from the center Cell</param>
+      /// <returns>IEnumerable of outermost border Cells in a circle around the center Cell</returns>
+      IEnumerable<ICell> GetBorderCellsInCircle( int xCenter, int yCenter, int radius );
+
+      /// <summary>
+      /// Get an IEnumerable of outermost border Cells in a diamond (Rhombus) shape around the center Cell up to the specified distance
+      /// </summary>
+      /// <param name="xCenter">X location of the center Cell with 0 as the farthest left</param>
+      /// <param name="yCenter">Y location of the center Cell with 0 as the top</param>
+      /// <param name="distance">The number of Cells to get in a distance from the center Cell</param>
+      /// <returns>IEnumerable of outermost border Cells in a diamond (Rhombus) shape around the center Cell</returns>
+      IEnumerable<ICell> GetBorderCellsInDiamond( int xCenter, int yCenter, int distance );
+
+      /// <summary>
+      /// Get an IEnumerable of outermost border Cells in a square area around the center Cell up to the specified distance
+      /// </summary>
+      /// <param name="xCenter">X location of the center Cell with 0 as the farthest left</param>
+      /// <param name="yCenter">Y location of the center Cell with 0 as the top</param>
+      /// <param name="distance">The number of Cells to get in each direction from the center Cell</param>
+      /// <returns>IEnumerable of outermost border Cells in a square area around the center Cell</returns>
+      IEnumerable<ICell> GetBorderCellsInSquare( int xCenter, int yCenter, int distance );
 
       /// <summary>
       /// Get an IEnumerable of all the Cells in the specified row numbers
@@ -339,17 +368,26 @@ namespace RogueSharp
       /// <summary>
       /// How many Cells wide the Map is
       /// </summary>
-      public int Width { get; set; }
+      public int Width
+      {
+         get; set;
+      }
 
       /// <summary>
       /// How many Cells tall the Map is
       /// </summary>
-      public int Height { get; set; }
+      public int Height
+      {
+         get; set;
+      }
 
       /// <summary>
       /// An array of the Flags Enumeration of CellProperties for each Cell in the Map.
       /// The index of the array corresponds to the location of the Cell within the Map using the forumla: index = ( y * Width ) + x
       /// </summary>
-      public CellProperties[] Cells { get; set; }
+      public CellProperties[] Cells
+      {
+         get; set;
+      }
    }
 }

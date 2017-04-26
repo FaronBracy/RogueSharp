@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -20,14 +19,26 @@ namespace RogueSharp
       private readonly List<WeightedPoint> _goals;
       private readonly HashSet<Point> _obstacles;
       private readonly IMap _map;
+      private readonly bool _allowDiagonalMovement;
       private bool _isRecomputeNeeded;
 
       /// <summary>
-      /// Constructs a new instance of a GoalMap for the specified Map
+      /// Constructs a new instance of a GoalMap for the specified Map that will not consider diagonal movements to be valid.
       /// </summary>
       /// <param name="map">The Map that this GoalMap will be created for</param>
       /// <exception cref="ArgumentNullException">Thrown on null map</exception>
       public GoalMap( IMap map )
+         : this( map, false )
+      {
+      }
+
+      /// <summary>
+      /// Constructs a new instance of a GoalMap for the specified Map that will consider diagonal movments to be valid if allowDiagonalMovement is set to true.
+      /// </summary>
+      /// <param name="map">The Map that this GoalMap will be created for</param>
+      /// <param name="allowDiagonalMovement">True if diagonal movements are allowed. False otherwise</param>
+      /// <exception cref="ArgumentNullException">Thrown on null map</exception>
+      public GoalMap( IMap map, bool allowDiagonalMovement )
       {
          if ( map == null )
          {
@@ -38,6 +49,7 @@ namespace RogueSharp
          _cellWeights = new int[map.Width, map.Height];
          _goals = new List<WeightedPoint>();
          _obstacles = new HashSet<Point>();
+         _allowDiagonalMovement = allowDiagonalMovement;
          _isRecomputeNeeded = true;
       }
 
@@ -49,7 +61,8 @@ namespace RogueSharp
       /// <param name="weight">The priority of this goal with respect to other goals with lower numbers being a higher priority</param>
       public void AddGoal( int x, int y, int weight )
       {
-         _goals.Add( new WeightedPoint {
+         _goals.Add( new WeightedPoint
+         {
             X = x,
             Y = y,
             Weight = weight
@@ -134,6 +147,7 @@ namespace RogueSharp
       /// In order to make the enemy AI try to flee from the player and his allies, Goals could be set on each object that the
       /// AI should stay away from. Then calling this method will find a path away from those Goals
       /// </exmaple>
+      /// <exception cref="PathNotFoundException">Thrown when there are no possible paths</exception>
       /// <param name="x">X location of the beginning of the path, starting with 0 as the farthest left</param>
       /// <param name="y">Y location of the beginning of the path, starting with 0 as the top</param>
       /// <returns>A Path representing ordered List of Points from the specified location away from Goals and avoiding Obstacles</returns>
@@ -141,6 +155,25 @@ namespace RogueSharp
       {
          MultiplyAndRecomputeCellWeights( -1.2f );
          return FindPath( x, y );
+      }
+
+      /// <summary>
+      /// Returns a Path representing an ordered list of Points from the specified location away from Goals specified in this GoalMap instance
+      /// Distance to the goals and the weight of the goals are both used in determining the priority of avoiding the Goals
+      /// The path must not pass through any Obstacles specified in this GoalMap instance
+      /// Returns null if a Path is not found
+      /// </summary>
+      /// <exmaple>
+      /// In order to make the enemy AI try to flee from the player and his allies, Goals could be set on each object that the
+      /// AI should stay away from. Then calling this method will find a path away from those Goals
+      /// </exmaple>
+      /// <param name="x">X location of the beginning of the path, starting with 0 as the farthest left</param>
+      /// <param name="y">Y location of the beginning of the path, starting with 0 as the top</param>
+      /// <returns>A Path representing ordered List of Points from the specified location away from Goals and avoiding Obstacles. Returns null if a Path is not found</returns>
+      public Path TryFindPathAvoidingGoals( int x, int y )
+      {
+         MultiplyAndRecomputeCellWeights( -1.2f );
+         return TryFindPath( x, y );
       }
 
       private void MultiplyAndRecomputeCellWeights( float amount )
@@ -210,6 +243,28 @@ namespace RogueSharp
       }
 
       /// <summary>
+      /// Returns a shortest Path representing an ordered List of Points from the specified location to the Goal determined to have the highest priority
+      /// Distance to the goals and the weight of the goals are both used in determining the priority
+      /// The path must not pass through any obstacles specified in this GoalMap instance
+      /// null will be returned if a path cannot be found
+      /// </summary>
+      /// <param name="x">X location of the beginning of the path, starting with 0 as the farthest left</param>
+      /// <param name="y">Y location of the beginning of the path, starting with 0 as the top</param>
+      /// <returns>An ordered List of Points representing a shortest path from the specified location to the Goal determined to have the highest priority. null is returned if a path cannot be found</returns>
+      public Path TryFindPath( int x, int y )
+      {
+         ComputeCellWeightsIfNeeded();
+         ReadOnlyCollection<Path> paths = TryFindPaths( x, y );
+
+         if ( paths == null )
+         {
+            return null;
+         }
+
+         return paths.First();
+      }
+
+      /// <summary>
       /// Returns a ReadOnlyCollection of Paths representing all of the shortest paths from the specified location to the Goal or Goals determined to have the highest priority
       /// This method is useful when there are multiple paths that would all work and we want to have some additional logic to pick one of the best paths
       /// The FindPath( int x, int y ) method in the GoalMap class uses this method and then chooses the first path.
@@ -233,7 +288,7 @@ namespace RogueSharp
          if ( !_goals.Any( g => _map.IsWalkable( g.X, g.Y ) ) )
          {
             throw new PathNotFoundException( "A goal must be walkable to find a path" );
-         }  
+         }
 
          ComputeCellWeightsIfNeeded();
          var pathFinder = new GoalMapPathFinder( this );
@@ -242,6 +297,43 @@ namespace RogueSharp
          if ( paths.Count <= 1 && paths[0].Length <= 1 )
          {
             throw new PathNotFoundException( string.Format( "A path from Source ({0}, {1}) to any goal was not found", x, y ) );
+         }
+
+         return paths;
+      }
+
+      /// <summary>
+      /// Returns a ReadOnlyCollection of Paths representing all of the shortest paths from the specified location to the Goal or Goals determined to have the highest priority
+      /// This method is useful when there are multiple paths that would all work and we want to have some additional logic to pick one of the best paths
+      /// The FindPath( int x, int y ) method in the GoalMap class uses this method and then chooses the first path.
+      /// </summary>
+      /// <param name="x">X location of the beginning of the path, starting with 0 as the farthest left</param>
+      /// <param name="y">Y location of the beginning of the path, starting with 0 as the top</param>
+      /// <returns>A ReadOnlyCollection of Paths representing all of the shortest paths from the specified location to the Goal or Goals determined to have the highest priority. Returns null if no path is found.</returns>
+      public ReadOnlyCollection<Path> TryFindPaths( int x, int y )
+      {
+         if ( _goals.Count < 1 )
+         {
+            return null;
+         }
+
+         if ( !_map.IsWalkable( x, y ) )
+         {
+            return null;
+         }
+
+         if ( !_goals.Any( g => _map.IsWalkable( g.X, g.Y ) ) )
+         {
+            return null;
+         }
+
+         ComputeCellWeightsIfNeeded();
+         var pathFinder = new GoalMapPathFinder( this );
+         var paths = pathFinder.FindPaths( x, y );
+
+         if ( paths.Count <= 1 && paths[0].Length <= 1 )
+         {
+            return null;
          }
 
          return paths;
@@ -312,19 +404,11 @@ namespace RogueSharp
       private List<WeightedPoint> GetNeighbors( int x, int y )
       {
          var neighbors = new List<WeightedPoint>();
-         if ( y + 1 < _map.Height && _cellWeights[x, y + 1] != Wall )
-         {
-            // Direction = Direction.Down
-            neighbors.Add( new WeightedPoint {
-               X = x,
-               Y = y + 1,
-               Weight = _cellWeights[x, y + 1]
-            } );
-         }
          if ( y > 0 && _cellWeights[x, y - 1] != Wall )
          {
-            // Direction = Direction.Up
-            neighbors.Add( new WeightedPoint {
+            // NORTH
+            neighbors.Add( new WeightedPoint
+            {
                X = x,
                Y = y - 1,
                Weight = _cellWeights[x, y - 1]
@@ -332,22 +416,79 @@ namespace RogueSharp
          }
          if ( x + 1 < _map.Width && _cellWeights[x + 1, y] != Wall )
          {
-            // Direction = Direction.Right
-            neighbors.Add( new WeightedPoint {
+            // EAST
+            neighbors.Add( new WeightedPoint
+            {
                X = x + 1,
                Y = y,
                Weight = _cellWeights[x + 1, y]
             } );
          }
+         if ( y + 1 < _map.Height && _cellWeights[x, y + 1] != Wall )
+         {
+            // SOUTH
+            neighbors.Add( new WeightedPoint
+            {
+               X = x,
+               Y = y + 1,
+               Weight = _cellWeights[x, y + 1]
+            } );
+         }
          if ( x > 0 && _cellWeights[x - 1, y] != Wall )
          {
-            // Direction = Direction.Up
-            neighbors.Add( new WeightedPoint {
+            // WEST
+            neighbors.Add( new WeightedPoint
+            {
                X = x - 1,
                Y = y,
                Weight = _cellWeights[x - 1, y]
             } );
          }
+
+         if ( _allowDiagonalMovement )
+         {
+            if ( y > 0 && x + 1 < _map.Width && _cellWeights[x + 1, y - 1] != Wall )
+            {
+               // NORTH_EAST
+               neighbors.Add( new WeightedPoint
+               {
+                  X = x + 1,
+                  Y = y - 1,
+                  Weight = _cellWeights[x + 1, y - 1]
+               } );
+            }
+            if ( x > 0 && y > 0 && _cellWeights[x - 1, y - 1] != Wall )
+            {
+               // NORTH_WEST
+               neighbors.Add( new WeightedPoint
+               {
+                  X = x - 1,
+                  Y = y - 1,
+                  Weight = _cellWeights[x - 1, y - 1]
+               } );
+            }
+            if ( y + 1 < _map.Height && x + 1 < _map.Width && _cellWeights[x + 1, y + 1] != Wall )
+            {
+               // SOUTH_EAST
+               neighbors.Add( new WeightedPoint
+               {
+                  X = x + 1,
+                  Y = y + 1,
+                  Weight = _cellWeights[x + 1, y + 1]
+               } );
+            }
+            if ( y + 1 < _map.Height && x > 0 && _cellWeights[x - 1, y + 1] != Wall )
+            {
+               // SOUTH_WEST
+               neighbors.Add( new WeightedPoint
+               {
+                  X = x - 1,
+                  Y = y + 1,
+                  Weight = _cellWeights[x - 1, y + 1]
+               } );
+            }
+         }
+
          return neighbors;
       }
 
@@ -409,19 +550,34 @@ namespace RogueSharp
 
       private struct WeightedPoint : IEquatable<WeightedPoint>
       {
-         public Point Point;
-         public int Weight { get; set; }
+         private Point _point;
+         public int Weight
+         {
+            get; set;
+         }
 
          public int X
          {
-            get { return Point.X; }
-            set { Point.X = value; }
+            get
+            {
+               return _point.X;
+            }
+            set
+            {
+               _point.X = value;
+            }
          }
 
          public int Y
          {
-            get { return Point.Y; }
-            set { Point.Y = value; }
+            get
+            {
+               return _point.Y;
+            }
+            set
+            {
+               _point.Y = value;
+            }
          }
 
          public bool Equals( WeightedPoint other )
