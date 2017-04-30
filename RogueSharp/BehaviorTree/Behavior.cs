@@ -25,7 +25,6 @@
          get
          {
             return Status == Status.Running;
-
          }
       }
 
