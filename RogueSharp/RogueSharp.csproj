@@ -57,6 +57,13 @@
     <Compile Include="Algorithms\Graph.cs" />
     <Compile Include="Algorithms\IndexMinPriorityQueue.cs" />
     <Compile Include="Algorithms\UnionFind.cs" />
+    <Compile Include="BehaviorTree\Behavior.cs" />
+    <Compile Include="BehaviorTree\Composite.cs" />
+    <Compile Include="BehaviorTree\Decorator.cs" />
+    <Compile Include="BehaviorTree\Repeat.cs" />
+    <Compile Include="BehaviorTree\Selector.cs" />
+    <Compile Include="BehaviorTree\Sequence.cs" />
+    <Compile Include="BehaviorTree\Status.cs" />
     <Compile Include="Cell.cs" />
     <Compile Include="DiceNotation\Dice.cs" />
     <Compile Include="DiceNotation\DiceExpression.cs" />

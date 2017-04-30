@@ -46,6 +46,9 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BehaviorTree\BehaviorTest.cs" />
+    <Compile Include="BehaviorTree\MockBehavior.cs" />
+    <Compile Include="BehaviorTree\RepeatTest.cs" />
     <Compile Include="PathFinderTest.cs" />
     <Compile Include="DiceNotation\ConstantTermTest.cs" />
     <Compile Include="DiceNotation\DiceExpressionTest.cs" />
@@ -69,6 +72,7 @@
       <Name>RogueSharp</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
