@@ -33,16 +33,16 @@
          Status = Status.Invalid;
       }
 
-      public virtual Status Update()
+      protected virtual Status Update()
       {
          return Status;
       }
 
-      public virtual void OnInitialize()
+      protected virtual void OnInitialize()
       {
       }
 
-      public virtual void OnTerminate( Status status )
+      protected virtual void OnTerminate( Status status )
       {
       }
 

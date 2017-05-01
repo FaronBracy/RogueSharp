@@ -4,12 +4,12 @@ namespace RogueSharp.BehaviorTree
    {
       private int _currentIndex;
 
-      public override void OnInitialize()
+      protected override void OnInitialize()
       {
          _currentIndex = 0;
       }
 
-      public override Status Update()
+      protected override Status Update()
       {
          while ( true )
          {

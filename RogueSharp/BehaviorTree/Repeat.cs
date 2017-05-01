@@ -19,7 +19,7 @@
       {
       }
 
-      public override Status Update()
+      protected override Status Update()
       {
          while ( true )
          {
@@ -42,7 +42,7 @@
          return Status.Invalid;
       }
 
-      public override void OnInitialize()
+      protected override void OnInitialize()
       {
          Counter = 0;
       }

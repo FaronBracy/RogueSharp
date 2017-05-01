@@ -39,18 +39,18 @@ namespace RogueSharp.Test.BehaviorTree
          TerminateStatus = Status.Invalid;
       }
 
-      public override Status Update()
+      protected override Status Update()
       {
          UpdateCalled++;
          return ReturnStatus;
       }
 
-      public override void OnInitialize()
+      protected override void OnInitialize()
       {
          InitializeCalled++;
       }
 
-      public override void OnTerminate( Status status )
+      protected override void OnTerminate( Status status )
       {
          TerminateCalled++;
          TerminateStatus = status;
