@@ -15,14 +15,14 @@ namespace RogueSharp.BehaviorTree
          {
             Status status = _children[_currentIndex].Tick();
 
-            if ( Status != Status.Failure )
+            if ( status != Status.Failure )
             {
                return status;
             }
 
             if ( ++_currentIndex >= _children.Count )
             {
-               return Status.Success;
+               return Status.Failure;
             }
          }
       }

@@ -51,6 +51,7 @@
     <Compile Include="BehaviorTree\MockBehavior.cs" />
     <Compile Include="BehaviorTree\MockComposite.cs" />
     <Compile Include="BehaviorTree\RepeatTest.cs" />
+    <Compile Include="BehaviorTree\SelectorTest.cs" />
     <Compile Include="BehaviorTree\SequenceTest.cs" />
     <Compile Include="PathFinderTest.cs" />
     <Compile Include="DiceNotation\ConstantTermTest.cs" />
