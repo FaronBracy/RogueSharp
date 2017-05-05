@@ -5,7 +5,7 @@
       public int Limit
       {
          get;
-         set;
+         private set;
       }
 
       public int Counter
@@ -14,9 +14,10 @@
          private set;
       }
 
-      public Repeat( Behavior child )
+      public Repeat( Behavior child, int limit )
          : base( child )
       {
+         Limit = limit;
       }
 
       protected override Status Update()
@@ -27,7 +28,6 @@
             if ( status == Status.Running )
             {
                break;
-               //return Status.Running;
             }
             if ( status == Status.Failure )
             {

@@ -11,10 +11,10 @@ namespace RogueSharp.Test.BehaviorTree
       {
          MockBehavior mockBehavior = new MockBehavior();
          mockBehavior.ReturnStatus = Status.Success;
-         Repeat repeat = new Repeat( mockBehavior );
-         repeat.Limit = 3;
+         Repeat repeat = new Repeat( mockBehavior, 3 );
 
          Status status = repeat.Tick();
+         Assert.AreEqual( Status.Success, status );  
          Assert.AreEqual( 3, repeat.Counter );
          Assert.AreEqual( 3, mockBehavior.InitializeCalled );
          Assert.AreEqual( 3, mockBehavior.UpdateCalled );
