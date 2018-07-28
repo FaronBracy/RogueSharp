@@ -1,0 +1,273 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+	<!--[if lt IE 9]>
+	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+    <title>Path - RogueSharp Documentation</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+    <link type="text/css" rel="stylesheet" href="../main.css"/>
+    <script type="text/javascript" src="../js/jquery-1.3.2.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.scrollTo-min.js"></script>
+    <script type="text/javascript" src="../js/navigation.js"></script>
+    <script type="text/javascript" src="../js/example.js"></script>
+  </head>
+  <body>
+  	<header><h1>RogueSharp : API Documentation</h1>
+	</header>
+<nav id="namespaces">
+	<h2 class="fixed">Namespaces</h2>
+	<div class="scroll">
+		<ul>
+			<li>
+          <a href="../RogueSharp/index.htm" class="current">RogueSharp</a>
+      </li>
+			<li>
+          <a href="../RogueSharp.Algorithms/index.htm">RogueSharp.Algorithms</a>
+      </li>
+			<li>
+          <a href="../RogueSharp.DiceNotation/index.htm">RogueSharp.DiceNotation</a>
+      </li>
+			<li>
+          <a href="../RogueSharp.DiceNotation.Exceptions/index.htm">RogueSharp.DiceNotation.Exceptions</a>
+      </li>
+			<li>
+          <a href="../RogueSharp.DiceNotation.Terms/index.htm">RogueSharp.DiceNotation.Terms</a>
+      </li>
+			<li>
+          <a href="../RogueSharp.MapCreation/index.htm">RogueSharp.MapCreation</a>
+      </li>
+			<li>
+          <a href="../RogueSharp.Random/index.htm">RogueSharp.Random</a>
+      </li>
+		</ul>
+	</div>
+</nav><nav id="types">
+  <h2 class="fixed">Types in RogueSharp</h2>
+	<div class="scroll">
+		<ul>
+				<li>
+            <a href="../RogueSharp/Cell.htm">Cell</a>
+        </li>
+				<li>
+            <a href="../RogueSharp/CellProperties.htm">CellProperties</a>
+        </li>
+				<li>
+            <a href="../RogueSharp/FieldOfView.htm">FieldOfView</a>
+        </li>
+				<li>
+            <a href="../RogueSharp/GoalMap.htm">GoalMap</a>
+        </li>
+				<li>
+            <a href="../RogueSharp/ICell.htm">ICell</a>
+        </li>
+				<li>
+            <a href="../RogueSharp/IGoalMap.htm">IGoalMap</a>
+        </li>
+				<li>
+            <a href="../RogueSharp/IMap.htm">IMap</a>
+        </li>
+				<li>
+            <a href="../RogueSharp/Map.htm">Map</a>
+        </li>
+				<li>
+            <a href="../RogueSharp/MapState.htm">MapState</a>
+        </li>
+				<li>
+            <a href="../RogueSharp/NoMoreStepsException.htm">NoMoreStepsException</a>
+        </li>
+				<li>
+            <a href="../RogueSharp/Path.htm" class="current">Path</a>
+        </li>
+				<li>
+            <a href="../RogueSharp/PathFinder.htm">PathFinder</a>
+        </li>
+				<li>
+            <a href="../RogueSharp/PathNotFoundException.htm">PathNotFoundException</a>
+        </li>
+				<li>
+            <a href="../RogueSharp/Point.htm">Point</a>
+        </li>
+				<li>
+            <a href="../RogueSharp/Rectangle.htm">Rectangle</a>
+        </li>
+		</ul>
+	</div>
+</nav>
+	<article>
+    <header>
+		<p class="class"><strong>Type</strong> Path</p>
+	</header>
+	<section>
+		<header>
+		<p><strong>Namespace</strong> RogueSharp</p>
+		</header>
+    <div class="sub-header">
+			<div id="summary">A class representing an ordered list of Cells from Start to End
+The path can be traversed by the StepForward and StepBackward methods
+Implemented by a doubly linked list 
+			</div>
+		
+		
+			<h3 class="section">Methods</h3>
+			<ul>
+				<li><a href="../RogueSharp/Path.htm#StepBackward">StepBackward</a></li>
+				<li><a href="../RogueSharp/Path.htm#StepForward">StepForward</a></li>
+				<li><a href="../RogueSharp/Path.htm#TryStepBackward">TryStepBackward</a></li>
+				<li><a href="../RogueSharp/Path.htm#TryStepForward">TryStepForward</a></li>
+			</ul>
+		
+			<h3 class="section">Properties</h3>
+			<ul>
+				<li><a href="../RogueSharp/Path.htm#CurrentStep">CurrentStep</a></li>
+				<li><a href="../RogueSharp/Path.htm#End">End</a></li>
+				<li><a href="../RogueSharp/Path.htm#Length">Length</a></li>
+				<li><a href="../RogueSharp/Path.htm#Start">Start</a></li>
+				<li><a href="../RogueSharp/Path.htm#Steps">Steps</a></li>
+			</ul>
+		
+	</div>
+	
+	<h3 class="section">Public instance methods</h3>
+
+	<div id="StepBackward" class="method">
+		<h4>
+			<a href="../RogueSharp/ICell.htm">ICell</a> <strong>StepBackward</strong>()
+		</h4>
+		<div class="content">Move backwards along this Path and rewind the CurrentStep to the previous Step in the Path 
+
+
+
+			<div class="return">
+
+				<h5>Returns</h5>
+				<dl>
+					<dt>
+						<code><a href="../RogueSharp/ICell.htm">ICell</a></code>
+					</dt>
+					<dd>A Cell representing the Step that was moved to as we back up along the Path 
+					</dd>
+				</dl>
+			</div>
+
+		</div>
+	</div>
+	<div id="StepForward" class="method">
+		<h4>
+			<a href="../RogueSharp/ICell.htm">ICell</a> <strong>StepForward</strong>()
+		</h4>
+		<div class="content">Move forward along this Path and advance the CurrentStep to the next Step in the Path 
+
+
+
+			<div class="return">
+
+				<h5>Returns</h5>
+				<dl>
+					<dt>
+						<code><a href="../RogueSharp/ICell.htm">ICell</a></code>
+					</dt>
+					<dd>A Cell representing the Step that was moved to as we advanced along the Path 
+					</dd>
+				</dl>
+			</div>
+
+		</div>
+	</div>
+	<div id="TryStepBackward" class="method">
+		<h4>
+			<a href="../RogueSharp/ICell.htm">ICell</a> <strong>TryStepBackward</strong>()
+		</h4>
+		<div class="content">Move backwards along this Path and rewind the CurrentStep to the next Step in the Path 
+
+
+
+			<div class="return">
+
+				<h5>Returns</h5>
+				<dl>
+					<dt>
+						<code><a href="../RogueSharp/ICell.htm">ICell</a></code>
+					</dt>
+					<dd>A Cell representing the Step that was moved to as we back up along the Path. If there is not another Cell in the path to back up to null is returned 
+					</dd>
+				</dl>
+			</div>
+
+		</div>
+	</div>
+	<div id="TryStepForward" class="method">
+		<h4>
+			<a href="../RogueSharp/ICell.htm">ICell</a> <strong>TryStepForward</strong>()
+		</h4>
+		<div class="content">Move forward along this Path and advance the CurrentStep to the next Step in the Path 
+
+
+
+			<div class="return">
+
+				<h5>Returns</h5>
+				<dl>
+					<dt>
+						<code><a href="../RogueSharp/ICell.htm">ICell</a></code>
+					</dt>
+					<dd>A Cell representing the Step that was moved to as we advanced along the Path. If there is not another Cell in the path to advance to null is returned 
+					</dd>
+				</dl>
+			</div>
+
+		</div>
+	</div>
+	
+	
+	<h3 class="section">Public properties</h3>
+
+	<div id="CurrentStep" class="method">
+		<h4>
+			<a href="../RogueSharp/ICell.htm">ICell</a> <strong>CurrentStep</strong> get; 
+		</h4>
+		<div class="content">The Cell represeting the step that is currently occupied in this Path 
+
+		</div>
+	</div>
+	<div id="End" class="method">
+		<h4>
+			<a href="../RogueSharp/ICell.htm">ICell</a> <strong>End</strong> get; 
+		</h4>
+		<div class="content">The Cell representing the last step or End of this Path 
+
+		</div>
+	</div>
+	<div id="Length" class="method">
+		<h4>
+			<span title="System.int">int</span> <strong>Length</strong> get; 
+		</h4>
+		<div class="content">The number of steps in this Path 
+
+		</div>
+	</div>
+	<div id="Start" class="method">
+		<h4>
+			<a href="../RogueSharp/ICell.htm">ICell</a> <strong>Start</strong> get; 
+		</h4>
+		<div class="content">The Cell representing the first step or Start of this Path 
+
+		</div>
+	</div>
+	<div id="Steps" class="method">
+		<h4>
+			<span title="System.Collections.Generic.IEnumerable<ICell>">IEnumerable&lt;ICell&gt;</span> <strong>Steps</strong> get; 
+		</h4>
+		<div class="content">All of the Cells representing the Steps in this Path from Start to End as an IEnumerable 
+
+		</div>
+	</div>
+	</section>
+	</article><footer>
+	<span id="version">Built from v1.0.0.0 of RogueSharp</span>
+	<span id="docu-link">
+		Generated by <a href="http://docu.jagregory.com">docu</a>
+	</span>
+</footer>
+  </body>
+</html>

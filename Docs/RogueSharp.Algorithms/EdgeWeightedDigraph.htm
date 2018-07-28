@@ -1,0 +1,241 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+	<!--[if lt IE 9]>
+	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+    <title>EdgeWeightedDigraph - RogueSharp Documentation</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+    <link type="text/css" rel="stylesheet" href="../main.css"/>
+    <script type="text/javascript" src="../js/jquery-1.3.2.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.scrollTo-min.js"></script>
+    <script type="text/javascript" src="../js/navigation.js"></script>
+    <script type="text/javascript" src="../js/example.js"></script>
+  </head>
+  <body>
+  	<header><h1>RogueSharp : API Documentation</h1>
+	</header>
+<nav id="namespaces">
+	<h2 class="fixed">Namespaces</h2>
+	<div class="scroll">
+		<ul>
+			<li>
+          <a href="../RogueSharp/index.htm">RogueSharp</a>
+      </li>
+			<li>
+          <a href="../RogueSharp.Algorithms/index.htm" class="current">RogueSharp.Algorithms</a>
+      </li>
+			<li>
+          <a href="../RogueSharp.DiceNotation/index.htm">RogueSharp.DiceNotation</a>
+      </li>
+			<li>
+          <a href="../RogueSharp.DiceNotation.Exceptions/index.htm">RogueSharp.DiceNotation.Exceptions</a>
+      </li>
+			<li>
+          <a href="../RogueSharp.DiceNotation.Terms/index.htm">RogueSharp.DiceNotation.Terms</a>
+      </li>
+			<li>
+          <a href="../RogueSharp.MapCreation/index.htm">RogueSharp.MapCreation</a>
+      </li>
+			<li>
+          <a href="../RogueSharp.Random/index.htm">RogueSharp.Random</a>
+      </li>
+		</ul>
+	</div>
+</nav><nav id="types">
+  <h2 class="fixed">Types in RogueSharp.Algorithms</h2>
+	<div class="scroll">
+		<ul>
+				<li>
+            <a href="../RogueSharp.Algorithms/DepthFirstPaths.htm">DepthFirstPaths</a>
+        </li>
+				<li>
+            <a href="../RogueSharp.Algorithms/DijkstraShortestPath.htm">DijkstraShortestPath</a>
+        </li>
+				<li>
+            <a href="../RogueSharp.Algorithms/DirectedEdge.htm">DirectedEdge</a>
+        </li>
+				<li>
+            <a href="../RogueSharp.Algorithms/EdgeWeightedDigraph.htm" class="current">EdgeWeightedDigraph</a>
+        </li>
+				<li>
+            <a href="../RogueSharp.Algorithms/Graph.htm">Graph</a>
+        </li>
+				<li>
+            <a href="../RogueSharp.Algorithms/IndexMinPriorityQueue`1.htm">IndexMinPriorityQueue&lt;T&gt;</a>
+        </li>
+				<li>
+            <a href="../RogueSharp.Algorithms/UnionFind.htm">UnionFind</a>
+        </li>
+		</ul>
+	</div>
+</nav>
+	<article>
+    <header>
+		<p class="class"><strong>Type</strong> EdgeWeightedDigraph</p>
+	</header>
+	<section>
+		<header>
+		<p><strong>Namespace</strong> RogueSharp.Algorithms</p>
+		</header>
+    <div class="sub-header">
+			<div id="summary">The EdgeWeightedDigrpah class represents an edge-weighted directed graph of vertices named 0 through V-1, where each directed edge
+is of type DirectedEdge and has real-valued weight. 
+			</div>
+		
+		
+			<h3 class="section">Methods</h3>
+			<ul>
+				<li><a href="../RogueSharp.Algorithms/EdgeWeightedDigraph.htm#AddEdge">AddEdge</a></li>
+				<li><a href="../RogueSharp.Algorithms/EdgeWeightedDigraph.htm#Adjacent">Adjacent</a></li>
+				<li><a href="../RogueSharp.Algorithms/EdgeWeightedDigraph.htm#Edges">Edges</a></li>
+				<li><a href="../RogueSharp.Algorithms/EdgeWeightedDigraph.htm#OutDegree">OutDegree</a></li>
+			</ul>
+		
+			<h3 class="section">Properties</h3>
+			<ul>
+				<li><a href="../RogueSharp.Algorithms/EdgeWeightedDigraph.htm#NumberOfEdges">NumberOfEdges</a></li>
+				<li><a href="../RogueSharp.Algorithms/EdgeWeightedDigraph.htm#NumberOfVertices">NumberOfVertices</a></li>
+			</ul>
+		
+	</div>
+	
+	<h3 class="section">Public instance methods</h3>
+
+	<div id="AddEdge" class="method">
+		<h4>
+			<span title="System.void">void</span> <strong>AddEdge</strong>(<a href="../RogueSharp.Algorithms/DirectedEdge.htm">DirectedEdge</a> edge)
+		</h4>
+		<div class="content">Adds the specified directed edge to the edge-weighted digraph 
+
+
+			<div class="parameters">
+				<h5>Parameters</h5>
+				<dl>
+						<dt>
+							<code><a href="../RogueSharp.Algorithms/DirectedEdge.htm">DirectedEdge</a></code> edge
+						</dt>
+						<dd>The DirectedEdge to add 
+						</dd>
+				</dl>
+			</div>
+
+
+		</div>
+	</div>
+	<div id="Adjacent" class="method">
+		<h4>
+			<span title="System.Collections.Generic.IEnumerable<DirectedEdge>">IEnumerable&lt;DirectedEdge&gt;</span> <strong>Adjacent</strong>(<span title="System.int">int</span> vertex)
+		</h4>
+		<div class="content">Returns an IEnumerable of the DirectedEdges incident from the specified vertex 
+
+
+			<div class="parameters">
+				<h5>Parameters</h5>
+				<dl>
+						<dt>
+							<code><span title="System.int">int</span></code> vertex
+						</dt>
+						<dd>The vertex to find incident DirectedEdges from 
+						</dd>
+				</dl>
+			</div>
+
+			<div class="return">
+
+				<h5>Returns</h5>
+				<dl>
+					<dt>
+						<code><span title="System.Collections.Generic.IEnumerable<DirectedEdge>">IEnumerable&lt;DirectedEdge&gt;</span></code>
+					</dt>
+					<dd>IEnumerable of the DirectedEdges incident from the specified vertex 
+					</dd>
+				</dl>
+			</div>
+
+		</div>
+	</div>
+	<div id="Edges" class="method">
+		<h4>
+			<span title="System.Collections.Generic.IEnumerable<DirectedEdge>">IEnumerable&lt;DirectedEdge&gt;</span> <strong>Edges</strong>()
+		</h4>
+		<div class="content">Returns an IEnumerable of all directed edges in the edge-weighted digraph 
+
+
+
+			<div class="return">
+
+				<h5>Returns</h5>
+				<dl>
+					<dt>
+						<code><span title="System.Collections.Generic.IEnumerable<DirectedEdge>">IEnumerable&lt;DirectedEdge&gt;</span></code>
+					</dt>
+					<dd>IEnumerable of of all directed edges in the edge-weighted digraph 
+					</dd>
+				</dl>
+			</div>
+
+		</div>
+	</div>
+	<div id="OutDegree" class="method">
+		<h4>
+			<span title="System.int">int</span> <strong>OutDegree</strong>(<span title="System.int">int</span> vertex)
+		</h4>
+		<div class="content">Returns the number of directed edges incident from the specified vertex
+This is known as the outdegree of the vertex 
+
+
+			<div class="parameters">
+				<h5>Parameters</h5>
+				<dl>
+						<dt>
+							<code><span title="System.int">int</span></code> vertex
+						</dt>
+						<dd>The vertex to find find the outdegree of 
+						</dd>
+				</dl>
+			</div>
+
+			<div class="return">
+
+				<h5>Returns</h5>
+				<dl>
+					<dt>
+						<code><span title="System.int">int</span></code>
+					</dt>
+					<dd>The number of directed edges incident from the specified vertex 
+					</dd>
+				</dl>
+			</div>
+
+		</div>
+	</div>
+	
+	
+	<h3 class="section">Public properties</h3>
+
+	<div id="NumberOfEdges" class="method">
+		<h4>
+			<span title="System.int">int</span> <strong>NumberOfEdges</strong> get; set;
+		</h4>
+		<div class="content">The number of edges in the edge-weighted digraph 
+
+		</div>
+	</div>
+	<div id="NumberOfVertices" class="method">
+		<h4>
+			<span title="System.int">int</span> <strong>NumberOfVertices</strong> get; set;
+		</h4>
+		<div class="content">The number of vertices in the edge-weighted digraph 
+
+		</div>
+	</div>
+	</section>
+	</article><footer>
+	<span id="version">Built from v1.0.0.0 of RogueSharp</span>
+	<span id="docu-link">
+		Generated by <a href="http://docu.jagregory.com">docu</a>
+	</span>
+</footer>
+  </body>
+</html>

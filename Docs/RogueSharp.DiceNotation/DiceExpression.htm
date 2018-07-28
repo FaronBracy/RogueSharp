@@ -1,0 +1,439 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+	<!--[if lt IE 9]>
+	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+    <title>DiceExpression - RogueSharp Documentation</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+    <link type="text/css" rel="stylesheet" href="../main.css"/>
+    <script type="text/javascript" src="../js/jquery-1.3.2.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.scrollTo-min.js"></script>
+    <script type="text/javascript" src="../js/navigation.js"></script>
+    <script type="text/javascript" src="../js/example.js"></script>
+  </head>
+  <body>
+  	<header><h1>RogueSharp : API Documentation</h1>
+	</header>
+<nav id="namespaces">
+	<h2 class="fixed">Namespaces</h2>
+	<div class="scroll">
+		<ul>
+			<li>
+          <a href="../RogueSharp/index.htm">RogueSharp</a>
+      </li>
+			<li>
+          <a href="../RogueSharp.Algorithms/index.htm">RogueSharp.Algorithms</a>
+      </li>
+			<li>
+          <a href="../RogueSharp.DiceNotation/index.htm" class="current">RogueSharp.DiceNotation</a>
+      </li>
+			<li>
+          <a href="../RogueSharp.DiceNotation.Exceptions/index.htm">RogueSharp.DiceNotation.Exceptions</a>
+      </li>
+			<li>
+          <a href="../RogueSharp.DiceNotation.Terms/index.htm">RogueSharp.DiceNotation.Terms</a>
+      </li>
+			<li>
+          <a href="../RogueSharp.MapCreation/index.htm">RogueSharp.MapCreation</a>
+      </li>
+			<li>
+          <a href="../RogueSharp.Random/index.htm">RogueSharp.Random</a>
+      </li>
+		</ul>
+	</div>
+</nav><nav id="types">
+  <h2 class="fixed">Types in RogueSharp.DiceNotation</h2>
+	<div class="scroll">
+		<ul>
+				<li>
+            <a href="../RogueSharp.DiceNotation/Dice.htm">Dice</a>
+        </li>
+				<li>
+            <a href="../RogueSharp.DiceNotation/DiceExpression.htm" class="current">DiceExpression</a>
+        </li>
+				<li>
+            <a href="../RogueSharp.DiceNotation/DiceParser.htm">DiceParser</a>
+        </li>
+				<li>
+            <a href="../RogueSharp.DiceNotation/DiceResult.htm">DiceResult</a>
+        </li>
+				<li>
+            <a href="../RogueSharp.DiceNotation/IDiceParser.htm">IDiceParser</a>
+        </li>
+				<li>
+            <a href="../RogueSharp.DiceNotation/TermResult.htm">TermResult</a>
+        </li>
+		</ul>
+	</div>
+</nav>
+	<article>
+    <header>
+		<p class="class"><strong>Type</strong> DiceExpression</p>
+	</header>
+	<section>
+		<header>
+		<p><strong>Namespace</strong> RogueSharp.DiceNotation</p>
+		</header>
+    <div class="sub-header">
+			<div id="summary">The DiceExpression class can be used to fluently add DiceTerms to a collection and then Roll them. 
+			</div>
+		
+		
+			<h3 class="section">Methods</h3>
+			<ul>
+				<li><a href="../RogueSharp.DiceNotation/DiceExpression.htm#Constant">Constant</a></li>
+				<li><a href="../RogueSharp.DiceNotation/DiceExpression.htm#Dice">Dice</a></li>
+				<li><a href="../RogueSharp.DiceNotation/DiceExpression.htm#Dice">Dice</a></li>
+				<li><a href="../RogueSharp.DiceNotation/DiceExpression.htm#Dice">Dice</a></li>
+				<li><a href="../RogueSharp.DiceNotation/DiceExpression.htm#Die">Die</a></li>
+				<li><a href="../RogueSharp.DiceNotation/DiceExpression.htm#Die">Die</a></li>
+				<li><a href="../RogueSharp.DiceNotation/DiceExpression.htm#MaxRoll">MaxRoll</a></li>
+				<li><a href="../RogueSharp.DiceNotation/DiceExpression.htm#MinRoll">MinRoll</a></li>
+				<li><a href="../RogueSharp.DiceNotation/DiceExpression.htm#Roll">Roll</a></li>
+				<li><a href="../RogueSharp.DiceNotation/DiceExpression.htm#Roll">Roll</a></li>
+			</ul>
+		
+		
+	</div>
+	
+	<h3 class="section">Public instance methods</h3>
+
+	<div id="Constant" class="method">
+		<h4>
+			<a href="../RogueSharp.DiceNotation/DiceExpression.htm">DiceExpression</a> <strong>Constant</strong>(<span title="System.int">int</span> value)
+		</h4>
+		<div class="content">Add a constant to this DiceExpression with the specified integer value 
+
+
+			<div class="parameters">
+				<h5>Parameters</h5>
+				<dl>
+						<dt>
+							<code><span title="System.int">int</span></code> value
+						</dt>
+						<dd>An integer constant to add to this DiceExpression 
+						</dd>
+				</dl>
+			</div>
+
+			<div class="return">
+
+				<h5>Returns</h5>
+				<dl>
+					<dt>
+						<code><a href="../RogueSharp.DiceNotation/DiceExpression.htm">DiceExpression</a></code>
+					</dt>
+					<dd>A DiceExpression representing the previous terms in this DiceExpression plus this newly added Constant 
+					</dd>
+				</dl>
+			</div>
+
+		</div>
+	</div>
+	<div id="Dice" class="method">
+		<h4>
+			<a href="../RogueSharp.DiceNotation/DiceExpression.htm">DiceExpression</a> <strong>Dice</strong>(<span title="System.int">int</span> multiplicity, <span title="System.int">int</span> sides, <span title="System.int">int</span> scalar)
+		</h4>
+		<div class="content">Add multiple Dice to this DiceExpression with the specified parameters 
+
+
+			<div class="parameters">
+				<h5>Parameters</h5>
+				<dl>
+						<dt>
+							<code><span title="System.int">int</span></code> multiplicity
+						</dt>
+						<dd>The number of Dice 
+						</dd>
+						<dt>
+							<code><span title="System.int">int</span></code> sides
+						</dt>
+						<dd>The number of sides per Die 
+						</dd>
+						<dt>
+							<code><span title="System.int">int</span></code> scalar
+						</dt>
+						<dd>The value to multiply the result of the Roll of these Dice by 
+						</dd>
+				</dl>
+			</div>
+
+			<div class="return">
+
+				<h5>Returns</h5>
+				<dl>
+					<dt>
+						<code><a href="../RogueSharp.DiceNotation/DiceExpression.htm">DiceExpression</a></code>
+					</dt>
+					<dd>A DiceExpression representing the previous terms in this DiceExpression plus these newly added Dice 
+					</dd>
+				</dl>
+			</div>
+
+		</div>
+	</div>
+	<div id="Dice" class="method">
+		<h4>
+			<a href="../RogueSharp.DiceNotation/DiceExpression.htm">DiceExpression</a> <strong>Dice</strong>(<span title="System.int">int</span> multiplicity, <span title="System.int">int</span> sides)
+		</h4>
+		<div class="content">Add multiple Dice to this DiceExpression with the specified parameters 
+
+
+			<div class="parameters">
+				<h5>Parameters</h5>
+				<dl>
+						<dt>
+							<code><span title="System.int">int</span></code> multiplicity
+						</dt>
+						<dd>The number of Dice 
+						</dd>
+						<dt>
+							<code><span title="System.int">int</span></code> sides
+						</dt>
+						<dd>The number of sides per Die 
+						</dd>
+				</dl>
+			</div>
+
+			<div class="return">
+
+				<h5>Returns</h5>
+				<dl>
+					<dt>
+						<code><a href="../RogueSharp.DiceNotation/DiceExpression.htm">DiceExpression</a></code>
+					</dt>
+					<dd>A DiceExpression representing the previous terms in this DiceExpression plus these newly added Dice 
+					</dd>
+				</dl>
+			</div>
+
+		</div>
+	</div>
+	<div id="Dice" class="method">
+		<h4>
+			<a href="../RogueSharp.DiceNotation/DiceExpression.htm">DiceExpression</a> <strong>Dice</strong>(<span title="System.int">int</span> multiplicity, <span title="System.int">int</span> sides, <span title="System.int">int</span> scalar, <span title="System.Nullable<int>">Nullable&lt;int&gt;</span> choose)
+		</h4>
+		<div class="content">Add multiple Dice to this DiceExpression with the specified parameters 
+
+
+			<div class="parameters">
+				<h5>Parameters</h5>
+				<dl>
+						<dt>
+							<code><span title="System.int">int</span></code> multiplicity
+						</dt>
+						<dd>The number of Dice 
+						</dd>
+						<dt>
+							<code><span title="System.int">int</span></code> sides
+						</dt>
+						<dd>The number of sides per Die 
+						</dd>
+						<dt>
+							<code><span title="System.int">int</span></code> scalar
+						</dt>
+						<dd>The value to multiply the result of the Roll of these Dice by 
+						</dd>
+						<dt>
+							<code><span title="System.Nullable<int>">Nullable&lt;int&gt;</span></code> choose
+						</dt>
+						<dd>Optional number of dice to choose out of the total rolled. The highest rolled Dice will be choosen. 
+						</dd>
+				</dl>
+			</div>
+
+			<div class="return">
+
+				<h5>Returns</h5>
+				<dl>
+					<dt>
+						<code><a href="../RogueSharp.DiceNotation/DiceExpression.htm">DiceExpression</a></code>
+					</dt>
+					<dd>A DiceExpression representing the previous terms in this DiceExpression plus these newly added Dice 
+					</dd>
+				</dl>
+			</div>
+
+		</div>
+	</div>
+	<div id="Die" class="method">
+		<h4>
+			<a href="../RogueSharp.DiceNotation/DiceExpression.htm">DiceExpression</a> <strong>Die</strong>(<span title="System.int">int</span> sides, <span title="System.int">int</span> scalar)
+		</h4>
+		<div class="content">Add a single Die to this DiceExpression with the specified number of sides and scalar 
+
+
+			<div class="parameters">
+				<h5>Parameters</h5>
+				<dl>
+						<dt>
+							<code><span title="System.int">int</span></code> sides
+						</dt>
+						<dd>The number of sides on the Die to add to this DiceExpression 
+						</dd>
+						<dt>
+							<code><span title="System.int">int</span></code> scalar
+						</dt>
+						<dd>The value to multiply the result of the Roll of this Die by 
+						</dd>
+				</dl>
+			</div>
+
+			<div class="return">
+
+				<h5>Returns</h5>
+				<dl>
+					<dt>
+						<code><a href="../RogueSharp.DiceNotation/DiceExpression.htm">DiceExpression</a></code>
+					</dt>
+					<dd>A DiceExpression representing the previous terms in this DiceExpression plus this newly added Die 
+					</dd>
+				</dl>
+			</div>
+
+		</div>
+	</div>
+	<div id="Die" class="method">
+		<h4>
+			<a href="../RogueSharp.DiceNotation/DiceExpression.htm">DiceExpression</a> <strong>Die</strong>(<span title="System.int">int</span> sides)
+		</h4>
+		<div class="content">Add a single Die to this DiceExpression with the specified number of sides 
+
+
+			<div class="parameters">
+				<h5>Parameters</h5>
+				<dl>
+						<dt>
+							<code><span title="System.int">int</span></code> sides
+						</dt>
+						<dd>The number of sides on the Die to add to this DiceExpression 
+						</dd>
+				</dl>
+			</div>
+
+			<div class="return">
+
+				<h5>Returns</h5>
+				<dl>
+					<dt>
+						<code><a href="../RogueSharp.DiceNotation/DiceExpression.htm">DiceExpression</a></code>
+					</dt>
+					<dd>A DiceExpression representing the previous terms in this DiceExpression plus this newly added Die 
+					</dd>
+				</dl>
+			</div>
+
+		</div>
+	</div>
+	<div id="MaxRoll" class="method">
+		<h4>
+			<a href="../RogueSharp.DiceNotation/DiceResult.htm">DiceResult</a> <strong>MaxRoll</strong>()
+		</h4>
+		<div class="content">Roll all of the Dice that are part of this DiceExpression, but force all of the rolls to be the highest possible result 
+
+
+
+			<div class="return">
+
+				<h5>Returns</h5>
+				<dl>
+					<dt>
+						<code><a href="../RogueSharp.DiceNotation/DiceResult.htm">DiceResult</a></code>
+					</dt>
+					<dd>A DiceResult representing the results of this Roll. All dice should have rolled their maximum values 
+					</dd>
+				</dl>
+			</div>
+
+		</div>
+	</div>
+	<div id="MinRoll" class="method">
+		<h4>
+			<a href="../RogueSharp.DiceNotation/DiceResult.htm">DiceResult</a> <strong>MinRoll</strong>()
+		</h4>
+		<div class="content">Roll all of the Dice that are part of this DiceExpression, but force all of the rolls to be the lowest possible result 
+
+
+
+			<div class="return">
+
+				<h5>Returns</h5>
+				<dl>
+					<dt>
+						<code><a href="../RogueSharp.DiceNotation/DiceResult.htm">DiceResult</a></code>
+					</dt>
+					<dd>A DiceResult representing the results of this Roll. All dice should have rolled their minimum values 
+					</dd>
+				</dl>
+			</div>
+
+		</div>
+	</div>
+	<div id="Roll" class="method">
+		<h4>
+			<a href="../RogueSharp.DiceNotation/DiceResult.htm">DiceResult</a> <strong>Roll</strong>()
+		</h4>
+		<div class="content">Roll all of the Dice that are part of this DiceExpression <blockquote class="remarks">
+  Uses DotNetRandom as its RNG 
+</blockquote>
+
+
+
+			<div class="return">
+
+				<h5>Returns</h5>
+				<dl>
+					<dt>
+						<code><a href="../RogueSharp.DiceNotation/DiceResult.htm">DiceResult</a></code>
+					</dt>
+					<dd>A DiceResult representing the results of this Roll 
+					</dd>
+				</dl>
+			</div>
+
+		</div>
+	</div>
+	<div id="Roll" class="method">
+		<h4>
+			<a href="../RogueSharp.DiceNotation/DiceResult.htm">DiceResult</a> <strong>Roll</strong>(<a href="../RogueSharp.Random/IRandom.htm">IRandom</a> random)
+		</h4>
+		<div class="content">Roll all of the Dice that are part of this DiceExpression 
+
+
+			<div class="parameters">
+				<h5>Parameters</h5>
+				<dl>
+						<dt>
+							<code><a href="../RogueSharp.Random/IRandom.htm">IRandom</a></code> random
+						</dt>
+						<dd>IRandom RNG used to perform the Roll. 
+						</dd>
+				</dl>
+			</div>
+
+			<div class="return">
+
+				<h5>Returns</h5>
+				<dl>
+					<dt>
+						<code><a href="../RogueSharp.DiceNotation/DiceResult.htm">DiceResult</a></code>
+					</dt>
+					<dd>A DiceResult representing the results of this Roll 
+					</dd>
+				</dl>
+			</div>
+
+		</div>
+	</div>
+	
+	
+	</section>
+	</article><footer>
+	<span id="version">Built from v1.0.0.0 of RogueSharp</span>
+	<span id="docu-link">
+		Generated by <a href="http://docu.jagregory.com">docu</a>
+	</span>
+</footer>
+  </body>
+</html>

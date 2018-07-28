@@ -1,0 +1,377 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+	<!--[if lt IE 9]>
+	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+    <title>Cell - RogueSharp Documentation</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+    <link type="text/css" rel="stylesheet" href="../main.css"/>
+    <script type="text/javascript" src="../js/jquery-1.3.2.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.scrollTo-min.js"></script>
+    <script type="text/javascript" src="../js/navigation.js"></script>
+    <script type="text/javascript" src="../js/example.js"></script>
+  </head>
+  <body>
+  	<header><h1>RogueSharp : API Documentation</h1>
+	</header>
+<nav id="namespaces">
+	<h2 class="fixed">Namespaces</h2>
+	<div class="scroll">
+		<ul>
+			<li>
+          <a href="../RogueSharp/index.htm" class="current">RogueSharp</a>
+      </li>
+			<li>
+          <a href="../RogueSharp.Algorithms/index.htm">RogueSharp.Algorithms</a>
+      </li>
+			<li>
+          <a href="../RogueSharp.DiceNotation/index.htm">RogueSharp.DiceNotation</a>
+      </li>
+			<li>
+          <a href="../RogueSharp.DiceNotation.Exceptions/index.htm">RogueSharp.DiceNotation.Exceptions</a>
+      </li>
+			<li>
+          <a href="../RogueSharp.DiceNotation.Terms/index.htm">RogueSharp.DiceNotation.Terms</a>
+      </li>
+			<li>
+          <a href="../RogueSharp.MapCreation/index.htm">RogueSharp.MapCreation</a>
+      </li>
+			<li>
+          <a href="../RogueSharp.Random/index.htm">RogueSharp.Random</a>
+      </li>
+		</ul>
+	</div>
+</nav><nav id="types">
+  <h2 class="fixed">Types in RogueSharp</h2>
+	<div class="scroll">
+		<ul>
+				<li>
+            <a href="../RogueSharp/Cell.htm" class="current">Cell</a>
+        </li>
+				<li>
+            <a href="../RogueSharp/CellProperties.htm">CellProperties</a>
+        </li>
+				<li>
+            <a href="../RogueSharp/FieldOfView.htm">FieldOfView</a>
+        </li>
+				<li>
+            <a href="../RogueSharp/GoalMap.htm">GoalMap</a>
+        </li>
+				<li>
+            <a href="../RogueSharp/ICell.htm">ICell</a>
+        </li>
+				<li>
+            <a href="../RogueSharp/IGoalMap.htm">IGoalMap</a>
+        </li>
+				<li>
+            <a href="../RogueSharp/IMap.htm">IMap</a>
+        </li>
+				<li>
+            <a href="../RogueSharp/Map.htm">Map</a>
+        </li>
+				<li>
+            <a href="../RogueSharp/MapState.htm">MapState</a>
+        </li>
+				<li>
+            <a href="../RogueSharp/NoMoreStepsException.htm">NoMoreStepsException</a>
+        </li>
+				<li>
+            <a href="../RogueSharp/Path.htm">Path</a>
+        </li>
+				<li>
+            <a href="../RogueSharp/PathFinder.htm">PathFinder</a>
+        </li>
+				<li>
+            <a href="../RogueSharp/PathNotFoundException.htm">PathNotFoundException</a>
+        </li>
+				<li>
+            <a href="../RogueSharp/Point.htm">Point</a>
+        </li>
+				<li>
+            <a href="../RogueSharp/Rectangle.htm">Rectangle</a>
+        </li>
+		</ul>
+	</div>
+</nav>
+	<article>
+    <header>
+		<p class="class"><strong>Type</strong> Cell</p>
+	</header>
+	<section>
+		<header>
+		<p><strong>Namespace</strong> RogueSharp</p>
+		<p><strong>Interfaces</strong> <a href="../RogueSharp/ICell.htm">ICell</a></p>
+		</header>
+    <div class="sub-header">
+			<div id="summary">A class that defines a square on a Map with all of its associated properties 
+			</div>
+		
+		
+			<h3 class="section">Methods</h3>
+			<ul>
+				<li><a href="../RogueSharp/Cell.htm#Equals">Equals</a></li>
+				<li><a href="../RogueSharp/Cell.htm#Equals">Equals</a></li>
+				<li><a href="../RogueSharp/Cell.htm#GetHashCode">GetHashCode</a></li>
+				<li><a href="../RogueSharp/Cell.htm#GetType">GetType</a></li>
+				<li><a href="../RogueSharp/Cell.htm#ToString">ToString</a></li>
+				<li><a href="../RogueSharp/Cell.htm#ToString">ToString</a></li>
+			</ul>
+		
+			<h3 class="section">Properties</h3>
+			<ul>
+				<li><a href="../RogueSharp/Cell.htm#IsExplored">IsExplored</a></li>
+				<li><a href="../RogueSharp/Cell.htm#IsInFov">IsInFov</a></li>
+				<li><a href="../RogueSharp/Cell.htm#IsTransparent">IsTransparent</a></li>
+				<li><a href="../RogueSharp/Cell.htm#IsWalkable">IsWalkable</a></li>
+				<li><a href="../RogueSharp/Cell.htm#X">X</a></li>
+				<li><a href="../RogueSharp/Cell.htm#Y">Y</a></li>
+			</ul>
+		
+	</div>
+	
+	<h3 class="section">Public instance methods</h3>
+
+	<div id="Equals" class="method">
+		<h4>
+			<span title="System.bool">bool</span> <strong>Equals</strong>(<span title="System.object">object</span> obj)
+		</h4>
+		<div class="content">Determines whether two Cell instances are equal 
+
+
+			<div class="parameters">
+				<h5>Parameters</h5>
+				<dl>
+						<dt>
+							<code><span title="System.object">object</span></code> obj
+						</dt>
+						<dd>The Object to compare this instance to 
+						</dd>
+				</dl>
+			</div>
+
+			<div class="return">
+
+				<h5>Returns</h5>
+				<dl>
+					<dt>
+						<code><span title="System.bool">bool</span></code>
+					</dt>
+					<dd>True if the instances are equal; False otherwise 
+					</dd>
+				</dl>
+			</div>
+
+		</div>
+	</div>
+	<div id="Equals" class="method">
+		<h4>
+			<span title="System.bool">bool</span> <strong>Equals</strong>(<a href="../RogueSharp/ICell.htm">ICell</a> other)
+		</h4>
+		<div class="content">Determines whether two Cell instances are equal 
+
+
+			<div class="parameters">
+				<h5>Parameters</h5>
+				<dl>
+						<dt>
+							<code><a href="../RogueSharp/ICell.htm">ICell</a></code> other
+						</dt>
+						<dd>The Cell to compare this instance to 
+						</dd>
+				</dl>
+			</div>
+
+			<div class="return">
+
+				<h5>Returns</h5>
+				<dl>
+					<dt>
+						<code><span title="System.bool">bool</span></code>
+					</dt>
+					<dd>True if the instances are equal; False otherwise 
+					</dd>
+				</dl>
+			</div>
+
+		</div>
+	</div>
+	<div id="GetHashCode" class="method">
+		<h4>
+			<span title="System.int">int</span> <strong>GetHashCode</strong>()
+		</h4>
+		<div class="content">Gets the hash code for this object which can help for quick checks of equality
+or when inserting this Cell into a hash-based collection such as a Dictionary or Hashtable 
+
+
+
+			<div class="return">
+
+				<h5>Returns</h5>
+				<dl>
+					<dt>
+						<code><span title="System.int">int</span></code>
+					</dt>
+					<dd>An integer hash used to identify this Cell 
+					</dd>
+				</dl>
+			</div>
+
+		</div>
+	</div>
+	<div id="GetType" class="method">
+		<h4>
+			<span title="System.Type">Type</span> <strong>GetType</strong>()
+		</h4>
+		<div class="content">
+
+
+
+
+		</div>
+	</div>
+	<div id="ToString" class="method">
+		<h4>
+			<span title="System.string">string</span> <strong>ToString</strong>()
+		</h4>
+		<div class="content">Returns a string that represents the current DirectedEdge 
+
+
+
+			<div class="return">
+
+				<h5>Returns</h5>
+				<dl>
+					<dt>
+						<code><span title="System.string">string</span></code>
+					</dt>
+					<dd>A string that represents the current DirectedEdge 
+					</dd>
+				</dl>
+			</div>
+
+		</div>
+	</div>
+	<div id="ToString" class="method">
+		<h4>
+			<span title="System.string">string</span> <strong>ToString</strong>(<span title="System.bool">bool</span> useFov)
+		</h4>
+		<div class="content">Provides a simple visual representation of the Cell using the following symbols:
+- `%`: `Cell` is not in field-of-view
+- `.`: `Cell` is transparent, walkable, and in field-of-view
+- `s`: `Cell` is walkable and in field-of-view (but not transparent)
+- `o`: `Cell` is transparent and in field-of-view (but not walkable)
+- `#`: `Cell` is in field-of-view (but not transparent or walkable) 
+
+
+			<div class="parameters">
+				<h5>Parameters</h5>
+				<dl>
+						<dt>
+							<code><span title="System.bool">bool</span></code> useFov
+						</dt>
+						<dd>True if field-of-view calculations will be used when creating the string represenation of the Cell. False otherwise 
+						</dd>
+				</dl>
+			</div>
+
+			<div class="return">
+
+				<h5>Returns</h5>
+				<dl>
+					<dt>
+						<code><span title="System.string">string</span></code>
+					</dt>
+					<dd>A string representation of the Cell using special symbols to denote Cell properties 
+					</dd>
+				</dl>
+			</div>
+
+		</div>
+	</div>
+	
+	
+	<h3 class="section">Public properties</h3>
+
+	<div id="IsExplored" class="method">
+		<h4>
+			<span title="System.bool">bool</span> <strong>IsExplored</strong> get; set;
+		</h4>
+		<div class="content">Check if the Cell is flagged as ever having been explored by the player <blockquote class="remarks">
+  The explored property of a Cell can be used to track if the Cell has ever been in the field-of-view of a character controlled by the player
+This property will not automatically be updated based on FOV calcuations or any other built-in functions of the RogueSharp library. 
+</blockquote>
+<div class="example">
+  <a href="javascript:void(0)">Show Example</a>
+  <pre>As the player moves characters around a Map, Cells will enter and exit the currently computed field-of-view
+This property can be used to keep track of those Cells that have been "seen" and could be used to show fog-of-war type effects when rendering the map </pre>
+</div>
+		</div>
+	</div>
+	<div id="IsInFov" class="method">
+		<h4>
+			<span title="System.bool">bool</span> <strong>IsInFov</strong> get; set;
+		</h4>
+		<div class="content">Check if the Cell is in the currently computed field-of-view
+For newly initialized maps a field-of-view will not exist so all Cells will return false
+Field-of-view must first be calculated by calling ComputeFov and/or AppendFov <blockquote class="remarks">
+  Field-of-view (FOV) is basically a calculation of what is observable in the Map from a given Cell with a given light radius 
+</blockquote>
+<div class="example">
+  <a href="javascript:void(0)">Show Example</a>
+  <pre>Field-of-view can be used to simulate a character holding a light source and exploring a Map representing a dark cavern
+Any Cells within the FOV would be what the character could see from their current location and lighting conditions </pre>
+</div>
+		</div>
+	</div>
+	<div id="IsTransparent" class="method">
+		<h4>
+			<span title="System.bool">bool</span> <strong>IsTransparent</strong> get; set;
+		</h4>
+		<div class="content">Get the transparency of the Cell i.e. if line of sight would be blocked by this Cell 
+<div class="example">
+  <a href="javascript:void(0)">Show Example</a>
+  <pre>A Cell representing an empty stone floor would be transparent 
+A Cell representing a glass wall could be transparent (even though it may not be walkable)
+A Cell representing a solid stone wall would not be transparent </pre>
+</div>
+		</div>
+	</div>
+	<div id="IsWalkable" class="method">
+		<h4>
+			<span title="System.bool">bool</span> <strong>IsWalkable</strong> get; set;
+		</h4>
+		<div class="content">Get the walkability of the Cell i.e. if a character could normally move across the Cell without difficulty 
+<div class="example">
+  <a href="javascript:void(0)">Show Example</a>
+  <pre>A Cell representing an empty stone floor would be walkable
+A Cell representing a glass wall may not be walkable (even though it could be transparent)
+A Cell representing a solid stone wall would not be walkable </pre>
+</div>
+		</div>
+	</div>
+	<div id="X" class="method">
+		<h4>
+			<span title="System.int">int</span> <strong>X</strong> get; set;
+		</h4>
+		<div class="content">Gets the X location of the Cell starting with 0 as the farthest left 
+
+		</div>
+	</div>
+	<div id="Y" class="method">
+		<h4>
+			<span title="System.int">int</span> <strong>Y</strong> get; set;
+		</h4>
+		<div class="content">Y location of the Cell starting with 0 as the top 
+
+		</div>
+	</div>
+	</section>
+	</article><footer>
+	<span id="version">Built from v1.0.0.0 of RogueSharp</span>
+	<span id="docu-link">
+		Generated by <a href="http://docu.jagregory.com">docu</a>
+	</span>
+</footer>
+  </body>
+</html>
