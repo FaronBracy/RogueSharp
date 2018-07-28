@@ -7,8 +7,7 @@ It is loosely based on the popular [libtcod](http://doryen.eptalys.net/libtcod/ 
 1. Visit the [RogueSharp Blog](http://roguesharp.wordpress.com/ "RogueSharp Blog") for tips and tutorials.
 2. The quickest way to add RogueSharp to your project is by using the [RogueSharp nuget package](https://www.nuget.org/packages/RogueSharp "RogueSharp nuget package"). 
 2. If building the assembly yourself, the solution file "RogueSharp.sln" contains the main library and unit tests. This should be all you need.
-3. The solution file "RogueSharpPerformanceTests.sln" contains a wrapper for libtcod and was only used to test performance of similar functions between RogueSharp and libtcod
-4. The solution file "RogueSharpDocumentation.sln" requires [Sandcastle Help File Builder](https://shfb.codeplex.com/ "Sandcastle Help File Builder") to be installed. It can be used to generate documentation for the library from the XML comments on public methods.
+3. Class documentation is located on [Github Pages](https://faronbracy.github.io/RogueSharp "RogueSharp class documentation").
 
 
 ## Creating a Map ##
@@ -69,7 +68,7 @@ A more interesting way to create a map is to use the `Map` class's static method
 
 - [Doryen Library (libtcod)](http://doryen.eptalys.net/libtcod/ "libtcod")
 	- This was a big inspiration for RogueSharp
-	- The binaries of libtcod are included only for performance testing to see how my algorithms performed compared to it. The main RogueSharp library does not use any source code from libtcod, nor does it reference or depend on the libtcod library.
+	- The main RogueSharp library does not use any source code from libtcod, nor does it reference or depend on the libtcod library
 	- [libtcod source code](https://bitbucket.org/jice/libtcod/src "libtcod source code")
 	- [libtcod license](https://bitbucket.org/jice/libtcod/src/969e7cfdf44c2a8734957306b456ae0eb29ac8c4/LIBTCOD-LICENSE.txt?at=default "libtcod license")
 - [MonoGame](http://www.monogame.net/ "MonoGame")
@@ -80,9 +79,9 @@ A more interesting way to create a map is to use the `Map` class's static method
 	- Several classes from RogueSharps Algorithms namespace are inspired by these Algorithms
 - [RogueBasin](http://www.roguebasin.com/ "RogueBasin")
 	- [Articles of interest for Roguelike developers](http://www.roguebasin.com/index.php?title=Articles "Roguelike developer articles")
-- [Sandcastle Help File Builder (SHFB)](https://shfb.codeplex.com/ "Sandcastle Help File Builder")
+- [Docu](https://github.com/jagregory/docu "Sandcastle Help File Builder")
 	- Used to automatically generate documentation from the XML comments in source code
-	- [SHFB license](https://shfb.codeplex.com/SourceControl/latest#SHFB/Source/License.txt "SHFB license")
+	- [Docu License](https://github.com/jagregory/docu/blob/master/LICENSE.txt "Docu license")
 - [Dice Notation .NET](https://dicenotation.codeplex.com "Dice Notation .NET")
 	- Significant portions of the code in RougeSharp DiceNotation namespace are taken directly from this great library
 	- [Dice Notation .NET source code](https://dicenotation.codeplex.com/SourceControl/latest "Dice Notation .NET source code")
@@ -94,7 +93,7 @@ A more interesting way to create a map is to use the `Map` class's static method
 
 The MIT License (MIT)
 
-Copyright (c) 2014 Faron Bracy
+Copyright (c) 2018 Faron Bracy
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
