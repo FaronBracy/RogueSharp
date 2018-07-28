@@ -74,3 +74,4 @@ RogueSharp.Docs/Help/
 
 #Necessary Dlls
 !Dlls/*
+!DocumentationBinaries/*

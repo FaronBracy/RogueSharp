@@ -1,0 +1,1 @@
+start DocumentationBinaries\docu.exe C:\Github\RogueSharp\RogueSharp\bin\Debug\netstandard1.0\RogueSharp.dll
