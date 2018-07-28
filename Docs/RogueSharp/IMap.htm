@@ -1,0 +1,1080 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+	<!--[if lt IE 9]>
+	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+    <title>IMap - RogueSharp Documentation</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+    <link type="text/css" rel="stylesheet" href="../main.css"/>
+    <script type="text/javascript" src="../js/jquery-1.3.2.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.scrollTo-min.js"></script>
+    <script type="text/javascript" src="../js/navigation.js"></script>
+    <script type="text/javascript" src="../js/example.js"></script>
+  </head>
+  <body>
+  	<header><h1>RogueSharp : API Documentation</h1>
+	</header>
+<nav id="namespaces">
+	<h2 class="fixed">Namespaces</h2>
+	<div class="scroll">
+		<ul>
+			<li>
+          <a href="../RogueSharp/index.htm" class="current">RogueSharp</a>
+      </li>
+			<li>
+          <a href="../RogueSharp.Algorithms/index.htm">RogueSharp.Algorithms</a>
+      </li>
+			<li>
+          <a href="../RogueSharp.DiceNotation/index.htm">RogueSharp.DiceNotation</a>
+      </li>
+			<li>
+          <a href="../RogueSharp.DiceNotation.Exceptions/index.htm">RogueSharp.DiceNotation.Exceptions</a>
+      </li>
+			<li>
+          <a href="../RogueSharp.DiceNotation.Terms/index.htm">RogueSharp.DiceNotation.Terms</a>
+      </li>
+			<li>
+          <a href="../RogueSharp.MapCreation/index.htm">RogueSharp.MapCreation</a>
+      </li>
+			<li>
+          <a href="../RogueSharp.Random/index.htm">RogueSharp.Random</a>
+      </li>
+		</ul>
+	</div>
+</nav><nav id="types">
+  <h2 class="fixed">Types in RogueSharp</h2>
+	<div class="scroll">
+		<ul>
+				<li>
+            <a href="../RogueSharp/Cell.htm">Cell</a>
+        </li>
+				<li>
+            <a href="../RogueSharp/CellProperties.htm">CellProperties</a>
+        </li>
+				<li>
+            <a href="../RogueSharp/FieldOfView.htm">FieldOfView</a>
+        </li>
+				<li>
+            <a href="../RogueSharp/GoalMap.htm">GoalMap</a>
+        </li>
+				<li>
+            <a href="../RogueSharp/ICell.htm">ICell</a>
+        </li>
+				<li>
+            <a href="../RogueSharp/IGoalMap.htm">IGoalMap</a>
+        </li>
+				<li>
+            <a href="../RogueSharp/IMap.htm" class="current">IMap</a>
+        </li>
+				<li>
+            <a href="../RogueSharp/Map.htm">Map</a>
+        </li>
+				<li>
+            <a href="../RogueSharp/MapState.htm">MapState</a>
+        </li>
+				<li>
+            <a href="../RogueSharp/NoMoreStepsException.htm">NoMoreStepsException</a>
+        </li>
+				<li>
+            <a href="../RogueSharp/Path.htm">Path</a>
+        </li>
+				<li>
+            <a href="../RogueSharp/PathFinder.htm">PathFinder</a>
+        </li>
+				<li>
+            <a href="../RogueSharp/PathNotFoundException.htm">PathNotFoundException</a>
+        </li>
+				<li>
+            <a href="../RogueSharp/Point.htm">Point</a>
+        </li>
+				<li>
+            <a href="../RogueSharp/Rectangle.htm">Rectangle</a>
+        </li>
+		</ul>
+	</div>
+</nav>
+	<article>
+    <header>
+		<p class="class"><strong>Type</strong> IMap</p>
+	</header>
+	<section>
+		<header>
+		<p><strong>Namespace</strong> RogueSharp</p>
+		</header>
+    <div class="sub-header">
+			<div id="summary">A Map represents a rectangular grid of Cells, each of which has a number of properties for determining walkability, field-of-view and so on
+The upper left corner of the Map is Cell (0,0) and the X value increases to the right, as the Y value increases downward 
+			</div>
+		
+		
+			<h3 class="section">Methods</h3>
+			<ul>
+				<li><a href="../RogueSharp/IMap.htm#CellFor">CellFor</a></li>
+				<li><a href="../RogueSharp/IMap.htm#Clear">Clear</a></li>
+				<li><a href="../RogueSharp/IMap.htm#Clear">Clear</a></li>
+				<li><a href="../RogueSharp/IMap.htm#Copy">Copy</a></li>
+				<li><a href="../RogueSharp/IMap.htm#Copy">Copy</a></li>
+				<li><a href="../RogueSharp/IMap.htm#GetAllCells">GetAllCells</a></li>
+				<li><a href="../RogueSharp/IMap.htm#GetBorderCellsInCircle">GetBorderCellsInCircle</a></li>
+				<li><a href="../RogueSharp/IMap.htm#GetBorderCellsInDiamond">GetBorderCellsInDiamond</a></li>
+				<li><a href="../RogueSharp/IMap.htm#GetBorderCellsInSquare">GetBorderCellsInSquare</a></li>
+				<li><a href="../RogueSharp/IMap.htm#GetCell">GetCell</a></li>
+				<li><a href="../RogueSharp/IMap.htm#GetCellsAlongLine">GetCellsAlongLine</a></li>
+				<li><a href="../RogueSharp/IMap.htm#GetCellsInCircle">GetCellsInCircle</a></li>
+				<li><a href="../RogueSharp/IMap.htm#GetCellsInColumns">GetCellsInColumns</a></li>
+				<li><a href="../RogueSharp/IMap.htm#GetCellsInDiamond">GetCellsInDiamond</a></li>
+				<li><a href="../RogueSharp/IMap.htm#GetCellsInRows">GetCellsInRows</a></li>
+				<li><a href="../RogueSharp/IMap.htm#GetCellsInSquare">GetCellsInSquare</a></li>
+				<li><a href="../RogueSharp/IMap.htm#IndexFor">IndexFor</a></li>
+				<li><a href="../RogueSharp/IMap.htm#IndexFor">IndexFor</a></li>
+				<li><a href="../RogueSharp/IMap.htm#Initialize">Initialize</a></li>
+				<li><a href="../RogueSharp/IMap.htm#IsExplored">IsExplored</a></li>
+				<li><a href="../RogueSharp/IMap.htm#IsTransparent">IsTransparent</a></li>
+				<li><a href="../RogueSharp/IMap.htm#IsWalkable">IsWalkable</a></li>
+				<li><a href="../RogueSharp/IMap.htm#Restore">Restore</a></li>
+				<li><a href="../RogueSharp/IMap.htm#Save">Save</a></li>
+				<li><a href="../RogueSharp/IMap.htm#SetCellProperties">SetCellProperties</a></li>
+				<li><a href="../RogueSharp/IMap.htm#SetCellProperties">SetCellProperties</a></li>
+			</ul>
+		
+			<h3 class="section">Properties</h3>
+			<ul>
+				<li><a href="../RogueSharp/IMap.htm#Height">Height</a></li>
+				<li><a href="../RogueSharp/IMap.htm#Width">Width</a></li>
+			</ul>
+		
+	</div>
+	
+	<h3 class="section">Public instance methods</h3>
+
+	<div id="CellFor" class="method">
+		<h4>
+			<a href="../RogueSharp/ICell.htm">ICell</a> <strong>CellFor</strong>(<span title="System.int">int</span> index)
+		</h4>
+		<div class="content">Get the Cell at the specified single dimensional array index using the formulas: x = index % Width; y = index / Width; 
+
+
+			<div class="parameters">
+				<h5>Parameters</h5>
+				<dl>
+						<dt>
+							<code><span title="System.int">int</span></code> index
+						</dt>
+						<dd>The single dimensional array index for the Cell that we want to get 
+						</dd>
+				</dl>
+			</div>
+
+			<div class="return">
+
+				<h5>Returns</h5>
+				<dl>
+					<dt>
+						<code><a href="../RogueSharp/ICell.htm">ICell</a></code>
+					</dt>
+					<dd>Cell at the specified single dimensional array index 
+					</dd>
+				</dl>
+			</div>
+
+		</div>
+	</div>
+	<div id="Clear" class="method">
+		<h4>
+			<span title="System.void">void</span> <strong>Clear</strong>()
+		</h4>
+		<div class="content">Sets the properties of all Cells in the Map to be transparent and walkable 
+
+
+
+
+		</div>
+	</div>
+	<div id="Clear" class="method">
+		<h4>
+			<span title="System.void">void</span> <strong>Clear</strong>(<span title="System.bool">bool</span> isTransparent, <span title="System.bool">bool</span> isWalkable)
+		</h4>
+		<div class="content">Sets the properties of all Cells in the Map to the specified values 
+
+
+			<div class="parameters">
+				<h5>Parameters</h5>
+				<dl>
+						<dt>
+							<code><span title="System.bool">bool</span></code> isTransparent
+						</dt>
+						<dd>Optional parameter defaults to false if not provided. True if line-of-sight is not blocked by this Cell. False otherwise 
+						</dd>
+						<dt>
+							<code><span title="System.bool">bool</span></code> isWalkable
+						</dt>
+						<dd>Optional parameter defaults to false if not provided. True if a character could walk across the Cell normally. False otherwise 
+						</dd>
+				</dl>
+			</div>
+
+
+		</div>
+	</div>
+	<div id="Copy" class="method">
+		<h4>
+			<span title="System.void">void</span> <strong>Copy</strong>(<a href="../RogueSharp/IMap.htm">IMap</a> sourceMap, <span title="System.int">int</span> left, <span title="System.int">int</span> top)
+		</h4>
+		<div class="content">Copies the Cell properties of a smaller source Map into this destination Map at the specified location 
+
+
+			<div class="parameters">
+				<h5>Parameters</h5>
+				<dl>
+						<dt>
+							<code><a href="../RogueSharp/IMap.htm">IMap</a></code> sourceMap
+						</dt>
+						<dd>An IMap which must be of smaller size and able to fit in this destination Map at the specified location 
+						</dd>
+						<dt>
+							<code><span title="System.int">int</span></code> left
+						</dt>
+						<dd>Optional parameter defaults to 0 if not provided. X location of the Cell to start copying parameters to, starting with 0 as the farthest left 
+						</dd>
+						<dt>
+							<code><span title="System.int">int</span></code> top
+						</dt>
+						<dd>Optional parameter defaults to 0 if not provided. Y location of the Cell to start copying parameters to, starting with 0 as the top 
+						</dd>
+				</dl>
+			</div>
+
+
+		</div>
+	</div>
+	<div id="Copy" class="method">
+		<h4>
+			<span title="System.void">void</span> <strong>Copy</strong>(<a href="../RogueSharp/IMap.htm">IMap</a> sourceMap)
+		</h4>
+		<div class="content">Copies the Cell properties of a smaller source Map into this destination Map at location (0,0) 
+
+
+			<div class="parameters">
+				<h5>Parameters</h5>
+				<dl>
+						<dt>
+							<code><a href="../RogueSharp/IMap.htm">IMap</a></code> sourceMap
+						</dt>
+						<dd>An IMap which must be of smaller size and able to fit in this destination Map at the specified location 
+						</dd>
+				</dl>
+			</div>
+
+
+		</div>
+	</div>
+	<div id="GetAllCells" class="method">
+		<h4>
+			<span title="System.Collections.Generic.IEnumerable<ICell>">IEnumerable&lt;ICell&gt;</span> <strong>GetAllCells</strong>()
+		</h4>
+		<div class="content">Get an IEnumerable of all Cells in the Map 
+
+
+
+			<div class="return">
+
+				<h5>Returns</h5>
+				<dl>
+					<dt>
+						<code><span title="System.Collections.Generic.IEnumerable<ICell>">IEnumerable&lt;ICell&gt;</span></code>
+					</dt>
+					<dd>IEnumerable of all Cells in the Map 
+					</dd>
+				</dl>
+			</div>
+
+		</div>
+	</div>
+	<div id="GetBorderCellsInCircle" class="method">
+		<h4>
+			<span title="System.Collections.Generic.IEnumerable<ICell>">IEnumerable&lt;ICell&gt;</span> <strong>GetBorderCellsInCircle</strong>(<span title="System.int">int</span> xCenter, <span title="System.int">int</span> yCenter, <span title="System.int">int</span> radius)
+		</h4>
+		<div class="content">Get an IEnumerable of outermost border Cells in a circle around the center Cell up to the specified radius using Bresenham's midpoint circle algorithm 
+
+
+			<div class="parameters">
+				<h5>Parameters</h5>
+				<dl>
+						<dt>
+							<code><span title="System.int">int</span></code> xCenter
+						</dt>
+						<dd>X location of the center Cell with 0 as the farthest left 
+						</dd>
+						<dt>
+							<code><span title="System.int">int</span></code> yCenter
+						</dt>
+						<dd>Y location of the center Cell with 0 as the top 
+						</dd>
+						<dt>
+							<code><span title="System.int">int</span></code> radius
+						</dt>
+						<dd>The number of Cells to get in a radius from the center Cell 
+						</dd>
+				</dl>
+			</div>
+
+			<div class="return">
+
+				<h5>Returns</h5>
+				<dl>
+					<dt>
+						<code><span title="System.Collections.Generic.IEnumerable<ICell>">IEnumerable&lt;ICell&gt;</span></code>
+					</dt>
+					<dd>IEnumerable of outermost border Cells in a circle around the center Cell 
+					</dd>
+				</dl>
+			</div>
+
+		</div>
+	</div>
+	<div id="GetBorderCellsInDiamond" class="method">
+		<h4>
+			<span title="System.Collections.Generic.IEnumerable<ICell>">IEnumerable&lt;ICell&gt;</span> <strong>GetBorderCellsInDiamond</strong>(<span title="System.int">int</span> xCenter, <span title="System.int">int</span> yCenter, <span title="System.int">int</span> distance)
+		</h4>
+		<div class="content">Get an IEnumerable of outermost border Cells in a diamond (Rhombus) shape around the center Cell up to the specified distance 
+
+
+			<div class="parameters">
+				<h5>Parameters</h5>
+				<dl>
+						<dt>
+							<code><span title="System.int">int</span></code> xCenter
+						</dt>
+						<dd>X location of the center Cell with 0 as the farthest left 
+						</dd>
+						<dt>
+							<code><span title="System.int">int</span></code> yCenter
+						</dt>
+						<dd>Y location of the center Cell with 0 as the top 
+						</dd>
+						<dt>
+							<code><span title="System.int">int</span></code> distance
+						</dt>
+						<dd>The number of Cells to get in a distance from the center Cell 
+						</dd>
+				</dl>
+			</div>
+
+			<div class="return">
+
+				<h5>Returns</h5>
+				<dl>
+					<dt>
+						<code><span title="System.Collections.Generic.IEnumerable<ICell>">IEnumerable&lt;ICell&gt;</span></code>
+					</dt>
+					<dd>IEnumerable of outermost border Cells in a diamond (Rhombus) shape around the center Cell 
+					</dd>
+				</dl>
+			</div>
+
+		</div>
+	</div>
+	<div id="GetBorderCellsInSquare" class="method">
+		<h4>
+			<span title="System.Collections.Generic.IEnumerable<ICell>">IEnumerable&lt;ICell&gt;</span> <strong>GetBorderCellsInSquare</strong>(<span title="System.int">int</span> xCenter, <span title="System.int">int</span> yCenter, <span title="System.int">int</span> distance)
+		</h4>
+		<div class="content">Get an IEnumerable of outermost border Cells in a square area around the center Cell up to the specified distance 
+
+
+			<div class="parameters">
+				<h5>Parameters</h5>
+				<dl>
+						<dt>
+							<code><span title="System.int">int</span></code> xCenter
+						</dt>
+						<dd>X location of the center Cell with 0 as the farthest left 
+						</dd>
+						<dt>
+							<code><span title="System.int">int</span></code> yCenter
+						</dt>
+						<dd>Y location of the center Cell with 0 as the top 
+						</dd>
+						<dt>
+							<code><span title="System.int">int</span></code> distance
+						</dt>
+						<dd>The number of Cells to get in each direction from the center Cell 
+						</dd>
+				</dl>
+			</div>
+
+			<div class="return">
+
+				<h5>Returns</h5>
+				<dl>
+					<dt>
+						<code><span title="System.Collections.Generic.IEnumerable<ICell>">IEnumerable&lt;ICell&gt;</span></code>
+					</dt>
+					<dd>IEnumerable of outermost border Cells in a square area around the center Cell 
+					</dd>
+				</dl>
+			</div>
+
+		</div>
+	</div>
+	<div id="GetCell" class="method">
+		<h4>
+			<a href="../RogueSharp/ICell.htm">ICell</a> <strong>GetCell</strong>(<span title="System.int">int</span> x, <span title="System.int">int</span> y)
+		</h4>
+		<div class="content">Get a Cell at the specified location 
+
+
+			<div class="parameters">
+				<h5>Parameters</h5>
+				<dl>
+						<dt>
+							<code><span title="System.int">int</span></code> x
+						</dt>
+						<dd>X location of the Cell to get starting with 0 as the farthest left 
+						</dd>
+						<dt>
+							<code><span title="System.int">int</span></code> y
+						</dt>
+						<dd>Y location of the Cell to get, starting with 0 as the top 
+						</dd>
+				</dl>
+			</div>
+
+			<div class="return">
+
+				<h5>Returns</h5>
+				<dl>
+					<dt>
+						<code><a href="../RogueSharp/ICell.htm">ICell</a></code>
+					</dt>
+					<dd>Cell at the specified location 
+					</dd>
+				</dl>
+			</div>
+
+		</div>
+	</div>
+	<div id="GetCellsAlongLine" class="method">
+		<h4>
+			<span title="System.Collections.Generic.IEnumerable<ICell>">IEnumerable&lt;ICell&gt;</span> <strong>GetCellsAlongLine</strong>(<span title="System.int">int</span> xOrigin, <span title="System.int">int</span> yOrigin, <span title="System.int">int</span> xDestination, <span title="System.int">int</span> yDestination)
+		</h4>
+		<div class="content">Get an IEnumerable of Cells in a line from the Origin Cell to the Destination Cell
+The resulting IEnumerable includes the Origin and Destination Cells
+Uses Bresenham's line algorithm to determine which Cells are in the closest approximation to a straight line between the two Cells 
+
+
+			<div class="parameters">
+				<h5>Parameters</h5>
+				<dl>
+						<dt>
+							<code><span title="System.int">int</span></code> xOrigin
+						</dt>
+						<dd>X location of the Origin Cell at the start of the line with 0 as the farthest left 
+						</dd>
+						<dt>
+							<code><span title="System.int">int</span></code> yOrigin
+						</dt>
+						<dd>Y location of the Origin Cell at the start of the line with 0 as the top 
+						</dd>
+						<dt>
+							<code><span title="System.int">int</span></code> xDestination
+						</dt>
+						<dd>X location of the Destination Cell at the end of the line with 0 as the farthest left 
+						</dd>
+						<dt>
+							<code><span title="System.int">int</span></code> yDestination
+						</dt>
+						<dd>Y location of the Destination Cell at the end of the line with 0 as the top 
+						</dd>
+				</dl>
+			</div>
+
+			<div class="return">
+
+				<h5>Returns</h5>
+				<dl>
+					<dt>
+						<code><span title="System.Collections.Generic.IEnumerable<ICell>">IEnumerable&lt;ICell&gt;</span></code>
+					</dt>
+					<dd>IEnumerable of Cells in a line from the Origin Cell to the Destination Cell which includes the Origin and Destination Cells 
+					</dd>
+				</dl>
+			</div>
+
+		</div>
+	</div>
+	<div id="GetCellsInCircle" class="method">
+		<h4>
+			<span title="System.Collections.Generic.IEnumerable<ICell>">IEnumerable&lt;ICell&gt;</span> <strong>GetCellsInCircle</strong>(<span title="System.int">int</span> xCenter, <span title="System.int">int</span> yCenter, <span title="System.int">int</span> radius)
+		</h4>
+		<div class="content">Get an IEnumerable of Cells in a circle around the center Cell up to the specified radius using Bresenham's midpoint circle algorithm 
+
+
+			<div class="parameters">
+				<h5>Parameters</h5>
+				<dl>
+						<dt>
+							<code><span title="System.int">int</span></code> xCenter
+						</dt>
+						<dd>X location of the center Cell with 0 as the farthest left 
+						</dd>
+						<dt>
+							<code><span title="System.int">int</span></code> yCenter
+						</dt>
+						<dd>Y location of the center Cell with 0 as the top 
+						</dd>
+						<dt>
+							<code><span title="System.int">int</span></code> radius
+						</dt>
+						<dd>The number of Cells to get in a radius from the center Cell 
+						</dd>
+				</dl>
+			</div>
+
+			<div class="return">
+
+				<h5>Returns</h5>
+				<dl>
+					<dt>
+						<code><span title="System.Collections.Generic.IEnumerable<ICell>">IEnumerable&lt;ICell&gt;</span></code>
+					</dt>
+					<dd>IEnumerable of Cells in a circle around the center Cell 
+					</dd>
+				</dl>
+			</div>
+
+		</div>
+	</div>
+	<div id="GetCellsInColumns" class="method">
+		<h4>
+			<span title="System.Collections.Generic.IEnumerable<ICell>">IEnumerable&lt;ICell&gt;</span> <strong>GetCellsInColumns</strong>(<span title="System.Int32[]">Int32[]</span> columnNumbers)
+		</h4>
+		<div class="content">Get an IEnumerable of all the Cells in the specified column numbers 
+
+
+			<div class="parameters">
+				<h5>Parameters</h5>
+				<dl>
+						<dt>
+							<code><span title="System.Int32[]">Int32[]</span></code> columnNumbers
+						</dt>
+						<dd>Integer array of column numbers with 0 as the farthest left 
+						</dd>
+				</dl>
+			</div>
+
+			<div class="return">
+
+				<h5>Returns</h5>
+				<dl>
+					<dt>
+						<code><span title="System.Collections.Generic.IEnumerable<ICell>">IEnumerable&lt;ICell&gt;</span></code>
+					</dt>
+					<dd>IEnumerable of all the Cells in the specified column numbers 
+					</dd>
+				</dl>
+			</div>
+
+		</div>
+	</div>
+	<div id="GetCellsInDiamond" class="method">
+		<h4>
+			<span title="System.Collections.Generic.IEnumerable<ICell>">IEnumerable&lt;ICell&gt;</span> <strong>GetCellsInDiamond</strong>(<span title="System.int">int</span> xCenter, <span title="System.int">int</span> yCenter, <span title="System.int">int</span> distance)
+		</h4>
+		<div class="content">Get an IEnumerable of Cells in a diamond (Rhombus) shape around the center Cell up to the specified distance 
+
+
+			<div class="parameters">
+				<h5>Parameters</h5>
+				<dl>
+						<dt>
+							<code><span title="System.int">int</span></code> xCenter
+						</dt>
+						<dd>X location of the center Cell with 0 as the farthest left 
+						</dd>
+						<dt>
+							<code><span title="System.int">int</span></code> yCenter
+						</dt>
+						<dd>Y location of the center Cell with 0 as the top 
+						</dd>
+						<dt>
+							<code><span title="System.int">int</span></code> distance
+						</dt>
+						<dd>The number of Cells to get in a distance from the center Cell 
+						</dd>
+				</dl>
+			</div>
+
+			<div class="return">
+
+				<h5>Returns</h5>
+				<dl>
+					<dt>
+						<code><span title="System.Collections.Generic.IEnumerable<ICell>">IEnumerable&lt;ICell&gt;</span></code>
+					</dt>
+					<dd>IEnumerable of Cells in a diamond (Rhombus) shape around the center Cell 
+					</dd>
+				</dl>
+			</div>
+
+		</div>
+	</div>
+	<div id="GetCellsInRows" class="method">
+		<h4>
+			<span title="System.Collections.Generic.IEnumerable<ICell>">IEnumerable&lt;ICell&gt;</span> <strong>GetCellsInRows</strong>(<span title="System.Int32[]">Int32[]</span> rowNumbers)
+		</h4>
+		<div class="content">Get an IEnumerable of all the Cells in the specified row numbers 
+
+
+			<div class="parameters">
+				<h5>Parameters</h5>
+				<dl>
+						<dt>
+							<code><span title="System.Int32[]">Int32[]</span></code> rowNumbers
+						</dt>
+						<dd>Integer array of row numbers with 0 as the top 
+						</dd>
+				</dl>
+			</div>
+
+			<div class="return">
+
+				<h5>Returns</h5>
+				<dl>
+					<dt>
+						<code><span title="System.Collections.Generic.IEnumerable<ICell>">IEnumerable&lt;ICell&gt;</span></code>
+					</dt>
+					<dd>IEnumerable of all the Cells in the specified row numbers 
+					</dd>
+				</dl>
+			</div>
+
+		</div>
+	</div>
+	<div id="GetCellsInSquare" class="method">
+		<h4>
+			<span title="System.Collections.Generic.IEnumerable<ICell>">IEnumerable&lt;ICell&gt;</span> <strong>GetCellsInSquare</strong>(<span title="System.int">int</span> xCenter, <span title="System.int">int</span> yCenter, <span title="System.int">int</span> distance)
+		</h4>
+		<div class="content">Get an IEnumerable of Cells in a square area around the center Cell up to the specified distance 
+
+
+			<div class="parameters">
+				<h5>Parameters</h5>
+				<dl>
+						<dt>
+							<code><span title="System.int">int</span></code> xCenter
+						</dt>
+						<dd>X location of the center Cell with 0 as the farthest left 
+						</dd>
+						<dt>
+							<code><span title="System.int">int</span></code> yCenter
+						</dt>
+						<dd>Y location of the center Cell with 0 as the top 
+						</dd>
+						<dt>
+							<code><span title="System.int">int</span></code> distance
+						</dt>
+						<dd>The number of Cells to get in each direction from the center Cell 
+						</dd>
+				</dl>
+			</div>
+
+			<div class="return">
+
+				<h5>Returns</h5>
+				<dl>
+					<dt>
+						<code><span title="System.Collections.Generic.IEnumerable<ICell>">IEnumerable&lt;ICell&gt;</span></code>
+					</dt>
+					<dd>IEnumerable of Cells in a square area around the center Cell 
+					</dd>
+				</dl>
+			</div>
+
+		</div>
+	</div>
+	<div id="IndexFor" class="method">
+		<h4>
+			<span title="System.int">int</span> <strong>IndexFor</strong>(<span title="System.int">int</span> x, <span title="System.int">int</span> y)
+		</h4>
+		<div class="content">Get the single dimensional array index for a Cell at the specified location using the formula: index = ( y * Width ) + x 
+
+
+			<div class="parameters">
+				<h5>Parameters</h5>
+				<dl>
+						<dt>
+							<code><span title="System.int">int</span></code> x
+						</dt>
+						<dd>X location of the Cell index to get starting with 0 as the farthest left 
+						</dd>
+						<dt>
+							<code><span title="System.int">int</span></code> y
+						</dt>
+						<dd>Y location of the Cell index to get, starting with 0 as the top 
+						</dd>
+				</dl>
+			</div>
+
+			<div class="return">
+
+				<h5>Returns</h5>
+				<dl>
+					<dt>
+						<code><span title="System.int">int</span></code>
+					</dt>
+					<dd>An index for the Cell at the specified location useful if storing Cells in a single dimensional array 
+					</dd>
+				</dl>
+			</div>
+
+		</div>
+	</div>
+	<div id="IndexFor" class="method">
+		<h4>
+			<span title="System.int">int</span> <strong>IndexFor</strong>(<a href="../RogueSharp/ICell.htm">ICell</a> cell)
+		</h4>
+		<div class="content">Get the single dimensional array index for the specified Cell 
+
+
+			<div class="parameters">
+				<h5>Parameters</h5>
+				<dl>
+						<dt>
+							<code><a href="../RogueSharp/ICell.htm">ICell</a></code> cell
+						</dt>
+						<dd>The Cell to get the index for 
+						</dd>
+				</dl>
+			</div>
+
+			<div class="return">
+
+				<h5>Returns</h5>
+				<dl>
+					<dt>
+						<code><span title="System.int">int</span></code>
+					</dt>
+					<dd>An index for the Cell which is useful if storing Cells in a single dimensional array 
+					</dd>
+				</dl>
+			</div>
+
+		</div>
+	</div>
+	<div id="Initialize" class="method">
+		<h4>
+			<span title="System.void">void</span> <strong>Initialize</strong>(<span title="System.int">int</span> width, <span title="System.int">int</span> height)
+		</h4>
+		<div class="content">Create a new map with the properties of all Cells set to false <blockquote class="remarks">
+  This is basically a solid stone map that would then need to be modified to have interesting features 
+</blockquote>
+
+
+			<div class="parameters">
+				<h5>Parameters</h5>
+				<dl>
+						<dt>
+							<code><span title="System.int">int</span></code> width
+						</dt>
+						<dd>How many Cells wide the Map will be 
+						</dd>
+						<dt>
+							<code><span title="System.int">int</span></code> height
+						</dt>
+						<dd>How many Cells tall the Map will be 
+						</dd>
+				</dl>
+			</div>
+
+
+		</div>
+	</div>
+	<div id="IsExplored" class="method">
+		<h4>
+			<span title="System.bool">bool</span> <strong>IsExplored</strong>(<span title="System.int">int</span> x, <span title="System.int">int</span> y)
+		</h4>
+		<div class="content">Check if the Cell is flagged as ever having been explored by the player <blockquote class="remarks">
+  The explored property of a Cell can be used to track if the Cell has ever been in the field-of-view of a character controlled by the player
+This property will not automatically be updated based on FOV calculations or any other built-in functions of the RogueSharp library. 
+</blockquote>
+
+
+			<div class="parameters">
+				<h5>Parameters</h5>
+				<dl>
+						<dt>
+							<code><span title="System.int">int</span></code> x
+						</dt>
+						<dd>X location of the Cell to check starting with 0 as the farthest left 
+						</dd>
+						<dt>
+							<code><span title="System.int">int</span></code> y
+						</dt>
+						<dd>Y location of the Cell to check, starting with 0 as the top 
+						</dd>
+				</dl>
+			</div>
+
+			<div class="return">
+
+				<h5>Returns</h5>
+				<dl>
+					<dt>
+						<code><span title="System.bool">bool</span></code>
+					</dt>
+					<dd>True if the Cell has been flagged as being explored by the player, false otherwise 
+					</dd>
+				</dl>
+			</div>
+<div class="example">
+  <a href="javascript:void(0)">Show Example</a>
+  <pre>As the player moves characters around a Map, Cells will enter and exit the currently computed field-of-view
+This property can be used to keep track of those Cells that have been "seen" and could be used to show fog-of-war type effects when rendering the map </pre>
+</div>
+		</div>
+	</div>
+	<div id="IsTransparent" class="method">
+		<h4>
+			<span title="System.bool">bool</span> <strong>IsTransparent</strong>(<span title="System.int">int</span> x, <span title="System.int">int</span> y)
+		</h4>
+		<div class="content">Get the transparency of the Cell i.e. if line of sight would be blocked by this Cell 
+
+
+			<div class="parameters">
+				<h5>Parameters</h5>
+				<dl>
+						<dt>
+							<code><span title="System.int">int</span></code> x
+						</dt>
+						<dd>X location of the Cell to check starting with 0 as the farthest left 
+						</dd>
+						<dt>
+							<code><span title="System.int">int</span></code> y
+						</dt>
+						<dd>Y location of the Cell to check, starting with 0 as the top 
+						</dd>
+				</dl>
+			</div>
+
+			<div class="return">
+
+				<h5>Returns</h5>
+				<dl>
+					<dt>
+						<code><span title="System.bool">bool</span></code>
+					</dt>
+					<dd>True if line-of-sight is not blocked by this Cell, false otherwise 
+					</dd>
+				</dl>
+			</div>
+<div class="example">
+  <a href="javascript:void(0)">Show Example</a>
+  <pre>A Cell representing an empty stone floor would be transparent 
+A Cell representing a glass wall could be transparent (even though it may not be walkable)
+A Cell representing a solid stone wall would not be transparent </pre>
+</div>
+		</div>
+	</div>
+	<div id="IsWalkable" class="method">
+		<h4>
+			<span title="System.bool">bool</span> <strong>IsWalkable</strong>(<span title="System.int">int</span> x, <span title="System.int">int</span> y)
+		</h4>
+		<div class="content">Get the walkability of the Cell i.e. if a character could normally move across the Cell without difficulty 
+
+
+			<div class="parameters">
+				<h5>Parameters</h5>
+				<dl>
+						<dt>
+							<code><span title="System.int">int</span></code> x
+						</dt>
+						<dd>X location of the Cell to check starting with 0 as the farthest left 
+						</dd>
+						<dt>
+							<code><span title="System.int">int</span></code> y
+						</dt>
+						<dd>Y location of the Cell to check, starting with 0 as the top 
+						</dd>
+				</dl>
+			</div>
+
+			<div class="return">
+
+				<h5>Returns</h5>
+				<dl>
+					<dt>
+						<code><span title="System.bool">bool</span></code>
+					</dt>
+					<dd>True if a character could move across this Cell, false otherwise 
+					</dd>
+				</dl>
+			</div>
+<div class="example">
+  <a href="javascript:void(0)">Show Example</a>
+  <pre>A Cell representing an empty stone floor would be walkable
+A Cell representing a glass wall may not be walkable (even though it could be transparent)
+A Cell representing a solid stone wall would not be walkable </pre>
+</div>
+		</div>
+	</div>
+	<div id="Restore" class="method">
+		<h4>
+			<span title="System.void">void</span> <strong>Restore</strong>(<a href="../RogueSharp/MapState.htm">MapState</a> state)
+		</h4>
+		<div class="content">Restore the state of this Map from the specified MapState 
+
+
+			<div class="parameters">
+				<h5>Parameters</h5>
+				<dl>
+						<dt>
+							<code><a href="../RogueSharp/MapState.htm">MapState</a></code> state
+						</dt>
+						<dd>Mapstate POCO (Plain Old C# Object) which represents this Map and can be easily serialized and deserialized 
+						</dd>
+				</dl>
+			</div>
+
+
+		</div>
+	</div>
+	<div id="Save" class="method">
+		<h4>
+			<a href="../RogueSharp/MapState.htm">MapState</a> <strong>Save</strong>()
+		</h4>
+		<div class="content">Get a MapState POCO which represents this Map and can be easily serialized
+Use Restore with the MapState to get back a full Map 
+
+
+
+			<div class="return">
+
+				<h5>Returns</h5>
+				<dl>
+					<dt>
+						<code><a href="../RogueSharp/MapState.htm">MapState</a></code>
+					</dt>
+					<dd>Mapstate POCO (Plain Old C# Object) which represents this Map and can be easily serialized 
+					</dd>
+				</dl>
+			</div>
+
+		</div>
+	</div>
+	<div id="SetCellProperties" class="method">
+		<h4>
+			<span title="System.void">void</span> <strong>SetCellProperties</strong>(<span title="System.int">int</span> x, <span title="System.int">int</span> y, <span title="System.bool">bool</span> isTransparent, <span title="System.bool">bool</span> isWalkable, <span title="System.bool">bool</span> isExplored)
+		</h4>
+		<div class="content">Set the properties of a Cell to the specified values <blockquote class="remarks">
+  IsInFov cannot be set through this method as it is always calculated by calling ComputeFov and/or AppendFov 
+</blockquote>
+
+
+			<div class="parameters">
+				<h5>Parameters</h5>
+				<dl>
+						<dt>
+							<code><span title="System.int">int</span></code> x
+						</dt>
+						<dd>X location of the Cell to set properties on, starting with 0 as the farthest left 
+						</dd>
+						<dt>
+							<code><span title="System.int">int</span></code> y
+						</dt>
+						<dd>Y location of the Cell to set properties on, starting with 0 as the top 
+						</dd>
+						<dt>
+							<code><span title="System.bool">bool</span></code> isTransparent
+						</dt>
+						<dd>True if line-of-sight is not blocked by this Cell. False otherwise 
+						</dd>
+						<dt>
+							<code><span title="System.bool">bool</span></code> isWalkable
+						</dt>
+						<dd>True if a character could walk across the Cell normally. False otherwise 
+						</dd>
+						<dt>
+							<code><span title="System.bool">bool</span></code> isExplored
+						</dt>
+						<dd>Optional parameter defaults to false if not provided. True if the Cell has ever been in the field-of-view of the player. False otherwise 
+						</dd>
+				</dl>
+			</div>
+
+
+		</div>
+	</div>
+	<div id="SetCellProperties" class="method">
+		<h4>
+			<span title="System.void">void</span> <strong>SetCellProperties</strong>(<span title="System.int">int</span> x, <span title="System.int">int</span> y, <span title="System.bool">bool</span> isTransparent, <span title="System.bool">bool</span> isWalkable)
+		</h4>
+		<div class="content">Set the properties of an unexplored Cell to the specified values <blockquote class="remarks">
+  IsInFov cannot be set through this method as it is always calculated by calling ComputeFov and/or AppendFov 
+</blockquote>
+
+
+			<div class="parameters">
+				<h5>Parameters</h5>
+				<dl>
+						<dt>
+							<code><span title="System.int">int</span></code> x
+						</dt>
+						<dd>X location of the Cell to set properties on, starting with 0 as the farthest left 
+						</dd>
+						<dt>
+							<code><span title="System.int">int</span></code> y
+						</dt>
+						<dd>Y location of the Cell to set properties on, starting with 0 as the top 
+						</dd>
+						<dt>
+							<code><span title="System.bool">bool</span></code> isTransparent
+						</dt>
+						<dd>True if line-of-sight is not blocked by this Cell. False otherwise 
+						</dd>
+						<dt>
+							<code><span title="System.bool">bool</span></code> isWalkable
+						</dt>
+						<dd>True if a character could walk across the Cell normally. False otherwise 
+						</dd>
+				</dl>
+			</div>
+
+
+		</div>
+	</div>
+	
+	
+	<h3 class="section">Public properties</h3>
+
+	<div id="Height" class="method">
+		<h4>
+			<span title="System.int">int</span> <strong>Height</strong> get; 
+		</h4>
+		<div class="content">How many Cells tall the Map is <blockquote class="remarks">
+  A Map with a Height of 20 will have Cells with Y locations of 0 through 19
+Cells with an Y value of 0 will be the topmost Cells 
+</blockquote>
+
+		</div>
+	</div>
+	<div id="Width" class="method">
+		<h4>
+			<span title="System.int">int</span> <strong>Width</strong> get; 
+		</h4>
+		<div class="content">How many Cells wide the Map is <blockquote class="remarks">
+  A Map with a Width of 10 will have Cells with X locations of 0 through 9
+Cells with an X value of 0 will be the leftmost Cells 
+</blockquote>
+
+		</div>
+	</div>
+	</section>
+	</article><footer>
+	<span id="version">Built from v1.0.0.0 of RogueSharp</span>
+	<span id="docu-link">
+		Generated by <a href="http://docu.jagregory.com">docu</a>
+	</span>
+</footer>
+  </body>
+</html>

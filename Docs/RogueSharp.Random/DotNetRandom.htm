@@ -1,0 +1,210 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+	<!--[if lt IE 9]>
+	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+    <title>DotNetRandom - RogueSharp Documentation</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+    <link type="text/css" rel="stylesheet" href="../main.css"/>
+    <script type="text/javascript" src="../js/jquery-1.3.2.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.scrollTo-min.js"></script>
+    <script type="text/javascript" src="../js/navigation.js"></script>
+    <script type="text/javascript" src="../js/example.js"></script>
+  </head>
+  <body>
+  	<header><h1>RogueSharp : API Documentation</h1>
+	</header>
+<nav id="namespaces">
+	<h2 class="fixed">Namespaces</h2>
+	<div class="scroll">
+		<ul>
+			<li>
+          <a href="../RogueSharp/index.htm">RogueSharp</a>
+      </li>
+			<li>
+          <a href="../RogueSharp.Algorithms/index.htm">RogueSharp.Algorithms</a>
+      </li>
+			<li>
+          <a href="../RogueSharp.DiceNotation/index.htm">RogueSharp.DiceNotation</a>
+      </li>
+			<li>
+          <a href="../RogueSharp.DiceNotation.Exceptions/index.htm">RogueSharp.DiceNotation.Exceptions</a>
+      </li>
+			<li>
+          <a href="../RogueSharp.DiceNotation.Terms/index.htm">RogueSharp.DiceNotation.Terms</a>
+      </li>
+			<li>
+          <a href="../RogueSharp.MapCreation/index.htm">RogueSharp.MapCreation</a>
+      </li>
+			<li>
+          <a href="../RogueSharp.Random/index.htm" class="current">RogueSharp.Random</a>
+      </li>
+		</ul>
+	</div>
+</nav><nav id="types">
+  <h2 class="fixed">Types in RogueSharp.Random</h2>
+	<div class="scroll">
+		<ul>
+				<li>
+            <a href="../RogueSharp.Random/DotNetRandom.htm" class="current">DotNetRandom</a>
+        </li>
+				<li>
+            <a href="../RogueSharp.Random/GaussianRandom.htm">GaussianRandom</a>
+        </li>
+				<li>
+            <a href="../RogueSharp.Random/IRandom.htm">IRandom</a>
+        </li>
+				<li>
+            <a href="../RogueSharp.Random/KnownSeriesRandom.htm">KnownSeriesRandom</a>
+        </li>
+				<li>
+            <a href="../RogueSharp.Random/MaxRandom.htm">MaxRandom</a>
+        </li>
+				<li>
+            <a href="../RogueSharp.Random/MinRandom.htm">MinRandom</a>
+        </li>
+				<li>
+            <a href="../RogueSharp.Random/RandomState.htm">RandomState</a>
+        </li>
+				<li>
+            <a href="../RogueSharp.Random/Singleton.htm">Singleton</a>
+        </li>
+		</ul>
+	</div>
+</nav>
+	<article>
+    <header>
+		<p class="class"><strong>Type</strong> DotNetRandom</p>
+	</header>
+	<section>
+		<header>
+		<p><strong>Namespace</strong> RogueSharp.Random</p>
+		<p><strong>Interfaces</strong> <a href="../RogueSharp.Random/IRandom.htm">IRandom</a></p>
+		</header>
+    <div class="sub-header">
+			<div id="summary">A class implementing IRandom which used for generating pseudo-random numbers
+using the System.Random class from the.Net framework 
+			</div>
+		
+		
+			<h3 class="section">Methods</h3>
+			<ul>
+				<li><a href="../RogueSharp.Random/DotNetRandom.htm#Next">Next</a></li>
+				<li><a href="../RogueSharp.Random/DotNetRandom.htm#Next">Next</a></li>
+				<li><a href="../RogueSharp.Random/DotNetRandom.htm#Restore">Restore</a></li>
+			</ul>
+		
+		
+	</div>
+	
+	<h3 class="section">Public instance methods</h3>
+
+	<div id="Next" class="method">
+		<h4>
+			<span title="System.int">int</span> <strong>Next</strong>(<span title="System.int">int</span> minValue, <span title="System.int">int</span> maxValue)
+		</h4>
+		<div class="content">Gets the next pseudo-random integer between the specified minValue and maxValue inclusive 
+
+
+			<div class="parameters">
+				<h5>Parameters</h5>
+				<dl>
+						<dt>
+							<code><span title="System.int">int</span></code> minValue
+						</dt>
+						<dd>Inclusive minimum result 
+						</dd>
+						<dt>
+							<code><span title="System.int">int</span></code> maxValue
+						</dt>
+						<dd>Inclusive maximum result 
+						</dd>
+				</dl>
+			</div>
+
+			<div class="return">
+
+				<h5>Returns</h5>
+				<dl>
+					<dt>
+						<code><span title="System.int">int</span></code>
+					</dt>
+					<dd>Returns a pseudo-random integer between the specified minValue and maxValue inclusive 
+					</dd>
+				</dl>
+			</div>
+
+		</div>
+	</div>
+	<div id="Next" class="method">
+		<h4>
+			<span title="System.int">int</span> <strong>Next</strong>(<span title="System.int">int</span> maxValue)
+		</h4>
+		<div class="content">Gets the next pseudo-random integer between 0 and the specified maxValue inclusive 
+
+
+			<div class="parameters">
+				<h5>Parameters</h5>
+				<dl>
+						<dt>
+							<code><span title="System.int">int</span></code> maxValue
+						</dt>
+						<dd>Inclusive maximum result 
+						</dd>
+				</dl>
+			</div>
+
+			<div class="return">
+
+				<h5>Returns</h5>
+				<dl>
+					<dt>
+						<code><span title="System.int">int</span></code>
+					</dt>
+					<dd>Returns a pseudo-random integer between 0 and the specified maxValue inclusive 
+					</dd>
+				</dl>
+			</div>
+
+		</div>
+	</div>
+	<div id="Restore" class="method">
+		<h4>
+			<span title="System.void">void</span> <strong>Restore</strong>(<a href="../RogueSharp.Random/RandomState.htm">RandomState</a> state)
+		</h4>
+		<div class="content">Restores the state of the pseudo-random number generator based on the specified state parameter 
+
+
+			<div class="parameters">
+				<h5>Parameters</h5>
+				<dl>
+						<dt>
+							<code><a href="../RogueSharp.Random/RandomState.htm">RandomState</a></code> state
+						</dt>
+						<dd>The state to restore to, usually obtained from calling the Save method 
+						</dd>
+				</dl>
+			</div>
+
+<div class="example">
+  <a href="javascript:void(0)">Show Example</a>
+  <pre>If you generated three random numbers and then called Save to store the state and 
+followed that up by generating 10 more numbers before calling Restore with the previously saved RandomState
+the Restore method should return the generator back to the state when Save was first called.
+This means that if you went on to generate 10 more numbers they would be the same 10 numbers that were
+generated the first time after Save was called. </pre>
+</div>
+		</div>
+	</div>
+	
+	
+	</section>
+	</article><footer>
+	<span id="version">Built from v1.0.0.0 of RogueSharp</span>
+	<span id="docu-link">
+		Generated by <a href="http://docu.jagregory.com">docu</a>
+	</span>
+</footer>
+  </body>
+</html>

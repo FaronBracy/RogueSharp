@@ -1,11 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2042
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RogueSharp", "RogueSharp\RogueSharp.csproj", "{EBCA7EA9-1C80-481A-8025-A465D6BA5F71}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RogueSharp.Test", "RogueSharp.Test\RogueSharp.Test.csproj", "{A1494180-593F-46C0-8C34-47D3289A3CE6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RogueSharp.Test", "RogueSharp.Test\RogueSharp.Test.csproj", "{A1494180-593F-46C0-8C34-47D3289A3CE6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EC8DBBC4-3542-4859-A2C7-BAE76D5FF83E}"
 	ProjectSection(SolutionItems) = preProject
@@ -13,23 +11,28 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		HowToBuildNugetPackage.txt = HowToBuildNugetPackage.txt
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RogueSharp", "RogueSharp\RogueSharp.csproj", "{B7127CF8-EF2D-44F3-B728-F3E505822F63}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{EBCA7EA9-1C80-481A-8025-A465D6BA5F71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EBCA7EA9-1C80-481A-8025-A465D6BA5F71}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EBCA7EA9-1C80-481A-8025-A465D6BA5F71}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EBCA7EA9-1C80-481A-8025-A465D6BA5F71}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A1494180-593F-46C0-8C34-47D3289A3CE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A1494180-593F-46C0-8C34-47D3289A3CE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A1494180-593F-46C0-8C34-47D3289A3CE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A1494180-593F-46C0-8C34-47D3289A3CE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7127CF8-EF2D-44F3-B728-F3E505822F63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7127CF8-EF2D-44F3-B728-F3E505822F63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7127CF8-EF2D-44F3-B728-F3E505822F63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7127CF8-EF2D-44F3-B728-F3E505822F63}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F779B2DC-0D1D-4817-AF62-B61FC20A831D}
 	EndGlobalSection
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True

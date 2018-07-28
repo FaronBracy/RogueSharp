@@ -1,0 +1,300 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+	<!--[if lt IE 9]>
+	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+    <title>FieldOfView - RogueSharp Documentation</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+    <link type="text/css" rel="stylesheet" href="../main.css"/>
+    <script type="text/javascript" src="../js/jquery-1.3.2.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.scrollTo-min.js"></script>
+    <script type="text/javascript" src="../js/navigation.js"></script>
+    <script type="text/javascript" src="../js/example.js"></script>
+  </head>
+  <body>
+  	<header><h1>RogueSharp : API Documentation</h1>
+	</header>
+<nav id="namespaces">
+	<h2 class="fixed">Namespaces</h2>
+	<div class="scroll">
+		<ul>
+			<li>
+          <a href="../RogueSharp/index.htm" class="current">RogueSharp</a>
+      </li>
+			<li>
+          <a href="../RogueSharp.Algorithms/index.htm">RogueSharp.Algorithms</a>
+      </li>
+			<li>
+          <a href="../RogueSharp.DiceNotation/index.htm">RogueSharp.DiceNotation</a>
+      </li>
+			<li>
+          <a href="../RogueSharp.DiceNotation.Exceptions/index.htm">RogueSharp.DiceNotation.Exceptions</a>
+      </li>
+			<li>
+          <a href="../RogueSharp.DiceNotation.Terms/index.htm">RogueSharp.DiceNotation.Terms</a>
+      </li>
+			<li>
+          <a href="../RogueSharp.MapCreation/index.htm">RogueSharp.MapCreation</a>
+      </li>
+			<li>
+          <a href="../RogueSharp.Random/index.htm">RogueSharp.Random</a>
+      </li>
+		</ul>
+	</div>
+</nav><nav id="types">
+  <h2 class="fixed">Types in RogueSharp</h2>
+	<div class="scroll">
+		<ul>
+				<li>
+            <a href="../RogueSharp/Cell.htm">Cell</a>
+        </li>
+				<li>
+            <a href="../RogueSharp/CellProperties.htm">CellProperties</a>
+        </li>
+				<li>
+            <a href="../RogueSharp/FieldOfView.htm" class="current">FieldOfView</a>
+        </li>
+				<li>
+            <a href="../RogueSharp/GoalMap.htm">GoalMap</a>
+        </li>
+				<li>
+            <a href="../RogueSharp/ICell.htm">ICell</a>
+        </li>
+				<li>
+            <a href="../RogueSharp/IGoalMap.htm">IGoalMap</a>
+        </li>
+				<li>
+            <a href="../RogueSharp/IMap.htm">IMap</a>
+        </li>
+				<li>
+            <a href="../RogueSharp/Map.htm">Map</a>
+        </li>
+				<li>
+            <a href="../RogueSharp/MapState.htm">MapState</a>
+        </li>
+				<li>
+            <a href="../RogueSharp/NoMoreStepsException.htm">NoMoreStepsException</a>
+        </li>
+				<li>
+            <a href="../RogueSharp/Path.htm">Path</a>
+        </li>
+				<li>
+            <a href="../RogueSharp/PathFinder.htm">PathFinder</a>
+        </li>
+				<li>
+            <a href="../RogueSharp/PathNotFoundException.htm">PathNotFoundException</a>
+        </li>
+				<li>
+            <a href="../RogueSharp/Point.htm">Point</a>
+        </li>
+				<li>
+            <a href="../RogueSharp/Rectangle.htm">Rectangle</a>
+        </li>
+		</ul>
+	</div>
+</nav>
+	<article>
+    <header>
+		<p class="class"><strong>Type</strong> FieldOfView</p>
+	</header>
+	<section>
+		<header>
+		<p><strong>Namespace</strong> RogueSharp</p>
+		</header>
+    <div class="sub-header">
+			<div id="summary">A class for performing field-of-view calculations to determine what is observable in a Map from a given Cell within a given light radius 
+			</div>
+		
+		
+			<h3 class="section">Methods</h3>
+			<ul>
+				<li><a href="../RogueSharp/FieldOfView.htm#AppendFov">AppendFov</a></li>
+				<li><a href="../RogueSharp/FieldOfView.htm#Clone">Clone</a></li>
+				<li><a href="../RogueSharp/FieldOfView.htm#ComputeFov">ComputeFov</a></li>
+				<li><a href="../RogueSharp/FieldOfView.htm#IsInFov">IsInFov</a></li>
+			</ul>
+		
+		
+	</div>
+	
+	<h3 class="section">Public instance methods</h3>
+
+	<div id="AppendFov" class="method">
+		<h4>
+			<span title="System.Collections.ObjectModel.ReadOnlyCollection<ICell>">ReadOnlyCollection&lt;ICell&gt;</span> <strong>AppendFov</strong>(<span title="System.int">int</span> xOrigin, <span title="System.int">int</span> yOrigin, <span title="System.int">int</span> radius, <span title="System.bool">bool</span> lightWalls)
+		</h4>
+		<div class="content">Performs a field-of-view calculation with the specified parameters and appends it any existing field-of-view calculations.
+Field-of-view (FOV) is basically a calculation of what is observable in the Map from a given Cell with a given light radius. 
+
+
+			<div class="parameters">
+				<h5>Parameters</h5>
+				<dl>
+						<dt>
+							<code><span title="System.int">int</span></code> xOrigin
+						</dt>
+						<dd>X location of the Cell to perform the field-of-view calculation with 0 as the farthest left 
+						</dd>
+						<dt>
+							<code><span title="System.int">int</span></code> yOrigin
+						</dt>
+						<dd>Y location of the Cell to perform the field-of-view calculation with 0 as the top 
+						</dd>
+						<dt>
+							<code><span title="System.int">int</span></code> radius
+						</dt>
+						<dd>The number of Cells in which the field-of-view extends from the origin Cell. Think of this as the intensity of the light source. 
+						</dd>
+						<dt>
+							<code><span title="System.bool">bool</span></code> lightWalls
+						</dt>
+						<dd>True if walls should be included in the field-of-view when they are within the radius of the light source. False excludes walls even when they are within range. 
+						</dd>
+				</dl>
+			</div>
+
+			<div class="return">
+
+				<h5>Returns</h5>
+				<dl>
+					<dt>
+						<code><span title="System.Collections.ObjectModel.ReadOnlyCollection<ICell>">ReadOnlyCollection&lt;ICell&gt;</span></code>
+					</dt>
+					<dd>List of Cells representing what is observable in the Map based on the specified parameters 
+					</dd>
+				</dl>
+			</div>
+<div class="example">
+  <a href="javascript:void(0)">Show Example</a>
+  <pre>When a character is holding a light source in a large area that also has several other sources of light such as torches along the walls
+ComputeFov could first be called for the character and then AppendFov could be called for each torch to give us the final combined FOV given all the light sources </pre>
+</div>
+		</div>
+	</div>
+	<div id="Clone" class="method">
+		<h4>
+			<a href="../RogueSharp/FieldOfView.htm">FieldOfView</a> <strong>Clone</strong>()
+		</h4>
+		<div class="content">Create and return a deep copy of an existing FieldOfView class 
+
+
+
+			<div class="return">
+
+				<h5>Returns</h5>
+				<dl>
+					<dt>
+						<code><a href="../RogueSharp/FieldOfView.htm">FieldOfView</a></code>
+					</dt>
+					<dd>A deep copy of an existing FieldOfViewClass 
+					</dd>
+				</dl>
+			</div>
+
+		</div>
+	</div>
+	<div id="ComputeFov" class="method">
+		<h4>
+			<span title="System.Collections.ObjectModel.ReadOnlyCollection<ICell>">ReadOnlyCollection&lt;ICell&gt;</span> <strong>ComputeFov</strong>(<span title="System.int">int</span> xOrigin, <span title="System.int">int</span> yOrigin, <span title="System.int">int</span> radius, <span title="System.bool">bool</span> lightWalls)
+		</h4>
+		<div class="content">Performs a field-of-view calculation with the specified parameters.
+Field-of-view (FOV) is basically a calculation of what is observable in the Map from a given Cell with a given light radius.
+Any existing field-of-view calculations will be overwritten when calling this method. 
+
+
+			<div class="parameters">
+				<h5>Parameters</h5>
+				<dl>
+						<dt>
+							<code><span title="System.int">int</span></code> xOrigin
+						</dt>
+						<dd>X location of the Cell to perform the field-of-view calculation with 0 as the farthest left 
+						</dd>
+						<dt>
+							<code><span title="System.int">int</span></code> yOrigin
+						</dt>
+						<dd>Y location of the Cell to perform the field-of-view calculation with 0 as the top 
+						</dd>
+						<dt>
+							<code><span title="System.int">int</span></code> radius
+						</dt>
+						<dd>The number of Cells in which the field-of-view extends from the origin Cell. Think of this as the intensity of the light source. 
+						</dd>
+						<dt>
+							<code><span title="System.bool">bool</span></code> lightWalls
+						</dt>
+						<dd>True if walls should be included in the field-of-view when they are within the radius of the light source. False excludes walls even when they are within range. 
+						</dd>
+				</dl>
+			</div>
+
+			<div class="return">
+
+				<h5>Returns</h5>
+				<dl>
+					<dt>
+						<code><span title="System.Collections.ObjectModel.ReadOnlyCollection<ICell>">ReadOnlyCollection&lt;ICell&gt;</span></code>
+					</dt>
+					<dd>List of Cells representing what is observable in the Map based on the specified parameters 
+					</dd>
+				</dl>
+			</div>
+
+		</div>
+	</div>
+	<div id="IsInFov" class="method">
+		<h4>
+			<span title="System.bool">bool</span> <strong>IsInFov</strong>(<span title="System.int">int</span> x, <span title="System.int">int</span> y)
+		</h4>
+		<div class="content">Check if the Cell is in the currently computed field-of-view
+Field-of-view must first be calculated by calling ComputeFov and/or AppendFov <blockquote class="remarks">
+  Field-of-view (FOV) is basically a calculation of what is observable in the Map from a given Cell with a given light radius 
+</blockquote>
+
+
+			<div class="parameters">
+				<h5>Parameters</h5>
+				<dl>
+						<dt>
+							<code><span title="System.int">int</span></code> x
+						</dt>
+						<dd>X location of the Cell to check starting with 0 as the farthest left 
+						</dd>
+						<dt>
+							<code><span title="System.int">int</span></code> y
+						</dt>
+						<dd>Y location of the Cell to check, starting with 0 as the top 
+						</dd>
+				</dl>
+			</div>
+
+			<div class="return">
+
+				<h5>Returns</h5>
+				<dl>
+					<dt>
+						<code><span title="System.bool">bool</span></code>
+					</dt>
+					<dd>True if the Cell is in the currently computed field-of-view, false otherwise 
+					</dd>
+				</dl>
+			</div>
+<div class="example">
+  <a href="javascript:void(0)">Show Example</a>
+  <pre>Field-of-view can be used to simulate a character holding a light source and exploring a Map representing a dark cavern
+Any Cells within the FOV would be what the character could see from their current location and lighting conditions </pre>
+</div>
+		</div>
+	</div>
+	
+	
+	</section>
+	</article><footer>
+	<span id="version">Built from v1.0.0.0 of RogueSharp</span>
+	<span id="docu-link">
+		Generated by <a href="http://docu.jagregory.com">docu</a>
+	</span>
+</footer>
+  </body>
+</html>
