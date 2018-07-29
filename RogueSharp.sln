@@ -7,7 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RogueSharp.Test", "RogueSha
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EC8DBBC4-3542-4859-A2C7-BAE76D5FF83E}"
 	ProjectSection(SolutionItems) = preProject
-		HowToBuildDocumentation.txt = HowToBuildDocumentation.txt
 		HowToBuildNugetPackage.txt = HowToBuildNugetPackage.txt
 	EndProjectSection
 EndProject
