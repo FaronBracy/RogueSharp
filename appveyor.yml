@@ -1,25 +1,25 @@
-#---------------------------------#
-#    environment configuration    #
-#---------------------------------#
-os: Windows Server 2012 R2
-
-# Set newline options for Git
-init:
-  - git config --global core.autocrlf true
-
-# clone directory
-clone_folder: c:\projects\RogueSharp
-
-#---------------------------------#
-#       build configuration       #
-#---------------------------------#
-# build platform, i.e. x86, x64, Any CPU. This setting is optional.
-
+version: '4.0.{build}'
+configuration:
+- Debug
+- Release
 platform: Any CPU
-
-configuration: Release
-
-build:
-  project: RogueSharp.sln
-  publish_nuget: true
-  verbosity: minimal
+environment:
+  # Don't report back to the mothership
+  DOTNET_CLI_TELEMETRY_OPTOUT: 1
+init:
+- ps: $Env:LABEL = "CI" + $Env:APPVEYOR_BUILD_NUMBER.PadLeft(5, "0")
+before_build:
+- appveyor-retry dotnet restore -v Minimal
+build_script:
+- dotnet build "RogueSharp\RogueSharp.csproj" -c %CONFIGURATION% --no-dependencies --version-suffix %LABEL%
+after_build:
+- dotnet pack "RogueSharp\RogueSharp.csproj" -c %CONFIGURATION% --no-build --version-suffix %LABEL% -o artifacts
+- dotnet publish "RogueSharp\RogueSharp.csproj" -c %CONFIGURATION% --no-build --version-suffix %LABEL% -o artifacts\RogueSharp
+test_script:
+- dotnet test "RogueSharp.Test\RogueSharp.Test.csproj" -c %CONFIGURATION%
+artifacts:
+- path: artifacts\**\*.*
+cache:
+- '%USERPROFILE%\.nuget\packages'
+on_finish: # Run the demo to show that it works
+- dotnet artifacts\RogueSharp\Roguesharp.dll
