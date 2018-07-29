@@ -18,8 +18,6 @@ after_build:
 test_script:
 - dotnet test "RogueSharp.Test\RogueSharp.Test.csproj" -c %CONFIGURATION%
 artifacts:
-- path: artifacts\**\*.*
+- path: RogueSharp\artifacts\**\*.*
 cache:
 - '%USERPROFILE%\.nuget\packages'
-on_finish: # Run the demo to show that it works
-- dotnet artifacts\RogueSharp\Roguesharp.dll
