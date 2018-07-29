@@ -22,12 +22,12 @@ Each `Cell` in a `Map` has the following properties:
 
 To instantiate a new `Map` you can use its constructor which takes a width and height and will create a new map of those dimensions with the properties of all `Cells` set to false.
     
-###Usage###
+### Usage ###
 
 	IMap boringMapOfSolidStone = new Map( 5, 3 );
 	Console.WriteLine( boringMapOfSolidStone.ToString() );
 
-###Output###
+### Output ###
 
 	#####
 	#####
@@ -45,13 +45,13 @@ The symbols used are as follows:
 
 A more interesting way to create a map is to use the `Map` class's static method `Create` which takes an `IMapCreationStrategy`. Some simple classes implementing `IMapCreationStrategy` are provided with RogueSharp but this is easily extended by creating your own class that implements the strategy.
 
-###Usage###
+### Usage ###
 
 	IMapCreationStrategy<Map> mapCreationStrategy = new RandomRoomsMapCreationStrategy<Map>( 17, 10, 30, 5, 3 )
 	IMap somewhatInterestingMap = Map.Create( mapCreationStrategy );
 	Console.WriteLine( somewhatInterestingMap.ToString() );
 
-###Output###
+### Output ###
 
 	#################
 	#################
