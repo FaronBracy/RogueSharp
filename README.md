@@ -1,3 +1,5 @@
+[![Build status](https://dreamersdesign.visualstudio.com/RogueSharp/_apis/build/status/RogueSharp%20Continuous)](https://dreamersdesign.visualstudio.com/RogueSharp/_build/latest?definitionId=1)[![Build status](https://ci.appveyor.com/api/projects/status/mx09mla59wsgrkkj?svg=true)](https://ci.appveyor.com/project/FaronBracy/roguesharp-20n28)
+
 # What is RogueSharp? #
 RogueSharp is a free library written in C# to help [roguelike](http://en.wikipedia.org/wiki/Roguelike "roguelike") developers get a head start on their game. RogueSharp provides many utility functions for dealing with map generation, field-of-view calculations, path finding, random number generation and more.
 
