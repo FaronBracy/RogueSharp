@@ -14,7 +14,7 @@ build_script:
 - dotnet build "RogueSharp\RogueSharp.csproj" -c %CONFIGURATION% --no-dependencies --version-suffix %LABEL%
 after_build:
 - dotnet pack "RogueSharp\RogueSharp.csproj" -c %CONFIGURATION% --no-build --version-suffix %LABEL% -o artifacts
-- dotnet publish "RogueSharp\RogueSharp.csproj" -c %CONFIGURATION% --no-build --version-suffix %LABEL% -o artifacts\RogueSharp
+- dotnet publish "RogueSharp\RogueSharp.csproj" -c %CONFIGURATION% --no-build --framework netstandard1.0 --version-suffix %LABEL% -o artifacts\RogueSharp
 test_script:
 - dotnet test "RogueSharp.Test\RogueSharp.Test.csproj" -c %CONFIGURATION%
 artifacts:
