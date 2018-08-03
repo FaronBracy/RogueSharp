@@ -496,6 +496,35 @@ namespace RogueSharp.Test
       }
 
       [TestMethod]
+      public void GetBorderCellsInSquare_CenteredOnX0Y0InSmallMap_ExpectedCellsWithoutCenterCell()
+      {
+         string mapRepresentation = @"#################
+                                      #################
+                                      ##...#######...##
+                                      ##.............##
+                                      ###.###....#...##
+                                      ###...##.#####.##
+                                      ###...##...###..#
+                                      ####............#
+                                      ##############..#
+                                      #################";
+         IMapCreationStrategy<Map> mapCreationStrategy = new StringDeserializeMapCreationStrategy<Map>( mapRepresentation );
+         IMap map = Map.Create( mapCreationStrategy );
+         string expectedCells = "###";
+
+         IEnumerable<ICell> cells = map.GetBorderCellsInSquare( 0, 0, 1 )
+            .OrderBy( c => c.X )
+            .ThenBy( c => c.Y );
+         var actualCells = new StringBuilder();
+         foreach ( ICell cell in cells )
+         {
+            actualCells.Append( cell.ToString() );
+         }
+
+         Assert.AreEqual( expectedCells, actualCells.ToString() );
+      }
+
+      [TestMethod]
       public void ComputeFov_X6Y1CellRadius20_ExpectedFovMap()
       {
          string mapRepresentation = @"####################################

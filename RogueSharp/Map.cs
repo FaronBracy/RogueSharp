@@ -604,17 +604,23 @@ namespace RogueSharp
          int xMax = Math.Min( Width - 1, xCenter + distance );
          int yMin = Math.Max( 0, yCenter - distance );
          int yMax = Math.Min( Height - 1, yCenter + distance );
+         List<ICell> borderCells = new List<ICell>();
 
          for ( int x = xMin; x <= xMax; x++ )
          {
-            yield return GetCell( x, yMin );
-            yield return GetCell( x, yMax );
+            borderCells.Add( GetCell( x, yMin ) );
+            borderCells.Add( GetCell( x, yMax ) );
          }
          for ( int y = yMin + 1; y <= yMax - 1; y++ )
          {
-            yield return GetCell( xMin, y );
-            yield return GetCell( xMax, y );
+            borderCells.Add( GetCell( xMin, y ) );
+            borderCells.Add( GetCell( xMax, y ) );
          }
+
+         ICell centerCell = GetCell( xCenter, yCenter );
+         borderCells.Remove( centerCell );
+
+         return borderCells;
       }
 
       /// <summary>
