@@ -380,6 +380,35 @@ namespace RogueSharp.Test
       }
 
       [TestMethod]
+      public void GetBorderCellsInCircle_CenteredOnX0Y0InSmallMap_ExpectedCells()
+      {
+         string mapRepresentation = @"#################
+                                      #################
+                                      ##...#######...##
+                                      ##.............##
+                                      ###.###....#...##
+                                      ###...##.#####.##
+                                      ###...##...###..#
+                                      ####............#
+                                      ##############..#
+                                      #################";
+         IMapCreationStrategy<Map> mapCreationStrategy = new StringDeserializeMapCreationStrategy<Map>( mapRepresentation );
+         IMap map = Map.Create( mapCreationStrategy );
+         string expectedCells = "##";
+
+         IEnumerable<ICell> cells = map.GetBorderCellsInCircle( 0, 0, 1 )
+            .OrderBy( c => c.X )
+            .ThenBy( c => c.Y );
+         var actualCells = new StringBuilder();
+         foreach ( ICell cell in cells )
+         {
+            actualCells.Append( cell.ToString() );
+         }
+
+         Assert.AreEqual( expectedCells, actualCells.ToString() );
+      }
+
+      [TestMethod]
       public void GetCellsInDiamond_SmallMap_ExpectedCells()
       {
          string mapRepresentation = @"#################
@@ -438,6 +467,35 @@ namespace RogueSharp.Test
       }
 
       [TestMethod]
+      public void GetBorderCellsInDiamond_CenteredOnX0Y0InSmallMap_ExpectedCells()
+      {
+         string mapRepresentation = @"#################
+                                      #################
+                                      ##...#######...##
+                                      ##.............##
+                                      ###.###....#...##
+                                      ###...##.#####.##
+                                      ###...##...###..#
+                                      ####............#
+                                      ##############..#
+                                      #################";
+         IMapCreationStrategy<Map> mapCreationStrategy = new StringDeserializeMapCreationStrategy<Map>( mapRepresentation );
+         IMap map = Map.Create( mapCreationStrategy );
+         string expectedCells = "##";
+
+         IEnumerable<ICell> cells = map.GetBorderCellsInDiamond( 0, 0, 1 )
+            .OrderBy( c => c.X )
+            .ThenBy( c => c.Y );
+         var actualCells = new StringBuilder();
+         foreach ( ICell cell in cells )
+         {
+            actualCells.Append( cell.ToString() );
+         }
+
+         Assert.AreEqual( expectedCells, actualCells.ToString() );
+      }
+
+      [TestMethod]
       public void GetCellsInSquare_SmallMap_ExpectedCells()
       {
          string mapRepresentation = @"#################
@@ -484,6 +542,35 @@ namespace RogueSharp.Test
          string expectedCells = "########.#.##.#.";
 
          IEnumerable<ICell> cells = map.GetBorderCellsInSquare( 3, 3, 2 )
+            .OrderBy( c => c.X )
+            .ThenBy( c => c.Y );
+         var actualCells = new StringBuilder();
+         foreach ( ICell cell in cells )
+         {
+            actualCells.Append( cell.ToString() );
+         }
+
+         Assert.AreEqual( expectedCells, actualCells.ToString() );
+      }
+
+      [TestMethod]
+      public void GetBorderCellsInSquare_CenteredOnX0Y0InSmallMap_ExpectedCellsWithoutCenterCell()
+      {
+         string mapRepresentation = @"#################
+                                      #################
+                                      ##...#######...##
+                                      ##.............##
+                                      ###.###....#...##
+                                      ###...##.#####.##
+                                      ###...##...###..#
+                                      ####............#
+                                      ##############..#
+                                      #################";
+         IMapCreationStrategy<Map> mapCreationStrategy = new StringDeserializeMapCreationStrategy<Map>( mapRepresentation );
+         IMap map = Map.Create( mapCreationStrategy );
+         string expectedCells = "###";
+
+         IEnumerable<ICell> cells = map.GetBorderCellsInSquare( 0, 0, 1 )
             .OrderBy( c => c.X )
             .ThenBy( c => c.Y );
          var actualCells = new StringBuilder();
