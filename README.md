@@ -1,5 +1,12 @@
-[![Build status](https://dreamersdesign.visualstudio.com/RogueSharp/_apis/build/status/RogueSharp%20Continuous)](https://dreamersdesign.visualstudio.com/RogueSharp/_build/latest?definitionId=1) [![Build status](https://ci.appveyor.com/api/projects/status/mx09mla59wsgrkkj?svg=true)](https://ci.appveyor.com/project/FaronBracy/roguesharp-20n28) 
-[![Nuget](https://img.shields.io/badge/nuget-v4.0.0-blue.svg)](https://www.nuget.org/packages/RogueSharp)
+[![Tutorials: Blog](https://img.shields.io/badge/tutorials-blog-blue.svg)](https://roguesharp.wordpress.com/ )
+[![Documentation: Github](https://img.shields.io/badge/docs-github-blue.svg)](https://faronbracy.github.io/RogueSharp/RogueSharp/index.htm)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/FaronBracy/RogueSharp/master/LICENSE.txt)
+
+[![Build status](https://dreamersdesign.visualstudio.com/RogueSharp/_apis/build/status/RogueSharp%20Continuous)](https://dreamersdesign.visualstudio.com/RogueSharp/_build/latest?definitionId=1) 
+[![Build status](https://ci.appveyor.com/api/projects/status/mx09mla59wsgrkkj?svg=true)](https://ci.appveyor.com/project/FaronBracy/roguesharp-20n28) 
+[![Nuget](https://buildstats.info/nuget/roguesharp)](https://www.nuget.org/packages/RogueSharp) 
+
+[![Build History](https://buildstats.info/appveyor/chart/FaronBracy/roguesharp-20n28)](https://ci.appveyor.com/project/FaronBracy/roguesharp-20n28/history)
 
 # What is RogueSharp? #
 RogueSharp is a free library written in C# to help [roguelike](http://en.wikipedia.org/wiki/Roguelike "roguelike") developers get a head start on their game. RogueSharp provides many utility functions for dealing with map generation, field-of-view calculations, path finding, random number generation and more.
@@ -7,7 +14,7 @@ RogueSharp is a free library written in C# to help [roguelike](http://en.wikiped
 It is loosely based on the popular [libtcod](http://doryen.eptalys.net/libtcod/ "libtcod") or "Doryen Library" though not all features overlap.
 
 ## Getting Started ##
-1. Visit the [RogueSharp Blog](http://roguesharp.wordpress.com/ "RogueSharp Blog") for tips and tutorials.
+1. Visit the [RogueSharp Blog](https://roguesharp.wordpress.com/ "RogueSharp Blog") for tips and tutorials.
 2. The quickest way to add RogueSharp to your project is by using the [RogueSharp nuget package](https://www.nuget.org/packages/RogueSharp "RogueSharp nuget package"). 
 2. If building the assembly yourself, the solution file "RogueSharp.sln" contains the main library and unit tests. This should be all you need.
 3. Class documentation is located on [Github Pages](https://faronbracy.github.io/RogueSharp "RogueSharp class documentation").
