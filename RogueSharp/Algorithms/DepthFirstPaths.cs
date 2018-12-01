@@ -30,10 +30,10 @@ namespace RogueSharp.Algorithms
          _sourceVertex = sourceVertex;
          _edgeTo = new int[graph.NumberOfVertices];
          _marked = new bool[graph.NumberOfVertices];
-         DepthFirstSeach( graph, sourceVertex );
+         DepthFirstSearch( graph, sourceVertex );
       }
 
-      private void DepthFirstSeach( Graph graph, int sourceVertex )
+      private void DepthFirstSearch( Graph graph, int sourceVertex )
       {
          _marked[sourceVertex] = true;
          foreach ( int vertex in graph.Adjacent( sourceVertex ) )
@@ -41,7 +41,7 @@ namespace RogueSharp.Algorithms
             if ( !_marked[vertex] )
             {
                _edgeTo[vertex] = sourceVertex;
-               DepthFirstSeach( graph, vertex );
+               DepthFirstSearch( graph, vertex );
             }
          }
       }

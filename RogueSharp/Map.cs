@@ -677,7 +677,7 @@ namespace RogueSharp
       /// - `o`: `Cell` is transparent and in field-of-view (but not walkable)
       /// - `#`: `Cell` is in field-of-view (but not transparent or walkable)
       /// </summary>
-      /// <param name="useFov">True if field-of-view calculations will be used when creating the string represenation of the Map. False otherwise</param>
+      /// <param name="useFov">True if field-of-view calculations will be used when creating the string representation of the Map. False otherwise</param>
       /// <returns>A string representation of the map using special symbols to denote Cell properties</returns>
       public string ToString( bool useFov )
       {
@@ -700,7 +700,7 @@ namespace RogueSharp
       /// Get a MapState POCO which represents this Map and can be easily serialized
       /// Use Restore with the MapState to get back a full Map
       /// </summary>
-      /// <returns>Mapstate POCO (Plain Old C# Object) which represents this Map and can be easily serialized</returns>
+      /// <returns>MapState POCO (Plain Old C# Object) which represents this Map and can be easily serialized</returns>
       public MapState Save()
       {
          var mapState = new MapState();
@@ -730,7 +730,7 @@ namespace RogueSharp
       /// <summary>
       /// Restore the state of this Map from the specified MapState
       /// </summary>
-      /// <param name="state">Mapstate POCO (Plain Old C# Object) which represents this Map and can be easily serialized and deserialized</param>
+      /// <param name="state">MapState POCO (Plain Old C# Object) which represents this Map and can be easily serialized and deserialized</param>
       /// <exception cref="ArgumentNullException">Thrown on null map state</exception>
       public void Restore( MapState state )
       {

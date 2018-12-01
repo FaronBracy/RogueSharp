@@ -73,7 +73,7 @@ namespace RogueSharp.DiceNotation
       /// <param name="multiplicity">The number of Dice</param>
       /// <param name="sides">The number of sides per Die</param>
       /// <param name="scalar">The value to multiply the result of the Roll of these Dice by</param>
-      /// <param name="choose">Optional number of dice to choose out of the total rolled. The highest rolled Dice will be choosen.</param>
+      /// <param name="choose">Optional number of dice to choose out of the total rolled. The highest rolled Dice will be chosen.</param>
       /// <returns>A DiceExpression representing the previous terms in this DiceExpression plus these newly added Dice</returns>
       public DiceExpression Dice( int multiplicity, int sides, int scalar, int? choose )
       {

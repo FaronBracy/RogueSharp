@@ -56,7 +56,7 @@ namespace RogueSharp
         /// </summary>
         /// <remarks>
         /// The explored property of a Cell can be used to track if the Cell has ever been in the field-of-view of a character controlled by the player
-        /// This property will not automatically be updated based on FOV calcuations or any other built-in functions of the RogueSharp library.
+        /// This property will not automatically be updated based on FOV calculations or any other built-in functions of the RogueSharp library.
         /// </remarks>
         /// <example>
         /// As the player moves characters around a Map, Cells will enter and exit the currently computed field-of-view

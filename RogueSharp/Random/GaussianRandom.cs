@@ -18,7 +18,7 @@ namespace RogueSharp.Random
       private System.Random _random;
       private long _numberGenerated;
       private double _nextGaussian;
-      private bool _uselast = true;
+      private bool _useLast = true;
 
       /// <summary>
       /// Constructs a new Gaussian pseudo-random number generator 
@@ -120,7 +120,7 @@ namespace RogueSharp.Random
          _random = new System.Random( _seed );
          _numberGenerated = default( long );
          _nextGaussian = default( double );
-         _uselast = true;
+         _useLast = true;
          for ( long i = 0; i < state.NumberGenerated; i++ )
          {
             Next( 1 );
@@ -128,9 +128,9 @@ namespace RogueSharp.Random
       }
       private double BoxMuller()
       {
-         if ( _uselast )
+         if ( _useLast )
          {
-            _uselast = false;
+            _useLast = false;
             return _nextGaussian;
          }
          else
@@ -147,7 +147,7 @@ namespace RogueSharp.Random
             s = Math.Sqrt( ( -2.0 * Math.Log( s ) ) / s );
 
             _nextGaussian = v2 * s;
-            _uselast = true;
+            _useLast = true;
             return v1 * s;
          }
       }

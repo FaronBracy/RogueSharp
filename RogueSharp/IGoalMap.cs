@@ -8,7 +8,7 @@ namespace RogueSharp
    /// </summary>
    /// <remarks>
    /// </remarks>
-   /// <seealso href="http://www.roguebasin.com/index.php?title=The_Incredible_Power_of_Dijkstra_Maps">Inspired by the article "The Incredible Power of Dijkstra Maps on roguebasin</seealso>
+   /// <seealso href="http://www.roguebasin.com/index.php?title=The_Incredible_Power_of_Dijkstra_Maps">Inspired by the article "The Incredible Power of Dijkstra Maps" on roguebasin</seealso>
    public interface IGoalMap
    {
       /// <summary>
@@ -41,7 +41,7 @@ namespace RogueSharp
       /// <summary>
       /// Add multiple obstacles from the specified enumeration of locations
       /// </summary>
-      /// <param name="obstacles">An enumeration of points representing X, Y locations of Obstacles to avoid when pathfinding</param>
+      /// <param name="obstacles">An enumeration of points representing X, Y locations of Obstacles to avoid when path-finding</param>
       void AddObstacles( IEnumerable<Point> obstacles );
 
       /// <summary>

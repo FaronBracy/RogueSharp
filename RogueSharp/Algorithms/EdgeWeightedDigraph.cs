@@ -5,7 +5,7 @@ using System.Text;
 namespace RogueSharp.Algorithms
 {
    /// <summary>
-   /// The EdgeWeightedDigrpah class represents an edge-weighted directed graph of vertices named 0 through V-1, where each directed edge
+   /// The EdgeWeightedDigraph class represents an edge-weighted directed graph of vertices named 0 through V-1, where each directed edge
    /// is of type DirectedEdge and has real-valued weight.
    /// </summary>
    /// <seealso href="http://algs4.cs.princeton.edu/44sp/EdgeWeightedDigraph.java.html">EdgeWeightedDigraph class from Princeton University's Java Algorithms</seealso>
@@ -80,9 +80,9 @@ namespace RogueSharp.Algorithms
 
       /// <summary>
       /// Returns the number of directed edges incident from the specified vertex
-      /// This is known as the outdegree of the vertex
+      /// This is known as the out-degree of the vertex
       /// </summary>
-      /// <param name="vertex">The vertex to find find the outdegree of</param>
+      /// <param name="vertex">The vertex to find find the out-degree of</param>
       /// <returns>The number of directed edges incident from the specified vertex</returns>
       public int OutDegree( int vertex )
       {
