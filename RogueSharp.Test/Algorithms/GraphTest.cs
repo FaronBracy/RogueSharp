@@ -66,12 +66,13 @@ namespace RogueSharp.Test.Algorithms
          string graphString = graph.ToString();
 
          string[] tokens = graphString.Split( Environment.NewLine );  
-         Assert.AreEqual( "5 vertices, 4 edges ", tokens[0] );
-         Assert.AreEqual( "0: 1 4 ", tokens[1] );
-         Assert.AreEqual( "1: 0 2 ", tokens[2] );
-         Assert.AreEqual( "2: 1 3 ", tokens[3] );
-         Assert.AreEqual( "3: 2 ", tokens[4] );
-         Assert.AreEqual( "4: 0 ", tokens[5] );
+         Assert.AreEqual( "5 vertices, 4 edges", tokens[0] );
+         Assert.AreEqual( "0: 1 4", tokens[1] );
+         Assert.AreEqual( "1: 0 2", tokens[2] );
+         Assert.AreEqual( "2: 1 3", tokens[3] );
+         Assert.AreEqual( "3: 2", tokens[4] );
+         Assert.AreEqual( "4: 0", tokens[5] );
+         Assert.AreEqual( 6, tokens.Length );
       }
    }
 }
