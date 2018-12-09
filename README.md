@@ -6,6 +6,9 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/mx09mla59wsgrkkj?svg=true)](https://ci.appveyor.com/project/FaronBracy/roguesharp-20n28) 
 [![Nuget](https://buildstats.info/nuget/roguesharp)](https://www.nuget.org/packages/RogueSharp) 
 
+![Test status](https://img.shields.io/azure-devops/tests/dreamersdesign/RogueSharp/1.svg)
+![Code coverage](https://img.shields.io/azure-devops/coverage/dreamersdesign/RogueSharp/1.svg)
+
 [![Build History](https://buildstats.info/appveyor/chart/FaronBracy/roguesharp-20n28)](https://ci.appveyor.com/project/FaronBracy/roguesharp-20n28/history)
 
 # What is RogueSharp? #
