@@ -51,6 +51,7 @@ namespace RogueSharp.Algorithms
          }
 
          _adjacent[edge.From].AddLast( edge );
+         NumberOfEdges++;
       }
 
       /// <summary>
