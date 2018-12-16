@@ -33,6 +33,7 @@ namespace RogueSharp.Algorithms
             throw new ArgumentNullException( "graph", "EdgeWeightedDigraph cannot be null" );
          }
 
+         // TODO: Consider optimizations for building in Release vs Debug
          foreach ( DirectedEdge edge in graph.Edges() )
          {
             if ( edge.Weight < 0 )
@@ -135,6 +136,7 @@ namespace RogueSharp.Algorithms
          var path = new Stack<DirectedEdge>();
          for ( DirectedEdge edge = _edgeTo[destinationVertex]; edge != null; edge = _edgeTo[edge.From] )
          {
+            // TODO: yield return edge
             path.Push( edge );
          }
          return path;
