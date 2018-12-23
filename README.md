@@ -106,7 +106,7 @@ A more interesting way to create a map is to use the `Map` class's static method
 
 The MIT License (MIT)
 
-Copyright (c) 2014 - 2018 Faron Bracy
+Copyright (c) 2014 - 2019 Faron Bracy
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
