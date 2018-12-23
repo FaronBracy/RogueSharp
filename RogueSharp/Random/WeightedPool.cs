@@ -60,6 +60,6 @@ namespace RogueSharp.Random
 
       T Draw();
 
-      Clear();
+      void Clear();
    }
 }
