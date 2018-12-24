@@ -15,7 +15,7 @@ namespace RogueSharp.Random
    {
       private int _totalWeight;
       private readonly IRandom _random;
-      private readonly List<WeightedItem<T>> _pool = new List<WeightedItem<T>>();
+      private List<WeightedItem<T>> _pool = new List<WeightedItem<T>>();
 
       public int Count
       {
@@ -76,7 +76,8 @@ namespace RogueSharp.Random
 
       public void Clear()
       {
-         throw new NotImplementedException();
+         _totalWeight = 0;
+         _pool = new List<WeightedItem<T>>();
       }
    }
 

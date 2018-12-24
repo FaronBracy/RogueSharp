@@ -62,5 +62,17 @@ namespace RogueSharp.Test.Random
 
          Assert.ThrowsException<InvalidOperationException>( () => pool.Draw() );
       }
+
+      [TestMethod]
+      public void Clear_WhenPoolHas2Items_WillHaveCount0()
+      {
+         WeightedPool<string> pool = new WeightedPool<string>();
+         pool.Add( "Thing 1", 1 );
+         pool.Add( "Thing 2", 1 );
+
+         pool.Clear();
+
+         Assert.AreEqual( 0, pool.Count );
+      }
    }
 }
