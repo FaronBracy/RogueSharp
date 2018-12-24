@@ -16,7 +16,7 @@ namespace RogueSharp.Test.Random
       [TestMethod]
       public void Add_WhenItemArgumentIsNull_WillThrowArgumentNullException()
       {
-         WeightedPool<string> pool = new WeightedPool<string>( Singleton.DefaultRandom );
+         WeightedPool<string> pool = new WeightedPool<string>();
 
          Assert.ThrowsException<ArgumentNullException>( () => pool.Add( null, 1 ) );
       }
@@ -24,7 +24,7 @@ namespace RogueSharp.Test.Random
       [TestMethod]
       public void Add_WhenWeightIs0_WillThrowArgumentException()
       {
-         WeightedPool<int> pool = new WeightedPool<int>( Singleton.DefaultRandom );
+         WeightedPool<int> pool = new WeightedPool<int>();
 
          Assert.ThrowsException<ArgumentException>( () => pool.Add( 12, 0 ) );
       }
@@ -32,9 +32,19 @@ namespace RogueSharp.Test.Random
       [TestMethod]
       public void Add_WhenWeightIsNegative_WillThrowArgumentException()
       {
-         WeightedPool<int> pool = new WeightedPool<int>( Singleton.DefaultRandom );
+         WeightedPool<int> pool = new WeightedPool<int>();
 
          Assert.ThrowsException<ArgumentException>( () => pool.Add( 12, -5 ) );
+      }
+
+      [TestMethod]
+      public void Count_WhenTwoItemsAddedToEmptyPool_WillBe2()
+      {
+         WeightedPool<string> pool = new WeightedPool<string>();
+         pool.Add( "Thing 1", 1 );
+         pool.Add( "Thing 2", 1 );
+
+         Assert.AreEqual( 2, pool.Count );
       }
 
       [TestMethod]
