@@ -27,7 +27,7 @@ namespace RogueSharp.MapCreation
       /// <param name="height">The height of the Map to be created</param>
       /// <param name="fillProbability">Recommend int between 40 and 60. Percent chance that a given cell will be a floor when randomizing all cells.</param>
       /// <param name="totalIterations">Recommend int between 2 and 5. Number of times to execute the cellular automata algorithm.</param>
-      /// <param name="cutoffOfBigAreaFill">Recommend int less than 4. The interation number to switch from the large area fill algorithm to a nearest neighbor algorithm</param>
+      /// <param name="cutoffOfBigAreaFill">Recommend int less than 4. The iteration number to switch from the large area fill algorithm to a nearest neighbor algorithm</param>
       /// <param name="random">A class implementing IRandom that will be used to generate pseudo-random numbers necessary to create the Map</param>
       public CaveMapCreationStrategy( int width, int height, int fillProbability, int totalIterations, int cutoffOfBigAreaFill, IRandom random )
       {
@@ -47,7 +47,7 @@ namespace RogueSharp.MapCreation
       /// <param name="height">The height of the Map to be created</param>
       /// <param name="fillProbability">Recommend int between 40 and 60. Percent chance that a given cell will be a floor when randomizing all cells.</param>
       /// <param name="totalIterations">Recommend int between 2 and 5. Number of times to execute the cellular automata algorithm.</param>
-      /// <param name="cutoffOfBigAreaFill">Recommend int less than 4. The interation number to switch from the large area fill algorithm to a nearest neighbor algorithm</param>
+      /// <param name="cutoffOfBigAreaFill">Recommend int less than 4. The iteration number to switch from the large area fill algorithm to a nearest neighbor algorithm</param>
       /// <remarks>Uses DotNetRandom as its RNG</remarks>
       public CaveMapCreationStrategy( int width, int height, int fillProbability, int totalIterations, int cutoffOfBigAreaFill )
       {
@@ -282,7 +282,7 @@ namespace RogueSharp.MapCreation
          private MapSection Visit(ICell cell)
          {
             Stack<ICell> stack = new Stack<ICell>(new List<ICell>());
-            MapSection mapsection = new MapSection();
+            MapSection mapSection = new MapSection();
             stack.Push(cell);
             while ( stack.Count != 0 )
             {
@@ -291,7 +291,7 @@ namespace RogueSharp.MapCreation
                {
                   continue;
                }
-               mapsection.AddCell( cell );
+               mapSection.AddCell( cell );
                _visited[cell.Y][cell.X] = true;
                foreach ( ICell neighbor in GetNeighbors(cell) )
                {
@@ -301,7 +301,7 @@ namespace RogueSharp.MapCreation
                   }
                }
             }
-            return mapsection;
+            return mapSection;
          }
 
          private ICell GetCell( int x, int y )

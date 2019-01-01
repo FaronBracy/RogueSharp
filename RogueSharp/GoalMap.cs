@@ -33,7 +33,7 @@ namespace RogueSharp
       }
 
       /// <summary>
-      /// Constructs a new instance of a GoalMap for the specified Map that will consider diagonal movments to be valid if allowDiagonalMovement is set to true.
+      /// Constructs a new instance of a GoalMap for the specified Map that will consider diagonal movements to be valid if allowDiagonalMovement is set to true.
       /// </summary>
       /// <param name="map">The Map that this GoalMap will be created for</param>
       /// <param name="allowDiagonalMovement">True if diagonal movements are allowed. False otherwise</param>
@@ -104,7 +104,7 @@ namespace RogueSharp
       /// <summary>
       /// Add multiple obstacles from the specified enumeration of locations
       /// </summary>
-      /// <param name="obstacles">An enumeration of points representing X, Y locations of Obstacles to avoid when pathfinding</param>
+      /// <param name="obstacles">An enumeration of points representing X, Y locations of Obstacles to avoid when path-finding</param>
       public void AddObstacles( IEnumerable<Point> obstacles )
       {
          if ( obstacles == null )

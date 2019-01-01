@@ -3,7 +3,7 @@
    /// <summary>
    /// An Interface for pseudo-random number generators to implement.
    /// Useful when mocking out systems for tests, as the the random number generator can be swapped for
-   /// a mock implimentation that returns known and expected values
+   /// a mock implementation that returns known and expected values
    /// </summary>
    /// <remarks>
    /// Pseudo-random number generators are devices that produces a sequence of numbers 

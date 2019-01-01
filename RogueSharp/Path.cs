@@ -65,7 +65,7 @@ namespace RogueSharp
       }
 
       /// <summary>
-      /// The Cell represeting the step that is currently occupied in this Path
+      /// The Cell representing the step that is currently occupied in this Path
       /// </summary>
       public ICell CurrentStep
       {

@@ -6,6 +6,9 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/mx09mla59wsgrkkj?svg=true)](https://ci.appveyor.com/project/FaronBracy/roguesharp-20n28) 
 [![Nuget](https://buildstats.info/nuget/roguesharp)](https://www.nuget.org/packages/RogueSharp) 
 
+[![Test status](https://img.shields.io/azure-devops/tests/dreamersdesign/RogueSharp/1.svg)](https://dreamersdesign.visualstudio.com/RogueSharp/_build/latest?definitionId=1)
+[![Code coverage](https://img.shields.io/azure-devops/coverage/dreamersdesign/RogueSharp/1.svg)](https://dreamersdesign.visualstudio.com/RogueSharp/_build/latest?definitionId=1)
+
 [![Build History](https://buildstats.info/appveyor/chart/FaronBracy/roguesharp-20n28)](https://ci.appveyor.com/project/FaronBracy/roguesharp-20n28/history)
 
 # What is RogueSharp? #
@@ -103,7 +106,7 @@ A more interesting way to create a map is to use the `Map` class's static method
 
 The MIT License (MIT)
 
-Copyright (c) 2014 - 2018 Faron Bracy
+Copyright (c) 2014 - 2019 Faron Bracy
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

@@ -30,10 +30,10 @@ namespace RogueSharp.Algorithms
          _sourceVertex = sourceVertex;
          _edgeTo = new int[graph.NumberOfVertices];
          _marked = new bool[graph.NumberOfVertices];
-         DepthFirstSeach( graph, sourceVertex );
+         DepthFirstSearch( graph, sourceVertex );
       }
 
-      private void DepthFirstSeach( Graph graph, int sourceVertex )
+      private void DepthFirstSearch( Graph graph, int sourceVertex )
       {
          _marked[sourceVertex] = true;
          foreach ( int vertex in graph.Adjacent( sourceVertex ) )
@@ -41,7 +41,7 @@ namespace RogueSharp.Algorithms
             if ( !_marked[vertex] )
             {
                _edgeTo[vertex] = sourceVertex;
-               DepthFirstSeach( graph, vertex );
+               DepthFirstSearch( graph, vertex );
             }
          }
       }
@@ -60,7 +60,7 @@ namespace RogueSharp.Algorithms
       /// Returns a path between the sourceVertex and the specified destinationVertex or null if no such path exists
       /// </summary>
       /// <param name="destinationVertex">The destination vertex</param>
-      /// <returns>An IEnumerable sequence of vertices representing the path between the sourceVertex and the specified destinationVertex or null if no such path exists</returns>
+      /// <returns>An IEnumerable sequence of vertices representing the path between the sourceVertex and the specified destinationVertex or null if no such path exists. The path will not include the source vertex</returns>
       public IEnumerable<int> PathTo( int destinationVertex )
       {
          if ( !HasPathTo( destinationVertex ) )
@@ -68,6 +68,7 @@ namespace RogueSharp.Algorithms
             return null;
          }
          var path = new Stack<int>();
+         // TODO: All methods that return paths should be consistent on whether or not they include the source and destination vertices in the path.
          for ( int x = destinationVertex; x != _sourceVertex; x = _edgeTo[x] )
          {
             path.Push( x );
