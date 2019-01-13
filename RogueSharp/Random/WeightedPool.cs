@@ -53,6 +53,10 @@ namespace RogueSharp.Random
 
          WeightedItem<T> weightedItem = new WeightedItem<T>( item, weight );
          _pool.Add( weightedItem );
+         if ( Int32.MaxValue - weight < _totalWeight )
+         {
+            throw new OverflowException( "The weight of items in the pool would be over Int32.MaxValue" );
+         }
          _totalWeight += weight;
       }
 
@@ -71,7 +75,35 @@ namespace RogueSharp.Random
          {
             throw new InvalidOperationException( "Add items to the pool before attempting to draw one" );
          }
-         throw new NotImplementedException();
+
+         int lookupWeight = _random.Next( 1, _totalWeight );
+         int currentWeight = 0;
+         WeightedItem<T> item = null;
+         foreach ( WeightedItem<T> weightedItem in _pool )
+         {
+            currentWeight += weightedItem.Weight;
+            if ( currentWeight >= lookupWeight )
+            {
+               item = weightedItem;
+               break;
+            }
+         }
+
+         if ( item != null )
+         {
+            Remove( item );
+            return item.Item;
+         }
+
+         throw new InvalidOperationException( "The random lookup was greater than the total weight" );
+      }
+
+      private void Remove( WeightedItem<T> item )
+      {
+         if ( item != null && _pool.Remove( item ) )
+         {
+            _totalWeight -= item.Weight;
+         }
       }
 
       public void Clear()
