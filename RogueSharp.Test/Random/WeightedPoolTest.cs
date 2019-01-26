@@ -76,6 +76,25 @@ namespace RogueSharp.Test.Random
       }
 
       [TestMethod]
+      public void Select_WhenPoolHas1Item_WillGetCloneOfItemWithDifferentReference()
+      {
+         WeightedPool<PlayingCard> pool = new WeightedPool<PlayingCard>( Singleton.DefaultRandom, PlayingCard.Clone );
+         PlayingCard kingOfHearts = new PlayingCard
+         {
+            DisplayName = "King of Hearts", FaceValue = 13, Suit = PlayingCard.Suits.Hearts
+         };
+         pool.Add( kingOfHearts, 1 );
+
+         PlayingCard selectedCard = pool.Select();
+
+         Assert.AreNotEqual( kingOfHearts, selectedCard );
+         Assert.AreEqual( kingOfHearts.FaceValue, selectedCard.FaceValue );
+         Assert.AreEqual( kingOfHearts.DisplayName, selectedCard.DisplayName );
+         Assert.AreEqual( kingOfHearts.Suit, selectedCard.Suit );
+         Assert.AreEqual( 1, pool.Count );
+      }
+
+      [TestMethod]
       public void Draw_WhenPoolHas0Items_WillThrowInvalidOperationException()
       {
          WeightedPool<int> pool = new WeightedPool<int>( Singleton.DefaultRandom );
@@ -144,6 +163,45 @@ namespace RogueSharp.Test.Random
          pool.Clear();
 
          Assert.AreEqual( 0, pool.Count );
+      }
+
+      private class PlayingCard
+      {
+         public enum Suits
+         {
+            None = 0,
+            Hearts = 1,
+            Spades = 2,
+            Diamonds = 3,
+            Clubs = 4
+         }
+
+         public string DisplayName
+         {
+            get;
+            set;
+         }
+
+         public Suits Suit
+         {
+            get;
+            set;
+         }
+
+         public int FaceValue
+         {
+            get;
+            set;
+         }
+
+         public static PlayingCard Clone( PlayingCard other )
+         {
+            return new PlayingCard {
+               DisplayName = other.DisplayName,
+               Suit = other.Suit,
+               FaceValue = other.FaceValue
+            };
+         }
       }
 
       private class BadRandom : IRandom
