@@ -11,11 +11,12 @@ using System.Collections.Generic;
 
 namespace RogueSharp.Random
 {
-   public class WeightedPool<T> : IWeightedPool<T> //where T : ICloneable<T> 
+   public class WeightedPool<T> : IWeightedPool<T>
    {
       private int _totalWeight;
       private readonly IRandom _random;
       private List<WeightedItem<T>> _pool = new List<WeightedItem<T>>();
+      private readonly Func<T, T> _cloneFunc;
 
       public int Count
       {
@@ -30,7 +31,7 @@ namespace RogueSharp.Random
       {
       }
 
-      public WeightedPool( IRandom random )
+      public WeightedPool( IRandom random, Func<T, T> cloneFunc = null )
       {
          if ( random == null )
          {
@@ -38,6 +39,7 @@ namespace RogueSharp.Random
          }
 
          _random = random;
+         _cloneFunc = cloneFunc;
       }
 
       public void Add( T item, int weight )
@@ -60,13 +62,21 @@ namespace RogueSharp.Random
          _totalWeight += weight;
       }
 
-      public T Select()
+      public T Select() 
       {
+         if ( _cloneFunc == null )
+         {
+            throw new InvalidOperationException(  "A clone function was not defined when this pool was constructed" );
+         }
+
          if ( Count <= 0 || _totalWeight <= 0 )
          {
             throw new InvalidOperationException( "Add items to the pool before attempting to select one" );
          }
-         throw new NotImplementedException();
+
+         WeightedItem<T> item = ChooseRandomWeightedItem();
+
+         return _cloneFunc( item.Item );
       }
 
       public T Draw()
@@ -76,6 +86,14 @@ namespace RogueSharp.Random
             throw new InvalidOperationException( "Add items to the pool before attempting to draw one" );
          }
 
+         WeightedItem<T> item = ChooseRandomWeightedItem();
+
+         Remove( item );
+         return item.Item;
+      }
+
+      private WeightedItem<T> ChooseRandomWeightedItem()
+      {
          int lookupWeight = _random.Next( 1, _totalWeight );
          int currentWeight = 0;
          WeightedItem<T> item = null;
@@ -89,13 +107,12 @@ namespace RogueSharp.Random
             }
          }
 
-         if ( item != null )
+         if ( item == null )
          {
-            Remove( item );
-            return item.Item;
+            throw new InvalidOperationException( "The random lookup was greater than the total weight" );
          }
 
-         throw new InvalidOperationException( "The random lookup was greater than the total weight" );
+         return item;
       }
 
       private void Remove( WeightedItem<T> item )
@@ -136,17 +153,21 @@ namespace RogueSharp.Random
 
    public interface IWeightedPool<T>
    {
+      /// <summary>
+      /// Add an item of type T to the pool with the given weight
+      /// </summary>
+      /// <param name="item">The item to add to the pool</param>
+      /// <param name="weight">The chance that the item will be drawn from the pool when weighted against all other items. Higher weights mean it is more likely to be drawn.</param>
       void Add( T item, int weight );
 
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <returns></returns>
       T Select();
 
       T Draw();
 
       void Clear();
    }
-
-   //public interface ICloneable<T>
-   //{
-   //   T Clone();
-   //}
 }

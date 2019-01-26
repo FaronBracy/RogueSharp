@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RogueSharp.Random;
 
@@ -60,9 +59,18 @@ namespace RogueSharp.Test.Random
       }
 
       [TestMethod]
-      public void Select_WhenPoolHas0Items_WillThrowInvalidOperationException()
+      public void Select_WhenCloneFuncWasNotDefined_WillThrowInvalidOperationException()
       {
          WeightedPool<int> pool = new WeightedPool<int>( Singleton.DefaultRandom );
+         pool.Add( 1, 1 );
+
+         Assert.ThrowsException<InvalidOperationException>( () => pool.Select() );
+      }
+
+      [TestMethod]
+      public void Select_WhenPoolHas0Items_WillThrowInvalidOperationException()
+      {
+         WeightedPool<int> pool = new WeightedPool<int>( Singleton.DefaultRandom, x => x );
 
          Assert.ThrowsException<InvalidOperationException>( () => pool.Select() );
       }
@@ -88,7 +96,7 @@ namespace RogueSharp.Test.Random
 
       [TestMethod]
       public void Draw_WhenUsingRandomBiggerThanTotalWeight_WillThrowInvalidOperationException()
-      { 
+      {
          WeightedPool<int> pool = new WeightedPool<int>( new BadRandom( 13 ) );
          pool.Add( 1, 12 );
 
