@@ -307,5 +307,19 @@ namespace RogueSharp.Test
 
          Assert.AreEqual( null, shortestPath );
       }
+
+      [TestMethod]
+      public void TryFindShortestPath_Large200x400MapFromX5Y1ToX29Y187_ReturnsExpectedPath()
+      {
+         IMapCreationStrategy<Map> mapCreationStrategy = new StringDeserializeMapCreationStrategy<Map>( Algorithms.TestSetup.TestHelpers.Map200x400 );
+         IMap map = Map.Create( mapCreationStrategy );
+         ICell source = map.GetCell( 5, 1 );
+         ICell destination = map.GetCell( 29, 187 );
+         PathFinder pathFinder = new PathFinder( map );
+
+         Path shortestPath = pathFinder.TryFindShortestPath( source, destination );
+
+         Assert.AreEqual( 705, shortestPath.Length );
+      }
    }
 }
