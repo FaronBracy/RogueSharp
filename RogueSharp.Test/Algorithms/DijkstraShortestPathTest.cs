@@ -126,6 +126,50 @@ namespace RogueSharp.Test.Algorithms
       }
 
       [TestMethod]
+      public void PathTo_WhenCalledOnMediumSizedGraphForEachNode_WillFindExpectedPaths()
+      {
+         string path = @"Algorithms\TestSetup\mediumEWD.txt";
+         EdgeWeightedDigraph graph = TestSetup.TestHelpers.CreateEdgeWeightedDigraphFromFile( path );
+
+         int longestPathLength = 0;
+         int longestPathStartNode = 0;
+         int longestPathEndNode = 0;
+
+         for ( int i = 0; i < graph.NumberOfVertices; i++ )
+         {
+            DijkstraShortestPath dsp = new DijkstraShortestPath( graph, i );
+            for ( int j = 0; j < graph.NumberOfVertices; j++ )
+            {
+               var dspPath = dsp.PathTo( j );
+               int length = dspPath.Count();
+               if ( length > longestPathLength )
+               {
+                  longestPathLength = length;
+                  longestPathStartNode = i;
+                  longestPathEndNode = j;
+                  Console.WriteLine( $"Path from {i} -> {j} = {length}" );
+                  /////// Console Output /////////
+                  // Path from 0-> 1 = 9
+                  // Path from 0-> 6 = 10
+                  // Path from 0-> 22 = 11
+                  // Path from 0-> 29 = 12
+                  // Path from 0-> 38 = 13
+                  // Path from 8-> 237 = 14
+                  // Path from 10-> 63 = 15
+                  // Path from 10-> 237 = 16
+                  ///////////////////////////////
+               }
+            }
+         }
+
+         Assert.AreEqual( 16, longestPathLength );
+         Assert.AreEqual( 10, longestPathStartNode );
+         Assert.AreEqual( 237, longestPathEndNode );
+         Assert.AreEqual( 250, graph.NumberOfVertices );
+         Assert.AreEqual( 2546, graph.NumberOfEdges );
+      }
+
+      [TestMethod]
       public void FindPath_WhenMultiplePathsExistBetween0And4_WillBeShortestPath()
       {
          EdgeWeightedDigraph digraph = new EdgeWeightedDigraph( 5 );

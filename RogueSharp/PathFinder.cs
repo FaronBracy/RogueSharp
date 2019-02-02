@@ -12,6 +12,8 @@ namespace RogueSharp
    {
       private readonly EdgeWeightedDigraph _graph;
       private readonly IMap _map;
+      private int? _sourceIndex = null;
+      private DijkstraShortestPath _dijkstraShortestPath = null;
 
       /// <summary>
       /// Constructs a new PathFinder instance for the specified Map that will not consider diagonal movements to be valid.
@@ -139,7 +141,19 @@ namespace RogueSharp
 
       private IEnumerable<ICell> ShortestPathCells( ICell source, ICell destination )
       {
-         IEnumerable<DirectedEdge> path = DijkstraShortestPath.FindPath( _graph, IndexFor( source ), IndexFor( destination ) );
+         IEnumerable<DirectedEdge> path;
+         int sourceIndex = IndexFor( source );
+         if ( _sourceIndex.HasValue && _sourceIndex == sourceIndex && _dijkstraShortestPath != null )
+         {
+            path = _dijkstraShortestPath.PathTo( IndexFor( destination ) );
+         }
+         else
+         {
+            _sourceIndex = sourceIndex;
+            _dijkstraShortestPath = new DijkstraShortestPath( _graph, sourceIndex );
+            path = _dijkstraShortestPath.PathTo( IndexFor( destination ) );
+         }
+
          if ( path == null )
          {
             yield return null;
