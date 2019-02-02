@@ -1,12 +1,4 @@
-﻿// TODO: Random notes for myself
-// - String replacement thing
-// - AStar
-// - Map generation
-// - Make sure no TODOs in solution
-// - Replace FxCop
-// - [,] map helpers look at PR
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace RogueSharp.Random

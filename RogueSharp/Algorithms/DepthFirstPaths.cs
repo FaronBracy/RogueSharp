@@ -68,7 +68,6 @@ namespace RogueSharp.Algorithms
             return null;
          }
          var path = new Stack<int>();
-         // TODO: All methods that return paths should be consistent on whether or not they include the source and destination vertices in the path.
          for ( int x = destinationVertex; x != _sourceVertex; x = _edgeTo[x] )
          {
             path.Push( x );
