@@ -54,11 +54,11 @@ namespace RogueSharp.DiceNotation.Terms
       {
          if ( sides <= 0 )
          {
-            throw new ImpossibleDieException( string.Format( "Cannot construct a die with {0} sides", sides ) );
+            throw new ImpossibleDieException( $"Cannot construct a die with {sides} sides" );
          }
          if ( multiplicity < 0 )
          {
-            throw new InvalidMultiplicityException( string.Format( "Cannot roll {0} dice; this quantity is less than 0", multiplicity ) );
+            throw new InvalidMultiplicityException( $"Cannot roll {multiplicity} dice; this quantity is less than 0" );
          }
          if ( choose < 0 )
          {
@@ -66,7 +66,7 @@ namespace RogueSharp.DiceNotation.Terms
          }
          if ( choose > multiplicity )
          {
-            throw new InvalidChooseException( string.Format( "Cannot choose {0} dice, only {1} were rolled", choose, multiplicity ) );
+            throw new InvalidChooseException( $"Cannot choose {choose} dice, only {multiplicity} were rolled" );
          }
 
          Sides = sides;
@@ -84,7 +84,8 @@ namespace RogueSharp.DiceNotation.Terms
       {
          IEnumerable<TermResult> results =
              from i in Enumerable.Range( 0, Multiplicity )
-             select new TermResult {
+             select new TermResult
+             {
                 Scalar = Scalar,
                 Value = random.Next( 1, Sides ),
                 TermType = "d" + Sides
@@ -109,9 +110,7 @@ namespace RogueSharp.DiceNotation.Terms
       public override string ToString()
       {
          string choose = Choose == Multiplicity ? "" : "k" + Choose;
-         return Scalar == 1
-             ? string.Format( "{0}d{1}{2}", Multiplicity, Sides, choose )
-             : string.Format( "{0}*{1}d{2}{3}", Scalar, Multiplicity, Sides, choose );
+         return Scalar == 1 ? $"{Multiplicity}d{Sides}{choose}" : $"{Scalar}*{Multiplicity}d{Sides}{choose}";
       }
    }
 }

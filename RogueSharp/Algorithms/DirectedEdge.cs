@@ -42,7 +42,7 @@
       /// </returns>
       public override string ToString()
       {
-         return string.Format( "From: {0}, To: {1}, Weight: {2}", From, To, Weight );
+         return $"From: {From}, To: {To}, Weight: {Weight}";
       }
    }
 }

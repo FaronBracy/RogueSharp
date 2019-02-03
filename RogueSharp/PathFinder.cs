@@ -96,7 +96,7 @@ namespace RogueSharp
 
          if ( shortestPath == null )
          {
-            throw new PathNotFoundException( string.Format( "Path from ({0}, {1}) to ({2}, {3}) not found", source.X, source.Y, destination.X, destination.Y ) );
+            throw new PathNotFoundException( $"Path from ({source.X}, {source.Y}) to ({destination.X}, {destination.Y}) not found" );
          }
 
          return shortestPath;

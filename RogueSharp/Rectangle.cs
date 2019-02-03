@@ -230,7 +230,7 @@ namespace RogueSharp
       /// <returns>A string that represents the current Rectangle</returns>
       public override string ToString()
       {
-         return string.Format( "{{X:{0} Y:{1} Width:{2} Height:{3}}}", X, Y, Width, Height );
+         return $"{{X:{X} Y:{Y} Width:{Width} Height:{Height}}}";
       }
 
       /// <summary>

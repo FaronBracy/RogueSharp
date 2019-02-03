@@ -277,7 +277,7 @@ namespace RogueSharp
 
          if ( !_map.IsWalkable( x, y ) )
          {
-            throw new PathNotFoundException( string.Format( "Source ({0}, {1}) must be walkable to find a path", x, y ) );
+            throw new PathNotFoundException( $"Source ({x}, {y}) must be walkable to find a path" );
          }
 
          if ( !_goals.Any( g => _map.IsWalkable( g.X, g.Y ) ) )
@@ -291,7 +291,7 @@ namespace RogueSharp
 
          if ( paths.Count <= 1 && paths[0].Length <= 1 )
          {
-            throw new PathNotFoundException( string.Format( "A path from Source ({0}, {1}) to any goal was not found", x, y ) );
+            throw new PathNotFoundException( $"A path from Source ({x}, {y}) to any goal was not found" );
          }
 
          return paths;

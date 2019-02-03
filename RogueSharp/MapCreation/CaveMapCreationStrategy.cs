@@ -380,7 +380,7 @@ namespace RogueSharp.MapCreation
 
          public override string ToString()
          {
-            return string.Format( "Bounds: {0}", Bounds );
+            return $"Bounds: {Bounds}";
          }
       }
    }

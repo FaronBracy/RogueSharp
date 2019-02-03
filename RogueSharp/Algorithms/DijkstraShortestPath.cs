@@ -37,7 +37,7 @@ namespace RogueSharp.Algorithms
          {
             if ( edge.Weight < 0 )
             {
-               throw new ArgumentOutOfRangeException( string.Format( "Edge: '{0}' has negative weight", edge ) );
+               throw new ArgumentOutOfRangeException( $"Edge: '{edge}' has negative weight" );
             }
          }
 
