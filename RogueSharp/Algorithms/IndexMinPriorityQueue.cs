@@ -10,7 +10,6 @@ namespace RogueSharp.Algorithms
    public class IndexMinPriorityQueue<T> where T : IComparable<T>
    {
       private readonly T[] _keys;
-      private readonly int _maxSize;
       private readonly int[] _pq;
       private readonly int[] _qp;
 
@@ -20,12 +19,11 @@ namespace RogueSharp.Algorithms
       /// <param name="maxSize">The maximum size of the indexed priority queue</param>
       public IndexMinPriorityQueue( int maxSize )
       {
-         _maxSize = maxSize;
          Size = 0;
-         _keys = new T[_maxSize + 1];
-         _pq = new int[_maxSize + 1];
-         _qp = new int[_maxSize + 1];
-         for ( int i = 0; i < _maxSize; i++ )
+         _keys = new T[maxSize + 1];
+         _pq = new int[maxSize + 1];
+         _qp = new int[maxSize + 1];
+         for ( int i = 0; i < maxSize; i++ )
          {
             _qp[i] = -1;
          }

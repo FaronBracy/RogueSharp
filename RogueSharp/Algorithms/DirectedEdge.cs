@@ -27,7 +27,7 @@
       /// <summary>
       /// Returns the start vertex of the DirectedEdge
       /// </summary>
-      public int To { get; private set;}
+      public int To { get; private set; }
 
       /// <summary>
       /// Returns the weight of the DirectedEdge

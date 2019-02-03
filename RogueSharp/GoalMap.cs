@@ -14,7 +14,7 @@ namespace RogueSharp
    /// <seealso href="http://www.roguebasin.com/index.php?title=The_Incredible_Power_of_Dijkstra_Maps">Inspired by the article "The Incredible Power of Dijkstra Maps on roguebasin</seealso>
    public class GoalMap : IGoalMap
    {
-      private const int Wall = int.MinValue;
+      private const int _wall = int.MinValue;
       private readonly int[,] _cellWeights;
       private readonly List<WeightedPoint> _goals;
       private readonly HashSet<Point> _obstacles;
@@ -40,12 +40,7 @@ namespace RogueSharp
       /// <exception cref="ArgumentNullException">Thrown on null map</exception>
       public GoalMap( IMap map, bool allowDiagonalMovement )
       {
-         if ( map == null )
-         {
-            throw new ArgumentNullException( "map", "Map cannot be null" );
-         }
-
-         _map = map;
+         _map = map ?? throw new ArgumentNullException( "map", "Map cannot be null" );
          _cellWeights = new int[map.Width, map.Height];
          _goals = new List<WeightedPoint>();
          _obstacles = new HashSet<Point>();
@@ -180,16 +175,16 @@ namespace RogueSharp
       {
          ComputeCellWeightsIfNeeded();
 
-         foreach ( var goal in _goals )
+         foreach ( WeightedPoint goal in _goals )
          {
-            _cellWeights[goal.X, goal.Y] = Wall;
+            _cellWeights[goal.X, goal.Y] = _wall;
          }
 
          for ( int y = 0; y < _map.Height; y++ )
          {
             for ( int x = 0; x < _map.Width; x++ )
             {
-               if ( _cellWeights[x, y] != Wall )
+               if ( _cellWeights[x, y] != _wall )
                {
                   _cellWeights[x, y] = (int) ( _cellWeights[x, y] * amount );
                }
@@ -204,7 +199,7 @@ namespace RogueSharp
             {
                for ( int x = 0; x < _map.Width; x++ )
                {
-                  if ( _cellWeights[x, y] == Wall )
+                  if ( _cellWeights[x, y] == _wall )
                   {
                      continue;
                   }
@@ -292,7 +287,7 @@ namespace RogueSharp
 
          ComputeCellWeightsIfNeeded();
          var pathFinder = new GoalMapPathFinder( this );
-         var paths = pathFinder.FindPaths( x, y );
+         ReadOnlyCollection<Path> paths = pathFinder.FindPaths( x, y );
 
          if ( paths.Count <= 1 && paths[0].Length <= 1 )
          {
@@ -329,7 +324,7 @@ namespace RogueSharp
 
          ComputeCellWeightsIfNeeded();
          var pathFinder = new GoalMapPathFinder( this );
-         var paths = pathFinder.FindPaths( x, y );
+         ReadOnlyCollection<Path> paths = pathFinder.FindPaths( x, y );
 
          if ( paths.Count <= 1 && paths[0].Length <= 1 )
          {
@@ -361,7 +356,7 @@ namespace RogueSharp
                }
                else
                {
-                  _cellWeights[x, y] = Wall;
+                  _cellWeights[x, y] = _wall;
                }
             }
          }
@@ -371,7 +366,7 @@ namespace RogueSharp
          }
          foreach ( Point obstacle in _obstacles )
          {
-            _cellWeights[obstacle.X, obstacle.Y] = Wall;
+            _cellWeights[obstacle.X, obstacle.Y] = _wall;
          }
          bool didCellWeightsChange = true;
          while ( didCellWeightsChange )
@@ -381,7 +376,7 @@ namespace RogueSharp
             {
                for ( int x = 0; x < _map.Width; x++ )
                {
-                  if ( _cellWeights[x, y] == Wall )
+                  if ( _cellWeights[x, y] == _wall )
                   {
                      continue;
                   }
@@ -404,7 +399,7 @@ namespace RogueSharp
       private List<WeightedPoint> GetNeighbors( int x, int y )
       {
          var neighbors = new List<WeightedPoint>();
-         if ( y > 0 && _cellWeights[x, y - 1] != Wall )
+         if ( y > 0 && _cellWeights[x, y - 1] != _wall )
          {
             // NORTH
             neighbors.Add( new WeightedPoint
@@ -414,7 +409,7 @@ namespace RogueSharp
                Weight = _cellWeights[x, y - 1]
             } );
          }
-         if ( x + 1 < _map.Width && _cellWeights[x + 1, y] != Wall )
+         if ( x + 1 < _map.Width && _cellWeights[x + 1, y] != _wall )
          {
             // EAST
             neighbors.Add( new WeightedPoint
@@ -424,7 +419,7 @@ namespace RogueSharp
                Weight = _cellWeights[x + 1, y]
             } );
          }
-         if ( y + 1 < _map.Height && _cellWeights[x, y + 1] != Wall )
+         if ( y + 1 < _map.Height && _cellWeights[x, y + 1] != _wall )
          {
             // SOUTH
             neighbors.Add( new WeightedPoint
@@ -434,7 +429,7 @@ namespace RogueSharp
                Weight = _cellWeights[x, y + 1]
             } );
          }
-         if ( x > 0 && _cellWeights[x - 1, y] != Wall )
+         if ( x > 0 && _cellWeights[x - 1, y] != _wall )
          {
             // WEST
             neighbors.Add( new WeightedPoint
@@ -447,7 +442,7 @@ namespace RogueSharp
 
          if ( _allowDiagonalMovement )
          {
-            if ( y > 0 && x + 1 < _map.Width && _cellWeights[x + 1, y - 1] != Wall )
+            if ( y > 0 && x + 1 < _map.Width && _cellWeights[x + 1, y - 1] != _wall )
             {
                // NORTH_EAST
                neighbors.Add( new WeightedPoint
@@ -457,7 +452,7 @@ namespace RogueSharp
                   Weight = _cellWeights[x + 1, y - 1]
                } );
             }
-            if ( x > 0 && y > 0 && _cellWeights[x - 1, y - 1] != Wall )
+            if ( x > 0 && y > 0 && _cellWeights[x - 1, y - 1] != _wall )
             {
                // NORTH_WEST
                neighbors.Add( new WeightedPoint
@@ -467,7 +462,7 @@ namespace RogueSharp
                   Weight = _cellWeights[x - 1, y - 1]
                } );
             }
-            if ( y + 1 < _map.Height && x + 1 < _map.Width && _cellWeights[x + 1, y + 1] != Wall )
+            if ( y + 1 < _map.Height && x + 1 < _map.Width && _cellWeights[x + 1, y + 1] != _wall )
             {
                // SOUTH_EAST
                neighbors.Add( new WeightedPoint
@@ -477,7 +472,7 @@ namespace RogueSharp
                   Weight = _cellWeights[x + 1, y + 1]
                } );
             }
-            if ( y + 1 < _map.Height && x > 0 && _cellWeights[x - 1, y + 1] != Wall )
+            if ( y + 1 < _map.Height && x > 0 && _cellWeights[x - 1, y + 1] != _wall )
             {
                // SOUTH_WEST
                neighbors.Add( new WeightedPoint
@@ -541,7 +536,7 @@ namespace RogueSharp
          {
             for ( int x = 0; x < _map.Width; x++ )
             {
-               mapRepresentation.AppendFormat( "{0,5}", _cellWeights[x, y] == Wall ? "#" : _cellWeights[x, y].ToString() );
+               mapRepresentation.AppendFormat( "{0,5}", _cellWeights[x, y] == _wall ? "#" : _cellWeights[x, y].ToString() );
             }
             mapRepresentation.Append( Environment.NewLine );
          }
@@ -558,26 +553,14 @@ namespace RogueSharp
 
          public int X
          {
-            get
-            {
-               return _point.X;
-            }
-            set
-            {
-               _point.X = value;
-            }
+            get => _point.X;
+            set => _point.X = value;
          }
 
          public int Y
          {
-            get
-            {
-               return _point.Y;
-            }
-            set
-            {
-               _point.Y = value;
-            }
+            get => _point.Y;
+            set => _point.Y = value;
          }
 
          public bool Equals( WeightedPoint other )
@@ -608,7 +591,7 @@ namespace RogueSharp
             _visited.Clear();
             RecursivelyFindPaths( x, y );
             var paths = new List<Path>();
-            foreach ( var path in _paths )
+            foreach ( Path path in _paths )
             {
                paths.Add( path );
             }
@@ -617,7 +600,7 @@ namespace RogueSharp
 
          private void RecursivelyFindPaths( int x, int y )
          {
-            var currentCell = _goalMap._map.GetCell( x, y );
+            ICell currentCell = _goalMap._map.GetCell( x, y );
             if ( _visited.Add( currentCell ) )
             {
                _currentPath.Push( currentCell );

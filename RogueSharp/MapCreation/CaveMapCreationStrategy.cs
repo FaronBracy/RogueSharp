@@ -215,7 +215,7 @@ namespace RogueSharp.MapCreation
       {
          MapSection start = mapSections[mapSectionIndex];
          int closestIndex = mapSectionIndex;
-         int distance = Int32.MaxValue;
+         int distance = int.MaxValue;
          for ( int i = 0; i < mapSections.Count; i++ )
          {
             if ( i == mapSectionIndex )
@@ -322,7 +322,7 @@ namespace RogueSharp.MapCreation
             List<ICell> neighbors = new List<ICell>(8);
             foreach (int[] offset in _offsets)
             {
-               var neighbor = GetCell(cell.X + offset[0], cell.Y + offset[1]);
+               ICell neighbor = GetCell(cell.X + offset[0], cell.Y + offset[1]);
                if ( neighbor == null )
                {
                   continue;
@@ -341,13 +341,7 @@ namespace RogueSharp.MapCreation
          private int _right;
          private int _left;
 
-         public Rectangle Bounds
-         {
-            get
-            {
-               return new Rectangle( _left, _top, _right - _left + 1, _bottom - _top + 1 );
-            }
-         }
+         public Rectangle Bounds => new Rectangle( _left, _top, _right - _left + 1, _bottom - _top + 1 );
 
          public HashSet<ICell> Cells { get; private set; }
 

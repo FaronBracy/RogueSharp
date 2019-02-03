@@ -61,7 +61,7 @@ namespace RogueSharp.Random
       {
          _numberGenerated++;
          double deviations = 3.5;
-         var r = (int) BoxMuller( minValue + ( maxValue - minValue ) / 2.0, ( maxValue - minValue ) / 2.0 / deviations );
+         var r = (int) BoxMuller( minValue + ( ( maxValue - minValue ) / 2.0 ), ( maxValue - minValue ) / 2.0 / deviations );
          if ( r > maxValue )
          {
             r = maxValue;
@@ -138,13 +138,13 @@ namespace RogueSharp.Random
             double v1, v2, s;
             do
             {
-               v1 = 2.0 * _random.NextDouble() - 1.0;
-               v2 = 2.0 * _random.NextDouble() - 1.0;
-               s = v1 * v1 + v2 * v2;
+               v1 = ( 2.0 * _random.NextDouble() ) - 1.0;
+               v2 = ( 2.0 * _random.NextDouble() ) - 1.0;
+               s = ( v1 * v1 ) + ( v2 * v2 );
             }
             while ( s >= 1.0 || s == 0 );
 
-            s = Math.Sqrt( ( -2.0 * Math.Log( s ) ) / s );
+            s = Math.Sqrt( -2.0 * Math.Log( s ) / s );
 
             _nextGaussian = v2 * s;
             _useLast = true;
@@ -153,7 +153,7 @@ namespace RogueSharp.Random
       }
       private double BoxMuller( double mean, double standardDeviation )
       {
-         return mean + BoxMuller() * standardDeviation;
+         return mean + ( BoxMuller() * standardDeviation );
       }
    }
 }

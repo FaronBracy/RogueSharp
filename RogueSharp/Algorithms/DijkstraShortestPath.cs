@@ -45,7 +45,7 @@ namespace RogueSharp.Algorithms
          _edgeTo = new DirectedEdge[graph.NumberOfVertices];
          for ( int v = 0; v < graph.NumberOfVertices; v++ )
          {
-            _distanceTo[v] = Double.PositiveInfinity;
+            _distanceTo[v] = double.PositiveInfinity;
          }
          _distanceTo[sourceVertex] = 0.0;
 

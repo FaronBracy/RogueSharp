@@ -34,7 +34,7 @@ namespace RogueSharp.DiceNotation
          string cleanExpression = _whitespacePattern.Replace( expression.ToLower(), "" );
          cleanExpression = cleanExpression.Replace( "+-", "-" );
 
-         var parseValues = new ParseValues().Init();
+         ParseValues parseValues = new ParseValues().Init();
 
          var dice = new DiceExpression();
 
