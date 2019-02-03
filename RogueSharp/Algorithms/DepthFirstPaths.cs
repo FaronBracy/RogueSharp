@@ -24,7 +24,7 @@ namespace RogueSharp.Algorithms
       {
          if ( graph == null || graph.NumberOfVertices < 0 )
          {
-            throw new ArgumentException( "Invalid Graph", "graph" );
+            throw new ArgumentException( "Invalid Graph", nameof( graph ) );
          }
 
          _sourceVertex = sourceVertex;

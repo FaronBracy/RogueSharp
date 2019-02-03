@@ -27,7 +27,7 @@
       /// <summary>
       /// Returns the start vertex of the DirectedEdge
       /// </summary>
-      public int To { get; private set;}
+      public int To { get; private set; }
 
       /// <summary>
       /// Returns the weight of the DirectedEdge
@@ -42,7 +42,7 @@
       /// </returns>
       public override string ToString()
       {
-         return string.Format( "From: {0}, To: {1}, Weight: {2}", From, To, Weight );
+         return $"From: {From}, To: {To}, Weight: {Weight}";
       }
    }
 }

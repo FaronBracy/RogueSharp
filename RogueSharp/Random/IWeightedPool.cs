@@ -24,7 +24,7 @@
       /// The item itself will remain in the pool and a clone of the item selected will be returned.
       /// </summary>
       /// <returns>A clone of the item of type T from the WeightedPool</returns>
-      T Select();
+      T Choose();
 
       /// <summary>
       /// Take an item at random from the pool, keeping weights into consideration.

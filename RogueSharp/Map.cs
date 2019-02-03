@@ -236,7 +236,7 @@ namespace RogueSharp
       {
          if ( sourceMap == null )
          {
-            throw new ArgumentNullException( "sourceMap", "Source map cannot be null" );
+            throw new ArgumentNullException( nameof( sourceMap ), "Source map cannot be null" );
          }
 
          if ( sourceMap.Width + left > Width )
@@ -368,7 +368,7 @@ namespace RogueSharp
       {
          var discovered = new HashSet<int>();
 
-         int d = ( 5 - radius * 4 ) / 4;
+         int d = ( 5 - ( radius * 4 ) ) / 4;
          int x = 0;
          int y = radius;
 
@@ -405,11 +405,11 @@ namespace RogueSharp
 
             if ( d < 0 )
             {
-               d += 2 * x + 1;
+               d += ( 2 * x ) + 1;
             }
             else
             {
-               d += 2 * ( x - y ) + 1;
+               d += ( 2 * ( x - y ) ) + 1;
                y--;
             }
             x++;
@@ -436,8 +436,7 @@ namespace RogueSharp
          {
             for ( int j = distance; j >= 0 + i; j-- )
             {
-               ICell cell;
-               if ( AddToHashSet( discovered, Math.Max( xMin, xCenter - i ), Math.Min( yMax, yCenter + distance - j ), out cell ) )
+               if ( AddToHashSet( discovered, Math.Max( xMin, xCenter - i ), Math.Min( yMax, yCenter + distance - j ), out ICell cell ) )
                {
                   yield return cell;
                }
@@ -492,7 +491,7 @@ namespace RogueSharp
       {
          var discovered = new HashSet<int>();
 
-         int d = ( 5 - radius * 4 ) / 4;
+         int d = ( 5 - ( radius * 4 ) ) / 4;
          int x = 0;
          int y = radius;
 
@@ -500,8 +499,7 @@ namespace RogueSharp
 
          do
          {
-            ICell cell;
-            if ( AddToHashSet( discovered, ClampX( xCenter + x ), ClampY( yCenter + y ), centerCell, out cell ) )
+            if ( AddToHashSet( discovered, ClampX( xCenter + x ), ClampY( yCenter + y ), centerCell, out ICell cell ) )
             {
                yield return cell;
             }
@@ -536,11 +534,11 @@ namespace RogueSharp
 
             if ( d < 0 )
             {
-               d += 2 * x + 1;
+               d += ( 2 * x ) + 1;
             }
             else
             {
-               d += 2 * ( x - y ) + 1;
+               d += ( 2 * ( x - y ) ) + 1;
                y--;
             }
             x++;
@@ -563,9 +561,8 @@ namespace RogueSharp
          int yMin = Math.Max( 0, yCenter - distance );
          int yMax = Math.Min( Height - 1, yCenter + distance );
 
-         ICell centerCell = GetCell( xCenter, yCenter ); 
-         ICell cell;
-         if ( AddToHashSet( discovered, xCenter, yMin, centerCell, out cell ) )
+         ICell centerCell = GetCell( xCenter, yCenter );
+         if ( AddToHashSet( discovered, xCenter, yMin, centerCell, out ICell cell ) )
          {
             yield return cell;
          }
@@ -703,13 +700,15 @@ namespace RogueSharp
       /// <returns>MapState POCO (Plain Old C# Object) which represents this Map and can be easily serialized</returns>
       public MapState Save()
       {
-         var mapState = new MapState();
-         mapState.Width = Width;
-         mapState.Height = Height;
-         mapState.Cells = new MapState.CellProperties[Width * Height];
+         var mapState = new MapState
+         {
+            Width = Width,
+            Height = Height,
+            Cells = new MapState.CellProperties[Width * Height]
+         };
          foreach ( ICell cell in GetAllCells() )
          {
-            var cellProperties = MapState.CellProperties.None;
+            MapState.CellProperties cellProperties = MapState.CellProperties.None;
             if ( cell.IsInFov )
             {
                cellProperties |= MapState.CellProperties.Visible;
@@ -722,7 +721,7 @@ namespace RogueSharp
             {
                cellProperties |= MapState.CellProperties.Walkable;
             }
-            mapState.Cells[cell.Y * Width + cell.X] = cellProperties;
+            mapState.Cells[( cell.Y * Width ) + cell.X] = cellProperties;
          }
          return mapState;
       }
@@ -736,7 +735,7 @@ namespace RogueSharp
       {
          if ( state == null )
          {
-            throw new ArgumentNullException( "state", "Map state cannot be null" );
+            throw new ArgumentNullException( nameof( state ), "Map state cannot be null" );
          }
 
          var inFov = new HashSet<int>();
@@ -744,7 +743,7 @@ namespace RogueSharp
          Initialize( state.Width, state.Height );
          foreach ( ICell cell in GetAllCells() )
          {
-            MapState.CellProperties cellProperties = state.Cells[cell.Y * Width + cell.X];
+            MapState.CellProperties cellProperties = state.Cells[( cell.Y * Width ) + cell.X];
             if ( cellProperties.HasFlag( MapState.CellProperties.Visible ) )
             {
                inFov.Add( IndexFor( cell.X, cell.Y ) );
@@ -770,7 +769,7 @@ namespace RogueSharp
       {
          if ( mapCreationStrategy == null )
          {
-            throw new ArgumentNullException( "mapCreationStrategy", "Map creation strategy cannot be null" );
+            throw new ArgumentNullException( nameof( mapCreationStrategy ), "Map creation strategy cannot be null" );
          }
 
          return mapCreationStrategy.CreateMap();
@@ -810,7 +809,7 @@ namespace RogueSharp
       {
          if ( cell == null )
          {
-            throw new ArgumentNullException( "cell", "Cell cannot be null" );
+            throw new ArgumentNullException( nameof( cell ), "Cell cannot be null" );
          }
 
          return ( cell.Y * Width ) + cell.X;
@@ -825,7 +824,11 @@ namespace RogueSharp
       private bool AddToHashSet( HashSet<int> hashSet, int x, int y, ICell centerCell, out ICell cell )
       {
          cell = GetCell( x, y );
-         if ( cell.Equals( centerCell ) ) return false;
+         if ( cell.Equals( centerCell ) )
+         {
+            return false;
+         }
+
          return hashSet.Add( IndexFor( cell ) );
       }
 

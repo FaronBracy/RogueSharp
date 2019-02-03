@@ -7,8 +7,6 @@ namespace RogueSharp
    /// </summary>
    public struct Point : IEquatable<Point>
    {
-      private static readonly Point _zeroPoint = new Point();
-
       /// <summary>
       ///   The x coordinate of this <see cref="Point" />.
       /// </summary>
@@ -50,10 +48,7 @@ namespace RogueSharp
       /// <summary>
       ///   Returns the point (0,0)
       /// </summary>
-      public static Point Zero
-      {
-         get { return _zeroPoint; }
-      }
+      public static Point Zero { get; } = new Point();
 
       #region Operators
 
@@ -172,9 +167,9 @@ namespace RogueSharp
       }
 
       /// <summary>
-      ///   Compares whether current instance is equal to specified <see cref="Object" />.
+      ///   Compares whether current instance is equal to specified <see cref="object" />.
       /// </summary>
-      /// <param name="obj">The <see cref="Object" /> to compare.</param>
+      /// <param name="obj">The <see cref="object" /> to compare.</param>
       /// <returns><c>true</c> if the instances are equal; <c>false</c> otherwise.</returns>
       public override bool Equals( object obj )
       {
@@ -201,10 +196,10 @@ namespace RogueSharp
       }
 
       /// <summary>
-      ///   Returns a <see cref="String" /> representation of this <see cref="Point" /> in the format:
+      ///   Returns a <see cref="string" /> representation of this <see cref="Point" /> in the format:
       ///   {X:[<see cref="X" />] Y:[<see cref="Y" />]}
       /// </summary>
-      /// <returns><see cref="String" /> representation of this <see cref="Point" />.</returns>
+      /// <returns><see cref="string" /> representation of this <see cref="Point" />.</returns>
       public override string ToString()
       {
          return "{X:" + X + " Y:" + Y + "}";
@@ -219,7 +214,7 @@ namespace RogueSharp
       public static float Distance( Point value1, Point value2 )
       {
          float v1 = value1.X - value2.X, v2 = value1.Y - value2.Y;
-         return (float) Math.Sqrt( v1 * v1 + v2 * v2 );
+         return (float) Math.Sqrt( ( v1 * v1 ) + ( v2 * v2 ) );
       }
 
       /// <summary>

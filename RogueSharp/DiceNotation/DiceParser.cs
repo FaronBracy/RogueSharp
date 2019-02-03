@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Text.RegularExpressions;
 
 namespace RogueSharp.DiceNotation
@@ -28,13 +29,13 @@ namespace RogueSharp.DiceNotation
       {
          if ( string.IsNullOrEmpty( expression ) )
          {
-            throw new ArgumentException( "A dice notation expression must be supplied.", "expression" );
+            throw new ArgumentException( "A dice notation expression must be supplied.", nameof( expression ) );
          }
 
          string cleanExpression = _whitespacePattern.Replace( expression.ToLower(), "" );
          cleanExpression = cleanExpression.Replace( "+-", "-" );
 
-         var parseValues = new ParseValues().Init();
+         ParseValues parseValues = new ParseValues().Init();
 
          var dice = new DiceExpression();
 
@@ -48,7 +49,7 @@ namespace RogueSharp.DiceNotation
             }
             else if ( c == '*' )
             {
-               parseValues.Scalar *= int.Parse( parseValues.Constant );
+               parseValues.Scalar *= int.Parse( parseValues.Constant, CultureInfo.CurrentCulture );
                parseValues.Constant = "";
             }
             else if ( c == 'd' )
@@ -57,7 +58,7 @@ namespace RogueSharp.DiceNotation
                {
                   parseValues.Constant = "1";
                }
-               parseValues.Multiplicity = int.Parse( parseValues.Constant );
+               parseValues.Multiplicity = int.Parse( parseValues.Constant, CultureInfo.CurrentCulture );
                parseValues.Constant = "";
             }
             else if ( c == 'k' )
@@ -68,7 +69,7 @@ namespace RogueSharp.DiceNotation
                   chooseAccum += cleanExpression[i + 1];
                   ++i;
                }
-               parseValues.Choose = int.Parse( chooseAccum );
+               parseValues.Choose = int.Parse( chooseAccum, CultureInfo.CurrentCulture );
             }
             else if ( c == '+' )
             {
@@ -83,7 +84,7 @@ namespace RogueSharp.DiceNotation
             }
             else
             {
-               throw new ArgumentException( "Invalid character in dice expression", "expression" );
+               throw new ArgumentException( "Invalid character in dice expression", nameof( expression ) );
             }
          }
          Append( dice, parseValues );
@@ -93,7 +94,7 @@ namespace RogueSharp.DiceNotation
 
       private static void Append( DiceExpression dice, ParseValues parseValues )
       {
-         int constant = int.Parse( parseValues.Constant );
+         int constant = int.Parse( parseValues.Constant, CultureInfo.CurrentCulture );
          if ( parseValues.Multiplicity == 0 )
          {
             dice.Constant( parseValues.Scalar * constant );

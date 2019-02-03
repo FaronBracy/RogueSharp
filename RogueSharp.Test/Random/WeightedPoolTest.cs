@@ -42,7 +42,7 @@ namespace RogueSharp.Test.Random
       public void Add_WhenTotalWeightGoesOverMaximumIntValue_WillThrowOverflowException()
       {
          WeightedPool<int> pool = new WeightedPool<int>();
-         pool.Add( 1, Int32.MaxValue - 10 );
+         pool.Add( 1, int.MaxValue - 10 );
          pool.Add( 2, 10 );
 
          Assert.ThrowsException<OverflowException>( () => pool.Add( 3, 1 ) );
@@ -59,24 +59,24 @@ namespace RogueSharp.Test.Random
       }
 
       [TestMethod]
-      public void Select_WhenCloneFuncWasNotDefined_WillThrowInvalidOperationException()
+      public void Choose_WhenCloneFuncWasNotDefined_WillThrowInvalidOperationException()
       {
          WeightedPool<int> pool = new WeightedPool<int>( Singleton.DefaultRandom );
          pool.Add( 1, 1 );
 
-         Assert.ThrowsException<InvalidOperationException>( () => pool.Select() );
+         Assert.ThrowsException<InvalidOperationException>( () => pool.Choose() );
       }
 
       [TestMethod]
-      public void Select_WhenPoolHas0Items_WillThrowInvalidOperationException()
+      public void Choose_WhenPoolHas0Items_WillThrowInvalidOperationException()
       {
          WeightedPool<int> pool = new WeightedPool<int>( Singleton.DefaultRandom, x => x );
 
-         Assert.ThrowsException<InvalidOperationException>( () => pool.Select() );
+         Assert.ThrowsException<InvalidOperationException>( () => pool.Choose() );
       }
 
       [TestMethod]
-      public void Select_WhenPoolHas1Item_WillGetCloneOfItemWithDifferentReference()
+      public void Choose_WhenPoolHas1Item_WillGetCloneOfItemWithDifferentReference()
       {
          WeightedPool<PlayingCard> pool = new WeightedPool<PlayingCard>( Singleton.DefaultRandom, PlayingCard.Clone );
          PlayingCard kingOfHearts = new PlayingCard
@@ -85,7 +85,7 @@ namespace RogueSharp.Test.Random
          };
          pool.Add( kingOfHearts, 1 );
 
-         PlayingCard selectedCard = pool.Select();
+         PlayingCard selectedCard = pool.Choose();
 
          Assert.AreNotEqual( kingOfHearts, selectedCard );
          Assert.AreEqual( kingOfHearts.FaceValue, selectedCard.FaceValue );

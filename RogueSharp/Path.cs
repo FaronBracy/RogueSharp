@@ -25,7 +25,7 @@ namespace RogueSharp
 
          if ( _steps.Count < 1 )
          {
-            throw new ArgumentException( "Path must have steps", "steps" );
+            throw new ArgumentException( "Path must have steps", nameof( steps ) );
          }
 
          _currentStep = _steps.First;
@@ -34,57 +34,27 @@ namespace RogueSharp
       /// <summary>
       /// The Cell representing the first step or Start of this Path
       /// </summary>
-      public ICell Start
-      {
-         get
-         {
-            return _steps.First.Value;
-         }
-      }
+      public ICell Start => _steps.First.Value;
 
       /// <summary>
       /// The Cell representing the last step or End of this Path
       /// </summary>
-      public ICell End
-      {
-         get
-         {
-            return _steps.Last.Value;
-         }
-      }
+      public ICell End => _steps.Last.Value;
 
       /// <summary>
       /// The number of steps in this Path
       /// </summary>
-      public int Length
-      {
-         get
-         {
-            return _steps.Count;
-         }
-      }
+      public int Length => _steps.Count;
 
       /// <summary>
       /// The Cell representing the step that is currently occupied in this Path
       /// </summary>
-      public ICell CurrentStep
-      {
-         get
-         {
-            return _currentStep.Value;
-         }
-      }
+      public ICell CurrentStep => _currentStep.Value;
 
       /// <summary>
       /// All of the Cells representing the Steps in this Path from Start to End as an IEnumerable
       /// </summary>
-      public IEnumerable<ICell> Steps
-      {
-         get
-         {
-            return _steps;
-         }
-      }
+      public IEnumerable<ICell> Steps => _steps;
 
       /// <summary>
       /// Move forward along this Path and advance the CurrentStep to the next Step in the Path

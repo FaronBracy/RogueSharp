@@ -22,12 +22,7 @@ namespace RogueSharp
       /// <exception cref="ArgumentNullException">Thrown when a null map parameter is passed in</exception>
       public PathFinder( IMap map )
       {
-         if ( map == null )
-         {
-            throw new ArgumentNullException( "map", "Map cannot be null" );
-         }
-
-         _map = map;
+         _map = map ?? throw new ArgumentNullException( nameof( map ), "Map cannot be null" );
          _graph = new EdgeWeightedDigraph( _map.Width * _map.Height );
          foreach ( ICell cell in _map.GetAllCells() )
          {
@@ -59,12 +54,7 @@ namespace RogueSharp
       /// <exception cref="ArgumentNullException">Thrown when a null map parameter is passed in</exception>
       public PathFinder( IMap map, double diagonalCost )
       {
-         if ( map == null )
-         {
-            throw new ArgumentNullException( "map", "Map cannot be null" );
-         }
-
-         _map = map;
+         _map = map ?? throw new ArgumentNullException( nameof( map ), "Map cannot be null" );
          _graph = new EdgeWeightedDigraph( _map.Width * _map.Height );
          foreach ( ICell cell in _map.GetAllCells() )
          {
@@ -106,7 +96,7 @@ namespace RogueSharp
 
          if ( shortestPath == null )
          {
-            throw new PathNotFoundException( string.Format( "Path from ({0}, {1}) to ({2}, {3}) not found", source.X, source.Y, destination.X, destination.Y ) );
+            throw new PathNotFoundException( $"Path from ({source.X}, {source.Y}) to ({destination.X}, {destination.Y}) not found" );
          }
 
          return shortestPath;
@@ -123,12 +113,12 @@ namespace RogueSharp
       {
          if ( source == null )
          {
-            throw new ArgumentNullException( "source" );
+            throw new ArgumentNullException( nameof( source ) );
          }
 
          if ( destination == null )
          {
-            throw new ArgumentNullException( "destination" );
+            throw new ArgumentNullException( nameof( destination ) );
          }
 
          var cells = ShortestPathCells( source, destination ).ToList();

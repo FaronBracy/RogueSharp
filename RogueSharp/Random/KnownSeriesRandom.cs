@@ -27,7 +27,7 @@ namespace RogueSharp.Random
       {
          if ( series == null )
          {
-            throw new ArgumentNullException( "series", "Series cannot be null" );
+            throw new ArgumentNullException( nameof( series ), "Series cannot be null" );
          }
 
          _series = new Queue<int>();
@@ -69,11 +69,11 @@ namespace RogueSharp.Random
          int value = _series.Dequeue();
          if ( value < minValue )
          {
-            throw new ArgumentOutOfRangeException( "minValue", "Next value in series is smaller than the minValue parameter" );
+            throw new ArgumentOutOfRangeException( nameof( minValue ), "Next value in series is smaller than the minValue parameter" );
          }
          if ( value > maxValue )
          {
-            throw new ArgumentOutOfRangeException( "maxValue", "Next value in series is larger than the maxValue parameter" );
+            throw new ArgumentOutOfRangeException( nameof( maxValue ), "Next value in series is larger than the maxValue parameter" );
          }
          _series.Enqueue( value );
          _numberGenerated++;
@@ -116,7 +116,7 @@ namespace RogueSharp.Random
       {
          if ( state == null )
          {
-            throw new ArgumentNullException( "state", "RandomState cannot be null" );
+            throw new ArgumentNullException( nameof( state ), "RandomState cannot be null" );
          }
 
          _series = new Queue<int>();

@@ -23,17 +23,11 @@ namespace RogueSharp.Random
       /// <summary>
       /// How many items are in the WeightedPool
       /// </summary>
-      public int Count
-      {
-         get
-         {
-            return _pool.Count;
-         }
-      }
+      public int Count => _pool.Count;
 
       /// <summary>
       /// Construct a new weighted pool using the default random number generator provided with .NET
-      /// This constructor does not take a clone function so Select() cannot be called, only Draw()
+      /// This constructor does not take a clone function so Choose() cannot be called, only Draw()
       /// </summary>
       public WeightedPool()
          : this( Singleton.DefaultRandom )
@@ -52,12 +46,7 @@ namespace RogueSharp.Random
       /// <exception cref="ArgumentNullException">Thrown when provided "random" argument is null</exception>
       public WeightedPool( IRandom random, Func<T, T> cloneFunc = null )
       {
-         if ( random == null )
-         {
-            throw new ArgumentNullException( "random", "Implementation of IRandom must not be null" );
-         }
-
-         _random = random;
+         _random = random ?? throw new ArgumentNullException( nameof( random ), "Implementation of IRandom must not be null" );
          _cloneFunc = cloneFunc;
       }
 
@@ -76,16 +65,16 @@ namespace RogueSharp.Random
       {
          if ( item == null )
          {
-            throw new ArgumentNullException( "item", "Can not add null item to the pool" );
+            throw new ArgumentNullException( nameof( item ), "Can not add null item to the pool" );
          }
          if ( weight <= 0 )
          {
-            throw new ArgumentException( "Weight must be greater than 0", "weight" );
+            throw new ArgumentException( "Weight must be greater than 0", nameof( weight ) );
          }
 
          WeightedItem<T> weightedItem = new WeightedItem<T>( item, weight );
          _pool.Add( weightedItem );
-         if ( Int32.MaxValue - weight < _totalWeight )
+         if ( int.MaxValue - weight < _totalWeight )
          {
             throw new OverflowException( "The weight of items in the pool would be over Int32.MaxValue" );
          }
@@ -100,16 +89,16 @@ namespace RogueSharp.Random
       /// <exception cref="InvalidOperationException">Thrown when a clone function was not defined when the pool was constructed</exception>
       /// <exception cref="InvalidOperationException">Thrown when the pool is empty</exception>
       /// <exception cref="InvalidOperationException">Thrown when the random lookup is greater than the total weight. Could only happen if a bad implementation of IRandom were provided</exception>
-      public T Select() 
+      public T Choose()
       {
          if ( _cloneFunc == null )
          {
-            throw new InvalidOperationException(  "A clone function was not defined when this pool was constructed" );
+            throw new InvalidOperationException( "A clone function was not defined when this pool was constructed" );
          }
 
          if ( Count <= 0 || _totalWeight <= 0 )
          {
-            throw new InvalidOperationException( "Add items to the pool before attempting to select one" );
+            throw new InvalidOperationException( "Add items to the pool before attempting to choose one" );
          }
 
          WeightedItem<T> item = ChooseRandomWeightedItem();

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 
 namespace RogueSharp.Algorithms
@@ -68,13 +69,13 @@ namespace RogueSharp.Algorithms
       public override string ToString()
       {
          var formattedString = new StringBuilder();
-         formattedString.AppendFormat( "{0} vertices, {1} edges{2}", NumberOfVertices, NumberOfEdges, Environment.NewLine );
+         formattedString.AppendFormat( CultureInfo.CurrentCulture, "{0} vertices, {1} edges{2}", NumberOfVertices, NumberOfEdges, Environment.NewLine );
          for ( int v = 0; v < NumberOfVertices; v++ )
          {
-            formattedString.AppendFormat( "{0}:", v );
+            formattedString.AppendFormat( CultureInfo.CurrentCulture, "{0}:", v );
             foreach ( int vertex in _adjacent[v] )
             {
-               formattedString.AppendFormat( " {0}", vertex );
+               formattedString.AppendFormat( CultureInfo.CurrentCulture, " {0}", vertex );
             }
             if ( v < NumberOfVertices - 1 )
             {

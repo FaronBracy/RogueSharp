@@ -36,7 +36,7 @@ namespace RogueSharp
       public FieldOfView Clone()
       {
          var inFovCopy = new HashSet<int>();
-         foreach( int i in _inFov )
+         foreach ( int i in _inFov )
          {
             inFovCopy.Add( i );
          }

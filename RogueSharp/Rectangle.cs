@@ -7,8 +7,6 @@ namespace RogueSharp
    /// </summary>
    public struct Rectangle : IEquatable<Rectangle>
    {
-      private static readonly Rectangle _emptyRectangle = new Rectangle();
-
       /// <summary>
       /// Specifies the Height of the Rectangle
       /// </summary>
@@ -42,13 +40,13 @@ namespace RogueSharp
       /// <param name="y">The y coordinate of the top-left corner of the created <see cref="Rectangle"/>.</param>
       /// <param name="width">The width of the created <see cref="Rectangle"/>.</param>
       /// <param name="height">The height of the created <see cref="Rectangle"/>.</param>
-      public Rectangle( int x, int y, int width, int height ) 
+      public Rectangle( int x, int y, int width, int height )
          : this()
       {
-         this.X = x;
-         this.Y = y;
-         this.Width = width;
-         this.Height = height;
+         X = x;
+         Y = y;
+         Width = width;
+         Height = height;
       }
 
       /// <summary>
@@ -57,13 +55,13 @@ namespace RogueSharp
       /// </summary>
       /// <param name="location">The x and y coordinates of the top-left corner of the created <see cref="Rectangle"/>.</param>
       /// <param name="size">The width and height of the created <see cref="Rectangle"/>.</param>
-      public Rectangle( Point location, Point size ) 
+      public Rectangle( Point location, Point size )
          : this()
       {
-         this.X = location.X;
-         this.Y = location.Y;
-         this.Width = size.X;
-         this.Height = size.Y;
+         X = location.X;
+         Y = location.Y;
+         Width = size.X;
+         Height = size.Y;
       }
 
       #endregion
@@ -71,67 +69,34 @@ namespace RogueSharp
       /// <summary>
       /// Returns a Rectangle with all of its values set to zero
       /// </summary>
-      public static Rectangle Empty
-      {
-         get
-         {
-            return _emptyRectangle;
-         }
-      }
+      public static Rectangle Empty { get; } = new Rectangle();
 
       /// <summary>
       /// Returns the x-coordinate of the left side of the rectangle
       /// </summary>
-      public int Left
-      {
-         get
-         {
-            return X;
-         }
-      }
+      public int Left => X;
 
       /// <summary>
       /// Returns the x-coordinate of the right side of the rectangle
       /// </summary>
-      public int Right
-      {
-         get
-         {
-            return ( X + Width );
-         }
-      }
+      public int Right => X + Width;
 
       /// <summary>
       /// Returns the y-coordinate of the top of the rectangle
       /// </summary>
-      public int Top
-      {
-         get
-         {
-            return Y;
-         }
-      }
+      public int Top => Y;
 
       /// <summary>
       /// Returns the y-coordinate of the bottom of the rectangle
       /// </summary>
-      public int Bottom
-      {
-         get
-         {
-            return ( Y + Height );
-         }
-      }
+      public int Bottom => Y + Height;
 
       /// <summary>
       /// Gets or sets the Point representing the upper-left value of the Rectangle
       /// </summary>
       public Point Location
       {
-         get
-         {
-            return new Point( X, Y );
-         }
+         get => new Point( X, Y );
          set
          {
             X = value.X;
@@ -142,25 +107,13 @@ namespace RogueSharp
       /// <summary>
       /// Returns the Point that specifies the center of the rectangle
       /// </summary>
-      public Point Center
-      {
-         get
-         {
-            return new Point( X + ( Width / 2 ), Y + ( Height / 2 ) );
-         }
-      }
+      public Point Center => new Point( X + ( Width / 2 ), Y + ( Height / 2 ) );
 
       /// <summary>
       /// Returns a value that indicates whether the Rectangle is empty
       /// true if the Rectangle is empty; otherwise false
       /// </summary>
-      public bool IsEmpty
-      {
-         get
-         {
-            return ( ( ( ( Width == 0 ) && ( Height == 0 ) ) && ( X == 0 ) ) && ( Y == 0 ) );
-         }
-      }
+      public bool IsEmpty => Width == 0 && Height == 0 && X == 0 && Y == 0;
 
       /// <summary>
       /// Determines whether two Rectangle instances are equal
@@ -180,7 +133,7 @@ namespace RogueSharp
       /// <returns>True if the rectangles are equal; False otherwise</returns>
       public static bool operator ==( Rectangle a, Rectangle b )
       {
-         return ( ( a.X == b.X ) && ( a.Y == b.Y ) && ( a.Width == b.Width ) && ( a.Height == b.Height ) );
+         return ( a.X == b.X ) && ( a.Y == b.Y ) && ( a.Width == b.Width ) && ( a.Height == b.Height );
       }
 
       /// <summary>
@@ -191,7 +144,7 @@ namespace RogueSharp
       /// <returns>True if the specified point is contained within this Rectangle; False otherwise</returns>
       public bool Contains( int x, int y )
       {
-         return ( ( ( ( X <= x ) && ( x < ( X + Width ) ) ) && ( Y <= y ) ) && ( y < ( Y + Height ) ) );
+         return ( X <= x ) && ( x < ( X + Width ) ) && ( Y <= y ) && ( y < ( Y + Height ) );
       }
 
       /// <summary>
@@ -201,7 +154,7 @@ namespace RogueSharp
       /// <returns>True if the specified Point is contained within this Rectangle; False otherwise</returns>
       public bool Contains( Point value )
       {
-         return ( ( ( ( X <= value.X ) && ( value.X < ( X + Width ) ) ) && ( Y <= value.Y ) ) && ( value.Y < ( Y + Height ) ) );
+         return ( X <= value.X ) && ( value.X < ( X + Width ) ) && ( Y <= value.Y ) && ( value.Y < ( Y + Height ) );
       }
 
       /// <summary>
@@ -211,8 +164,8 @@ namespace RogueSharp
       /// <returns>True if this Rectangle entirely contains the specified Rectangle; False otherwise</returns>
       public bool Contains( Rectangle value )
       {
-         return ( ( ( ( X <= value.X ) && ( ( value.X + value.Width ) <= ( X + Width ) ) ) && ( Y <= value.Y ) )
-                  && ( ( value.Y + value.Height ) <= ( Y + Height ) ) );
+         return ( X <= value.X ) && ( ( value.X + value.Width ) <= ( X + Width ) ) && ( Y <= value.Y )
+                  && ( ( value.Y + value.Height ) <= ( Y + Height ) );
       }
 
       /// <summary>
@@ -262,9 +215,9 @@ namespace RogueSharp
       }
 
       /// <summary>
-      /// Compares whether current instance is equal to specified <see cref="Object"/>.
+      /// Compares whether current instance is equal to specified <see cref="object"/>.
       /// </summary>
-      /// <param name="obj">The <see cref="Object"/> to compare.</param>
+      /// <param name="obj">The <see cref="object"/> to compare.</param>
       /// <returns><c>true</c> if the instances are equal; <c>false</c> otherwise.</returns>
       public override bool Equals( object obj )
       {
@@ -277,7 +230,7 @@ namespace RogueSharp
       /// <returns>A string that represents the current Rectangle</returns>
       public override string ToString()
       {
-         return string.Format( "{{X:{0} Y:{1} Width:{2} Height:{3}}}", X, Y, Width, Height );
+         return $"{{X:{X} Y:{Y} Width:{Width} Height:{Height}}}";
       }
 
       /// <summary>
@@ -287,7 +240,7 @@ namespace RogueSharp
       /// <returns>An integer hash used to identify this Rectangle</returns>
       public override int GetHashCode()
       {
-         return ( X ^ Y ^ Width ^ Height );
+         return X ^ Y ^ Width ^ Height;
       }
 
       /// <summary>
@@ -324,8 +277,7 @@ namespace RogueSharp
       /// <returns>The area where the two specified Rectangles overlap. If the two Rectangles do not overlap the resulting Rectangle will be Empty</returns>
       public static Rectangle Intersect( Rectangle value1, Rectangle value2 )
       {
-         Rectangle rectangle;
-         Intersect( ref value1, ref value2, out rectangle );
+         Intersect( ref value1, ref value2, out Rectangle rectangle );
          return rectangle;
       }
 
