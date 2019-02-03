@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 
@@ -536,7 +537,7 @@ namespace RogueSharp
          {
             for ( int x = 0; x < _map.Width; x++ )
             {
-               mapRepresentation.AppendFormat( "{0,5}", _cellWeights[x, y] == _wall ? "#" : _cellWeights[x, y].ToString() );
+               mapRepresentation.AppendFormat( CultureInfo.CurrentCulture, "{0,5}", _cellWeights[x, y] == _wall ? "#" : _cellWeights[x, y].ToString( CultureInfo.CurrentCulture ) );
             }
             mapRepresentation.Append( Environment.NewLine );
          }

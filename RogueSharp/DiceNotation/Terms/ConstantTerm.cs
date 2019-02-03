@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 using RogueSharp.Random;
 
 namespace RogueSharp.DiceNotation.Terms
@@ -47,7 +48,7 @@ namespace RogueSharp.DiceNotation.Terms
       /// <returns>A string representing this ConstantTerm</returns>
       public override string ToString()
       {
-         return _constant.ToString();
+         return _constant.ToString( CultureInfo.CurrentCulture );
       }
    }
 }
