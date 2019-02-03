@@ -46,7 +46,7 @@ namespace RogueSharp.Random
       /// <exception cref="ArgumentNullException">Thrown when provided "random" argument is null</exception>
       public WeightedPool( IRandom random, Func<T, T> cloneFunc = null )
       {
-         _random = random ?? throw new ArgumentNullException( "random", "Implementation of IRandom must not be null" );
+         _random = random ?? throw new ArgumentNullException( nameof( random ), "Implementation of IRandom must not be null" );
          _cloneFunc = cloneFunc;
       }
 
@@ -65,11 +65,11 @@ namespace RogueSharp.Random
       {
          if ( item == null )
          {
-            throw new ArgumentNullException( "item", "Can not add null item to the pool" );
+            throw new ArgumentNullException( nameof( item ), "Can not add null item to the pool" );
          }
          if ( weight <= 0 )
          {
-            throw new ArgumentException( "Weight must be greater than 0", "weight" );
+            throw new ArgumentException( "Weight must be greater than 0", nameof( weight ) );
          }
 
          WeightedItem<T> weightedItem = new WeightedItem<T>( item, weight );

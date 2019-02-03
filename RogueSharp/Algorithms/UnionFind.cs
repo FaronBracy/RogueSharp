@@ -22,7 +22,7 @@ namespace RogueSharp.Algorithms
       {
          if ( count < 0 )
          {
-            throw new ArgumentException( "count must be positive", "count" );
+            throw new ArgumentException( "count must be positive", nameof( count ) );
          }
          Count = count;
          _id = new int[count];
@@ -50,7 +50,7 @@ namespace RogueSharp.Algorithms
       {
          if ( p < 0 || p >= _id.Length )
          {
-            throw new ArgumentOutOfRangeException( "p", "Index out of bounds" );
+            throw new ArgumentOutOfRangeException( nameof( p ), "Index out of bounds" );
          }
          while ( p != _id[p] )
          {

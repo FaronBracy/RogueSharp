@@ -47,7 +47,7 @@ namespace RogueSharp.Algorithms
       {
          if ( edge == null )
          {
-            throw new ArgumentNullException( "edge", "DirectedEdge cannot be null" );
+            throw new ArgumentNullException( nameof( edge ), "DirectedEdge cannot be null" );
          }
 
          _adjacent[edge.From].AddLast( edge );

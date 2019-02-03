@@ -40,7 +40,7 @@ namespace RogueSharp
       /// <exception cref="ArgumentNullException">Thrown on null map</exception>
       public GoalMap( IMap map, bool allowDiagonalMovement )
       {
-         _map = map ?? throw new ArgumentNullException( "map", "Map cannot be null" );
+         _map = map ?? throw new ArgumentNullException( nameof( map ), "Map cannot be null" );
          _cellWeights = new int[map.Width, map.Height];
          _goals = new List<WeightedPoint>();
          _obstacles = new HashSet<Point>();

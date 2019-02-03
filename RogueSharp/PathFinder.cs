@@ -22,7 +22,7 @@ namespace RogueSharp
       /// <exception cref="ArgumentNullException">Thrown when a null map parameter is passed in</exception>
       public PathFinder( IMap map )
       {
-         _map = map ?? throw new ArgumentNullException( "map", "Map cannot be null" );
+         _map = map ?? throw new ArgumentNullException( nameof( map ), "Map cannot be null" );
          _graph = new EdgeWeightedDigraph( _map.Width * _map.Height );
          foreach ( ICell cell in _map.GetAllCells() )
          {
@@ -54,7 +54,7 @@ namespace RogueSharp
       /// <exception cref="ArgumentNullException">Thrown when a null map parameter is passed in</exception>
       public PathFinder( IMap map, double diagonalCost )
       {
-         _map = map ?? throw new ArgumentNullException( "map", "Map cannot be null" );
+         _map = map ?? throw new ArgumentNullException( nameof( map ), "Map cannot be null" );
          _graph = new EdgeWeightedDigraph( _map.Width * _map.Height );
          foreach ( ICell cell in _map.GetAllCells() )
          {
@@ -113,12 +113,12 @@ namespace RogueSharp
       {
          if ( source == null )
          {
-            throw new ArgumentNullException( "source" );
+            throw new ArgumentNullException( nameof( source ) );
          }
 
          if ( destination == null )
          {
-            throw new ArgumentNullException( "destination" );
+            throw new ArgumentNullException( nameof( destination ) );
          }
 
          var cells = ShortestPathCells( source, destination ).ToList();

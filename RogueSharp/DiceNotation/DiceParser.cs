@@ -28,7 +28,7 @@ namespace RogueSharp.DiceNotation
       {
          if ( string.IsNullOrEmpty( expression ) )
          {
-            throw new ArgumentException( "A dice notation expression must be supplied.", "expression" );
+            throw new ArgumentException( "A dice notation expression must be supplied.", nameof( expression ) );
          }
 
          string cleanExpression = _whitespacePattern.Replace( expression.ToLower(), "" );
@@ -83,7 +83,7 @@ namespace RogueSharp.DiceNotation
             }
             else
             {
-               throw new ArgumentException( "Invalid character in dice expression", "expression" );
+               throw new ArgumentException( "Invalid character in dice expression", nameof( expression ) );
             }
          }
          Append( dice, parseValues );

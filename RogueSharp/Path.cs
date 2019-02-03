@@ -25,7 +25,7 @@ namespace RogueSharp
 
          if ( _steps.Count < 1 )
          {
-            throw new ArgumentException( "Path must have steps", "steps" );
+            throw new ArgumentException( "Path must have steps", nameof( steps ) );
          }
 
          _currentStep = _steps.First;
