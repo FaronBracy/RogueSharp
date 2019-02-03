@@ -566,7 +566,25 @@ namespace RogueSharp
 
          public bool Equals( WeightedPoint other )
          {
-            return X == other.X && Y == other.Y && Weight == other.Weight;
+            return _point.Equals( other._point ) && Weight == other.Weight;
+         }
+
+         public override bool Equals( object obj )
+         {
+            if ( ReferenceEquals( null, obj ) )
+            {
+               return false;
+            }
+
+            return obj is WeightedPoint other && Equals( other );
+         }
+
+         public override int GetHashCode()
+         {
+            unchecked
+            {
+               return ( _point.GetHashCode() * 397 ) ^ Weight;
+            }
          }
       }
 
