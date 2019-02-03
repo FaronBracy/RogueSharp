@@ -27,7 +27,7 @@ namespace RogueSharp.Random
 
       /// <summary>
       /// Construct a new weighted pool using the default random number generator provided with .NET
-      /// This constructor does not take a clone function so Select() cannot be called, only Draw()
+      /// This constructor does not take a clone function so Choose() cannot be called, only Draw()
       /// </summary>
       public WeightedPool()
          : this( Singleton.DefaultRandom )
@@ -89,7 +89,7 @@ namespace RogueSharp.Random
       /// <exception cref="InvalidOperationException">Thrown when a clone function was not defined when the pool was constructed</exception>
       /// <exception cref="InvalidOperationException">Thrown when the pool is empty</exception>
       /// <exception cref="InvalidOperationException">Thrown when the random lookup is greater than the total weight. Could only happen if a bad implementation of IRandom were provided</exception>
-      public T Select()
+      public T Choose()
       {
          if ( _cloneFunc == null )
          {
@@ -98,7 +98,7 @@ namespace RogueSharp.Random
 
          if ( Count <= 0 || _totalWeight <= 0 )
          {
-            throw new InvalidOperationException( "Add items to the pool before attempting to select one" );
+            throw new InvalidOperationException( "Add items to the pool before attempting to choose one" );
          }
 
          WeightedItem<T> item = ChooseRandomWeightedItem();
