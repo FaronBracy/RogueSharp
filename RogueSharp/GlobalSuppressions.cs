@@ -37,3 +37,9 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Scope = "member", Target = "RogueSharp.IMap.#GetAllCells()" )]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix", Scope = "type", Target = "RogueSharp.Algorithms.IndexMinPriorityQueue`1" )]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Usage", "CA2243:AttributeStringLiteralsShouldParseCorrectly" )]
+
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Usage", "CA2237:Mark ISerializable types with serializable", Justification = "Not available in .NET Standard 1.0", Scope = "type", Target = "~T:RogueSharp.DiceNotation.Exceptions.ImpossibleDieException" )]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Usage", "CA2237:Mark ISerializable types with serializable", Justification = "Not available in .NET Standard 1.0", Scope = "type", Target = "~T:RogueSharp.DiceNotation.Exceptions.InvalidChooseException" )]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Usage", "CA2237:Mark ISerializable types with serializable", Justification = "Not available in .NET Standard 1.0", Scope = "type", Target = "~T:RogueSharp.DiceNotation.Exceptions.InvalidMultiplicityException" )]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Usage", "CA2237:Mark ISerializable types with serializable", Justification = "Not available in .NET Standard 1.0", Scope = "type", Target = "~T:RogueSharp.NoMoreStepsException" )]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Usage", "CA2237:Mark ISerializable types with serializable", Justification = "Not available in .NET Standard 1.0", Scope = "type", Target = "~T:RogueSharp.PathNotFoundException" )]
