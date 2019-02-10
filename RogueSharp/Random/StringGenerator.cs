@@ -43,7 +43,13 @@ namespace RogueSharp.Random
          {
             if ( wordPool.Key != null )
             {
-               parameterizedString = parameterizedString.Replace( $"{{{wordPool.Key}}}", wordPool.Value.Choose() );
+               string poolName = $"{{{wordPool.Key}}}";
+               int index = parameterizedString.IndexOf( poolName, StringComparison.OrdinalIgnoreCase );
+               while ( index != -1 )
+               {
+                  parameterizedString = parameterizedString.Remove( index, poolName.Length ).Insert( index, wordPool.Value.Choose() );
+                  index = parameterizedString.IndexOf( poolName, StringComparison.OrdinalIgnoreCase );
+               }
             }
          }
 

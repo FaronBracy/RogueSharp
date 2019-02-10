@@ -40,5 +40,32 @@ namespace RogueSharp.Test.Random
 
          Assert.AreEqual( "The room was painted blue.", generated );
       }
+
+      [TestMethod]
+      public void Generate_WhenStringHasParameterTwiceButPoolHasOneItem_WillGenerateStringWithBothParametersReplacedBySameString()
+      {
+         StringGenerator stringGenerator = new StringGenerator();
+         WeightedPool<string> colorPool = new WeightedPool<string>( new DotNetRandom(), x => x );
+         colorPool.Add( "blue", 1 );
+         stringGenerator.AddWordPool( "color", colorPool );
+
+         string generated = stringGenerator.Generate( "The room was painted {color} with {color} stripes." );
+
+         Assert.AreEqual( "The room was painted blue with blue stripes.", generated );
+      }
+
+      [TestMethod]
+      public void Generate_WhenStringHasParameterTwiceWithKnownSeriesRandom_WillGenerateExpectedString()
+      {
+         StringGenerator stringGenerator = new StringGenerator();
+         WeightedPool<string> colorPool = new WeightedPool<string>( new KnownSeriesRandom( 1, 2 ), x => x );
+         colorPool.Add( "blue", 1 );
+         colorPool.Add( "red", 1 );
+         stringGenerator.AddWordPool( "color", colorPool );
+
+         string generated = stringGenerator.Generate( "The room was painted {color} with {color} stripes." );
+
+         Assert.AreEqual( "The room was painted blue with red stripes.", generated );
+      }
    }
 }
