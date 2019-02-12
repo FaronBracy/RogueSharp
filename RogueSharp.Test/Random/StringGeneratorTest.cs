@@ -8,6 +8,41 @@ namespace RogueSharp.Test.Random
    public class StringGeneratorTest
    {
       [TestMethod]
+      public void AddWordsToPool_WhenPoolNameIsNull_WillThrowArgumentException()
+      {
+         StringGenerator stringGenerator = new StringGenerator();
+
+         Assert.ThrowsException<ArgumentException>( () => stringGenerator.AddWordsToPool( null, "red" ) );
+      }
+
+      [TestMethod]
+      public void AddWordsToPool_WhenPoolNameIsWhiteSpace_WillThrowArgumentException()
+      {
+         StringGenerator stringGenerator = new StringGenerator();
+
+         Assert.ThrowsException<ArgumentException>( () => stringGenerator.AddWordsToPool( "  ", "red" ) );
+      }
+
+      [TestMethod]
+      public void AddWordsToPool_WhenWordsParamIsNull_WillThrowArgumentNullException()
+      {
+         StringGenerator stringGenerator = new StringGenerator();
+
+         Assert.ThrowsException<ArgumentNullException>( () => stringGenerator.AddWordsToPool( "color", null ) );
+      }
+
+      [TestMethod]
+      public void AddWordsToPool_When3WordsAddedWithKnownSeriesRandom_WillUseAll3Words()
+      {
+         StringGenerator stringGenerator = new StringGenerator( new KnownSeriesRandom( 1, 2, 3 ) );
+
+         stringGenerator.AddWordsToPool( "color", "red", "green", "blue" );
+
+         string generated = stringGenerator.Generate( "The room was painted {color} with {color} stripes and {color} spots." );
+         Assert.AreEqual( "The room was painted red with green stripes and blue spots.", generated );
+      }
+
+      [TestMethod]
       public void AddWordPool_WhenWordPoolIsNull_ThrowsArgumentNullException()
       {
          StringGenerator stringGenerator = new StringGenerator();
