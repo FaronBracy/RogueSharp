@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RogueSharp.Random;
 
@@ -37,6 +38,42 @@ namespace RogueSharp.Test.Random
          StringGenerator stringGenerator = new StringGenerator( new KnownSeriesRandom( 1, 2, 3 ) );
 
          stringGenerator.AddWordsToPool( "color", "red", "green", "blue" );
+
+         string generated = stringGenerator.Generate( "The room was painted {color} with {color} stripes and {color} spots." );
+         Assert.AreEqual( "The room was painted red with green stripes and blue spots.", generated );
+      }
+
+      [TestMethod]
+      public void AddWordsToPool_UsingEnumerableWhenPoolNameIsNull_WillThrowArgumentException()
+      {
+         StringGenerator stringGenerator = new StringGenerator();
+
+         Assert.ThrowsException<ArgumentException>( () => stringGenerator.AddWordsToPool( null, new List<string> { "red"} ) );
+      }
+
+      [TestMethod]
+      public void AddWordsToPool_UsingEnumerableWhenPoolNameIsWhiteSpace_WillThrowArgumentException()
+      {
+         StringGenerator stringGenerator = new StringGenerator();
+
+         Assert.ThrowsException<ArgumentException>( () => stringGenerator.AddWordsToPool( "  ", new List<string> { "red" } ) );
+      }
+
+      [TestMethod]
+      public void AddWordsToPool_UsingEnumerableWhenWordsParamIsNull_WillThrowArgumentNullException()
+      {
+         List<string> words = null;
+         StringGenerator stringGenerator = new StringGenerator();
+
+         Assert.ThrowsException<ArgumentNullException>( () => stringGenerator.AddWordsToPool( "color", words ) );
+      }
+
+      [TestMethod]
+      public void AddWordsToPool_UsingEnumerableWhen3WordsAddedWithKnownSeriesRandom_WillUseAll3Words()
+      {
+         StringGenerator stringGenerator = new StringGenerator( new KnownSeriesRandom( 1, 2, 3 ) );
+
+         stringGenerator.AddWordsToPool( "color", new List<string> { "red", "green", "blue" } );
 
          string generated = stringGenerator.Generate( "The room was painted {color} with {color} stripes and {color} spots." );
          Assert.AreEqual( "The room was painted red with green stripes and blue spots.", generated );

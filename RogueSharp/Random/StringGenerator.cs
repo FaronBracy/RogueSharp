@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace RogueSharp.Random
 {
@@ -48,7 +49,7 @@ namespace RogueSharp.Random
 
       public void AddWordsToPool( string poolName, IEnumerable<string> words )
       {
-         throw new NotImplementedException();
+         AddWordsToPool( poolName, words.ToArray() );
       }
 
       public void AddWordPool( string poolName, IWeightedPool<string> weightedWordPool )
