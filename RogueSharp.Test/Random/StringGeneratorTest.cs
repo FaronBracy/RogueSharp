@@ -44,11 +44,23 @@ namespace RogueSharp.Test.Random
       }
 
       [TestMethod]
+      public void AddWordsToPool_WhenPoolAlreadyExists_WillExpandPoolWithNewWords()
+      {
+         StringGenerator stringGenerator = new StringGenerator( new KnownSeriesRandom( 1, 2, 3 ) );
+
+         stringGenerator.AddWordsToPool( "color", "red" );
+         stringGenerator.AddWordsToPool( "color", "green", "blue" );
+
+         string generated = stringGenerator.Generate( "The room was painted {color} with {color} stripes and {color} spots." );
+         Assert.AreEqual( "The room was painted red with green stripes and blue spots.", generated );
+      }
+
+      [TestMethod]
       public void AddWordsToPool_UsingEnumerableWhenPoolNameIsNull_WillThrowArgumentException()
       {
          StringGenerator stringGenerator = new StringGenerator();
 
-         Assert.ThrowsException<ArgumentException>( () => stringGenerator.AddWordsToPool( null, new List<string> { "red"} ) );
+         Assert.ThrowsException<ArgumentException>( () => stringGenerator.AddWordsToPool( null, new List<string> { "red" } ) );
       }
 
       [TestMethod]
@@ -91,9 +103,9 @@ namespace RogueSharp.Test.Random
       public void AddWordPool_WhenPoolKeyAlreadyExists_ThrowsInvalidOperationException()
       {
          StringGenerator stringGenerator = new StringGenerator();
-         WeightedPool<string> colorPool1 = new WeightedPool<string>( new DotNetRandom(), x => x );
+         WeightedPool<string> colorPool1 = new WeightedPool<string>( new DotNetRandom(), string.Copy );
          colorPool1.Add( "blue", 1 );
-         WeightedPool<string> colorPool2 = new WeightedPool<string>( new DotNetRandom(), x => x );
+         WeightedPool<string> colorPool2 = new WeightedPool<string>( new DotNetRandom(), string.Copy );
          colorPool2.Add( "red", 1 );
          stringGenerator.AddWordPool( "color", colorPool1 );
 
@@ -104,7 +116,7 @@ namespace RogueSharp.Test.Random
       public void Generate_WhenPoolHasOneItem_WillGenerateStringWithReplacedField()
       {
          StringGenerator stringGenerator = new StringGenerator();
-         WeightedPool<string> colorPool = new WeightedPool<string>( new DotNetRandom(), x => x );
+         WeightedPool<string> colorPool = new WeightedPool<string>( new DotNetRandom(), string.Copy );
          colorPool.Add( "blue", 1 );
          stringGenerator.AddWordPool( "color", colorPool );
 
@@ -117,7 +129,7 @@ namespace RogueSharp.Test.Random
       public void Generate_WhenStringHasParameterTwiceButPoolHasOneItem_WillGenerateStringWithBothParametersReplacedBySameString()
       {
          StringGenerator stringGenerator = new StringGenerator();
-         WeightedPool<string> colorPool = new WeightedPool<string>( new DotNetRandom(), x => x );
+         WeightedPool<string> colorPool = new WeightedPool<string>( new DotNetRandom(), string.Copy );
          colorPool.Add( "blue", 1 );
          stringGenerator.AddWordPool( "color", colorPool );
 
@@ -130,12 +142,37 @@ namespace RogueSharp.Test.Random
       public void Generate_WhenStringHasParameterTwiceWithKnownSeriesRandom_WillGenerateExpectedString()
       {
          StringGenerator stringGenerator = new StringGenerator();
-         WeightedPool<string> colorPool = new WeightedPool<string>( new KnownSeriesRandom( 1, 2 ), x => x );
+         WeightedPool<string> colorPool = new WeightedPool<string>( new KnownSeriesRandom( 1, 2 ), string.Copy );
          colorPool.Add( "blue", 1 );
          colorPool.Add( "red", 1 );
          stringGenerator.AddWordPool( "color", colorPool );
 
          string generated = stringGenerator.Generate( "The room was painted {color} with {color} stripes." );
+
+         Assert.AreEqual( "The room was painted blue with red stripes.", generated );
+      }
+
+      [TestMethod]
+      public void GenerateUnique_WhenStringHasParameterTwiceButPoolHasOneItem_WillThrowInvalidOperationException()
+      {
+         StringGenerator stringGenerator = new StringGenerator();
+         WeightedPool<string> colorPool = new WeightedPool<string>( new DotNetRandom(), string.Copy );
+         colorPool.Add( "blue", 1 );
+         stringGenerator.AddWordPool( "color", colorPool );
+
+         Assert.ThrowsException<InvalidOperationException>( () => stringGenerator.GenerateUnique( "The room was painted {color} with {color} stripes." ) );
+      }
+
+      [TestMethod]
+      public void GenerateUnique_WhenStringHasParameterTwiceAndPoolHasTwoItems_WillGenerateExpectedString()
+      {
+         StringGenerator stringGenerator = new StringGenerator();
+         WeightedPool<string> colorPool = new WeightedPool<string>( new KnownSeriesRandom( 1 ), string.Copy );
+         colorPool.Add( "blue", 1 );
+         colorPool.Add( "red", 5 );  
+         stringGenerator.AddWordPool( "color", colorPool );
+
+         string generated = stringGenerator.GenerateUnique( "The room was painted {color} with {color} stripes." );
 
          Assert.AreEqual( "The room was painted blue with red stripes.", generated );
       }

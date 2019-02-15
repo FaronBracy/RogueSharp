@@ -69,6 +69,16 @@ namespace RogueSharp.Random
 
       public string Generate( string parameterizedString )
       {
+         return Generate( parameterizedString, weightedPool => weightedPool.Choose() );
+      }
+
+      public string GenerateUnique( string parameterizedString )
+      {
+         return Generate( parameterizedString, weightedPool => weightedPool.Draw() );
+      }
+
+      private string Generate( string parameterizedString, Func<IWeightedPool<string>,string> stringSelectionFunc )
+      {
          foreach ( KeyValuePair<string, IWeightedPool<string>> wordPool in _wordPools )
          {
             if ( wordPool.Key != null )
@@ -77,7 +87,7 @@ namespace RogueSharp.Random
                int index = parameterizedString.IndexOf( poolName, StringComparison.OrdinalIgnoreCase );
                while ( index != -1 )
                {
-                  parameterizedString = parameterizedString.Remove( index, poolName.Length ).Insert( index, wordPool.Value.Choose() );
+                  parameterizedString = parameterizedString.Remove( index, poolName.Length ).Insert( index, stringSelectionFunc.Invoke( wordPool.Value ) );
                   index = parameterizedString.IndexOf( poolName, StringComparison.OrdinalIgnoreCase );
                }
             }

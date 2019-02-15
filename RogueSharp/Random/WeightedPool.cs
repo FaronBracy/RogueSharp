@@ -98,7 +98,7 @@ namespace RogueSharp.Random
 
          if ( Count <= 0 || _totalWeight <= 0 )
          {
-            throw new InvalidOperationException( "Add items to the pool before attempting to choose one" );
+            throw new InvalidOperationException( "The pool is empty. Add items to the pool before attempting to choose one" );
          }
 
          WeightedItem<T> item = ChooseRandomWeightedItem();
@@ -117,7 +117,7 @@ namespace RogueSharp.Random
       {
          if ( Count <= 0 || _totalWeight <= 0 )
          {
-            throw new InvalidOperationException( "Add items to the pool before attempting to draw one" );
+            throw new InvalidOperationException( "The pool is empty. Add items to the pool before attempting to draw one" );
          }
 
          WeightedItem<T> item = ChooseRandomWeightedItem();
