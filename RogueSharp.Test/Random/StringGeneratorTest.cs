@@ -92,6 +92,26 @@ namespace RogueSharp.Test.Random
       }
 
       [TestMethod]
+      public void AddWordPool_WhenPoolNameIsNull_WillThrowArgumentException()
+      {
+         StringGenerator stringGenerator = new StringGenerator();
+         WeightedPool<string> colorPool = new WeightedPool<string>( new DotNetRandom(), string.Copy );
+         colorPool.Add( "blue", 1 );
+
+         Assert.ThrowsException<ArgumentException>( () => stringGenerator.AddWordPool( null, colorPool ) );
+      }
+
+      [TestMethod]
+      public void AddWordPool_WhenPoolNameIsWhiteSpace_WillThrowArgumentException()
+      {
+         StringGenerator stringGenerator = new StringGenerator();
+         WeightedPool<string> colorPool = new WeightedPool<string>( new DotNetRandom(), string.Copy );
+         colorPool.Add( "blue", 1 );
+
+         Assert.ThrowsException<ArgumentException>( () => stringGenerator.AddWordPool( "  ", colorPool ) );
+      }
+
+      [TestMethod]
       public void AddWordPool_WhenWordPoolIsNull_ThrowsArgumentNullException()
       {
          StringGenerator stringGenerator = new StringGenerator();
