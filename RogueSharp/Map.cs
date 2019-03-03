@@ -721,6 +721,10 @@ namespace RogueSharp
             {
                cellProperties |= MapState.CellProperties.Walkable;
             }
+            if ( cell.IsExplored )
+            {
+               cellProperties |= MapState.CellProperties.Explored;
+            }
             mapState.Cells[( cell.Y * Width ) + cell.X] = cellProperties;
          }
          return mapState;
@@ -750,6 +754,7 @@ namespace RogueSharp
             }
             _isTransparent[cell.X, cell.Y] = cellProperties.HasFlag( MapState.CellProperties.Transparent );
             _isWalkable[cell.X, cell.Y] = cellProperties.HasFlag( MapState.CellProperties.Walkable );
+            _isExplored[cell.X, cell.Y] = cellProperties.HasFlag( MapState.CellProperties.Explored );
          }
 
          _fieldOfView = new FieldOfView( this, inFov );
