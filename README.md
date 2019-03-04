@@ -46,7 +46,7 @@ public Path ShortestPath( ICell source, ICell destination )
 
 **Cell Selection**
 
-Selection rows, columns, circles, squares and diamonds with and without borders.
+Select rows, columns, circles, squares and diamonds with and without borders.
 
 ![Cell Selection](Images/selection.gif)
 ```
@@ -61,15 +61,13 @@ public IEnumerable<ICell> GetBorderCellsInCircle( int xCenter, int yCenter, int 
 
 **Weighted Goal Maps**
 
-Set multiple goals weights for desirability. Add obstacles and things to avoid.
+Set multiple goals weights for desirability. Add obstacles to avoid.
 
 ![Weighted Goal Maps](Images/diagonalgoalmap.gif)
 
 ```
 /// Constructs a new instance of a GoalMap for the specified Map 
 /// that will consider diagonal movements to be valid if allowDiagonalMovement is set to true.
-/// "map" The Map that this GoalMap will be created for
-/// "allowDiagonalMovement" True if diagonal movements are allowed. False otherwise
 public GoalMap( IMap map, bool allowDiagonalMovement )
 
 /// Add a Goal at the specified location with the specified weight
