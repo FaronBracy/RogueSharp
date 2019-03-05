@@ -11,6 +11,11 @@
 
 [![Build History](https://buildstats.info/appveyor/chart/FaronBracy/roguesharp-20n28)](https://ci.appveyor.com/project/FaronBracy/roguesharp-20n28/history)
 
+[![RogueSharp with SadConsole](Images/sadconsoleport.png)](https://github.com/FaronBracy/RogueSharpSadConsoleSamples)
+
+- [Sample Game using RogueSharp with SadConsole](https://github.com/FaronBracy/RogueSharpSadConsoleSamples)
+- [Sample Game using RogueSharp with RLNet](https://github.com/FaronBracy/RogueSharpRLNetSamples)
+
 # What is RogueSharp? #
 RogueSharp is a free library written in C# to help [roguelike](http://en.wikipedia.org/wiki/Roguelike "roguelike") developers get a head start on their game. RogueSharp provides many utility functions for dealing with map generation, field-of-view calculations, path finding, random number generation and more.
 
@@ -22,6 +27,72 @@ It is loosely based on the popular [libtcod](http://doryen.eptalys.net/libtcod/ 
 2. If building the assembly yourself, the solution file "RogueSharp.sln" contains the main library and unit tests. This should be all you need.
 3. Class documentation is located on [Github Pages](https://faronbracy.github.io/RogueSharp "RogueSharp class documentation").
 
+## Features ##
+
+**Pathfinding**
+
+With or without diagonals
+
+![Pathfinding with Diagonals](Images/diagonalpathfinder.gif)
+```
+/// Constructs a new PathFinder instance for the specified Map 
+/// that will consider diagonal movement by using the specified diagonalCost
+public PathFinder( IMap map, double diagonalCost )
+
+/// Returns a shortest Path containing a list of Cells 
+/// from a specified source Cell to a destination Cell
+public Path ShortestPath( ICell source, ICell destination )
+```
+
+**Cell Selection**
+
+Select rows, columns, circles, squares and diamonds with and without borders.
+
+![Cell Selection](Images/selection.gif)
+```
+/// Get an IEnumerable of Cells in a circle around the center Cell up 
+/// to the specified radius using Bresenham's midpoint circle algorithm
+public IEnumerable<ICell> GetCellsInCircle( int xCenter, int yCenter, int radius )
+  
+/// Get an IEnumerable of outermost border Cells in a circle around the center 
+/// Cell up to the specified radius using Bresenham's midpoint circle algorithm
+public IEnumerable<ICell> GetBorderCellsInCircle( int xCenter, int yCenter, int radius )
+```
+
+**Weighted Goal Maps**
+
+Set multiple goals weights for desirability. Add obstacles to avoid.
+
+![Weighted Goal Maps](Images/diagonalgoalmap.gif)
+
+```
+/// Constructs a new instance of a GoalMap for the specified Map 
+/// that will consider diagonal movements to be valid if allowDiagonalMovement is set to true.
+public GoalMap( IMap map, bool allowDiagonalMovement )
+
+/// Add a Goal at the specified location with the specified weight
+public void AddGoal( int x, int y, int weight )
+
+/// Add an Obstacle at the specified location. Any paths found must not go through Obstacles
+public void AddObstacle( int x, int y )
+```
+
+**Field-of-View**
+
+Efficient field-of-view calulation for specified distance. Option to light walls or not.
+
+![Field of View](Images/circularfieldofview.gif)
+```
+/// Constructs a new FieldOfView objec for the specified Map
+public FieldOfView( IMap map )
+
+/// Performs a field-of-view calculation with the specified parameters.
+public ReadOnlyCollection<ICell> ComputeFov( int xOrigin, int yOrigin, int radius, bool lightWalls )
+
+/// Performs a field-of-view calculation with the specified parameters
+/// and appends it any existing field-of-view calculations.
+public ReadOnlyCollection<ICell> AppendFov( int xOrigin, int yOrigin, int radius, bool lightWalls )
+```
 
 ## Creating a Map ##
 Most interactions with RogueSharp is based around the concept of a `Map` which is a rectangular grid of `Cells`. 
