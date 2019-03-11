@@ -31,7 +31,9 @@ namespace RogueSharp
       /// <param name="height">How many Cells tall the Map will be</param>
       public Map( int width, int height )
       {
+#pragma warning disable CA2214 // Do not call overridable methods in constructors
          Initialize( width, height );
+#pragma warning restore CA2214 // Do not call overridable methods in constructors
       }
 
       /// <summary>
@@ -62,11 +64,11 @@ namespace RogueSharp
       /// Create a new map with the properties of all Cells set to false
       /// </summary>
       /// <remarks>
-      /// This is basically a solid stone map that would then need to be modified to have interesting features
+      /// This is basically a solid stone map that would then need to be modified to have interesting features. Override to initialize other internal state
       /// </remarks>
       /// <param name="width">How many Cells wide the Map will be</param>
       /// <param name="height">How many Cells tall the Map will be</param>
-      public void Initialize( int width, int height )
+      public virtual void Initialize( int width, int height )
       {
          Width = width;
          Height = height;
@@ -473,6 +475,30 @@ namespace RogueSharp
          for ( int y = yMin; y <= yMax; y++ )
          {
             for ( int x = xMin; x <= xMax; x++ )
+            {
+               yield return GetCell( x, y );
+            }
+         }
+      }
+
+      /// <summary>
+      /// Get an IEnumerable of Cells in a rectangle area
+      /// </summary>
+      /// <param name="top">The top row of the rectangle </param>
+      /// <param name="left">The left column of the rectangle</param>
+      /// <param name="width">The width of the rectangle</param>
+      /// <param name="height">The height of the rectangle</param>
+      /// <returns>IEnumerable of Cells in a rectangle area</returns>
+      public IEnumerable<ICell> GetCellsInRectangle( int top, int left, int width, int height )
+      {
+         int xMin = Math.Max( 0, left );
+         int xMax = Math.Min( Width - 1, left + width );
+         int yMin = Math.Max( 0, top );
+         int yMax = Math.Min( Height - 1, top + height );
+
+         for ( int y = yMin; y < yMax; y++ )
+         {
+            for ( int x = xMin; x < xMax; x++ )
             {
                yield return GetCell( x, y );
             }

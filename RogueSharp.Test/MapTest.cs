@@ -525,6 +525,35 @@ namespace RogueSharp.Test
       }
 
       [TestMethod]
+      public void GetCellsInRectangle_SmallMap_ExpectedCells()
+      {
+         string mapRepresentation = @"#################
+                                      #################
+                                      ##...#######...##
+                                      ##.............##
+                                      ###.###....#...##
+                                      ###...##.#####.##
+                                      ###...##...###..#
+                                      ####............#
+                                      ##############..#
+                                      #################";
+         IMapCreationStrategy<Map> mapCreationStrategy = new StringDeserializeMapCreationStrategy<Map>( mapRepresentation );
+         IMap map = Map.Create( mapCreationStrategy );
+         string expectedCells = "..#.....##.#";
+
+         IEnumerable<ICell> cells = map.GetCellsInRectangle( 2, 2, 4, 3 )
+            .OrderBy( c => c.X )
+            .ThenBy( c => c.Y );
+         var actualCells = new StringBuilder();
+         foreach ( ICell cell in cells )
+         {
+            actualCells.Append( cell.ToString() );
+         }
+
+         Assert.AreEqual( expectedCells, actualCells.ToString() );
+      }
+
+      [TestMethod]
       public void GetBorderCellsInSquare_SmallMap_ExpectedCells()
       {
          string mapRepresentation = @"#################
