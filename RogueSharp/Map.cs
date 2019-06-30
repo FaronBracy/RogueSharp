@@ -207,12 +207,13 @@ namespace RogueSharp
       }
 
       /// <summary>
-      /// Create and return a deep copy of an existing Map
+      /// Create and return a deep copy of an existing Map.
+      /// Override when a derived class has additional properties to clone.
       /// </summary>
-      /// <returns>IMap deep copy of the original Map</returns>
-      public IMap Clone()
+      /// <returns>T of type IMap which is a deep copy of the original Map</returns>
+      public virtual T Clone<T>() where T : IMap, new()
       {
-         var map = new Map( Width, Height );
+         T map = Create( new BorderOnlyMapCreationStrategy<T>( Width, Height ) );
          foreach ( ICell cell in GetAllCells() )
          {
             map.SetCellProperties( cell.X, cell.Y, cell.IsTransparent, cell.IsWalkable, cell.IsExplored );

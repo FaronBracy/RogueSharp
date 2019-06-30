@@ -143,8 +143,8 @@ namespace RogueSharp
       /// <summary>
       /// Create and return a deep copy of an existing Map
       /// </summary>
-      /// <returns>IMap deep copy of the original Map</returns>
-      IMap Clone();
+      /// <returns>T of type IMap which is a deep copy of the original Map</returns>
+      T Clone<T>() where T : IMap, new();
 
       /// <summary>
       /// Copies the Cell properties of a smaller source Map into this destination Map at location (0,0)
