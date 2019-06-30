@@ -31,9 +31,12 @@ namespace RogueSharp
       /// <param name="height">How many Cells tall the Map will be</param>
       public Map( int width, int height )
       {
-#pragma warning disable CA2214 // Do not call overridable methods in constructors
-         Initialize( width, height );
-#pragma warning restore CA2214 // Do not call overridable methods in constructors
+         Width = width;
+         Height = height;
+         _isTransparent = new bool[width, height];
+         _isWalkable = new bool[width, height];
+         _isExplored = new bool[width, height];
+         _fieldOfView = new FieldOfView( this );
       }
 
       /// <summary>
@@ -204,12 +207,13 @@ namespace RogueSharp
       }
 
       /// <summary>
-      /// Create and return a deep copy of an existing Map
+      /// Create and return a deep copy of an existing Map.
+      /// Override when a derived class has additional properties to clone.
       /// </summary>
-      /// <returns>IMap deep copy of the original Map</returns>
-      public IMap Clone()
+      /// <returns>T of type IMap which is a deep copy of the original Map</returns>
+      public virtual T Clone<T>() where T : IMap, new()
       {
-         var map = new Map( Width, Height );
+         T map = Create( new BorderOnlyMapCreationStrategy<T>( Width, Height ) );
          foreach ( ICell cell in GetAllCells() )
          {
             map.SetCellProperties( cell.X, cell.Y, cell.IsTransparent, cell.IsWalkable, cell.IsExplored );

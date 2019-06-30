@@ -83,7 +83,7 @@ namespace RogueSharp.MapCreation
             }
             else if ( i >= _cutoffOfBigAreaFill )
             {
-               CellularAutomaNearestNeighborsAlgorithm();
+               CellularAutomataNearestNeighborsAlgorithm();
             }
          }
 
@@ -113,7 +113,7 @@ namespace RogueSharp.MapCreation
 
       private void CellularAutomataBigAreaAlgorithm()
       {
-         var updatedMap = _map.Clone() as T;
+         T updatedMap = _map.Clone<T>();
 
          foreach ( ICell cell in _map.GetAllCells() )
          {
@@ -134,9 +134,9 @@ namespace RogueSharp.MapCreation
          _map = updatedMap;
       }
 
-      private void CellularAutomaNearestNeighborsAlgorithm()
+      private void CellularAutomataNearestNeighborsAlgorithm()
       {
-         var updatedMap = _map.Clone() as T;
+         T updatedMap = _map.Clone<T>();
 
          foreach ( ICell cell in _map.GetAllCells() )
          {
