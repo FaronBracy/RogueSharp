@@ -1,10 +1,19 @@
-﻿namespace RogueSharp
+﻿using System.Xml.Linq;
+
+namespace RogueSharp
 {
    /// <summary>
    /// A class that defines a square on a Map with all of its associated properties
    /// </summary>
    public class Cell : ICell
    {
+      /// <summary>
+      /// Construct a new uninitialized Cell 
+      /// </summary>
+      public Cell()
+      {
+      }
+
       /// <summary>
       /// Construct a new Cell located at the specified x and y location with the specified properties
       /// </summary>
@@ -41,16 +50,16 @@
          IsInFov = isInFov;
          IsExplored = false;
       }
-
+      
       /// <summary>
       /// Gets the X location of the Cell starting with 0 as the farthest left
       /// </summary>
-      public int X { get; private set; }
+      public int X { get; set; }
 
       /// <summary>
       /// Y location of the Cell starting with 0 as the top
       /// </summary>
-      public int Y { get; private set; }
+      public int Y { get; set; }
 
       /// <summary>
       /// Get the transparency of the Cell i.e. if line of sight would be blocked by this Cell
@@ -60,7 +69,7 @@
       /// A Cell representing a glass wall could be transparent (even though it may not be walkable)
       /// A Cell representing a solid stone wall would not be transparent
       /// </example>
-      public bool IsTransparent { get; private set; }
+      public bool IsTransparent { get; set; }
 
       /// <summary>
       /// Get the walkability of the Cell i.e. if a character could normally move across the Cell without difficulty
@@ -70,7 +79,7 @@
       /// A Cell representing a glass wall may not be walkable (even though it could be transparent)
       /// A Cell representing a solid stone wall would not be walkable
       /// </example>
-      public bool IsWalkable { get; private set; }
+      public bool IsWalkable { get; set; }
 
       /// <summary>
       /// Check if the Cell is in the currently computed field-of-view
@@ -84,7 +93,7 @@
       /// Field-of-view can be used to simulate a character holding a light source and exploring a Map representing a dark cavern
       /// Any Cells within the FOV would be what the character could see from their current location and lighting conditions
       /// </example>
-      public bool IsInFov { get; private set; }
+      public bool IsInFov { get; set; }
 
       /// <summary>
       /// Check if the Cell is flagged as ever having been explored by the player
@@ -97,7 +106,7 @@
       /// As the player moves characters around a Map, Cells will enter and exit the currently computed field-of-view
       /// This property can be used to keep track of those Cells that have been "seen" and could be used to show fog-of-war type effects when rendering the map
       /// </example>
-      public bool IsExplored { get; private set; }
+      public bool IsExplored { get; set; }
 
       /// <summary>
       /// Provides a simple visual representation of the Cell using the following symbols:
