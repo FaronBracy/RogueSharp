@@ -9,8 +9,45 @@ namespace RogueSharp.MapCreation
    /// The CaveMapCreationStrategy creates a Map of the specified type by using a cellular automata algorithm for creating a cave-like map.
    /// </summary>
    /// <seealso href="http://www.roguebasin.com/index.php?title=Cellular_Automata_Method_for_Generating_Random_Cave-Like_Levels">Cellular Automata Method from RogueBasin</seealso>
-   /// <typeparam name="T">The type of IMap that will be created</typeparam>
-   public class CaveMapCreationStrategy<T> : IMapCreationStrategy<T> where T : class, IMap, new()
+   /// <typeparam name="TMap">The type of IMap that will be created</typeparam>
+   public class CaveMapCreationStrategy<TMap> : CaveMapCreationStrategy<TMap, Cell>, IMapCreationStrategy<TMap> where TMap : class, IMap<Cell>, new()
+   {
+      /// <summary>
+      /// Constructs a new CaveMapCreationStrategy with the specified parameters
+      /// </summary>
+      /// <param name="width">The width of the Map to be created</param>
+      /// <param name="height">The height of the Map to be created</param>
+      /// <param name="fillProbability">Recommend int between 40 and 60. Percent chance that a given cell will be a floor when randomizing all cells.</param>
+      /// <param name="totalIterations">Recommend int between 2 and 5. Number of times to execute the cellular automata algorithm.</param>
+      /// <param name="cutoffOfBigAreaFill">Recommend int less than 4. The iteration number to switch from the large area fill algorithm to a nearest neighbor algorithm</param>
+      /// <param name="random">A class implementing IRandom that will be used to generate pseudo-random numbers necessary to create the Map</param>
+      public CaveMapCreationStrategy( int width, int height, int fillProbability, int totalIterations, int cutoffOfBigAreaFill, IRandom random )
+         : base( width, height, fillProbability, totalIterations, cutoffOfBigAreaFill, random )
+      {
+      }
+
+      /// <summary>
+      /// Constructs a new CaveMapCreationStrategy with the specified parameters
+      /// </summary>
+      /// <param name="width">The width of the Map to be created</param>
+      /// <param name="height">The height of the Map to be created</param>
+      /// <param name="fillProbability">Recommend int between 40 and 60. Percent chance that a given cell will be a floor when randomizing all cells.</param>
+      /// <param name="totalIterations">Recommend int between 2 and 5. Number of times to execute the cellular automata algorithm.</param>
+      /// <param name="cutoffOfBigAreaFill">Recommend int less than 4. The iteration number to switch from the large area fill algorithm to a nearest neighbor algorithm</param>
+      /// <remarks>Uses DotNetRandom as its RNG</remarks>
+      public CaveMapCreationStrategy( int width, int height, int fillProbability, int totalIterations, int cutoffOfBigAreaFill )
+         : base( width, height, fillProbability, totalIterations, cutoffOfBigAreaFill )
+      {
+      }
+   }
+
+   /// <summary>
+   /// The CaveMapCreationStrategy creates a Map of the specified type by using a cellular automata algorithm for creating a cave-like map.
+   /// </summary>
+   /// <seealso href="http://www.roguebasin.com/index.php?title=Cellular_Automata_Method_for_Generating_Random_Cave-Like_Levels">Cellular Automata Method from RogueBasin</seealso>
+   /// <typeparam name="TMap">The type of IMap that will be created</typeparam>
+   /// <typeparam name="TCell">The type of ICell that the Map will use</typeparam>
+   public class CaveMapCreationStrategy<TMap, TCell> : IMapCreationStrategy<TMap, TCell> where TMap : class, IMap<TCell>, new() where TCell : ICell
    {
       private readonly int _width;
       private readonly int _height;
@@ -18,7 +55,7 @@ namespace RogueSharp.MapCreation
       private readonly int _totalIterations;
       private readonly int _cutoffOfBigAreaFill;
       private readonly IRandom _random;
-      private T _map;
+      private TMap _map;
 
       /// <summary>
       /// Constructs a new CaveMapCreationStrategy with the specified parameters
@@ -37,7 +74,7 @@ namespace RogueSharp.MapCreation
          _totalIterations = totalIterations;
          _cutoffOfBigAreaFill = cutoffOfBigAreaFill;
          _random = random;
-         _map = new T();
+         _map = new TMap();
       }
 
       /// <summary>
@@ -57,7 +94,7 @@ namespace RogueSharp.MapCreation
          _totalIterations = totalIterations;
          _cutoffOfBigAreaFill = cutoffOfBigAreaFill;
          _random = Singleton.DefaultRandom;
-         _map = new T();
+         _map = new TMap();
       }
 
       /// <summary>
@@ -69,7 +106,7 @@ namespace RogueSharp.MapCreation
       /// Once finished iterating and examining neighboring cells, any isolated map regions will be connected with paths.
       /// </remarks>
       /// <returns>An IMap of the specified type</returns>
-      public T CreateMap()
+      public TMap CreateMap()
       {
          _map.Initialize( _width, _height );
 
@@ -94,7 +131,7 @@ namespace RogueSharp.MapCreation
 
       private void RandomlyFillCells()
       {
-         foreach ( ICell cell in _map.GetAllCells() )
+         foreach ( TCell cell in _map.GetAllCells() )
          {
             if ( IsBorderCell( cell ) )
             {
@@ -113,9 +150,9 @@ namespace RogueSharp.MapCreation
 
       private void CellularAutomataBigAreaAlgorithm()
       {
-         T updatedMap = _map.Clone<T>();
+         TMap updatedMap = _map.Clone<TMap>();
 
-         foreach ( ICell cell in _map.GetAllCells() )
+         foreach ( TCell cell in _map.GetAllCells() )
          {
             if ( IsBorderCell( cell ) )
             {
@@ -136,9 +173,9 @@ namespace RogueSharp.MapCreation
 
       private void CellularAutomataNearestNeighborsAlgorithm()
       {
-         T updatedMap = _map.Clone<T>();
+         TMap updatedMap = _map.Clone<TMap>();
 
-         foreach ( ICell cell in _map.GetAllCells() )
+         foreach ( TCell cell in _map.GetAllCells() )
          {
             if ( IsBorderCell( cell ) )
             {
@@ -157,16 +194,16 @@ namespace RogueSharp.MapCreation
          _map = updatedMap;
       }
 
-      private bool IsBorderCell( ICell cell )
+      private bool IsBorderCell( TCell cell )
       {
          return cell.X == 0 || cell.X == _map.Width - 1
                 || cell.Y == 0 || cell.Y == _map.Height - 1;
       }
 
-      private int CountWallsNear( ICell cell, int distance )
+      private int CountWallsNear( TCell cell, int distance )
       {
          int count = 0;
-         foreach ( ICell nearbyCell in _map.GetCellsInSquare( cell.X, cell.Y, distance ) )
+         foreach ( TCell nearbyCell in _map.GetCellsInSquare( cell.X, cell.Y, distance ) )
          {
             if ( nearbyCell.X == cell.X && nearbyCell.Y == cell.Y )
             {
@@ -191,10 +228,10 @@ namespace RogueSharp.MapCreation
             {
                int closestMapSectionIndex = FindNearestMapSection( mapSections, i, unionFind );
                MapSection closestMapSection = mapSections[closestMapSectionIndex];
-               IEnumerable<ICell> tunnelCells = _map.GetCellsAlongLine( mapSections[i].Bounds.Center.X, mapSections[i].Bounds.Center.Y,
+               IEnumerable<TCell> tunnelCells = _map.GetCellsAlongLine( mapSections[i].Bounds.Center.X, mapSections[i].Bounds.Center.Y,
                   closestMapSection.Bounds.Center.X, closestMapSection.Bounds.Center.Y );
                ICell previousCell = null;
-               foreach ( ICell cell in tunnelCells )
+               foreach ( TCell cell in tunnelCells )
                {
                   _map.SetCellProperties( cell.X, cell.Y, true, true );
                   if ( previousCell != null )
@@ -243,7 +280,7 @@ namespace RogueSharp.MapCreation
 
       private class FloodFillAnalyzer
       {
-         private readonly IMap _map;
+         private readonly TMap _map;
          private readonly List<MapSection> _mapSections;
 
          private readonly int[][] _offsets =
@@ -253,7 +290,7 @@ namespace RogueSharp.MapCreation
 
          private readonly bool[][] _visited;
 
-         public FloodFillAnalyzer( IMap map )
+         public FloodFillAnalyzer( TMap map )
          {
             _map = map;
             _mapSections = new List<MapSection>();
@@ -266,8 +303,8 @@ namespace RogueSharp.MapCreation
 
          public List<MapSection> GetMapSections()
          {
-            IEnumerable<ICell> cells = _map.GetAllCells();
-            foreach ( ICell cell in cells )
+            IEnumerable<TCell> cells = _map.GetAllCells();
+            foreach ( TCell cell in cells )
             {
                MapSection section = Visit( cell );
                if ( section.Cells.Count > 0 )
@@ -279,9 +316,9 @@ namespace RogueSharp.MapCreation
             return _mapSections;
          }
 
-         private MapSection Visit( ICell cell )
+         private MapSection Visit( TCell cell )
          {
-            Stack<ICell> stack = new Stack<ICell>( new List<ICell>() );
+            Stack<TCell> stack = new Stack<TCell>( new List<TCell>() );
             MapSection mapSection = new MapSection();
             stack.Push( cell );
             while ( stack.Count != 0 )
@@ -293,7 +330,7 @@ namespace RogueSharp.MapCreation
                }
                mapSection.AddCell( cell );
                _visited[cell.Y][cell.X] = true;
-               foreach ( ICell neighbor in GetNeighbors( cell ) )
+               foreach ( TCell neighbor in GetNeighbors( cell ) )
                {
                   if ( cell.IsWalkable == neighbor.IsWalkable && !_visited[neighbor.Y][neighbor.X] )
                   {
@@ -304,25 +341,25 @@ namespace RogueSharp.MapCreation
             return mapSection;
          }
 
-         private ICell GetCell( int x, int y )
+         private TCell GetCell( int x, int y )
          {
             if ( x < 0 || y < 0 )
             {
-               return null;
+               return default( TCell );
             }
             if ( x >= _map.Width || y >= _map.Height )
             {
-               return null;
+               return default( TCell );
             }
             return _map.GetCell( x, y );
          }
 
-         private IEnumerable<ICell> GetNeighbors( ICell cell )
+         private IEnumerable<TCell> GetNeighbors( TCell cell )
          {
-            List<ICell> neighbors = new List<ICell>( 8 );
+            List<TCell> neighbors = new List<TCell>( 8 );
             foreach ( int[] offset in _offsets )
             {
-               ICell neighbor = GetCell( cell.X + offset[0], cell.Y + offset[1] );
+               TCell neighbor = GetCell( cell.X + offset[0], cell.Y + offset[1] );
                if ( neighbor == null )
                {
                   continue;
@@ -343,22 +380,22 @@ namespace RogueSharp.MapCreation
 
          public Rectangle Bounds => new Rectangle( _left, _top, _right - _left + 1, _bottom - _top + 1 );
 
-         public HashSet<ICell> Cells { get; private set; }
+         public HashSet<TCell> Cells { get; private set; }
 
          public MapSection()
          {
-            Cells = new HashSet<ICell>();
+            Cells = new HashSet<TCell>();
             _top = int.MaxValue;
             _left = int.MaxValue;
          }
 
-         public void AddCell( ICell cell )
+         public void AddCell( TCell cell )
          {
             Cells.Add( cell );
             UpdateBounds( cell );
          }
 
-         private void UpdateBounds( ICell cell )
+         private void UpdateBounds( TCell cell )
          {
             if ( cell.X > _right )
             {

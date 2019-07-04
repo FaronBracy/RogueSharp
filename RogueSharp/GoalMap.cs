@@ -13,13 +13,43 @@ namespace RogueSharp
    /// <remarks>
    /// </remarks>
    /// <seealso href="http://www.roguebasin.com/index.php?title=The_Incredible_Power_of_Dijkstra_Maps">Inspired by the article "The Incredible Power of Dijkstra Maps on roguebasin</seealso>
-   public class GoalMap : IGoalMap
+   public class GoalMap : GoalMap<Cell>
+   {
+      /// <summary>
+      /// Constructs a new instance of a GoalMap for the specified Map that will not consider diagonal movements to be valid.
+      /// </summary>
+      /// <param name="map">The Map that this GoalMap will be created for</param>
+      /// <exception cref="ArgumentNullException">Thrown on null map</exception>
+      public GoalMap( IMap<Cell> map )
+         : base( map )
+      {
+      }
+
+      /// <summary>
+      /// Constructs a new instance of a GoalMap for the specified Map that will consider diagonal movements to be valid if allowDiagonalMovement is set to true.
+      /// </summary>
+      /// <param name="map">The Map that this GoalMap will be created for</param>
+      /// <param name="allowDiagonalMovement">True if diagonal movements are allowed. False otherwise</param>
+      /// <exception cref="ArgumentNullException">Thrown on null map</exception>
+      public GoalMap( IMap<Cell> map, bool allowDiagonalMovement )
+         : base( map, allowDiagonalMovement )
+      {
+      }
+   }
+
+   /// <summary>
+   /// A class for assigning weights to every cell on the Map which can then be used for finding paths or building desire-driven AI
+   /// </summary>
+   /// <remarks>
+   /// </remarks>
+   /// <seealso href="http://www.roguebasin.com/index.php?title=The_Incredible_Power_of_Dijkstra_Maps">Inspired by the article "The Incredible Power of Dijkstra Maps on roguebasin</seealso>
+   public class GoalMap<TCell> : IGoalMap where TCell : ICell
    {
       private const int _wall = int.MinValue;
       private readonly int[,] _cellWeights;
       private readonly List<WeightedPoint> _goals;
       private readonly HashSet<Point> _obstacles;
-      private readonly IMap _map;
+      private readonly IMap<TCell> _map;
       private readonly bool _allowDiagonalMovement;
       private bool _isRecomputeNeeded;
 
@@ -28,7 +58,7 @@ namespace RogueSharp
       /// </summary>
       /// <param name="map">The Map that this GoalMap will be created for</param>
       /// <exception cref="ArgumentNullException">Thrown on null map</exception>
-      public GoalMap( IMap map )
+      public GoalMap( IMap<TCell> map )
          : this( map, false )
       {
       }
@@ -39,7 +69,7 @@ namespace RogueSharp
       /// <param name="map">The Map that this GoalMap will be created for</param>
       /// <param name="allowDiagonalMovement">True if diagonal movements are allowed. False otherwise</param>
       /// <exception cref="ArgumentNullException">Thrown on null map</exception>
-      public GoalMap( IMap map, bool allowDiagonalMovement )
+      public GoalMap( IMap<TCell> map, bool allowDiagonalMovement )
       {
          _map = map ?? throw new ArgumentNullException( nameof( map ), "Map cannot be null" );
          _cellWeights = new int[map.Width, map.Height];
@@ -590,12 +620,12 @@ namespace RogueSharp
 
       private class GoalMapPathFinder
       {
-         private readonly GoalMap _goalMap;
+         private readonly GoalMap<TCell> _goalMap;
          private readonly List<Path> _paths;
          private readonly Stack<ICell> _currentPath;
          private readonly HashSet<ICell> _visited;
 
-         public GoalMapPathFinder( GoalMap goalMap )
+         public GoalMapPathFinder( GoalMap<TCell> goalMap )
          {
             _goalMap = goalMap;
             _paths = new List<Path>();

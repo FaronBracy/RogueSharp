@@ -7,8 +7,44 @@ namespace RogueSharp.MapCreation
    /// <summary>
    /// The RandomRoomsMapCreationStrategy creates a Map of the specified type by placing rooms randomly and then connecting them with cooridors
    /// </summary>
-   /// <typeparam name="T">The type of IMap that will be created</typeparam>
-   public class RandomRoomsMapCreationStrategy<T> : IMapCreationStrategy<T> where T : IMap, new()
+   /// <typeparam name="TMap">The type of IMap that will be created</typeparam>
+   public class RandomRoomsMapCreationStrategy<TMap> : RandomRoomsMapCreationStrategy<TMap, Cell>, IMapCreationStrategy<TMap> where TMap : IMap<Cell>, new()
+   {
+      /// <summary>
+      /// Constructs a new RandomRoomsMapCreationStrategy with the specified parameters
+      /// </summary>
+      /// <param name="width">The width of the Map to be created</param>
+      /// <param name="height">The height of the Map to be created</param>
+      /// <param name="maxRooms">The maximum number of rooms that will exist in the generated Map</param>
+      /// <param name="roomMaxSize">The maximum width and height of each room that will be generated in the Map</param>
+      /// <param name="roomMinSize">The minimum width and height of each room that will be generated in the Map</param>
+      /// <param name="random">A class implementing IRandom that will be used to generate pseudo-random numbers necessary to create the Map</param>
+      public RandomRoomsMapCreationStrategy( int width, int height, int maxRooms, int roomMaxSize, int roomMinSize, IRandom random )
+         : base( width, height, maxRooms, roomMaxSize, roomMinSize, random )
+      {
+      }
+
+      /// <summary>
+      /// Constructs a new RandomRoomsMapCreationStrategy with the specified parameters
+      /// </summary>
+      /// <param name="width">The width of the Map to be created</param>
+      /// <param name="height">The height of the Map to be created</param>
+      /// <param name="maxRooms">The maximum number of rooms that will exist in the generated Map</param>
+      /// <param name="roomMaxSize">The maximum width and height of each room that will be generated in the Map</param>
+      /// <param name="roomMinSize">The minimum width and height of each room that will be generated in the Map</param>
+      /// <remarks>Uses DotNetRandom as its RNG</remarks>
+      public RandomRoomsMapCreationStrategy( int width, int height, int maxRooms, int roomMaxSize, int roomMinSize )
+         : base( width, height, maxRooms, roomMaxSize, roomMinSize )
+      {
+      }
+   }
+
+   /// <summary>
+   /// The RandomRoomsMapCreationStrategy creates a Map of the specified type by placing rooms randomly and then connecting them with cooridors
+   /// </summary>
+   /// <typeparam name="TMap">The type of IMap that will be created</typeparam>
+   /// <typeparam name="TCell">The type of ICell that the Map will use</typeparam>
+   public class RandomRoomsMapCreationStrategy<TMap,TCell> : IMapCreationStrategy<TMap,TCell> where TMap : IMap<TCell>, new() where TCell : ICell
    {
       private readonly IRandom _random;
       private readonly int _height;
@@ -65,10 +101,10 @@ namespace RogueSharp.MapCreation
       /// Once all rooms have have been placed, or thrown out because they overlap, corridors will be created between rooms in a random manner.
       /// </remarks>
       /// <returns>An IMap of the specified type</returns>
-      public T CreateMap()
+      public TMap CreateMap()
       {
          var rooms = new List<Rectangle>();
-         var map = new T();
+         var map = new TMap();
          map.Initialize( _width, _height );
 
          for ( int r = 0; r < _maxRooms; r++ )
@@ -126,7 +162,7 @@ namespace RogueSharp.MapCreation
          return map;
       }
 
-      private static void MakeRoom( T map, Rectangle room )
+      private static void MakeRoom( TMap map, Rectangle room )
       {
          for ( int x = room.Left + 1; x < room.Right; x++ )
          {
@@ -137,7 +173,7 @@ namespace RogueSharp.MapCreation
          }
       }
 
-      private static void MakeHorizontalTunnel( T map, int xStart, int xEnd, int yPosition )
+      private static void MakeHorizontalTunnel( TMap map, int xStart, int xEnd, int yPosition )
       {
          for ( int x = Math.Min( xStart, xEnd ); x <= Math.Max( xStart, xEnd ); x++ )
          {
@@ -145,7 +181,7 @@ namespace RogueSharp.MapCreation
          }
       }
 
-      private static void MakeVerticalTunnel( T map, int yStart, int yEnd, int xPosition )
+      private static void MakeVerticalTunnel( TMap map, int yStart, int yEnd, int xPosition )
       {
          for ( int y = Math.Min( yStart, yEnd ); y <= Math.Max( yStart, yEnd ); y++ )
          {
