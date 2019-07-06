@@ -7,17 +7,51 @@ using RogueSharp.Random;
 
 namespace RogueSharp.MapCreation
 {
+   /// <summary>
+   /// The DungeonCreationStrategy creates a Map of the Dungeon type by extending the generic Map class with rooms, corridors, entrances and stairs.
+   /// </summary>
    public class DungeonCreationStrategy : IMapCreationStrategy<Dungeon, DungeonCell>
    {
-      private static readonly int _mapWidth = 77;
-      private static readonly int _mapHeight = 29;
-      private static Dungeon _dungeon;
+      private readonly int _mapWidth;
+      private readonly int _mapHeight;
+      private readonly IRandom _random;
+      private Dungeon _dungeon;
 
+      /// <summary>
+      /// Constructs a new DungeonCreationStrategy with the specified parameters
+      /// </summary>
+      /// <param name="mapWidth">The width of the Map to be created. Must be an odd number.</param>
+      /// <param name="mapHeight">The height of the Map to be created. Must be an odd number.</param>
+      /// <param name="random">A class implementing IRandom that will be used to generate pseudo-random numbers necessary to create the Map. Uses standard DotNetRandom if omitted.</param>
+      public DungeonCreationStrategy( int mapWidth, int mapHeight, IRandom  random = null )
+      {
+         if ( mapWidth % 2 == 0 )
+         {
+            throw new ArgumentException( "mapWidth must be odd", nameof(mapWidth) );
+         }
+         if ( mapHeight % 2 == 0 )
+         {
+            throw new ArgumentException( "mapHeight must be odd", nameof( mapWidth ) );
+         }
+
+         _mapWidth = mapWidth;
+         _mapHeight = mapHeight;
+         if ( random == null )
+         {
+            random = new DotNetRandom();
+         }
+         _random = random;
+      }
+
+      /// <summary>
+      /// Creates a new Dungeon
+      /// </summary>
+      /// <returns>A new Dungeon which extends the generic Map class with rooms, corridors, entrances and stairs</returns>
       public Dungeon CreateMap()
       {
          _dungeon = new Dungeon();
          _dungeon.Initialize( _mapWidth, _mapHeight );  
-         var builder = new DungeonBuilder( _dungeon, 50 );
+         var builder = new DungeonBuilder( _dungeon, 50, _random );
          _dungeon = builder.Create();
          return _dungeon;
       }

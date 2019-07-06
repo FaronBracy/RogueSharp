@@ -5,7 +5,7 @@ using RogueSharp.Random;
 namespace RogueSharp.MapCreation
 {
    /// <summary>
-   /// The RandomRoomsMapCreationStrategy creates a Map of the specified type by placing rooms randomly and then connecting them with cooridors
+   /// The RandomRoomsMapCreationStrategy creates a Map of the specified type by placing rooms randomly and then connecting them with corridors
    /// </summary>
    /// <typeparam name="TMap">The type of IMap that will be created</typeparam>
    public class RandomRoomsMapCreationStrategy<TMap> : RandomRoomsMapCreationStrategy<TMap, Cell>, IMapCreationStrategy<TMap> where TMap : IMap<Cell>, new()
@@ -40,7 +40,7 @@ namespace RogueSharp.MapCreation
    }
 
    /// <summary>
-   /// The RandomRoomsMapCreationStrategy creates a Map of the specified type by placing rooms randomly and then connecting them with cooridors
+   /// The RandomRoomsMapCreationStrategy creates a Map of the specified type by placing rooms randomly and then connecting them with corridors
    /// </summary>
    /// <typeparam name="TMap">The type of IMap that will be created</typeparam>
    /// <typeparam name="TCell">The type of ICell that the Map will use</typeparam>
