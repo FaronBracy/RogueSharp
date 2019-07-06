@@ -59,7 +59,7 @@ namespace RogueSharp
       /// <param name="mapCreationStrategy">A class that implements IMapCreationStrategy and has CreateMap method which defines algorithms for creating interesting Maps</param>
       /// <returns>Map created by calling CreateMap from the specified IMapCreationStrategy</returns>
       /// <exception cref="ArgumentNullException">Thrown on null map creation strategy</exception>
-      public static TMap Create<TMap>( IMapCreationStrategy<TMap, ICell> mapCreationStrategy ) where TMap : IMap<ICell>
+      public static TMap Create<TMap, TCell>( IMapCreationStrategy<TMap, TCell> mapCreationStrategy ) where TMap : IMap<TCell> where TCell : ICell
       {
          if ( mapCreationStrategy == null )
          {
