@@ -59,16 +59,21 @@ namespace RogueSharp.MapCreation
    
    public class Dungeon : Map<DungeonCell>
    {
+      private int _nextId;
+
       public Dungeon()
       {
-         AreaCount = 0;
+         _nextId = 0;
+         RoomCount = 0;
+         CorridorCount = 0;
          EntranceCount = 0;
          Rooms = new List<Room>();
          Corridors = new List<Corridor>();
          Entrances = new List<Entrance>();
       }
 
-      public int AreaCount { get; private set; }
+      public int RoomCount { get; private set; }
+      public int CorridorCount { get; private set; }
       public int EntranceCount { get; private set; }
       public List<Room> Rooms { get; private set; }
       public List<Corridor> Corridors { get; private set; }
@@ -78,7 +83,8 @@ namespace RogueSharp.MapCreation
 
       public void AddRoom( Room room )
       {
-         room.Id = AreaCount++;
+         RoomCount++;
+         room.Id = _nextId++;
          Rooms.Add( room );
       }
 
@@ -100,13 +106,15 @@ namespace RogueSharp.MapCreation
 
       public void AddCorridor( Corridor corridor )
       {
-         corridor.Id = AreaCount++;
+         CorridorCount++;
+         corridor.Id = _nextId++;
          Corridors.Add( corridor );
       }
 
       public void AddEntrance( IDungeonArea dungeonArea, IDungeonArea connectedDungeonArea, Entrance entrance )
       {
-         entrance.Id = EntranceCount++;
+         EntranceCount++;
+         entrance.Id = _nextId++;
          Entrances.Add( entrance );
          dungeonArea.EntranceIds.Add( entrance.Id );
          connectedDungeonArea.EntranceIds.Add( entrance.Id );
@@ -127,11 +135,11 @@ namespace RogueSharp.MapCreation
             }
          }
 
-         foreach ( Corridor cooridor in Corridors )
+         foreach ( Corridor corridor in Corridors )
          {
-            if ( cooridor.Contains( dungeonCell ) )
+            if ( corridor.Contains( dungeonCell ) )
             {
-               return cooridor;
+               return corridor;
             }
          }
 
@@ -512,7 +520,7 @@ namespace RogueSharp.MapCreation
 
       private void DigEntrances( Dungeon dungeon, IRandom random )
       {
-         var uf = new UnionFind( dungeon.AreaCount );
+         var uf = new UnionFind( dungeon.RoomCount + dungeon.CorridorCount );
 
          foreach ( Room room in dungeon.Rooms )
          {
@@ -680,7 +688,7 @@ namespace RogueSharp.MapCreation
          while ( uf.Count != 1 )
          {
             // get an area at random;
-            IDungeonArea area = dungeon.GetArea( random.Next( 0, dungeon.AreaCount - 1 ) );
+            IDungeonArea area = dungeon.GetArea( random.Next( 0, dungeon.RoomCount + dungeon.CorridorCount - 1 ) );
             if ( area is Room )
             {
                var room = area as Room;
