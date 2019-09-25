@@ -618,7 +618,18 @@ namespace RogueSharp.Test
             actualCells.Append( cell.ToString() );
          }
 
-         var expectedCells = mapRepresentation.Replace( " ", string.Empty ).Replace( Environment.NewLine, string.Empty );
+         var expectedCells = new StringBuilder()
+            .Append( "#################" )
+            .Append( "#################" )
+            .Append( "##...#######...##" )
+            .Append( "##.............##" )
+            .Append( "###.###....#...##" )
+            .Append( "###...##.#####.##" )
+            .Append( "###...##...###..#" )
+            .Append( "####............#" )
+            .Append( "##############..#" )
+            .Append( "#################" )
+            .ToString();
 
          Assert.AreEqual( expectedCells, actualCells.ToString() );
       }
