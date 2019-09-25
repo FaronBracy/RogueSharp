@@ -496,9 +496,9 @@ namespace RogueSharp
       public IEnumerable<ICell> GetCellsInRectangle( int top, int left, int width, int height )
       {
          int xMin = Math.Max( 0, left );
-         int xMax = Math.Min( Width - 1, left + width );
+         int xMax = Math.Min( Width, left + width );
          int yMin = Math.Max( 0, top );
-         int yMax = Math.Min( Height - 1, top + height );
+         int yMax = Math.Min( Height, top + height );
 
          for ( int y = yMin; y < yMax; y++ )
          {
