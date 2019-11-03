@@ -165,8 +165,12 @@ A more interesting way to create a map is to use the `Map` class's static method
 - [RogueBasin](http://www.roguebasin.com/ "RogueBasin")
 	- [Articles of interest for Roguelike developers](http://www.roguebasin.com/index.php?title=Articles "Roguelike developer articles")
 - [DocFx](https://github.com/dotnet/docfx "DocFx")
-	- Used to automatically generate documentation from the XML comments in source code
-	- [DocFx License](https://github.com/dotnet/docfx/blob/dev/LICENSE "DocFx license")
+	- DocFx is used to automatically generate documentation from the XML comments in source code
+	- [DocFx license](https://github.com/dotnet/docfx/blob/dev/LICENSE "DocFx license")
+- [Certes DocFx Template](https://github.com/fszlin/certes "Certes DocFx Template")
+	- The DocFx template I'm using is based on the template created by fszlin for the Certes client.
+	- Note: RogueSharp itself doesn't actually use Certes
+	- [Certes license](https://github.com/fszlin/certes/blob/master/LICENSE)
 - [Dice Notation .NET](https://dicenotation.codeplex.com "Dice Notation .NET")
 	- Significant portions of the code in RougeSharp DiceNotation namespace are taken directly from this great library
 	- [Dice Notation .NET source code](https://dicenotation.codeplex.com/SourceControl/latest "Dice Notation .NET source code")
