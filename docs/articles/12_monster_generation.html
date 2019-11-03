@@ -1,0 +1,294 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Monster Generation | RogueSharp </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="title" content="Monster Generation - RogueSharp ">
+    <meta name="generator" content="docfx 2.47.0.0">
+    
+    <link rel="shortcut icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-87DrmpqHRiY8hPLIr7ByqhPIywuSsjuQAfMXAE0sMUpY3BM7nXjf+mLIUSvhDArs" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css">
+    <link rel="stylesheet" href="../styles/site.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+    <script type="text/javascript">
+    var appInsights=window.appInsights||function(a){function b(a){c[a]=function(){var b=arguments;c.queue.push(function(){c[a].apply(c,b)})}}var c={config:a},d=document,e=window;setTimeout(function(){var b=d.createElement("script");b.src=a.url||"https://az416426.vo.msecnd.net/scripts/a/ai.0.js",d.getElementsByTagName("script")[0].parentNode.appendChild(b)});try{c.cookie=d.cookie}catch(a){}c.queue=[];for(var f=["Event","Exception","Metric","PageView","Trace","Dependency"];f.length;)b("track"+f.pop());if(b("setAuthenticatedUserContext"),b("clearAuthenticatedUserContext"),b("startTrackEvent"),b("stopTrackEvent"),b("startTrackPage"),b("stopTrackPage"),b("flush"),!a.disableExceptionTracking){f="onerror",b("_"+f);var g=e[f];e[f]=function(a,b,d,e,h){var i=g&&g(a,b,d,e,h);return!0!==i&&c["_"+f](a,b,d,e,h),i}}return c}({instrumentationKey:"9aaf9896-bee3-4d08-abb6-2ef51b389035"});
+    window.appInsights=appInsights,appInsights.queue&&0===appInsights.queue.length&&appInsights.trackPageView();
+  </script>
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <div class="bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light container">
+          
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="RogueSharp" width="36" height="36">
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        
+          <div class="collapse navbar-collapse" id="navbar">
+            <!--<form id="search" role="search" class="form-inline my-2 my-lg-0">
+              <input id="search-query" class="form-control mr-sm-2" type="search" placeholder="Search" autocomplete="off" aria-label="Search">
+            </form>-->
+          </div>
+        </nav>
+        </div>
+        
+        <div class="bg-dark">
+        <nav aria-label="breadcrumb" id="breadcrumb" class="container hide-when-search">
+          <!--<ol class="breadcrumb">
+            <li class="breadcrumb-item" aria-current="page"></li>
+          </ol>-->
+        </nav>
+        </div>      </header>
+      <div role="main" class="container body-content hide-when-search">
+      <div class="row">
+        
+        
+        <div class="sidenav hide-when-search col-md-3 pt-md-3 pb-md-3">
+          <a class="btn btn-link toc-toggle d-md-none" data-toggle="collapse" data-target="#sidetoggle" href="javascript:;" aria-expanded="true" aria-controls="sidetoggle">
+            Show / Hide Table of Contents
+          </a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article col-md-9">
+      <div class="row">
+          <div class="col-lg-9">
+            <article class="content wrap pt-2 pb-2" id="_content" data-uid="">
+<h1 id="monster-generation">Monster Generation</h1>
+
+<p>During this tutorial we’ll create our first monster, the lowly Kobold. We’ll also randomly create our Kobold and his friends in rooms across our map. At this point the Kobold will not act or even be able to be attacked. That will come later.</p>
+<p><img src="../images/V3Tutorial/12_kobolds.png" alt="alt text" title="Kobolds rendered in map"></p>
+<h2 id="choosing-a-kobold-color">Choosing a Kobold Color</h2>
+<p>The most important part of creating our monster is choosing a color for him. I’m going to use an existing color from our swatch <code>DbBrightWood</code>. Pick any color you want and add it to <code>Colors.cs</code>.</p>
+<pre><code class="lang-cs">public static RLColor KoboldColor = Swatch.DbBrightWood;
+</code></pre>
+<h2 id="create-a-monster-base-class">Create a Monster Base Class</h2>
+<p>Next we need to create the <code>Monster</code> base class that all of our monsters going forward will inherit from. At this point it will be pretty lackluster and not have any functionality but we will be adding to it in the future. Our <code>Monster</code> class is a type of <code>Actor</code> so it needs to inherit from <code>Actor</code>. Create a new class <code>Monster.cs</code> in the <code>Core</code> folder and add code that looks like the following:</p>
+<pre><code class="lang-cs">public class Monster : Actor
+{
+  // Empty for now, we will add functionality later
+}
+</code></pre>
+<h2 id="creating-a-kobold">Creating a Kobold</h2>
+<p>Our first <code>Monster</code> will be the <a href="https://en.wikipedia.org/wiki/Kobold_(Dungeons_%26_Dragons)">Reptilian Kobold</a>. Create a new folder called <code>Monsters</code> and create a new class in the <code>Monsters</code> folder called <code>Kobold.cs</code>. The <code>Kobold</code> class will inherit from the <code>Monster</code> class that we made up above.</p>
+<pre><code class="lang-cs">public class Kobold : Monster
+{
+  public static Kobold Create( int level )
+  {
+    int health = Dice.Roll( &quot;2D5&quot; );
+    return new Kobold {
+      Attack = Dice.Roll( &quot;1D3&quot; ) + level / 3,
+      AttackChance = Dice.Roll( &quot;25D3&quot; ),
+      Awareness = 10,
+      Color = Colors.KoboldColor,
+      Defense = Dice.Roll( &quot;1D3&quot; ) + level / 3,
+      DefenseChance = Dice.Roll( &quot;10D4&quot; ),
+      Gold = Dice.Roll( &quot;5D5&quot; ),
+      Health = health,
+      MaxHealth = health,
+      Name = &quot;Kobold&quot;,
+      Speed = 14,
+      Symbol = 'k'
+    };
+  }
+}
+</code></pre>
+<p>For now the <code>Kobold</code> will only have a <code>Create()</code> method. We’ll pass the current level of the dungeon into the <code>Create()</code> method so that as the player progresses deeper into the dungeon the <code>Kobolds</code> will get stronger. Feel free to assign the stats to whatever you want. I used the <code>Dice</code> class to roll for some random values.</p>
+<p>One thing to note is that we didn’t create a <code>Draw()</code> method for the <code>Kobold</code>, yet he will still be able to be drawn to our map just fine. The reason for this is because of the inheritance chain we set up. <code>Kobold : Monster : Actor</code>.  Because an <code>Actor</code> already has a <code>Draw()</code> method the <code>Kobold</code> will get it automatically through inheritance!</p>
+<h2 id="adding-monsters-to-the-dungeonmap">Adding Monsters to the DungeonMap</h2>
+<p>Now that we have our first monster we need a way to be able to add them to our <code>DungeonMap</code>. Open <code>DungeonMap.cs</code> and add a new private field that is a <code>List&lt;Monster&gt;</code>. Make sure that you initialize the list in the constructor.</p>
+<pre><code class="lang-cs">private readonly List&lt;Monster&gt; _monsters;
+
+public DungeonMap()
+{
+  // Initialize all the lists when we create a new DungeonMap
+  _monsters = new List&lt;Monster&gt;();
+}
+</code></pre>
+<p>Next we’ll need to add a few new methods to <code>DungeonMap.cs</code> to help us add monsters.</p>
+<pre><code class="lang-cs">public void AddMonster( Monster monster )
+{
+  _monsters.Add( monster );
+  // After adding the monster to the map make sure to make the cell not walkable
+  SetIsWalkable( monster.X, monster.Y, false );
+}
+
+// Look for a random location in the room that is walkable.
+public Point GetRandomWalkableLocationInRoom( Rectangle room )
+{
+  if ( DoesRoomHaveWalkableSpace( room ) )
+  {
+    for ( int i = 0; i &lt; 100; i++ )
+    {
+      int x = Game.Random.Next( 1, room.Width - 2 ) + room.X;
+      int y = Game.Random.Next( 1, room.Height - 2 ) + room.Y;
+      if ( IsWalkable( x, y ) )
+      {
+        return new Point( x, y );
+      }
+    }
+  }
+
+  // If we didn't find a walkable location in the room return null
+  return null;
+}
+
+// Iterate through each Cell in the room and return true if any are walkable
+public bool DoesRoomHaveWalkableSpace( Rectangle room )
+{
+  for ( int x = 1; x &lt;= room.Width - 2; x++ )
+  {
+    for ( int y = 1; y &lt;= room.Height - 2; y++ )
+    {
+      if ( IsWalkable( x + room.X, y + room.Y ) )
+      {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+</code></pre>
+<p>The first method <code>AddMonster()</code> will add a <code>Monster</code> to list of monsters currently on the map and make sure that the <code>Cell</code> the <code>Monster</code> is located in will not be walkable.</p>
+<p>The next two methods <code>GetRandomWalkableLocationInRoom()</code> and <code>DoesRoomHaveWalkableSpace()</code> will both be useful for us in determining a good location to place our <code>Monsters</code>.</p>
+<p>The last change to DungeonMap.cs will be to update the <code>Draw()</code> method to make sure that all of the Monsters on the map are also drawn.</p>
+<pre><code class="lang-cs">// Iterate through each monster on the map and draw it after drawing the Cells
+foreach ( Monster monster in _monsters )
+{
+  monster.Draw( mapConsole, this );
+}
+</code></pre>
+<h2 id="generating-and-placing-monsters">Generating and Placing Monsters</h2>
+<p>We now have the ability to add <code>Monsters</code> to the <code>DungeonMap</code>. The only thing left to do is to actually generate our <code>Monsters</code>. We’ll update <code>MapGenerator.cs</code> and add a method to <code>PlaceMonsters()</code>. The algorithm will basically go through each room and roll a 10-sided die. If the result of the roll is 1-6 then we’ll roll 4-sided die and add that many monsters to the room in any open <code>Cells</code>. We will make extensive use of the methods that we previously added to <code>DungeonMap.cs</code> to help us out.</p>
+<p>Add the following method to <code>MapGenerator.cs</code></p>
+<pre><code class="lang-cs">private void PlaceMonsters()
+{
+  foreach ( var room in _map.Rooms )
+  {
+    // Each room has a 60% chance of having monsters
+    if ( Dice.Roll( &quot;1D10&quot; ) &lt; 7 )
+    {
+      // Generate between 1 and 4 monsters
+      var numberOfMonsters = Dice.Roll( &quot;1D4&quot; );
+      for ( int i = 0; i &lt; numberOfMonsters; i++ )
+      {
+        // Find a random walkable location in the room to place the monster
+        Point randomRoomLocation = _map.GetRandomWalkableLocationInRoom( room );
+        // It's possible that the room doesn't have space to place a monster
+        // In that case skip creating the monster
+        if ( randomRoomLocation != null )
+        {
+          // Temporarily hard code this monster to be created at level 1
+          var monster = Kobold.Create( 1 );
+          monster.X = randomRoomLocation.X;
+          monster.Y = randomRoomLocation.Y;
+          _map.AddMonster( monster );
+        }
+      }
+    }
+  }
+}
+</code></pre>
+<p>Don’t forget to add a call to <code>PlaceMonsters()</code> in the <code>CreateMap()</code> method.</p>
+<pre><code class="lang-cs">public DungeonMap CreateMap()
+{
+  // ... Existing code
+  PlacePlayer();
+
+  // After the existing PlacePlayer() call, add another call to PlaceMonsters()
+  PlaceMonsters();
+}
+</code></pre>
+<p>If you run the game now you should have some ‘k’ shaped kobolds on your map. They won’t do anything interesting just sit there and act like walls. We will give them some interesting behaviors later on.</p>
+<h2 id="code-on-github">Code on GitHub</h2>
+<p>As always the code for the tutorial series so far can be found on GitHub:</p>
+<ul>
+<li><a href="https://github.com/FaronBracy/RogueSharpV3Tutorial/tree/10MonsterGeneration">https://github.com/FaronBracy/RogueSharpV3Tutorial/tree/10MonsterGeneration</a></li>
+</ul>
+<p>Bored waiting for the next tutorial? The complete tutorial project is already finished and the source code is available on Github:</p>
+<ul>
+<li>Sample Roguelike game using RogueSharp and RLNet console
+<ul>
+<li><a href="https://github.com/FaronBracy/RogueSharpRLNetSamples">https://github.com/FaronBracy/RogueSharpRLNetSamples</a></li>
+</ul>
+</li>
+<li>Sample Roguelike game using RogueSharp and SadConsole
+<ul>
+<li><a href="https://github.com/FaronBracy/RogueSharpSadConsoleSamples">https://github.com/FaronBracy/RogueSharpSadConsoleSamples</a></li>
+</ul>
+</li>
+</ul>
+</article>
+            <div id="disqus_thread"></div>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+          </div>
+          
+          <div class="d-none d-lg-block col-md-3" role="complementary">
+            <div class="sideaffix pt-3 pb-3">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/FaronBracy/RogueSharp.Documentation/blob/master/articles/12_monster_generation.md/#L1" class="contribution-link text-info" title="Improve this Doc">
+                    <i class="fal fa-edit fa-fw"></i>
+                    <span>Improve this Doc</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <!--<div class="github-links">
+                  <a class="github-button" href="https://github.com/fszlin/certes" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star fszlin/certes on GitHub">Star</a>
+              </div>-->
+              <nav class="hidden-print affix mt-2" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      
+      <footer class="bg-secondary">
+        <!--<div class="grad-bottom"></div>-->
+        <div class="footer bg-secondary">
+          <div class="container">
+          <div class="d-flex">
+            <div class="p-2 flex-grow-1 text-white">
+            <a class="text-white" href="https://github.com/FaronBracy/RogueSharp">RogueSharp &copy; 2014-2020 Faron Bracy</a>
+            
+            </div>
+            <div class="p-2">
+              <a class="text-white" href="#top">Back to top</a>
+            </div>
+          </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/dos.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/powershell.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+  </body>
+</html>

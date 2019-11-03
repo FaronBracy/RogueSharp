@@ -1,0 +1,889 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class Cell
+   | RogueSharp </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="title" content="Class Cell
+   - RogueSharp ">
+    <meta name="generator" content="docfx 2.47.0.0">
+    
+    <link rel="shortcut icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-87DrmpqHRiY8hPLIr7ByqhPIywuSsjuQAfMXAE0sMUpY3BM7nXjf+mLIUSvhDArs" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css">
+    <link rel="stylesheet" href="../styles/site.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+    <script type="text/javascript">
+    var appInsights=window.appInsights||function(a){function b(a){c[a]=function(){var b=arguments;c.queue.push(function(){c[a].apply(c,b)})}}var c={config:a},d=document,e=window;setTimeout(function(){var b=d.createElement("script");b.src=a.url||"https://az416426.vo.msecnd.net/scripts/a/ai.0.js",d.getElementsByTagName("script")[0].parentNode.appendChild(b)});try{c.cookie=d.cookie}catch(a){}c.queue=[];for(var f=["Event","Exception","Metric","PageView","Trace","Dependency"];f.length;)b("track"+f.pop());if(b("setAuthenticatedUserContext"),b("clearAuthenticatedUserContext"),b("startTrackEvent"),b("stopTrackEvent"),b("startTrackPage"),b("stopTrackPage"),b("flush"),!a.disableExceptionTracking){f="onerror",b("_"+f);var g=e[f];e[f]=function(a,b,d,e,h){var i=g&&g(a,b,d,e,h);return!0!==i&&c["_"+f](a,b,d,e,h),i}}return c}({instrumentationKey:"9aaf9896-bee3-4d08-abb6-2ef51b389035"});
+    window.appInsights=appInsights,appInsights.queue&&0===appInsights.queue.length&&appInsights.trackPageView();
+  </script>
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <div class="bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light container">
+          
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="RogueSharp" width="36" height="36">
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        
+          <div class="collapse navbar-collapse" id="navbar">
+            <!--<form id="search" role="search" class="form-inline my-2 my-lg-0">
+              <input id="search-query" class="form-control mr-sm-2" type="search" placeholder="Search" autocomplete="off" aria-label="Search">
+            </form>-->
+          </div>
+        </nav>
+        </div>
+        
+        <div class="bg-dark">
+        <nav aria-label="breadcrumb" id="breadcrumb" class="container hide-when-search">
+          <!--<ol class="breadcrumb">
+            <li class="breadcrumb-item" aria-current="page"></li>
+          </ol>-->
+        </nav>
+        </div>      </header>
+      <div role="main" class="container body-content hide-when-search">
+      <div class="row">
+        
+        
+        <div class="sidenav hide-when-search col-md-3 pt-md-3 pb-md-3">
+          <a class="btn btn-link toc-toggle d-md-none" data-toggle="collapse" data-target="#sidetoggle" href="javascript:;" aria-expanded="true" aria-controls="sidetoggle">
+            Show / Hide Table of Contents
+          </a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article col-md-9">
+      <div class="row">
+          <div class="col-lg-9">
+            <article class="content wrap pt-2 pb-2" id="_content" data-uid="RogueSharp.Cell">
+  
+  
+  <h1 id="RogueSharp_Cell" data-uid="RogueSharp.Cell" class="text-break">Class Cell
+  </h1>
+  <div class="markdown level0 summary"><p>A class that defines a square on a Map with all of its associated properties</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance mt-1">
+    <h5 class="text-muted font-weight-light font-italic mb-0">Inheritance</h5>
+    <div class="d-flex flex-wrap">
+    <div class="level0 mr-1"><span class="xref">System.Object</span><i class="fal fa-arrow-alt-left fa-fw"></i></div>
+    <div class="level1"><span class="xref">Cell</span></div>
+    </div>
+  </div>
+  <div class="implements mt-1">
+    <h5 class="font-weight-light font-italic mb-0">
+      <a class="text-muted" data-toggle="collapse" data-target="#implementsCollapse" role="button" aria-expanded="false" aria-controls="implementsCollapse">
+      Implements
+      </a>
+    </h5>
+    <div class="collapse" id="implementsCollapse">
+    <div><a class="xref" href="RogueSharp.ICell.html">ICell</a></div>
+    <div><span class="xref">System.IEquatable</span>&lt;<a class="xref" href="RogueSharp.ICell.html">ICell</a>&gt;</div>
+    </div>
+  </div>
+  <div class="inheritedMembers mt-1">
+    <h5 class="font-weight-light font-italic mb-0">
+      <a class="text-muted" data-toggle="collapse" data-target="#inheritedMembersCollapse" role="button" aria-expanded="false" aria-controls="inheritedMembersCollapse">
+      Inherited Members
+      </a>
+    </h5>
+    <div class="collapse" id="inheritedMembersCollapse">
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    </div>
+  </div>
+  <h6 class="mt-1"><i class="text-muted font-weight-light font-italic mb-0">Namespace:</i> <a class="xref" href="RogueSharp.html">RogueSharp</a></h6>
+  <h6 class="mt-1"><i class="text-muted font-weight-light font-italic mb-0">Assembly:</i> RogueSharp.dll</h6>
+  <h5 id="RogueSharp_Cell_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class Cell : ICell, IEquatable&lt;ICell&gt;</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_Cell__ctor_System_Int32_System_Int32_System_Boolean_System_Boolean_System_Boolean_.md&amp;value=---%0Auid%3A%20RogueSharp.Cell.%23ctor(System.Int32%2CSystem.Int32%2CSystem.Boolean%2CSystem.Boolean%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/Cell.cs/#L35">View Source</a>
+  </span>
+  <a id="RogueSharp_Cell__ctor_" data-uid="RogueSharp.Cell.#ctor*"></a>
+  <h4 id="RogueSharp_Cell__ctor_System_Int32_System_Int32_System_Boolean_System_Boolean_System_Boolean_" data-uid="RogueSharp.Cell.#ctor(System.Int32,System.Int32,System.Boolean,System.Boolean,System.Boolean)">Cell(Int32, Int32, Boolean, Boolean, Boolean)</h4>
+  <div class="markdown level1 summary"><p>Construct a new unexplored Cell located at the specified x and y location with the specified properties</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Cell(int x, int y, bool isTransparent, bool isWalkable, bool isInFov)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">x</span></td>
+        <td><p>X location of the Cell starting with 0 as the farthest left</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">y</span></td>
+        <td><p>Y location of the Cell starting with 0 as the top</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">isTransparent</span></td>
+        <td><p>Is there a clear line-of-sight through this Cell</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">isWalkable</span></td>
+        <td><p>Could a character could normally walk across the Cell without difficulty</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">isInFov</span></td>
+        <td><p>Is the Cell currently in the currently observable field-of-view</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_Cell__ctor_System_Int32_System_Int32_System_Boolean_System_Boolean_System_Boolean_System_Boolean_.md&amp;value=---%0Auid%3A%20RogueSharp.Cell.%23ctor(System.Int32%2CSystem.Int32%2CSystem.Boolean%2CSystem.Boolean%2CSystem.Boolean%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/Cell.cs/#L17">View Source</a>
+  </span>
+  <a id="RogueSharp_Cell__ctor_" data-uid="RogueSharp.Cell.#ctor*"></a>
+  <h4 id="RogueSharp_Cell__ctor_System_Int32_System_Int32_System_Boolean_System_Boolean_System_Boolean_System_Boolean_" data-uid="RogueSharp.Cell.#ctor(System.Int32,System.Int32,System.Boolean,System.Boolean,System.Boolean,System.Boolean)">Cell(Int32, Int32, Boolean, Boolean, Boolean, Boolean)</h4>
+  <div class="markdown level1 summary"><p>Construct a new Cell located at the specified x and y location with the specified properties</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Cell(int x, int y, bool isTransparent, bool isWalkable, bool isInFov, bool isExplored)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">x</span></td>
+        <td><p>X location of the Cell starting with 0 as the farthest left</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">y</span></td>
+        <td><p>Y location of the Cell starting with 0 as the top</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">isTransparent</span></td>
+        <td><p>Is there a clear line-of-sight through this Cell</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">isWalkable</span></td>
+        <td><p>Could a character could normally walk across the Cell without difficulty</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">isInFov</span></td>
+        <td><p>Is the Cell currently in the currently observable field-of-view</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">isExplored</span></td>
+        <td><p>Has this Cell ever been explored by the player</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_Cell_IsExplored.md&amp;value=---%0Auid%3A%20RogueSharp.Cell.IsExplored%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/Cell.cs/#L100">View Source</a>
+  </span>
+  <a id="RogueSharp_Cell_IsExplored_" data-uid="RogueSharp.Cell.IsExplored*"></a>
+  <h4 id="RogueSharp_Cell_IsExplored" data-uid="RogueSharp.Cell.IsExplored">IsExplored</h4>
+  <div class="markdown level1 summary"><p>Check if the Cell is flagged as ever having been explored by the player</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsExplored { get; }</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="RogueSharp_Cell_IsExplored_remarks" class="text-muted font-weight-light font-italic">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The explored property of a Cell can be used to track if the Cell has ever been in the field-of-view of a character controlled by the player
+This property will not automatically be updated based on FOV calculations or any other built-in functions of the RogueSharp library.</p>
+</div>
+  <h5 id="RogueSharp_Cell_IsExplored_examples" class="text-muted font-weight-light font-italic">Examples</h5>
+  <p>As the player moves characters around a Map, Cells will enter and exit the currently computed field-of-view
+This property can be used to keep track of those Cells that have been &quot;seen&quot; and could be used to show fog-of-war type effects when rendering the map</p>
+
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_Cell_IsInFov.md&amp;value=---%0Auid%3A%20RogueSharp.Cell.IsInFov%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/Cell.cs/#L87">View Source</a>
+  </span>
+  <a id="RogueSharp_Cell_IsInFov_" data-uid="RogueSharp.Cell.IsInFov*"></a>
+  <h4 id="RogueSharp_Cell_IsInFov" data-uid="RogueSharp.Cell.IsInFov">IsInFov</h4>
+  <div class="markdown level1 summary"><p>Check if the Cell is in the currently computed field-of-view
+For newly initialized maps a field-of-view will not exist so all Cells will return false
+Field-of-view must first be calculated by calling ComputeFov and/or AppendFov</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsInFov { get; }</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="RogueSharp_Cell_IsInFov_remarks" class="text-muted font-weight-light font-italic">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Field-of-view (FOV) is basically a calculation of what is observable in the Map from a given Cell with a given light radius</p>
+</div>
+  <h5 id="RogueSharp_Cell_IsInFov_examples" class="text-muted font-weight-light font-italic">Examples</h5>
+  <p>Field-of-view can be used to simulate a character holding a light source and exploring a Map representing a dark cavern
+Any Cells within the FOV would be what the character could see from their current location and lighting conditions</p>
+
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_Cell_IsTransparent.md&amp;value=---%0Auid%3A%20RogueSharp.Cell.IsTransparent%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/Cell.cs/#L63">View Source</a>
+  </span>
+  <a id="RogueSharp_Cell_IsTransparent_" data-uid="RogueSharp.Cell.IsTransparent*"></a>
+  <h4 id="RogueSharp_Cell_IsTransparent" data-uid="RogueSharp.Cell.IsTransparent">IsTransparent</h4>
+  <div class="markdown level1 summary"><p>Get the transparency of the Cell i.e. if line of sight would be blocked by this Cell</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsTransparent { get; }</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="RogueSharp_Cell_IsTransparent_examples" class="text-muted font-weight-light font-italic">Examples</h5>
+  <p>A Cell representing an empty stone floor would be transparent
+A Cell representing a glass wall could be transparent (even though it may not be walkable)
+A Cell representing a solid stone wall would not be transparent</p>
+
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_Cell_IsWalkable.md&amp;value=---%0Auid%3A%20RogueSharp.Cell.IsWalkable%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/Cell.cs/#L73">View Source</a>
+  </span>
+  <a id="RogueSharp_Cell_IsWalkable_" data-uid="RogueSharp.Cell.IsWalkable*"></a>
+  <h4 id="RogueSharp_Cell_IsWalkable" data-uid="RogueSharp.Cell.IsWalkable">IsWalkable</h4>
+  <div class="markdown level1 summary"><p>Get the walkability of the Cell i.e. if a character could normally move across the Cell without difficulty</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsWalkable { get; }</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="RogueSharp_Cell_IsWalkable_examples" class="text-muted font-weight-light font-italic">Examples</h5>
+  <p>A Cell representing an empty stone floor would be walkable
+A Cell representing a glass wall may not be walkable (even though it could be transparent)
+A Cell representing a solid stone wall would not be walkable</p>
+
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_Cell_X.md&amp;value=---%0Auid%3A%20RogueSharp.Cell.X%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/Cell.cs/#L48">View Source</a>
+  </span>
+  <a id="RogueSharp_Cell_X_" data-uid="RogueSharp.Cell.X*"></a>
+  <h4 id="RogueSharp_Cell_X" data-uid="RogueSharp.Cell.X">X</h4>
+  <div class="markdown level1 summary"><p>Gets the X location of the Cell starting with 0 as the farthest left</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int X { get; }</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_Cell_Y.md&amp;value=---%0Auid%3A%20RogueSharp.Cell.Y%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/Cell.cs/#L53">View Source</a>
+  </span>
+  <a id="RogueSharp_Cell_Y_" data-uid="RogueSharp.Cell.Y*"></a>
+  <h4 id="RogueSharp_Cell_Y" data-uid="RogueSharp.Cell.Y">Y</h4>
+  <div class="markdown level1 summary"><p>Y location of the Cell starting with 0 as the top</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int Y { get; }</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_Cell_Equals_RogueSharp_ICell_.md&amp;value=---%0Auid%3A%20RogueSharp.Cell.Equals(RogueSharp.ICell)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/Cell.cs/#L163">View Source</a>
+  </span>
+  <a id="RogueSharp_Cell_Equals_" data-uid="RogueSharp.Cell.Equals*"></a>
+  <h4 id="RogueSharp_Cell_Equals_RogueSharp_ICell_" data-uid="RogueSharp.Cell.Equals(RogueSharp.ICell)">Equals(ICell)</h4>
+  <div class="markdown level1 summary"><p>Determines whether two Cell instances are equal</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Equals(ICell other)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="RogueSharp.ICell.html">ICell</a></td>
+        <td><span class="parametername">other</span></td>
+        <td><p>The Cell to compare this instance to</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>True if the instances are equal; False otherwise</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_Cell_Equals_System_Object_.md&amp;value=---%0Auid%3A%20RogueSharp.Cell.Equals(System.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/Cell.cs/#L181">View Source</a>
+  </span>
+  <a id="RogueSharp_Cell_Equals_" data-uid="RogueSharp.Cell.Equals*"></a>
+  <h4 id="RogueSharp_Cell_Equals_System_Object_" data-uid="RogueSharp.Cell.Equals(System.Object)">Equals(Object)</h4>
+  <div class="markdown level1 summary"><p>Determines whether two Cell instances are equal</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool Equals(object obj)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">obj</span></td>
+        <td><p>The Object to compare this instance to</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>True if the instances are equal; False otherwise</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic overrides">Overrides</h5>
+  <div><span class="xref">System.Object.Equals(System.Object)</span></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_Cell_GetHashCode.md&amp;value=---%0Auid%3A%20RogueSharp.Cell.GetHashCode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/Cell.cs/#L225">View Source</a>
+  </span>
+  <a id="RogueSharp_Cell_GetHashCode_" data-uid="RogueSharp.Cell.GetHashCode*"></a>
+  <h4 id="RogueSharp_Cell_GetHashCode" data-uid="RogueSharp.Cell.GetHashCode">GetHashCode()</h4>
+  <div class="markdown level1 summary"><p>Gets the hash code for this object which can help for quick checks of equality
+or when inserting this Cell into a hash-based collection such as a Dictionary or Hashtable</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override int GetHashCode()</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><p>An integer hash used to identify this Cell</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic overrides">Overrides</h5>
+  <div><span class="xref">System.Object.GetHashCode()</span></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_Cell_ToString.md&amp;value=---%0Auid%3A%20RogueSharp.Cell.ToString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/Cell.cs/#L113">View Source</a>
+  </span>
+  <a id="RogueSharp_Cell_ToString_" data-uid="RogueSharp.Cell.ToString*"></a>
+  <h4 id="RogueSharp_Cell_ToString" data-uid="RogueSharp.Cell.ToString">ToString()</h4>
+  <div class="markdown level1 summary"><p>Provides a simple visual representation of the Cell using the following symbols:</p>
+<ul>
+<li><code>.</code>: <code>Cell</code> is transparent and walkable</li>
+<li><code>s</code>: <code>Cell</code> is walkable (but not transparent)</li>
+<li><code>o</code>: <code>Cell</code> is transparent (but not walkable)</li>
+<li><code>#</code>: <code>Cell</code> is not transparent or walkable</li>
+</ul>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override string ToString()</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>A string representation of the Cell using special symbols to denote Cell properties</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic overrides">Overrides</h5>
+  <div><span class="xref">System.Object.ToString()</span></div>
+  <h5 id="RogueSharp_Cell_ToString_remarks" class="text-muted font-weight-light font-italic">Remarks</h5>
+  <div class="markdown level1 remarks"><p>This call ignores field-of-view. If field-of-view is important use the ToString overload with a &quot;true&quot; parameter</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_Cell_ToString_System_Boolean_.md&amp;value=---%0Auid%3A%20RogueSharp.Cell.ToString(System.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/Cell.cs/#L128">View Source</a>
+  </span>
+  <a id="RogueSharp_Cell_ToString_" data-uid="RogueSharp.Cell.ToString*"></a>
+  <h4 id="RogueSharp_Cell_ToString_System_Boolean_" data-uid="RogueSharp.Cell.ToString(System.Boolean)">ToString(Boolean)</h4>
+  <div class="markdown level1 summary"><p>Provides a simple visual representation of the Cell using the following symbols:</p>
+<ul>
+<li><code>%</code>: <code>Cell</code> is not in field-of-view</li>
+<li><code>.</code>: <code>Cell</code> is transparent, walkable, and in field-of-view</li>
+<li><code>s</code>: <code>Cell</code> is walkable and in field-of-view (but not transparent)</li>
+<li><code>o</code>: <code>Cell</code> is transparent and in field-of-view (but not walkable)</li>
+<li><code>#</code>: <code>Cell</code> is in field-of-view (but not transparent or walkable)</li>
+</ul>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string ToString(bool useFov)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">useFov</span></td>
+        <td><p>True if field-of-view calculations will be used when creating the string representation of the Cell. False otherwise</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>A string representation of the Cell using special symbols to denote Cell properties</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="operators">Operators
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_Cell_op_Equality_RogueSharp_Cell_RogueSharp_Cell_.md&amp;value=---%0Auid%3A%20RogueSharp.Cell.op_Equality(RogueSharp.Cell%2CRogueSharp.Cell)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/Cell.cs/#L204">View Source</a>
+  </span>
+  <a id="RogueSharp_Cell_op_Equality_" data-uid="RogueSharp.Cell.op_Equality*"></a>
+  <h4 id="RogueSharp_Cell_op_Equality_RogueSharp_Cell_RogueSharp_Cell_" data-uid="RogueSharp.Cell.op_Equality(RogueSharp.Cell,RogueSharp.Cell)">Equality(Cell, Cell)</h4>
+  <div class="markdown level1 summary"><p>Determines whether two Cell instances are equal</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator ==(Cell left, Cell right)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="RogueSharp.Cell.html">Cell</a></td>
+        <td><span class="parametername">left</span></td>
+        <td><p>Cell on the left side of the equal sign</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="RogueSharp.Cell.html">Cell</a></td>
+        <td><span class="parametername">right</span></td>
+        <td><p>Cell on the right side of the equal sign</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>True if a and b are equal; False otherwise</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_Cell_op_Inequality_RogueSharp_Cell_RogueSharp_Cell_.md&amp;value=---%0Auid%3A%20RogueSharp.Cell.op_Inequality(RogueSharp.Cell%2CRogueSharp.Cell)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/Cell.cs/#L215">View Source</a>
+  </span>
+  <a id="RogueSharp_Cell_op_Inequality_" data-uid="RogueSharp.Cell.op_Inequality*"></a>
+  <h4 id="RogueSharp_Cell_op_Inequality_RogueSharp_Cell_RogueSharp_Cell_" data-uid="RogueSharp.Cell.op_Inequality(RogueSharp.Cell,RogueSharp.Cell)">Inequality(Cell, Cell)</h4>
+  <div class="markdown level1 summary"><p>Determines whether two Cell instances are not equal</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator !=(Cell left, Cell right)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="RogueSharp.Cell.html">Cell</a></td>
+        <td><span class="parametername">left</span></td>
+        <td><p>Cell on the left side of the equal sign</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="RogueSharp.Cell.html">Cell</a></td>
+        <td><span class="parametername">right</span></td>
+        <td><p>Cell on the right side of the equal sign</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>True if a and b are not equal; False otherwise</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements" class="text-muted font-weight-light font-italic">Implements</h3>
+  <div>
+      <a class="xref" href="RogueSharp.ICell.html">ICell</a>
+  </div>
+  <div>
+      <span class="xref">System.IEquatable&lt;T&gt;</span>
+  </div>
+</article>
+            <div id="disqus_thread"></div>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+          </div>
+          
+          <div class="d-none d-lg-block col-md-3" role="complementary">
+            <div class="sideaffix pt-3 pb-3">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_Cell.md&amp;value=---%0Auid%3A%20RogueSharp.Cell%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link text-info" title="Improve this Doc">
+                    <i class="fal fa-edit fa-fw"></i>
+                    <span>Improve this Doc</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/Cell.cs/#L6" class="contribution-link text-info" title="View Source">
+                    <i class="fal fa-code fa-fw"></i>
+                    <span>View Source</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <!--<div class="github-links">
+                  <a class="github-button" href="https://github.com/fszlin/certes" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star fszlin/certes on GitHub">Star</a>
+              </div>-->
+              <nav class="hidden-print affix mt-2" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      
+      <footer class="bg-secondary">
+        <!--<div class="grad-bottom"></div>-->
+        <div class="footer bg-secondary">
+          <div class="container">
+          <div class="d-flex">
+            <div class="p-2 flex-grow-1 text-white">
+            <a class="text-white" href="https://github.com/FaronBracy/RogueSharp">RogueSharp &copy; 2014-2020 Faron Bracy</a>
+            
+            </div>
+            <div class="p-2">
+              <a class="text-white" href="#top">Back to top</a>
+            </div>
+          </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/dos.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/powershell.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+  </body>
+</html>

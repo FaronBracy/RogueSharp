@@ -1,0 +1,240 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Scheduling System | RogueSharp </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="title" content="Scheduling System - RogueSharp ">
+    <meta name="generator" content="docfx 2.47.0.0">
+    
+    <link rel="shortcut icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-87DrmpqHRiY8hPLIr7ByqhPIywuSsjuQAfMXAE0sMUpY3BM7nXjf+mLIUSvhDArs" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css">
+    <link rel="stylesheet" href="../styles/site.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+    <script type="text/javascript">
+    var appInsights=window.appInsights||function(a){function b(a){c[a]=function(){var b=arguments;c.queue.push(function(){c[a].apply(c,b)})}}var c={config:a},d=document,e=window;setTimeout(function(){var b=d.createElement("script");b.src=a.url||"https://az416426.vo.msecnd.net/scripts/a/ai.0.js",d.getElementsByTagName("script")[0].parentNode.appendChild(b)});try{c.cookie=d.cookie}catch(a){}c.queue=[];for(var f=["Event","Exception","Metric","PageView","Trace","Dependency"];f.length;)b("track"+f.pop());if(b("setAuthenticatedUserContext"),b("clearAuthenticatedUserContext"),b("startTrackEvent"),b("stopTrackEvent"),b("startTrackPage"),b("stopTrackPage"),b("flush"),!a.disableExceptionTracking){f="onerror",b("_"+f);var g=e[f];e[f]=function(a,b,d,e,h){var i=g&&g(a,b,d,e,h);return!0!==i&&c["_"+f](a,b,d,e,h),i}}return c}({instrumentationKey:"9aaf9896-bee3-4d08-abb6-2ef51b389035"});
+    window.appInsights=appInsights,appInsights.queue&&0===appInsights.queue.length&&appInsights.trackPageView();
+  </script>
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <div class="bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light container">
+          
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="RogueSharp" width="36" height="36">
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        
+          <div class="collapse navbar-collapse" id="navbar">
+            <!--<form id="search" role="search" class="form-inline my-2 my-lg-0">
+              <input id="search-query" class="form-control mr-sm-2" type="search" placeholder="Search" autocomplete="off" aria-label="Search">
+            </form>-->
+          </div>
+        </nav>
+        </div>
+        
+        <div class="bg-dark">
+        <nav aria-label="breadcrumb" id="breadcrumb" class="container hide-when-search">
+          <!--<ol class="breadcrumb">
+            <li class="breadcrumb-item" aria-current="page"></li>
+          </ol>-->
+        </nav>
+        </div>      </header>
+      <div role="main" class="container body-content hide-when-search">
+      <div class="row">
+        
+        
+        <div class="sidenav hide-when-search col-md-3 pt-md-3 pb-md-3">
+          <a class="btn btn-link toc-toggle d-md-none" data-toggle="collapse" data-target="#sidetoggle" href="javascript:;" aria-expanded="true" aria-controls="sidetoggle">
+            Show / Hide Table of Contents
+          </a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article col-md-9">
+      <div class="row">
+          <div class="col-lg-9">
+            <article class="content wrap pt-2 pb-2" id="_content" data-uid="">
+<h1 id="scheduling-system">Scheduling System</h1>
+
+<p>During this tutorial we will create a Scheduling System. Some roguelikes also refer to these as time systems. You can find out how lots of developers create their time systems by reading the <a href="https://www.reddit.com/r/roguelikedev/comments/4pk2k6/faq_friday_41_time_systems">Roguelike Dev Subreddit FAQ Friday #41</a>.</p>
+<h2 id="scheduling-system-details">Scheduling System Details</h2>
+<p>Most roguelikes including this tutorial are turn-based, meaning each Actor acts on their turn. The simplest way to achieve this is to just have a giant queue structure and have everyone act in order one-by-one. When the actor is removed from the queue and takes their turn then they get re-added to the back of the queue. The player goes, and then each monster takes a turn, then the player takes their turn again and so on.</p>
+<p>Unfortunately if we did something that simple it wouldn’t be very interesting. All Actors would have the same speed. Effectively this would mean that you could never run away from monsters or catch a fleeing monster.</p>
+<p>To get around this issue we will give each Actor a <code>Speed</code> statistic which will represent how often they can take actions. You may even remember in a <a href="11_player_stats.html">previous tutorial</a> where we defined stats we already allocated a <code>Speed</code> stat. We just never got around to using it, but we are about to fix that!</p>
+<p>The concept behind our scheduling system is that it will keep track of the time or number of turns that have passed as well as the current time. The <code>Speed</code> of the actor will determine when they get inserted into the timeline. Note that in this case having a lower speed is better.</p>
+<p><img src="../images/V3Tutorial/15_schedulingsystem.png" alt="A sample schedule" title="A sample schedule"></p>
+<p>In the Example Schedule above notice that during the first 12 turns the player with a speed of 4 will have acted 3 times. The goblin with a speed of 3 will have acted 4 times. And the Ooze with a speed of 6 will have only acted twice. This means that a player would be able to easily outrun an ooze, but not the goblin. The goblin moves twice as fast as the ooze.</p>
+<h2 id="data-structure">Data Structure</h2>
+<p>To represent this data structure in code we will use a <a href="https://msdn.microsoft.com/en-us/library/f7fta44c(v=vs.110).aspx">SortedDictionary&lt;int, List&lt;IScheduleable&gt;&gt;</a>. This may look a little odd at first, but all it really means is that each <code>Key</code> in the dictionary is an <code>integer</code> that represents the <code>time</code>. The <code>Value</code> of each dictionary entry is a <code>List&lt;IScheduleable&gt;</code>. But what exactly is an <code>IScheduleable</code>? It’s a custom interface that we’ll make and it will just have a single property <code>Time</code>. What we are saying is that we can put anything on the schedule as long as it has a <code>Time</code> which represents how many turns pass until its time comes up again on the schedule. Add the <code>IScheduleable.cs</code> file to the <code>Interfaces</code> folder and add the following code.</p>
+<pre><code class="lang-cs">public interface IScheduleable
+{
+  int Time { get; }
+}
+</code></pre>
+<p>So now that we see what an <code>IScheduleable</code> is, the next question is why do we have a <code>List&lt;&gt;</code> of them for each key in the dictionary? The answer goes back to our to our Example Schedule. If you look at it closer you’ll notice that more than one <code>Actor</code> can act on the same time interval. At Time 6 both the Ooze and Goblin act. At time 12 all three act.</p>
+<p>Let’s go ahead and create <code>SchedulingSystem.cs</code> in the <code>Systems</code> folder.</p>
+<pre><code class="lang-cs">public class SchedulingSystem
+{
+  private int _time;
+  private readonly SortedDictionary&lt;int, List&lt;IScheduleable&gt;&gt; _scheduleables;
+
+  public SchedulingSystem()
+  {
+    _time = 0;
+    _scheduleables = new SortedDictionary&lt;int, List&lt;IScheduleable&gt;&gt;();
+  }
+
+  // Add a new object to the schedule
+  // Place it at the current time plus the object's Time property.
+  public void Add( IScheduleable scheduleable )
+  {
+    int key = _time + scheduleable.Time;
+    if ( !_scheduleables.ContainsKey( key ) )
+    {
+      _scheduleables.Add( key, new List&lt;IScheduleable&gt;() );
+    }
+    _scheduleables[key].Add( scheduleable );
+  }
+
+  // Remove a specific object from the schedule.
+  // Useful for when an monster is killed to remove it before it's action comes up again.
+  public void Remove( IScheduleable scheduleable )
+  {
+    KeyValuePair&lt;int, List&lt;IScheduleable&gt;&gt; scheduleableListFound
+      = new KeyValuePair&lt;int, List&lt;IScheduleable&gt;&gt;( -1, null );
+
+    foreach ( var scheduleablesList in _scheduleables )
+    {
+      if ( scheduleablesList.Value.Contains( scheduleable ) )
+      {
+        scheduleableListFound = scheduleablesList;
+        break;
+      }
+    }
+    if ( scheduleableListFound.Value != null )
+    {
+      scheduleableListFound.Value.Remove( scheduleable );
+      if ( scheduleableListFound.Value.Count &lt;= 0 )
+      {
+        _scheduleables.Remove( scheduleableListFound.Key );
+      }
+    }
+  }
+
+  // Get the next object whose turn it is from the schedule. Advance time if necessary
+  public IScheduleable Get()
+  {
+    var firstScheduleableGroup = _scheduleables.First();
+    var firstScheduleable = firstScheduleableGroup.Value.First();
+    Remove( firstScheduleable );
+    _time = firstScheduleableGroup.Key;
+    return firstScheduleable;
+  }
+
+  // Get the current time (turn) for the schedule
+  public int GetTime()
+  {
+    return _time;
+  }
+
+  // Reset the time and clear out the schedule
+  public void Clear()
+  {
+    _time = 0;
+    _scheduleables.Clear();
+  }
+}
+</code></pre>
+<p>Quite a bit of code and if we run the game again nothing will have changed since the last tutorial. We won’t get a chance to actually see our scheduling system in action until next time.</p>
+<h2 id="code-on-github">Code on GitHub</h2>
+<p>As always the code for the tutorial series so far can be found on GitHub:</p>
+<ul>
+<li><a href="https://github.com/FaronBracy/RogueSharpV3Tutorial/tree/13SchedulingSystem">https://github.com/FaronBracy/RogueSharpV3Tutorial/tree/13SchedulingSystem</a></li>
+</ul>
+<p>Bored waiting for the next tutorial? The complete tutorial project is already finished and the source code is available on Github:</p>
+<ul>
+<li>Sample Roguelike game using RogueSharp and RLNet console
+<ul>
+<li><a href="https://github.com/FaronBracy/RogueSharpRLNetSamples">https://github.com/FaronBracy/RogueSharpRLNetSamples</a></li>
+</ul>
+</li>
+<li>Sample Roguelike game using RogueSharp and SadConsole
+<ul>
+<li><a href="https://github.com/FaronBracy/RogueSharpSadConsoleSamples">https://github.com/FaronBracy/RogueSharpSadConsoleSamples</a></li>
+</ul>
+</li>
+</ul>
+</article>
+            <div id="disqus_thread"></div>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+          </div>
+          
+          <div class="d-none d-lg-block col-md-3" role="complementary">
+            <div class="sideaffix pt-3 pb-3">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/FaronBracy/RogueSharp.Documentation/blob/master/articles/15_scheduling_system.md/#L1" class="contribution-link text-info" title="Improve this Doc">
+                    <i class="fal fa-edit fa-fw"></i>
+                    <span>Improve this Doc</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <!--<div class="github-links">
+                  <a class="github-button" href="https://github.com/fszlin/certes" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star fszlin/certes on GitHub">Star</a>
+              </div>-->
+              <nav class="hidden-print affix mt-2" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      
+      <footer class="bg-secondary">
+        <!--<div class="grad-bottom"></div>-->
+        <div class="footer bg-secondary">
+          <div class="container">
+          <div class="d-flex">
+            <div class="p-2 flex-grow-1 text-white">
+            <a class="text-white" href="https://github.com/FaronBracy/RogueSharp">RogueSharp &copy; 2014-2020 Faron Bracy</a>
+            
+            </div>
+            <div class="p-2">
+              <a class="text-white" href="#top">Back to top</a>
+            </div>
+          </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/dos.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/powershell.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+  </body>
+</html>

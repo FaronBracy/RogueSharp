@@ -1,0 +1,730 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class DiceExpression
+   | RogueSharp </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="title" content="Class DiceExpression
+   - RogueSharp ">
+    <meta name="generator" content="docfx 2.47.0.0">
+    
+    <link rel="shortcut icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-87DrmpqHRiY8hPLIr7ByqhPIywuSsjuQAfMXAE0sMUpY3BM7nXjf+mLIUSvhDArs" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css">
+    <link rel="stylesheet" href="../styles/site.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+    <script type="text/javascript">
+    var appInsights=window.appInsights||function(a){function b(a){c[a]=function(){var b=arguments;c.queue.push(function(){c[a].apply(c,b)})}}var c={config:a},d=document,e=window;setTimeout(function(){var b=d.createElement("script");b.src=a.url||"https://az416426.vo.msecnd.net/scripts/a/ai.0.js",d.getElementsByTagName("script")[0].parentNode.appendChild(b)});try{c.cookie=d.cookie}catch(a){}c.queue=[];for(var f=["Event","Exception","Metric","PageView","Trace","Dependency"];f.length;)b("track"+f.pop());if(b("setAuthenticatedUserContext"),b("clearAuthenticatedUserContext"),b("startTrackEvent"),b("stopTrackEvent"),b("startTrackPage"),b("stopTrackPage"),b("flush"),!a.disableExceptionTracking){f="onerror",b("_"+f);var g=e[f];e[f]=function(a,b,d,e,h){var i=g&&g(a,b,d,e,h);return!0!==i&&c["_"+f](a,b,d,e,h),i}}return c}({instrumentationKey:"9aaf9896-bee3-4d08-abb6-2ef51b389035"});
+    window.appInsights=appInsights,appInsights.queue&&0===appInsights.queue.length&&appInsights.trackPageView();
+  </script>
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <div class="bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light container">
+          
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="RogueSharp" width="36" height="36">
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        
+          <div class="collapse navbar-collapse" id="navbar">
+            <!--<form id="search" role="search" class="form-inline my-2 my-lg-0">
+              <input id="search-query" class="form-control mr-sm-2" type="search" placeholder="Search" autocomplete="off" aria-label="Search">
+            </form>-->
+          </div>
+        </nav>
+        </div>
+        
+        <div class="bg-dark">
+        <nav aria-label="breadcrumb" id="breadcrumb" class="container hide-when-search">
+          <!--<ol class="breadcrumb">
+            <li class="breadcrumb-item" aria-current="page"></li>
+          </ol>-->
+        </nav>
+        </div>      </header>
+      <div role="main" class="container body-content hide-when-search">
+      <div class="row">
+        
+        
+        <div class="sidenav hide-when-search col-md-3 pt-md-3 pb-md-3">
+          <a class="btn btn-link toc-toggle d-md-none" data-toggle="collapse" data-target="#sidetoggle" href="javascript:;" aria-expanded="true" aria-controls="sidetoggle">
+            Show / Hide Table of Contents
+          </a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article col-md-9">
+      <div class="row">
+          <div class="col-lg-9">
+            <article class="content wrap pt-2 pb-2" id="_content" data-uid="RogueSharp.DiceNotation.DiceExpression">
+  
+  
+  <h1 id="RogueSharp_DiceNotation_DiceExpression" data-uid="RogueSharp.DiceNotation.DiceExpression" class="text-break">Class DiceExpression
+  </h1>
+  <div class="markdown level0 summary"><p>The DiceExpression class can be used to fluently add DiceTerms to a collection and then Roll them.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance mt-1">
+    <h5 class="text-muted font-weight-light font-italic mb-0">Inheritance</h5>
+    <div class="d-flex flex-wrap">
+    <div class="level0 mr-1"><span class="xref">System.Object</span><i class="fal fa-arrow-alt-left fa-fw"></i></div>
+    <div class="level1"><span class="xref">DiceExpression</span></div>
+    </div>
+  </div>
+  <div class="inheritedMembers mt-1">
+    <h5 class="font-weight-light font-italic mb-0">
+      <a class="text-muted" data-toggle="collapse" data-target="#inheritedMembersCollapse" role="button" aria-expanded="false" aria-controls="inheritedMembersCollapse">
+      Inherited Members
+      </a>
+    </h5>
+    <div class="collapse" id="inheritedMembersCollapse">
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    </div>
+  </div>
+  <h6 class="mt-1"><i class="text-muted font-weight-light font-italic mb-0">Namespace:</i> <a class="xref" href="RogueSharp.DiceNotation.html">RogueSharp.DiceNotation</a></h6>
+  <h6 class="mt-1"><i class="text-muted font-weight-light font-italic mb-0">Assembly:</i> RogueSharp.dll</h6>
+  <h5 id="RogueSharp_DiceNotation_DiceExpression_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class DiceExpression</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_DiceNotation_DiceExpression__ctor.md&amp;value=---%0Auid%3A%20RogueSharp.DiceNotation.DiceExpression.%23ctor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/DiceNotation/DiceExpression.cs/#L17">View Source</a>
+  </span>
+  <a id="RogueSharp_DiceNotation_DiceExpression__ctor_" data-uid="RogueSharp.DiceNotation.DiceExpression.#ctor*"></a>
+  <h4 id="RogueSharp_DiceNotation_DiceExpression__ctor" data-uid="RogueSharp.DiceNotation.DiceExpression.#ctor">DiceExpression()</h4>
+  <div class="markdown level1 summary"><p>Construct a new DiceExpression class with an empty list of terms</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DiceExpression()</code></pre>
+  </div>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_DiceNotation_DiceExpression_Constant_System_Int32_.md&amp;value=---%0Auid%3A%20RogueSharp.DiceNotation.DiceExpression.Constant(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/DiceNotation/DiceExpression.cs/#L89">View Source</a>
+  </span>
+  <a id="RogueSharp_DiceNotation_DiceExpression_Constant_" data-uid="RogueSharp.DiceNotation.DiceExpression.Constant*"></a>
+  <h4 id="RogueSharp_DiceNotation_DiceExpression_Constant_System_Int32_" data-uid="RogueSharp.DiceNotation.DiceExpression.Constant(System.Int32)">Constant(Int32)</h4>
+  <div class="markdown level1 summary"><p>Add a constant to this DiceExpression with the specified integer value</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DiceExpression Constant(int value)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">value</span></td>
+        <td><p>An integer constant to add to this DiceExpression</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="RogueSharp.DiceNotation.DiceExpression.html">DiceExpression</a></td>
+        <td><p>A DiceExpression representing the previous terms in this DiceExpression plus this newly added Constant</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_DiceNotation_DiceExpression_Dice_System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20RogueSharp.DiceNotation.DiceExpression.Dice(System.Int32%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/DiceNotation/DiceExpression.cs/#L53">View Source</a>
+  </span>
+  <a id="RogueSharp_DiceNotation_DiceExpression_Dice_" data-uid="RogueSharp.DiceNotation.DiceExpression.Dice*"></a>
+  <h4 id="RogueSharp_DiceNotation_DiceExpression_Dice_System_Int32_System_Int32_" data-uid="RogueSharp.DiceNotation.DiceExpression.Dice(System.Int32,System.Int32)">Dice(Int32, Int32)</h4>
+  <div class="markdown level1 summary"><p>Add multiple Dice to this DiceExpression with the specified parameters</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DiceExpression Dice(int multiplicity, int sides)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">multiplicity</span></td>
+        <td><p>The number of Dice</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">sides</span></td>
+        <td><p>The number of sides per Die</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="RogueSharp.DiceNotation.DiceExpression.html">DiceExpression</a></td>
+        <td><p>A DiceExpression representing the previous terms in this DiceExpression plus these newly added Dice</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_DiceNotation_DiceExpression_Dice_System_Int32_System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20RogueSharp.DiceNotation.DiceExpression.Dice(System.Int32%2CSystem.Int32%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/DiceNotation/DiceExpression.cs/#L65">View Source</a>
+  </span>
+  <a id="RogueSharp_DiceNotation_DiceExpression_Dice_" data-uid="RogueSharp.DiceNotation.DiceExpression.Dice*"></a>
+  <h4 id="RogueSharp_DiceNotation_DiceExpression_Dice_System_Int32_System_Int32_System_Int32_" data-uid="RogueSharp.DiceNotation.DiceExpression.Dice(System.Int32,System.Int32,System.Int32)">Dice(Int32, Int32, Int32)</h4>
+  <div class="markdown level1 summary"><p>Add multiple Dice to this DiceExpression with the specified parameters</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DiceExpression Dice(int multiplicity, int sides, int scalar)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">multiplicity</span></td>
+        <td><p>The number of Dice</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">sides</span></td>
+        <td><p>The number of sides per Die</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">scalar</span></td>
+        <td><p>The value to multiply the result of the Roll of these Dice by</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="RogueSharp.DiceNotation.DiceExpression.html">DiceExpression</a></td>
+        <td><p>A DiceExpression representing the previous terms in this DiceExpression plus these newly added Dice</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_DiceNotation_DiceExpression_Dice_System_Int32_System_Int32_System_Int32_System_Nullable_System_Int32__.md&amp;value=---%0Auid%3A%20RogueSharp.DiceNotation.DiceExpression.Dice(System.Int32%2CSystem.Int32%2CSystem.Int32%2CSystem.Nullable%7BSystem.Int32%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/DiceNotation/DiceExpression.cs/#L78">View Source</a>
+  </span>
+  <a id="RogueSharp_DiceNotation_DiceExpression_Dice_" data-uid="RogueSharp.DiceNotation.DiceExpression.Dice*"></a>
+  <h4 id="RogueSharp_DiceNotation_DiceExpression_Dice_System_Int32_System_Int32_System_Int32_System_Nullable_System_Int32__" data-uid="RogueSharp.DiceNotation.DiceExpression.Dice(System.Int32,System.Int32,System.Int32,System.Nullable{System.Int32})">Dice(Int32, Int32, Int32, Nullable&lt;Int32&gt;)</h4>
+  <div class="markdown level1 summary"><p>Add multiple Dice to this DiceExpression with the specified parameters</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DiceExpression Dice(int multiplicity, int sides, int scalar, int? choose)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">multiplicity</span></td>
+        <td><p>The number of Dice</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">sides</span></td>
+        <td><p>The number of sides per Die</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">scalar</span></td>
+        <td><p>The value to multiply the result of the Roll of these Dice by</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
+        <td><span class="parametername">choose</span></td>
+        <td><p>Optional number of dice to choose out of the total rolled. The highest rolled Dice will be chosen.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="RogueSharp.DiceNotation.DiceExpression.html">DiceExpression</a></td>
+        <td><p>A DiceExpression representing the previous terms in this DiceExpression plus these newly added Dice</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_DiceNotation_DiceExpression_Die_System_Int32_.md&amp;value=---%0Auid%3A%20RogueSharp.DiceNotation.DiceExpression.Die(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/DiceNotation/DiceExpression.cs/#L42">View Source</a>
+  </span>
+  <a id="RogueSharp_DiceNotation_DiceExpression_Die_" data-uid="RogueSharp.DiceNotation.DiceExpression.Die*"></a>
+  <h4 id="RogueSharp_DiceNotation_DiceExpression_Die_System_Int32_" data-uid="RogueSharp.DiceNotation.DiceExpression.Die(System.Int32)">Die(Int32)</h4>
+  <div class="markdown level1 summary"><p>Add a single Die to this DiceExpression with the specified number of sides</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DiceExpression Die(int sides)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">sides</span></td>
+        <td><p>The number of sides on the Die to add to this DiceExpression</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="RogueSharp.DiceNotation.DiceExpression.html">DiceExpression</a></td>
+        <td><p>A DiceExpression representing the previous terms in this DiceExpression plus this newly added Die</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_DiceNotation_DiceExpression_Die_System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20RogueSharp.DiceNotation.DiceExpression.Die(System.Int32%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/DiceNotation/DiceExpression.cs/#L32">View Source</a>
+  </span>
+  <a id="RogueSharp_DiceNotation_DiceExpression_Die_" data-uid="RogueSharp.DiceNotation.DiceExpression.Die*"></a>
+  <h4 id="RogueSharp_DiceNotation_DiceExpression_Die_System_Int32_System_Int32_" data-uid="RogueSharp.DiceNotation.DiceExpression.Die(System.Int32,System.Int32)">Die(Int32, Int32)</h4>
+  <div class="markdown level1 summary"><p>Add a single Die to this DiceExpression with the specified number of sides and scalar</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DiceExpression Die(int sides, int scalar)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">sides</span></td>
+        <td><p>The number of sides on the Die to add to this DiceExpression</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">scalar</span></td>
+        <td><p>The value to multiply the result of the Roll of this Die by</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="RogueSharp.DiceNotation.DiceExpression.html">DiceExpression</a></td>
+        <td><p>A DiceExpression representing the previous terms in this DiceExpression plus this newly added Die</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_DiceNotation_DiceExpression_MaxRoll.md&amp;value=---%0Auid%3A%20RogueSharp.DiceNotation.DiceExpression.MaxRoll%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/DiceNotation/DiceExpression.cs/#L129">View Source</a>
+  </span>
+  <a id="RogueSharp_DiceNotation_DiceExpression_MaxRoll_" data-uid="RogueSharp.DiceNotation.DiceExpression.MaxRoll*"></a>
+  <h4 id="RogueSharp_DiceNotation_DiceExpression_MaxRoll" data-uid="RogueSharp.DiceNotation.DiceExpression.MaxRoll">MaxRoll()</h4>
+  <div class="markdown level1 summary"><p>Roll all of the Dice that are part of this DiceExpression, but force all of the rolls to be the highest possible result</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DiceResult MaxRoll()</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="RogueSharp.DiceNotation.DiceResult.html">DiceResult</a></td>
+        <td><p>A DiceResult representing the results of this Roll. All dice should have rolled their maximum values</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_DiceNotation_DiceExpression_MinRoll.md&amp;value=---%0Auid%3A%20RogueSharp.DiceNotation.DiceExpression.MinRoll%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/DiceNotation/DiceExpression.cs/#L120">View Source</a>
+  </span>
+  <a id="RogueSharp_DiceNotation_DiceExpression_MinRoll_" data-uid="RogueSharp.DiceNotation.DiceExpression.MinRoll*"></a>
+  <h4 id="RogueSharp_DiceNotation_DiceExpression_MinRoll" data-uid="RogueSharp.DiceNotation.DiceExpression.MinRoll">MinRoll()</h4>
+  <div class="markdown level1 summary"><p>Roll all of the Dice that are part of this DiceExpression, but force all of the rolls to be the lowest possible result</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DiceResult MinRoll()</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="RogueSharp.DiceNotation.DiceResult.html">DiceResult</a></td>
+        <td><p>A DiceResult representing the results of this Roll. All dice should have rolled their minimum values</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_DiceNotation_DiceExpression_Roll.md&amp;value=---%0Auid%3A%20RogueSharp.DiceNotation.DiceExpression.Roll%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/DiceNotation/DiceExpression.cs/#L111">View Source</a>
+  </span>
+  <a id="RogueSharp_DiceNotation_DiceExpression_Roll_" data-uid="RogueSharp.DiceNotation.DiceExpression.Roll*"></a>
+  <h4 id="RogueSharp_DiceNotation_DiceExpression_Roll" data-uid="RogueSharp.DiceNotation.DiceExpression.Roll">Roll()</h4>
+  <div class="markdown level1 summary"><p>Roll all of the Dice that are part of this DiceExpression</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DiceResult Roll()</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="RogueSharp.DiceNotation.DiceResult.html">DiceResult</a></td>
+        <td><p>A DiceResult representing the results of this Roll</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="RogueSharp_DiceNotation_DiceExpression_Roll_remarks" class="text-muted font-weight-light font-italic">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Uses DotNetRandom as its RNG</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_DiceNotation_DiceExpression_Roll_RogueSharp_Random_IRandom_.md&amp;value=---%0Auid%3A%20RogueSharp.DiceNotation.DiceExpression.Roll(RogueSharp.Random.IRandom)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/DiceNotation/DiceExpression.cs/#L100">View Source</a>
+  </span>
+  <a id="RogueSharp_DiceNotation_DiceExpression_Roll_" data-uid="RogueSharp.DiceNotation.DiceExpression.Roll*"></a>
+  <h4 id="RogueSharp_DiceNotation_DiceExpression_Roll_RogueSharp_Random_IRandom_" data-uid="RogueSharp.DiceNotation.DiceExpression.Roll(RogueSharp.Random.IRandom)">Roll(IRandom)</h4>
+  <div class="markdown level1 summary"><p>Roll all of the Dice that are part of this DiceExpression</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DiceResult Roll(IRandom random)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="RogueSharp.Random.IRandom.html">IRandom</a></td>
+        <td><span class="parametername">random</span></td>
+        <td><p>IRandom RNG used to perform the Roll.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="RogueSharp.DiceNotation.DiceResult.html">DiceResult</a></td>
+        <td><p>A DiceResult representing the results of this Roll</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_DiceNotation_DiceExpression_ToString.md&amp;value=---%0Auid%3A%20RogueSharp.DiceNotation.DiceExpression.ToString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/DiceNotation/DiceExpression.cs/#L138">View Source</a>
+  </span>
+  <a id="RogueSharp_DiceNotation_DiceExpression_ToString_" data-uid="RogueSharp.DiceNotation.DiceExpression.ToString*"></a>
+  <h4 id="RogueSharp_DiceNotation_DiceExpression_ToString" data-uid="RogueSharp.DiceNotation.DiceExpression.ToString">ToString()</h4>
+  <div class="markdown level1 summary"><p>Returns a string that represents this DiceExpression</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override string ToString()</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>A string representing this DiceExpression</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic overrides">Overrides</h5>
+  <div><span class="xref">System.Object.ToString()</span></div>
+</article>
+            <div id="disqus_thread"></div>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+          </div>
+          
+          <div class="d-none d-lg-block col-md-3" role="complementary">
+            <div class="sideaffix pt-3 pb-3">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_DiceNotation_DiceExpression.md&amp;value=---%0Auid%3A%20RogueSharp.DiceNotation.DiceExpression%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link text-info" title="Improve this Doc">
+                    <i class="fal fa-edit fa-fw"></i>
+                    <span>Improve this Doc</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/DiceNotation/DiceExpression.cs/#L11" class="contribution-link text-info" title="View Source">
+                    <i class="fal fa-code fa-fw"></i>
+                    <span>View Source</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <!--<div class="github-links">
+                  <a class="github-button" href="https://github.com/fszlin/certes" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star fszlin/certes on GitHub">Star</a>
+              </div>-->
+              <nav class="hidden-print affix mt-2" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      
+      <footer class="bg-secondary">
+        <!--<div class="grad-bottom"></div>-->
+        <div class="footer bg-secondary">
+          <div class="container">
+          <div class="d-flex">
+            <div class="p-2 flex-grow-1 text-white">
+            <a class="text-white" href="https://github.com/FaronBracy/RogueSharp">RogueSharp &copy; 2014-2020 Faron Bracy</a>
+            
+            </div>
+            <div class="p-2">
+              <a class="text-white" href="#top">Back to top</a>
+            </div>
+          </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/dos.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/powershell.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+  </body>
+</html>

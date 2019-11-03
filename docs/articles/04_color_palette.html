@@ -1,0 +1,273 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Color Palette | RogueSharp </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="title" content="Color Palette - RogueSharp ">
+    <meta name="generator" content="docfx 2.47.0.0">
+    
+    <link rel="shortcut icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-87DrmpqHRiY8hPLIr7ByqhPIywuSsjuQAfMXAE0sMUpY3BM7nXjf+mLIUSvhDArs" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css">
+    <link rel="stylesheet" href="../styles/site.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+    <script type="text/javascript">
+    var appInsights=window.appInsights||function(a){function b(a){c[a]=function(){var b=arguments;c.queue.push(function(){c[a].apply(c,b)})}}var c={config:a},d=document,e=window;setTimeout(function(){var b=d.createElement("script");b.src=a.url||"https://az416426.vo.msecnd.net/scripts/a/ai.0.js",d.getElementsByTagName("script")[0].parentNode.appendChild(b)});try{c.cookie=d.cookie}catch(a){}c.queue=[];for(var f=["Event","Exception","Metric","PageView","Trace","Dependency"];f.length;)b("track"+f.pop());if(b("setAuthenticatedUserContext"),b("clearAuthenticatedUserContext"),b("startTrackEvent"),b("stopTrackEvent"),b("startTrackPage"),b("stopTrackPage"),b("flush"),!a.disableExceptionTracking){f="onerror",b("_"+f);var g=e[f];e[f]=function(a,b,d,e,h){var i=g&&g(a,b,d,e,h);return!0!==i&&c["_"+f](a,b,d,e,h),i}}return c}({instrumentationKey:"9aaf9896-bee3-4d08-abb6-2ef51b389035"});
+    window.appInsights=appInsights,appInsights.queue&&0===appInsights.queue.length&&appInsights.trackPageView();
+  </script>
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <div class="bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light container">
+          
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="RogueSharp" width="36" height="36">
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        
+          <div class="collapse navbar-collapse" id="navbar">
+            <!--<form id="search" role="search" class="form-inline my-2 my-lg-0">
+              <input id="search-query" class="form-control mr-sm-2" type="search" placeholder="Search" autocomplete="off" aria-label="Search">
+            </form>-->
+          </div>
+        </nav>
+        </div>
+        
+        <div class="bg-dark">
+        <nav aria-label="breadcrumb" id="breadcrumb" class="container hide-when-search">
+          <!--<ol class="breadcrumb">
+            <li class="breadcrumb-item" aria-current="page"></li>
+          </ol>-->
+        </nav>
+        </div>      </header>
+      <div role="main" class="container body-content hide-when-search">
+      <div class="row">
+        
+        
+        <div class="sidenav hide-when-search col-md-3 pt-md-3 pb-md-3">
+          <a class="btn btn-link toc-toggle d-md-none" data-toggle="collapse" data-target="#sidetoggle" href="javascript:;" aria-expanded="true" aria-controls="sidetoggle">
+            Show / Hide Table of Contents
+          </a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article col-md-9">
+      <div class="row">
+          <div class="col-lg-9">
+            <article class="content wrap pt-2 pb-2" id="_content" data-uid="">
+<h1 id="color-palette">Color Palette</h1>
+
+<p>In this tutorial we’ll look defining a color palette or swatch that we’ll use for the elements in our game.</p>
+<h2 id="paletton">Paletton</h2>
+<p>There are lots of websites that will help you choose colors. One that I like is paletton. After some fiddling around I went with a Tetrad 4-color scheme that you can see here:</p>
+<p><a href="http://paletton.com/#uid=73d0u0k5qgb2NnT41jT74c8bJ8X">http://paletton.com/#uid=73d0u0k5qgb2NnT41jT74c8bJ8X</a></p>
+<p><img src="../images/V3Tutorial/04_paletton.png" alt="alt text" title="Sample Colors from Paletton.com"></p>
+<h2 id="dawnbringers-16-color-palette">DawnBringer’s 16 Color Palette</h2>
+<p>Another palette that I ran across on the pixeljoint forums is DawnBringer’s 16 Color Palette. Read more about it here:</p>
+<p><a href="http://pixeljoint.com/forum/forum_posts.asp?TID=12795">http://pixeljoint.com/forum/forum_posts.asp?TID=12795</a></p>
+<p><img src="../images/V3Tutorial/04_dawnbringer16color.png" alt="alt text" title="DawnBringer’s 16 Color Palette"></p>
+<h2 id="creating-a-folder-with-color-and-swatch-classes">Creating a Folder with Color and Swatch Classes</h2>
+<p>We are going to make two new classes called <code>Colors.cs</code> and <code>Swatch.cs</code> and they should be categorized under their own folder called Core.</p>
+<p>You can accomplish this by right clicking on the project and choosing <strong>Add -&gt; New Folder</strong>. Then right click on the folder and choose <strong>Add -&gt; Class…</strong></p>
+<p>Do this for both <code>Color.cs</code> and <code>Swatch.cs</code> and your project should look something like the one below.</p>
+<p><img src="../images/V3Tutorial/04_corefolder.png" alt="alt text" title="The Core folder in Visual Studio Project Manager"></p>
+<h2 id="swatch-class">Swatch Class</h2>
+<p>RLNET lets you define colors with the <code>RLColor</code> constructor taking the RGB values of the color as parameters as in <code>RLColor myColor = new RLColor( red, green, blue );</code></p>
+<p>In the Swatch class we’ll define friendly names for each of the colors from the palettes that we choose so that we don’t have to recall those RGB values.</p>
+<p>In hindsight it might have made more sense to call this class Palette. Feel free to rename yours to whatever makes sense to you.</p>
+<p>Add the following code to <code>Swatch.cs</code></p>
+<pre><code class="lang-cs">using RLNET;
+
+namespace RogueSharpV3Tutorial.Core
+{
+  public class Swatch
+  {
+    // http://paletton.com/#uid=73d0u0k5qgb2NnT41jT74c8bJ8X
+
+    public static RLColor PrimaryLightest = new RLColor( 110, 121, 119 );
+    public static RLColor PrimaryLighter = new RLColor( 88, 100, 98 );
+    public static RLColor Primary = new RLColor( 68, 82, 79 );
+    public static RLColor PrimaryDarker = new RLColor( 48, 61, 59 );
+    public static RLColor PrimaryDarkest = new RLColor( 29, 45, 42 );
+
+    public static RLColor SecondaryLightest = new RLColor( 116, 120, 126 );
+    public static RLColor SecondaryLighter = new RLColor( 93, 97, 105 );
+    public static RLColor Secondary = new RLColor( 72, 77, 85 );
+    public static RLColor SecondaryDarker = new RLColor( 51, 56, 64 );
+    public static RLColor SecondaryDarkest = new RLColor( 31, 38, 47 );
+
+    public static RLColor AlternateLightest = new RLColor( 190, 184, 174 );
+    public static RLColor AlternateLighter = new RLColor( 158, 151, 138 );
+    public static RLColor Alternate = new RLColor( 129, 121, 107 );
+    public static RLColor AlternateDarker = new RLColor( 97, 89, 75 );
+    public static RLColor AlternateDarkest = new RLColor( 71, 62, 45 );
+
+    public static RLColor ComplimentLightest = new RLColor( 190, 180, 174 );
+    public static RLColor ComplimentLighter = new RLColor( 158, 147, 138 );
+    public static RLColor Compliment = new RLColor( 129, 116, 107 );
+    public static RLColor ComplimentDarker = new RLColor( 97, 84, 75 );
+    public static RLColor ComplimentDarkest = new RLColor( 71, 56, 45 );
+
+    // http://pixeljoint.com/forum/forum_posts.asp?TID=12795
+
+    public static RLColor DbDark = new RLColor( 20, 12, 28 );
+    public static RLColor DbOldBlood = new RLColor( 68, 36, 52 );
+    public static RLColor DbDeepWater = new RLColor( 48, 52, 109 );
+    public static RLColor DbOldStone = new RLColor( 78, 74, 78 );
+    public static RLColor DbWood = new RLColor( 133, 76, 48 );
+    public static RLColor DbVegetation = new RLColor( 52, 101, 36 );
+    public static RLColor DbBlood = new RLColor( 208, 70, 72 );
+    public static RLColor DbStone = new RLColor( 117, 113, 97 );
+    public static RLColor DbWater = new RLColor( 89, 125, 206 );
+    public static RLColor DbBrightWood = new RLColor( 210, 125, 44 );
+    public static RLColor DbMetal = new RLColor( 133, 149, 161 );
+    public static RLColor DbGrass = new RLColor( 109, 170, 44 );
+    public static RLColor DbSkin = new RLColor( 210, 170, 153 );
+    public static RLColor DbSky = new RLColor( 109, 194, 202 );
+    public static RLColor DbSun = new RLColor( 218, 212, 94 );
+    public static RLColor DbLight = new RLColor( 222, 238, 214 );
+  }
+}
+</code></pre>
+<h2 id="colors-class">Colors Class</h2>
+<p>Why do we have two classes for colors? What is the difference between the <code>Swatch</code> class and the <code>Colors</code> class? I thought that the <code>Swatch</code> would make sense to just define the possible colors that we have to work with. Then when we define the color of something specific to our game’s domain like the Player’s symbol we can put that definition in the <code>Colors</code> class.  It might be that both the Player’s ‘@’ symbol and the text for the inventory both use a color from the swatch such as <code>Swatch.DbLight</code>.</p>
+<p>A nice benefit of keeping all of our Colors together is that if we want to change colors in the future we can come to this one place to change them and don’t have to dig all over in code to find colors spread throughout. We could also load different colors if we wanted a special colorblind mode.</p>
+<p>Add the following code to <code>Colors.cs</code></p>
+<pre><code class="lang-cs">using RLNET;
+
+namespace RogueSharpV3Tutorial.Core
+{
+  public class Colors
+  {
+    public static RLColor FloorBackground = RLColor.Black;
+    public static RLColor Floor = Swatch.AlternateDarkest;
+    public static RLColor FloorBackgroundFov = Swatch.DbDark;
+    public static RLColor FloorFov = Swatch.Alternate;
+
+    public static RLColor WallBackground = Swatch.SecondaryDarkest;
+    public static RLColor Wall = Swatch.Secondary;
+    public static RLColor WallBackgroundFov = Swatch.SecondaryDarker;
+    public static RLColor WallFov = Swatch.SecondaryLighter;
+
+    public static RLColor TextHeading = Swatch.DbLight;
+  }
+}
+</code></pre>
+<p>You’ll notice that the only colors that we have defined so far are for the Floor and Walls both when they are in Field-of-View and when they are not. We also defined a color for text headings.</p>
+<h2 id="testing-our-colors">Testing our Colors</h2>
+<p>To see if our colors are working as we expect lets go back to <code>Game.cs</code> and find the <code>OnRootConsoleUpdate()</code> method and substitute in our own colors.</p>
+<pre><code class="lang-cs">// Remember to add the using for our new namespace to the top of the file
+using RogueSharpV3Tutorial.Core;
+
+private static void OnRootConsoleUpdate( object sender, UpdateEventArgs e )
+{
+  _mapConsole.SetBackColor( 0, 0, _mapWidth, _mapHeight, Colors.FloorBackground );
+  _mapConsole.Print( 1, 1, &quot;Map&quot;, Colors.TextHeading );
+
+  _messageConsole.SetBackColor( 0, 0, _messageWidth, _messageHeight, Swatch.DbDeepWater );
+  _messageConsole.Print( 1, 1, &quot;Messages&quot;, Colors.TextHeading );
+
+  _statConsole.SetBackColor( 0, 0, _statWidth, _statHeight, Swatch.DbOldStone );
+  _statConsole.Print( 1, 1, &quot;Stats&quot;, Colors.TextHeading );
+
+  _inventoryConsole.SetBackColor( 0, 0, _inventoryWidth, _inventoryHeight, Swatch.DbWood );
+  _inventoryConsole.Print( 1, 1, &quot;Inventory&quot;, Colors.TextHeading );
+}
+</code></pre>
+<p>If you run the game you should now see something like this:</p>
+<p><img src="../images/V3Tutorial/04_fourcolorconsoles.png" alt="alt text" title="Four nested consoles with color"></p>
+<p>This should look very familiar. That was quite a bit of work for only slightly different colors, but we’ll be using these colors for the rest of our game.</p>
+<h2 id="code-on-github">Code on GitHub</h2>
+<p>As always the code for the tutorial series so far can be found on GitHub:</p>
+<ul>
+<li><a href="https://github.com/FaronBracy/RogueSharpV3Tutorial/tree/02ChooseColors">https://github.com/FaronBracy/RogueSharpV3Tutorial/tree/02ChooseColors</a></li>
+</ul>
+<p>Bored waiting for the next tutorial? The complete tutorial project is already finished and the source code is available on Github:</p>
+<ul>
+<li>Sample Roguelike game using RogueSharp and RLNet console
+<ul>
+<li><a href="https://github.com/FaronBracy/RogueSharpRLNetSamples">https://github.com/FaronBracy/RogueSharpRLNetSamples</a></li>
+</ul>
+</li>
+<li>Sample Roguelike game using RogueSharp and SadConsole
+<ul>
+<li><a href="https://github.com/FaronBracy/RogueSharpSadConsoleSamples">https://github.com/FaronBracy/RogueSharpSadConsoleSamples</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="closing-thoughts">Closing Thoughts</h2>
+<p>I’m a little disappointed that throughout this post I refer to our color palettes but then when it comes to code I put the palettes in a class called swatch. I’m basically using two terms for the same thing.</p>
+<p>When starting a new project it could be beneficial before coding to come up with a glossary for all of the objects of your game. Do you call them tiles or cells? Is it a grid or a map? Characters, Entities, Actors, Tokens, Figures… if you ever read any books on Domain Driven Design they recommend that you come up with a <a href="http://martinfowler.com/bliki/UbiquitousLanguage.html">ubiquitous language</a> that you use for both describing your domain (in this case our game) in both code and when speaking to others about it and then stick to it.</p>
+</article>
+            <div id="disqus_thread"></div>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+          </div>
+          
+          <div class="d-none d-lg-block col-md-3" role="complementary">
+            <div class="sideaffix pt-3 pb-3">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/FaronBracy/RogueSharp.Documentation/blob/master/articles/04_color_palette.md/#L1" class="contribution-link text-info" title="Improve this Doc">
+                    <i class="fal fa-edit fa-fw"></i>
+                    <span>Improve this Doc</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <!--<div class="github-links">
+                  <a class="github-button" href="https://github.com/fszlin/certes" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star fszlin/certes on GitHub">Star</a>
+              </div>-->
+              <nav class="hidden-print affix mt-2" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      
+      <footer class="bg-secondary">
+        <!--<div class="grad-bottom"></div>-->
+        <div class="footer bg-secondary">
+          <div class="container">
+          <div class="d-flex">
+            <div class="p-2 flex-grow-1 text-white">
+            <a class="text-white" href="https://github.com/FaronBracy/RogueSharp">RogueSharp &copy; 2014-2020 Faron Bracy</a>
+            
+            </div>
+            <div class="p-2">
+              <a class="text-white" href="#top">Back to top</a>
+            </div>
+          </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/dos.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/powershell.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+  </body>
+</html>

@@ -1,0 +1,1371 @@
+{
+  "homepages": [],
+  "source_base_path": "C:/github/RogueSharp.Documentation",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RogueSharp.Algorithms.DepthFirstPaths.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RogueSharp.Algorithms.DepthFirstPaths.html",
+          "hash": "8ygYT5CEYsCVOT1hK3cZyg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RogueSharp.Algorithms.DijkstraShortestPath.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RogueSharp.Algorithms.DijkstraShortestPath.html",
+          "hash": "n0PxOLLnQUQI625lnp4VUA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RogueSharp.Algorithms.DirectedEdge.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RogueSharp.Algorithms.DirectedEdge.html",
+          "hash": "8Z9u/id2AgthQvPl7lVLnw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RogueSharp.Algorithms.EdgeWeightedDigraph.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RogueSharp.Algorithms.EdgeWeightedDigraph.html",
+          "hash": "7IWz/EQ6fQuqdAyAuaUx/w=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RogueSharp.Algorithms.Graph.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RogueSharp.Algorithms.Graph.html",
+          "hash": "kl9PDIA1yFL5Ve+GVbNXzg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RogueSharp.Algorithms.IndexMinPriorityQueue-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RogueSharp.Algorithms.IndexMinPriorityQueue-1.html",
+          "hash": "Y+A7e1ZmvjXkdnsPdPe3fw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RogueSharp.Algorithms.UnionFind.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RogueSharp.Algorithms.UnionFind.html",
+          "hash": "2DP7elEaSJgmhGadMvwKcA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RogueSharp.Algorithms.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RogueSharp.Algorithms.html",
+          "hash": "r58ZVmppJc5eGKc52vW65w=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RogueSharp.Cell.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RogueSharp.Cell.html",
+          "hash": "DizPNL54l0rRRq8cgqFFTA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RogueSharp.DiceNotation.Dice.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RogueSharp.DiceNotation.Dice.html",
+          "hash": "6be4ftrzE0+mm3nzTKUibA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RogueSharp.DiceNotation.DiceExpression.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RogueSharp.DiceNotation.DiceExpression.html",
+          "hash": "XWtBrNDXAMWdvkcMJS5JCg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RogueSharp.DiceNotation.DiceParser.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RogueSharp.DiceNotation.DiceParser.html",
+          "hash": "SYaTykcuSoV711J8b+s5TA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RogueSharp.DiceNotation.DiceResult.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RogueSharp.DiceNotation.DiceResult.html",
+          "hash": "F0qmoQtDoEhhqD1MDR/wUA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RogueSharp.DiceNotation.Exceptions.ImpossibleDieException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RogueSharp.DiceNotation.Exceptions.ImpossibleDieException.html",
+          "hash": "trbbNotyADDRv4YeJFbfYQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RogueSharp.DiceNotation.Exceptions.InvalidChooseException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RogueSharp.DiceNotation.Exceptions.InvalidChooseException.html",
+          "hash": "VJXzIhqq9ZWfN7bq9k2dyg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RogueSharp.DiceNotation.Exceptions.InvalidMultiplicityException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RogueSharp.DiceNotation.Exceptions.InvalidMultiplicityException.html",
+          "hash": "/aB3Z5kGJ3aawH3jq2+ZZQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RogueSharp.DiceNotation.Exceptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RogueSharp.DiceNotation.Exceptions.html",
+          "hash": "TunzVVJU7mpzrqzOz4BkEQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RogueSharp.DiceNotation.IDiceParser.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RogueSharp.DiceNotation.IDiceParser.html",
+          "hash": "VbId5230snC5tPe6/bn6xg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RogueSharp.DiceNotation.TermResult.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RogueSharp.DiceNotation.TermResult.html",
+          "hash": "kFVp7PMEt9qFc9718D4HsA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RogueSharp.DiceNotation.Terms.ConstantTerm.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RogueSharp.DiceNotation.Terms.ConstantTerm.html",
+          "hash": "HTW+gplyMqGbSFFJG2vIaw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RogueSharp.DiceNotation.Terms.DiceTerm.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RogueSharp.DiceNotation.Terms.DiceTerm.html",
+          "hash": "1qxNLCMRQcXJYfC8MUaKhw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RogueSharp.DiceNotation.Terms.IDiceExpressionTerm.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RogueSharp.DiceNotation.Terms.IDiceExpressionTerm.html",
+          "hash": "ReVdYG13c4Uvnle1YyZwSA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RogueSharp.DiceNotation.Terms.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RogueSharp.DiceNotation.Terms.html",
+          "hash": "pPmbkgudd9ne4yvkylH46w=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RogueSharp.DiceNotation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RogueSharp.DiceNotation.html",
+          "hash": "54sVBYsIzTblq7T0wOndug=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RogueSharp.FieldOfView.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RogueSharp.FieldOfView.html",
+          "hash": "U1/k2QRcJ8tPlDffw6deCQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RogueSharp.GoalMap.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RogueSharp.GoalMap.html",
+          "hash": "b5pTzK2dAAVqMTtXhmVGWA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RogueSharp.ICell.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RogueSharp.ICell.html",
+          "hash": "5OEGKaPeKhwQK6buptjfcw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RogueSharp.IGoalMap.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RogueSharp.IGoalMap.html",
+          "hash": "vosOEj1DQ1p+U362jBAMhQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RogueSharp.IMap.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RogueSharp.IMap.html",
+          "hash": "Q08SI0+ufcmfd7DGQ3JQCw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RogueSharp.Map.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RogueSharp.Map.html",
+          "hash": "QMDyPFzbgv/tzSeL5s1gTg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RogueSharp.MapCreation.BorderOnlyMapCreationStrategy-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RogueSharp.MapCreation.BorderOnlyMapCreationStrategy-1.html",
+          "hash": "JtGKLGfRTQvmswxcnTdX6w=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RogueSharp.MapCreation.CaveMapCreationStrategy-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RogueSharp.MapCreation.CaveMapCreationStrategy-1.html",
+          "hash": "/gUPLfcpPe6MeJc3PUL+jA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RogueSharp.MapCreation.IMapCreationStrategy-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RogueSharp.MapCreation.IMapCreationStrategy-1.html",
+          "hash": "B77Jtgh0kv3Cn0tc0gfBpA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RogueSharp.MapCreation.RandomRoomsMapCreationStrategy-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RogueSharp.MapCreation.RandomRoomsMapCreationStrategy-1.html",
+          "hash": "BmW234zlvwF1KCneH6NZEg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RogueSharp.MapCreation.StringDeserializeMapCreationStrategy-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RogueSharp.MapCreation.StringDeserializeMapCreationStrategy-1.html",
+          "hash": "hMq1iSTwPRoQdl+eGlu6yA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RogueSharp.MapCreation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RogueSharp.MapCreation.html",
+          "hash": "/G4yVoDSd70Aj0qsPsKDqQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RogueSharp.MapState.CellProperties.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RogueSharp.MapState.CellProperties.html",
+          "hash": "MVOUNB75xdeYqeUsv0xD0g=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RogueSharp.MapState.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RogueSharp.MapState.html",
+          "hash": "ZFWPwFmkuNvifS4ZUrW9SA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RogueSharp.NoMoreStepsException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RogueSharp.NoMoreStepsException.html",
+          "hash": "GCeSHyF3kY4Rkdi7FAGnJA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RogueSharp.Path.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RogueSharp.Path.html",
+          "hash": "q8/f+eNGTbfSQdvjmG7yZw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RogueSharp.PathFinder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RogueSharp.PathFinder.html",
+          "hash": "bh7SgrYaWLjPtPcnpVhqRg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RogueSharp.PathNotFoundException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RogueSharp.PathNotFoundException.html",
+          "hash": "gAUawqWqFcrRxBOAB33+Ig=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RogueSharp.Point.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RogueSharp.Point.html",
+          "hash": "CmbYTFYOh65n4NN4umxFcQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RogueSharp.Random.DotNetRandom.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RogueSharp.Random.DotNetRandom.html",
+          "hash": "QBthkrcXV2QkBKZV2IhvnA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RogueSharp.Random.GaussianRandom.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RogueSharp.Random.GaussianRandom.html",
+          "hash": "QL29DWcM2g5TENOl54pRYw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RogueSharp.Random.IRandom.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RogueSharp.Random.IRandom.html",
+          "hash": "6JWGSDBrXvMAvK46K+CBsA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RogueSharp.Random.IWeightedPool-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RogueSharp.Random.IWeightedPool-1.html",
+          "hash": "hLwCM2wiJEYNEw0sudhSNw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RogueSharp.Random.KnownSeriesRandom.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RogueSharp.Random.KnownSeriesRandom.html",
+          "hash": "5ITq7yb8nAzydVRZTJRrcA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RogueSharp.Random.MaxRandom.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RogueSharp.Random.MaxRandom.html",
+          "hash": "ls3QzDgFQPYO5uXD+dXDHQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RogueSharp.Random.MinRandom.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RogueSharp.Random.MinRandom.html",
+          "hash": "Cd2l8EP1alyj7wtHVWVP/w=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RogueSharp.Random.RandomState.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RogueSharp.Random.RandomState.html",
+          "hash": "Vdre/v6JTHh6XmjNyT8M/w=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RogueSharp.Random.Singleton.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RogueSharp.Random.Singleton.html",
+          "hash": "I+3Oa0RhaVu45r8lkR0N4g=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RogueSharp.Random.WeightedPool-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RogueSharp.Random.WeightedPool-1.html",
+          "hash": "nhYy9rQNlx8ttbNoLrrtMw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RogueSharp.Random.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RogueSharp.Random.html",
+          "hash": "iE2nM4R4wZG4DEXFjT9ouQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RogueSharp.Rectangle.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RogueSharp.Rectangle.html",
+          "hash": "545LouxkTHBEGWsU4Eajmw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RogueSharp.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RogueSharp.html",
+          "hash": "7kYFZj7S+BzVlpOunwBV6Q=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "api/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "api/index.html",
+          "hash": "TjS30D6olQZDy8FFTuoDgQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html",
+          "hash": "x3e5cedmgzvi9F4LEbVSVA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/01_introduction.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/01_introduction.html",
+          "hash": "7CQqDh3hYuvzDiOarWmCvg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/02_creating_the_project.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/02_creating_the_project.html",
+          "hash": "8BzZz/NqMCML1ByQ5Ldf+A=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/03_multiple_consoles.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/03_multiple_consoles.html",
+          "hash": "MeXW+STjTQhhZePcNY1BBg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/04_color_palette.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/04_color_palette.html",
+          "hash": "39KaQ1znO9/Xq9tG3S1IwQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/05_simple_map_drawing.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/05_simple_map_drawing.html",
+          "hash": "cMEBD6So4IhdQm6CK1uB2Q=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/06_player.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/06_player.html",
+          "hash": "sUZHZybQxgn3nyKJLtXFBg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/07_player_input.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/07_player_input.html",
+          "hash": "az6qwJcan5RSu44jXx07Sw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/08_simple_room_generation.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/08_simple_room_generation.html",
+          "hash": "FUlzJznagoUhQ3F1vmEfsQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/09_connecting_rooms_with_hallways.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/09_connecting_rooms_with_hallways.html",
+          "hash": "uu9VGQwDA5GawPZSqXwGgg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/10_message_log.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/10_message_log.html",
+          "hash": "50lrzt+LgWNf5tZ4aB2V1Q=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/11_player_stats.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/11_player_stats.html",
+          "hash": "A8KbwqjeoquipdCMjKbZrA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/12_monster_generation.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/12_monster_generation.html",
+          "hash": "jDRPS+e+gjS473Yz2abQEQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/13_monster_stats.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/13_monster_stats.html",
+          "hash": "UteSWMJWlTD7QxKG5BXA7Q=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/14_simple_combat.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/14_simple_combat.html",
+          "hash": "PfVuJHRApp3BlwJO63+Lpg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/15_scheduling_system.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/15_scheduling_system.html",
+          "hash": "qo7FGFL7ZdHPq1dejJUH6g=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/16_monster_behaviors.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/16_monster_behaviors.html",
+          "hash": "pXTLA/H33KCjTcYlWZNdxg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "articles/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "articles/toc.html",
+          "hash": "wUhYrJ2Auhh50lMWJK+xGA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "how_to_build.md",
+      "output": {
+        ".html": {
+          "relative_path": "how_to_build.html",
+          "hash": "oJAR9gblITeHOA3u0JgCdQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/Index/circularfieldofview.gif",
+      "output": {
+        "resource": {
+          "relative_path": "images/Index/circularfieldofview.gif"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/Index/diagonalgoalmap.gif",
+      "output": {
+        "resource": {
+          "relative_path": "images/Index/diagonalgoalmap.gif"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/Index/diagonalpathfinder.gif",
+      "output": {
+        "resource": {
+          "relative_path": "images/Index/diagonalpathfinder.gif"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/Index/sadconsoleport.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/Index/sadconsoleport.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/Index/selection.gif",
+      "output": {
+        "resource": {
+          "relative_path": "images/Index/selection.gif"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/V3Tutorial/01_tutorialgame.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/V3Tutorial/01_tutorialgame.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/V3Tutorial/02_bitmapfont.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/V3Tutorial/02_bitmapfont.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/V3Tutorial/02_consoleapplication.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/V3Tutorial/02_consoleapplication.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/V3Tutorial/02_managenugetpackages.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/V3Tutorial/02_managenugetpackages.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/V3Tutorial/02_rootconsolerender.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/V3Tutorial/02_rootconsolerender.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/V3Tutorial/02_terminal8x8.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/V3Tutorial/02_terminal8x8.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/V3Tutorial/03_fourconsoles.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/V3Tutorial/03_fourconsoles.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/V3Tutorial/04_corefolder.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/V3Tutorial/04_corefolder.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/V3Tutorial/04_dawnbringer16color.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/V3Tutorial/04_dawnbringer16color.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/V3Tutorial/04_fourcolorconsoles.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/V3Tutorial/04_fourcolorconsoles.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/V3Tutorial/04_paletton.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/V3Tutorial/04_paletton.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/V3Tutorial/05_projectstructurewithsystems.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/V3Tutorial/05_projectstructurewithsystems.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/V3Tutorial/05_simplemapdrawing.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/V3Tutorial/05_simplemapdrawing.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/V3Tutorial/06_interfacesfolder.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/V3Tutorial/06_interfacesfolder.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/V3Tutorial/06_mapwithplayer.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/V3Tutorial/06_mapwithplayer.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/V3Tutorial/07_playermove.gif",
+      "output": {
+        "resource": {
+          "relative_path": "images/V3Tutorial/07_playermove.gif"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/V3Tutorial/08_outsideofroombug.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/V3Tutorial/08_outsideofroombug.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/V3Tutorial/08_whenlucky.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/V3Tutorial/08_whenlucky.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/V3Tutorial/09_connectingrooms.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/V3Tutorial/09_connectingrooms.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/V3Tutorial/09_hallways.gif",
+      "output": {
+        "resource": {
+          "relative_path": "images/V3Tutorial/09_hallways.gif"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/V3Tutorial/10_messagelog.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/V3Tutorial/10_messagelog.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/V3Tutorial/11_drawstats.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/V3Tutorial/11_drawstats.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/V3Tutorial/12_kobolds.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/V3Tutorial/12_kobolds.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/V3Tutorial/13_monsterstats.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/V3Tutorial/13_monsterstats.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/V3Tutorial/14_simplecombat.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/V3Tutorial/14_simplecombat.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/V3Tutorial/15_schedulingsystem.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/V3Tutorial/15_schedulingsystem.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/V3Tutorial/16_simplebehaviors.gif",
+      "output": {
+        "resource": {
+          "relative_path": "images/V3Tutorial/16_simplebehaviors.gif"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/favicon.ico",
+      "output": {
+        "resource": {
+          "relative_path": "images/favicon.ico"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/logo.svg",
+      "output": {
+        "resource": {
+          "relative_path": "images/logo.svg"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html",
+          "hash": "7J1sZMD/ExPA52yaQ2e3Sw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html",
+          "hash": "Jx+MOZZDOR7AB1wk/LuPIg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    }
+  ],
+  "incremental_info": [
+    {
+      "status": {
+        "can_incremental": true,
+        "incrementalPhase": "build",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        },
+        "ResourceDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        },
+        "ConceptualDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build",
+          "total_file_count": 19,
+          "skipped_file_count": 19
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build",
+          "total_file_count": 56,
+          "skipped_file_count": 56
+        }
+      }
+    },
+    {
+      "status": {
+        "can_incremental": true,
+        "details": "Can support incremental post processing.",
+        "incrementalPhase": "postProcessing",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {}
+    }
+  ],
+  "version_info": {},
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}

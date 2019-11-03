@@ -1,0 +1,400 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Monster Behaviors | RogueSharp </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="title" content="Monster Behaviors - RogueSharp ">
+    <meta name="generator" content="docfx 2.47.0.0">
+    
+    <link rel="shortcut icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-87DrmpqHRiY8hPLIr7ByqhPIywuSsjuQAfMXAE0sMUpY3BM7nXjf+mLIUSvhDArs" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css">
+    <link rel="stylesheet" href="../styles/site.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+    <script type="text/javascript">
+    var appInsights=window.appInsights||function(a){function b(a){c[a]=function(){var b=arguments;c.queue.push(function(){c[a].apply(c,b)})}}var c={config:a},d=document,e=window;setTimeout(function(){var b=d.createElement("script");b.src=a.url||"https://az416426.vo.msecnd.net/scripts/a/ai.0.js",d.getElementsByTagName("script")[0].parentNode.appendChild(b)});try{c.cookie=d.cookie}catch(a){}c.queue=[];for(var f=["Event","Exception","Metric","PageView","Trace","Dependency"];f.length;)b("track"+f.pop());if(b("setAuthenticatedUserContext"),b("clearAuthenticatedUserContext"),b("startTrackEvent"),b("stopTrackEvent"),b("startTrackPage"),b("stopTrackPage"),b("flush"),!a.disableExceptionTracking){f="onerror",b("_"+f);var g=e[f];e[f]=function(a,b,d,e,h){var i=g&&g(a,b,d,e,h);return!0!==i&&c["_"+f](a,b,d,e,h),i}}return c}({instrumentationKey:"9aaf9896-bee3-4d08-abb6-2ef51b389035"});
+    window.appInsights=appInsights,appInsights.queue&&0===appInsights.queue.length&&appInsights.trackPageView();
+  </script>
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <div class="bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light container">
+          
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="RogueSharp" width="36" height="36">
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        
+          <div class="collapse navbar-collapse" id="navbar">
+            <!--<form id="search" role="search" class="form-inline my-2 my-lg-0">
+              <input id="search-query" class="form-control mr-sm-2" type="search" placeholder="Search" autocomplete="off" aria-label="Search">
+            </form>-->
+          </div>
+        </nav>
+        </div>
+        
+        <div class="bg-dark">
+        <nav aria-label="breadcrumb" id="breadcrumb" class="container hide-when-search">
+          <!--<ol class="breadcrumb">
+            <li class="breadcrumb-item" aria-current="page"></li>
+          </ol>-->
+        </nav>
+        </div>      </header>
+      <div role="main" class="container body-content hide-when-search">
+      <div class="row">
+        
+        
+        <div class="sidenav hide-when-search col-md-3 pt-md-3 pb-md-3">
+          <a class="btn btn-link toc-toggle d-md-none" data-toggle="collapse" data-target="#sidetoggle" href="javascript:;" aria-expanded="true" aria-controls="sidetoggle">
+            Show / Hide Table of Contents
+          </a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article col-md-9">
+      <div class="row">
+          <div class="col-lg-9">
+            <article class="content wrap pt-2 pb-2" id="_content" data-uid="">
+<h1 id="monster-behaviors">Monster Behaviors</h1>
+
+<p>There is going to be a lot of code in this tutorial. We have to start using the <a href="15_scheduling_system.html">scheduling system</a> we built last time. We’ll also be laying the foundation for creating monster behaviors. Our first behavior will be a simple move and attack, but we can expand on this in the future to create lots of interesting monsters.</p>
+<p><img src="../images/V3Tutorial/16_simplebehaviors.gif" alt="Animation demonstrating simple behaviors in game console" title="Animation demonstrating simple behaviors in game console"></p>
+<h2 id="defining-a-behavior-interface">Defining a Behavior Interface</h2>
+<p>First we need to define the interface that all of our future <code>Behaviors</code> will use. Create a new file named <code>IBehavior.cs</code> in the <code>Interfaces</code> folder. Add the following code:</p>
+<pre><code class="lang-cs">public interface IBehavior
+{
+  bool Act( Monster monster, CommandSystem commandSystem );
+}
+</code></pre>
+<p>We’re going to keep it simple and just have a simple <code>Act(…)</code> method that will take the <code>Monster</code> performing the action and the <code>CommandSystem</code> as parameters.</p>
+<h2 id="creating-a-move-and-attack-behavior">Creating a Move and Attack Behavior</h2>
+<p>Our first concrete behavior that will implement our <code>IBehavior</code> interface will be <code>StandardMoveAndAttack</code>.</p>
+<p>Briefly lets go over what the <code>StandardMoveAndAttack</code> behavior will do.</p>
+<ul>
+<li>A monster should perform a standard melee attack on the player if the player is adjacent to the monster.</li>
+<li>If the player is not within attack range, the monster should move closer to the player via the shortest available path.</li>
+<li>Only monsters that are aware of the player should chase him.</li>
+<li>Once the monster is alerted and begins the chase, if the player evades him and remains out of visual range for a period of time the monster should stop pursuit.</li>
+<li>If the monster can see the player but does not have a valid path (possibly because of being blocked by other monsters) it should wait a turn.</li>
+</ul>
+<p>Because we want to have many additional behaviors in the future we should make a new folder named <code>Behaviors</code> and then create the file <code>StandardMoveAndAttack.cs</code> in that folder. Add the following code:</p>
+<pre><code class="lang-cs">public class StandardMoveAndAttack : IBehavior
+{
+  public bool Act( Monster monster, CommandSystem commandSystem )
+  {
+    DungeonMap dungeonMap = Game.DungeonMap;
+    Player player = Game.Player;
+    FieldOfView monsterFov = new FieldOfView( dungeonMap );
+
+    // If the monster has not been alerted, compute a field-of-view
+    // Use the monster's Awareness value for the distance in the FoV check
+    // If the player is in the monster's FoV then alert it
+    // Add a message to the MessageLog regarding this alerted status
+    if ( !monster.TurnsAlerted.HasValue )
+    {
+      monsterFov.ComputeFov( monster.X, monster.Y, monster.Awareness, true );
+      if ( monsterFov.IsInFov( player.X, player.Y ) )
+      {
+        Game.MessageLog.Add( $&quot;{monster.Name} is eager to fight {player.Name}&quot; );
+        monster.TurnsAlerted = 1;
+      }
+    }
+
+    if ( monster.TurnsAlerted.HasValue )
+    {
+      // Before we find a path, make sure to make the monster and player Cells walkable
+      dungeonMap.SetIsWalkable( monster.X, monster.Y, true );
+      dungeonMap.SetIsWalkable( player.X, player.Y, true );
+
+      PathFinder pathFinder = new PathFinder( dungeonMap );
+      Path path = null;
+
+      try
+      {
+        path = pathFinder.ShortestPath(
+        dungeonMap.GetCell( monster.X, monster.Y ),
+        dungeonMap.GetCell( player.X, player.Y ) );
+      }
+      catch ( PathNotFoundException )
+      {
+        // The monster can see the player, but cannot find a path to him
+        // This could be due to other monsters blocking the way
+        // Add a message to the message log that the monster is waiting
+        Game.MessageLog.Add( $&quot;{monster.Name} waits for a turn&quot; );
+      }
+
+      // Don't forget to set the walkable status back to false
+      dungeonMap.SetIsWalkable( monster.X, monster.Y, false );
+      dungeonMap.SetIsWalkable( player.X, player.Y, false );
+
+      // In the case that there was a path, tell the CommandSystem to move the monster
+      if ( path != null )
+      {
+        try
+        {
+          // TODO: This should be path.StepForward() but there is a bug in RogueSharp V3
+          // The bug is that a Path returned from a PathFinder does not include the source Cell
+          commandSystem.MoveMonster( monster, path.Steps.First() );
+        }
+        catch ( NoMoreStepsException )
+        {
+          Game.MessageLog.Add( $&quot;{monster.Name} growls in frustration&quot; );
+        }
+      }
+
+      monster.TurnsAlerted++;
+
+      // Lose alerted status every 15 turns.
+      // As long as the player is still in FoV the monster will stay alert
+      // Otherwise the monster will quit chasing the player.
+      if ( monster.TurnsAlerted &gt; 15 )
+      {
+        monster.TurnsAlerted = null;
+      }
+    }
+    return true;
+  }
+}
+</code></pre>
+<p>Be aware that if you try to Build right now there will be errors. We never added the <code>TurnsAlerted</code> property to our Monster class. Additionally we are missing the <code>MoveMonster</code> method on our <code>CommandSystem</code>.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>You may also notice the TODO comment. I discovered a bug in V3 RogueSharp and have a fix for it but for now this is a workaround.</p>
+</div>
+<h2 id="monster-class-updates">Monster Class Updates</h2>
+<p>We should make sure we get back to a state where the project will build as quickly as possible. With that in mind open <code>Monster.cs</code> and add a new <code>TurnsAlerted</code> property as well as a <code>PerformAction</code> method that we’ll use later.</p>
+<pre><code class="lang-cs">public int? TurnsAlerted { get; set; }
+
+public virtual void PerformAction( CommandSystem commandSystem )
+{
+  var behavior = new StandardMoveAndAttack();
+  behavior.Act( this, commandSystem );
+}
+</code></pre>
+<p>Did you notice the question mark on the <code>int?</code> property? That’s shorthand for a <a href="https://msdn.microsoft.com/en-us/library/1t3y8s4s.aspx">Nullable&lt;int&gt; type</a>. Since integers are value types they cannot normally be null, however we want a null integer to represent that the monster has not been alerted.</p>
+<p>Notice that the <code>PerformAction</code> method is <code>virtual</code> also. Since this is on our <code>Monster</code> base class, we’ll give any monster the <code>StandardMoveAndAttack</code> behavior by default. We can override this in any of our Monster sub-classes to get more interesting behaviors.</p>
+<h2 id="actor-class-updates">Actor Class Updates</h2>
+<p>At this point we’re still not building, but we are getting closer. Open <code>Actor.cs</code> and make sure that the <code>Actor</code> class implements <code>IScheduleable</code> so that we can add them to our scheduling system.</p>
+<pre><code class="lang-cs">public class Actor : IActor, IDrawable, IScheduleable
+{
+  // ... Previous Actor code omitted
+
+  // IScheduleable
+  public int Time
+  {
+    get
+    {
+      return Speed;
+    }
+  }
+}
+</code></pre>
+<h2 id="commandsystem-class-updates">CommandSystem Class Updates</h2>
+<p>We should get our <code>CommandSystem</code> updated now so we can finally build again. Open <code>CommandSystem.cs</code> and add the <code>IsPlayerTurn</code> property as well as the <code>ActivateMonsters()</code> and <code>MoveMonster(…)</code> methods.</p>
+<pre><code class="lang-cs">public bool IsPlayerTurn { get; set; }
+
+public void EndPlayerTurn()
+{
+  IsPlayerTurn = false;
+}
+
+public void ActivateMonsters()
+{
+  IScheduleable scheduleable = Game.SchedulingSystem.Get();
+  if ( scheduleable is Player )
+  {
+    IsPlayerTurn = true;
+    Game.SchedulingSystem.Add( Game.Player );
+  }
+  else
+  {
+    Monster monster = scheduleable as Monster;
+
+    if ( monster != null )
+    {
+      monster.PerformAction( this );
+      Game.SchedulingSystem.Add( monster );
+    }
+
+    ActivateMonsters();
+  }
+}
+
+public void MoveMonster( Monster monster, Cell cell )
+{
+  if ( !Game.DungeonMap.SetActorPosition( monster, cell.X, cell.Y ) )
+  {
+    if ( Game.Player.X == cell.X &amp;&amp; Game.Player.Y == cell.Y )
+    {
+      Attack( monster, Game.Player );
+    }
+  }
+}
+</code></pre>
+<p>The <code>ActivateMonsters()</code> method is intended to be called after the <code>Player</code> takes a turn. This will proceed to get the next scheduled <code>Actor</code> from the <code>SchedulingSystem</code>. If this happens to be the <code>Player</code> again, we’ll wait for the <code>Player</code> to make a move. Otherwise we’ll have the <code>Monster</code> perform an action and then call <code>ActivateMonsters()</code> again recursively. This will keep having <code>Monsters</code> perform their actions until it is once again the <code>Player’s</code> turn.</p>
+<h3 id="add-player-and-monsters-to-scheduling-system">Add Player and Monsters to Scheduling System</h3>
+<p>Open <code>DungeonMap.cs</code> and update the <code>AddPlayer(…)</code>, <code>AddMonster(…)</code>, and <code>RemoveMonster(…)</code> methods to use the <code>SchedulingSystem</code>. Just add the calls at the end of each method.</p>
+<pre><code class="lang-cs">public void AddPlayer( Player player )
+{
+  // ...previous code omitted
+  Game.SchedulingSystem.Add( player );
+}
+
+public void AddMonster( Monster monster )
+{
+  // ...previous code omitted
+  Game.SchedulingSystem.Add( monster );
+}
+
+public void RemoveMonster( Monster monster )
+{
+  // ...previous code omitted
+  Game.SchedulingSystem.Remove( monster );
+}
+</code></pre>
+<h2 id="updating-the-game-class">Updating the Game Class</h2>
+<p>We’re almost done. The rest of the updates will be in <code>Game.cs</code> so open up the file and add a new public property.</p>
+<pre><code class="lang-cs">public static SchedulingSystem SchedulingSystem { get; private set; }
+</code></pre>
+<p>Make sure to instantiate a new <code>SchedulingSystem</code> in the <code>Main()</code> method.</p>
+<pre><code class="lang-cs">SchedulingSystem = new SchedulingSystem();
+</code></pre>
+<p>The last set of updates will be made in the <code>OnRootConsoleUpdate(…)</code> method. We need to ensure that it is the player’s turn before handling key presses. We also need to activate monsters after the player has taken their turn.</p>
+<pre><code class="lang-cs">private static void OnRootConsoleUpdate( object sender, UpdateEventArgs e )
+{
+  bool didPlayerAct = false;
+  RLKeyPress keyPress = _rootConsole.Keyboard.GetKeyPress();
+
+  if ( CommandSystem.IsPlayerTurn )
+  {
+    if ( keyPress != null )
+    {
+      if ( keyPress.Key == RLKey.Up )
+      {
+        didPlayerAct = CommandSystem.MovePlayer( Direction.Up );
+      }
+      else if ( keyPress.Key == RLKey.Down )
+      {
+        didPlayerAct = CommandSystem.MovePlayer( Direction.Down );
+      }
+      else if ( keyPress.Key == RLKey.Left )
+      {
+        didPlayerAct = CommandSystem.MovePlayer( Direction.Left );
+      }
+      else if ( keyPress.Key == RLKey.Right )
+      {
+        didPlayerAct = CommandSystem.MovePlayer( Direction.Right );
+      }
+      else if ( keyPress.Key == RLKey.Escape )
+      {
+        _rootConsole.Close();
+      }
+    }
+
+    if ( didPlayerAct )
+    {
+      _renderRequired = true;
+      CommandSystem.EndPlayerTurn();
+    }
+  }
+  else
+  {
+    CommandSystem.ActivateMonsters();
+    _renderRequired = true;
+  }
+}
+</code></pre>
+<p>Everything should build now and if you run the game you’ll see that monsters will now chase the player around and attack. The scheduling system that we implemented last time is all hooked up now too.</p>
+<h2 id="code-on-github">Code on GitHub</h2>
+<p>As always the code for the tutorial series so far can be found on GitHub:</p>
+<ul>
+<li><a href="https://github.com/FaronBracy/RogueSharpV3Tutorial/tree/14MonsterBehaviors">https://github.com/FaronBracy/RogueSharpV3Tutorial/tree/14MonsterBehaviors</a></li>
+</ul>
+<p>Bored waiting for the next tutorial? The complete tutorial project is already finished and the source code is available on Github:</p>
+<ul>
+<li>Sample Roguelike game using RogueSharp and RLNet console
+<ul>
+<li><a href="https://github.com/FaronBracy/RogueSharpRLNetSamples">https://github.com/FaronBracy/RogueSharpRLNetSamples</a></li>
+</ul>
+</li>
+<li>Sample Roguelike game using RogueSharp and SadConsole
+<ul>
+<li><a href="https://github.com/FaronBracy/RogueSharpSadConsoleSamples">https://github.com/FaronBracy/RogueSharpSadConsoleSamples</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="final-thoughts">Final Thoughts</h2>
+<p>This was a long post with a lot of code but it should pave the way for adding more monsters and more interesting behaviors in the future.</p>
+</article>
+            <div id="disqus_thread"></div>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+          </div>
+          
+          <div class="d-none d-lg-block col-md-3" role="complementary">
+            <div class="sideaffix pt-3 pb-3">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/FaronBracy/RogueSharp.Documentation/blob/master/articles/16_monster_behaviors.md/#L1" class="contribution-link text-info" title="Improve this Doc">
+                    <i class="fal fa-edit fa-fw"></i>
+                    <span>Improve this Doc</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <!--<div class="github-links">
+                  <a class="github-button" href="https://github.com/fszlin/certes" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star fszlin/certes on GitHub">Star</a>
+              </div>-->
+              <nav class="hidden-print affix mt-2" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      
+      <footer class="bg-secondary">
+        <!--<div class="grad-bottom"></div>-->
+        <div class="footer bg-secondary">
+          <div class="container">
+          <div class="d-flex">
+            <div class="p-2 flex-grow-1 text-white">
+            <a class="text-white" href="https://github.com/FaronBracy/RogueSharp">RogueSharp &copy; 2014-2020 Faron Bracy</a>
+            
+            </div>
+            <div class="p-2">
+              <a class="text-white" href="#top">Back to top</a>
+            </div>
+          </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/dos.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/powershell.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+  </body>
+</html>

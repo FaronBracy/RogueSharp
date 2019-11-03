@@ -1,0 +1,315 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Simple Combat | RogueSharp </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="title" content="Simple Combat - RogueSharp ">
+    <meta name="generator" content="docfx 2.47.0.0">
+    
+    <link rel="shortcut icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-87DrmpqHRiY8hPLIr7ByqhPIywuSsjuQAfMXAE0sMUpY3BM7nXjf+mLIUSvhDArs" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css">
+    <link rel="stylesheet" href="../styles/site.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+    <script type="text/javascript">
+    var appInsights=window.appInsights||function(a){function b(a){c[a]=function(){var b=arguments;c.queue.push(function(){c[a].apply(c,b)})}}var c={config:a},d=document,e=window;setTimeout(function(){var b=d.createElement("script");b.src=a.url||"https://az416426.vo.msecnd.net/scripts/a/ai.0.js",d.getElementsByTagName("script")[0].parentNode.appendChild(b)});try{c.cookie=d.cookie}catch(a){}c.queue=[];for(var f=["Event","Exception","Metric","PageView","Trace","Dependency"];f.length;)b("track"+f.pop());if(b("setAuthenticatedUserContext"),b("clearAuthenticatedUserContext"),b("startTrackEvent"),b("stopTrackEvent"),b("startTrackPage"),b("stopTrackPage"),b("flush"),!a.disableExceptionTracking){f="onerror",b("_"+f);var g=e[f];e[f]=function(a,b,d,e,h){var i=g&&g(a,b,d,e,h);return!0!==i&&c["_"+f](a,b,d,e,h),i}}return c}({instrumentationKey:"9aaf9896-bee3-4d08-abb6-2ef51b389035"});
+    window.appInsights=appInsights,appInsights.queue&&0===appInsights.queue.length&&appInsights.trackPageView();
+  </script>
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <div class="bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light container">
+          
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="RogueSharp" width="36" height="36">
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        
+          <div class="collapse navbar-collapse" id="navbar">
+            <!--<form id="search" role="search" class="form-inline my-2 my-lg-0">
+              <input id="search-query" class="form-control mr-sm-2" type="search" placeholder="Search" autocomplete="off" aria-label="Search">
+            </form>-->
+          </div>
+        </nav>
+        </div>
+        
+        <div class="bg-dark">
+        <nav aria-label="breadcrumb" id="breadcrumb" class="container hide-when-search">
+          <!--<ol class="breadcrumb">
+            <li class="breadcrumb-item" aria-current="page"></li>
+          </ol>-->
+        </nav>
+        </div>      </header>
+      <div role="main" class="container body-content hide-when-search">
+      <div class="row">
+        
+        
+        <div class="sidenav hide-when-search col-md-3 pt-md-3 pb-md-3">
+          <a class="btn btn-link toc-toggle d-md-none" data-toggle="collapse" data-target="#sidetoggle" href="javascript:;" aria-expanded="true" aria-controls="sidetoggle">
+            Show / Hide Table of Contents
+          </a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article col-md-9">
+      <div class="row">
+          <div class="col-lg-9">
+            <article class="content wrap pt-2 pb-2" id="_content" data-uid="">
+<h1 id="simple-combat">Simple Combat</h1>
+
+<p>During this tutorial we will setup a basic system for combat. At this point only the Player will be able to attack and they will be limited to a single type of attack when trying to move into a space that is occupied by a monster. Dice will be rolled and all the results will be printed to the message log. This is often referred to as “bump attack” because the player bumps into a monster while moving.</p>
+<p><img src="../images/V3Tutorial/14_simplecombat.png" alt="Combat demonstration" title="Image demonstrating combat"></p>
+<h2 id="combat-overview">Combat Overview</h2>
+<p>The combat system was covered in the past but I’m going to repeat some of that here for reference. For this tutorial I decided combat would be a percentage based opposing roll system. First the attacker will roll a number of 100 sided dice equal to their attack value. Each die in the roll will have a percentage chance to be a success. Each success has the potential to inflict 1 point of damage. Thus the maximum amount of damage an actor can do is their <code>Attack</code> value, if they get all successes and their is no defense.</p>
+<p>So how about defense? It will work the same way. The defender rolls a number of 100 sided dice equal to their <code>Defense</code> value. Each die has a percentage chance to be a success. The number of defender successes is subtracted from the number of attacker successes and if the remaining number is positive then that much damage is applied to the defender.</p>
+<h2 id="important-stats-for-combat">Important Stats for Combat</h2>
+<ul>
+<li><code>Attack</code> – int – Number of dice to roll when performing an attack. Also represents the maximum amount of damage that can be inflicted in a single attack.</li>
+<li><code>AttackChance</code> – int – Percentage chance that each die rolled is a success. A success for a die means that 1 point of damage was inflicted.</li>
+<li><code>Defense</code> – int – Number of dice to roll when defending against an attack. Also represents the maximum amount of damage that can blocked or dodged from an incoming attack.</li>
+<li><code>DefenseChance</code> – int – Percentage chance that each die rolled is a success. A success for a die means that 1 point of damage was blocked.</li>
+<li><code>Health</code> – int – The current health total of the actor. If this value is 0 or less then the actor is killed.</li>
+<li><code>MaxHealth</code> – int – How much health the actor has when fully healed.</li>
+</ul>
+<h2 id="additional-dungeonmap-methods">Additional DungeonMap Methods</h2>
+<p>Before we start rolling dice we need to add a couple more methods to <code>DungeonMap.cs</code> to handle getting a monster at a particular position, and removing a monster from the map. We already have a method <code>AddMonster()</code> so lets put the new methods directly below that. Open <code>DungeonMap.cs</code> and add the following code.</p>
+<pre><code class="lang-cs">public void RemoveMonster( Monster monster )
+{
+  _monsters.Remove( monster );
+  // After removing the monster from the map, make sure the cell is walkable again
+  SetIsWalkable( monster.X, monster.Y, true );
+}
+
+public Monster GetMonsterAt( int x, int y )
+{
+  return _monsters.FirstOrDefault( m =&gt; m.X == x &amp;&amp; m.Y == y );
+}
+</code></pre>
+<h2 id="adding-the-attack-command">Adding the Attack Command</h2>
+<p>Now for the fun part, the actual combat. Attacking will be another command just like moving so we will add the code to <code>CommandSystem.cs</code>. The first thing we need to do is update the <code>MovePlayer()</code> method to use our new <code>DungeonMap.GetMonsterAt( x, y )</code> method to see if there is a monster in the <code>Cell</code> we are trying to move into. When there is then instead of moving we will attack it.</p>
+<p>Add the following code to the <code>MovePlayer()</code> method in <code>CommandSystem.cs</code> after the <code>if</code> block where we try to <code>SetActorPosition</code>. This is also after we have established our x and y position based on the direction the player is trying to move.</p>
+<pre><code class="lang-cs">Monster monster = Game.DungeonMap.GetMonsterAt( x, y );
+
+if ( monster != null )
+{
+  Attack( Game.Player, monster );
+  return true;
+}
+</code></pre>
+<p>Now that is in place, lets make our <code>Attack()</code>r method.</p>
+<pre><code class="lang-cs">public void Attack( Actor attacker, Actor defender )
+{
+  StringBuilder attackMessage = new StringBuilder();
+  StringBuilder defenseMessage = new StringBuilder();
+
+  int hits = ResolveAttack( attacker, defender, attackMessage );
+
+  int blocks = ResolveDefense( defender, hits, attackMessage, defenseMessage );
+
+  Game.MessageLog.Add( attackMessage.ToString() );
+  if ( !string.IsNullOrWhiteSpace( defenseMessage.ToString() ) )
+  {
+    Game.MessageLog.Add( defenseMessage.ToString() );
+  }
+
+  int damage = hits - blocks;
+
+  ResolveDamage( defender, damage );
+}
+
+// The attacker rolls based on his stats to see if he gets any hits
+private static int ResolveAttack( Actor attacker, Actor defender, StringBuilder attackMessage )
+{
+  int hits = 0;
+
+  attackMessage.AppendFormat( &quot;{0} attacks {1} and rolls: &quot;, attacker.Name, defender.Name );
+
+  // Roll a number of 100-sided dice equal to the Attack value of the attacking actor
+  DiceExpression attackDice = new DiceExpression().Dice( attacker.Attack, 100 );
+  DiceResult attackResult = attackDice.Roll();
+
+  // Look at the face value of each single die that was rolled
+  foreach ( TermResult termResult in attackResult.Results )
+  {
+    attackMessage.Append( termResult.Value + &quot;, &quot; );
+    // Compare the value to 100 minus the attack chance and add a hit if it's greater
+    if ( termResult.Value &gt;= 100 - attacker.AttackChance )
+    {
+      hits++;
+    }
+  }
+
+  return hits;
+}
+
+// The defender rolls based on his stats to see if he blocks any of the hits from the attacker
+private static int ResolveDefense( Actor defender, int hits, StringBuilder attackMessage, StringBuilder defenseMessage )
+{
+  int blocks = 0;
+
+  if ( hits &gt; 0 )
+  {
+    attackMessage.AppendFormat( &quot;scoring {0} hits.&quot;, hits );
+    defenseMessage.AppendFormat( &quot;  {0} defends and rolls: &quot;, defender.Name );
+
+    // Roll a number of 100-sided dice equal to the Defense value of the defendering actor
+    DiceExpression defenseDice = new DiceExpression().Dice( defender.Defense, 100 );
+    DiceResult defenseRoll = defenseDice.Roll();
+
+    // Look at the face value of each single die that was rolled
+    foreach ( TermResult termResult in defenseRoll.Results )
+    {
+      defenseMessage.Append( termResult.Value + &quot;, &quot; );
+      // Compare the value to 100 minus the defense chance and add a block if it's greater
+      if ( termResult.Value &gt;= 100 - defender.DefenseChance )
+      {
+        blocks++;
+      }
+    }
+    defenseMessage.AppendFormat( &quot;resulting in {0} blocks.&quot;, blocks );
+  }
+  else
+  {
+    attackMessage.Append( &quot;and misses completely.&quot; );
+  }
+
+  return blocks;
+}
+
+// Apply any damage that wasn't blocked to the defender
+private static void ResolveDamage( Actor defender, int damage )
+{
+  if ( damage &gt; 0 )
+  {
+    defender.Health = defender.Health - damage;
+
+    Game.MessageLog.Add( $&quot;  {defender.Name} was hit for {damage} damage&quot; );
+
+    if ( defender.Health &lt;= 0 )
+    {
+      ResolveDeath( defender );
+    }
+  }
+  else
+  {
+    Game.MessageLog.Add( $&quot;  {defender.Name} blocked all damage&quot; );
+  }
+}
+
+// Remove the defender from the map and add some messages upon death.
+private static void ResolveDeath( Actor defender )
+{
+  if ( defender is Player )
+  {
+    Game.MessageLog.Add( $&quot;  {defender.Name} was killed, GAME OVER MAN!&quot; );
+  }
+  else if ( defender is Monster )
+  {
+    Game.DungeonMap.RemoveMonster( (Monster) defender );
+
+    Game.MessageLog.Add( $&quot;  {defender.Name} died and dropped {defender.Gold} gold&quot; );
+  }
+}
+</code></pre>
+<p>That’s a lot of code but I tried to add some comments to help clarify. It should read very similar to the Combat Overview section above. You’ll notice that instead of having one gigantic public method with 100 lines of code we extracted some private methods. I like doing this because you can quickly look at the public method and see what it is doing without having to know all of the details. Resolve the attack rolls, resolve the defense rolls, write the results to the message log, and resolve any damage that was sustained.</p>
+<p>Giving the private methods clear names for their purpose can help with readability. Someone who doesn’t care about the internals can just skip over those, or if they do need to see the details of what it means to resolve an attack, they dive in and look at that private method.</p>
+<p>You might notice that in the death message it mentions dropping gold. We haven’t actually implemented that yet but we’ll get to it soon. I don’t mind having the message in place and ready to go for when we do.</p>
+<p>If the dice expressions seem a little tricky here you can find the API documentation for them here:</p>
+<ul>
+<li><a href="../api/RogueSharp.DiceNotation.yml">Dice Notation Documentation</a></li>
+</ul>
+<p>Run the program now and you should be able to move around the map and bump into monsters to damage them.</p>
+<h2 id="code-on-github">Code on GitHub</h2>
+<p>As always the code for the tutorial series so far can be found on GitHub:</p>
+<ul>
+<li><a href="https://github.com/FaronBracy/RogueSharpV3Tutorial/tree/12SimpleCombat">https://github.com/FaronBracy/RogueSharpV3Tutorial/tree/12SimpleCombat</a></li>
+</ul>
+<p>Bored waiting for the next tutorial? The complete tutorial project is already finished and the source code is available on Github:</p>
+<ul>
+<li>Sample Roguelike game using RogueSharp and RLNet console
+<ul>
+<li><a href="https://github.com/FaronBracy/RogueSharpRLNetSamples">https://github.com/FaronBracy/RogueSharpRLNetSamples</a></li>
+</ul>
+</li>
+<li>Sample Roguelike game using RogueSharp and SadConsole
+<ul>
+<li><a href="https://github.com/FaronBracy/RogueSharpSadConsoleSamples">https://github.com/FaronBracy/RogueSharpSadConsoleSamples</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="closing-thoughts">Closing Thoughts</h2>
+<p>When you are going through the code examples here, please don’t feel like you have to type them in letter for letter. For example in this tutorial try changing the messages that get added to the log to make them more interesting. Create additional stats for actors and make up your own more exciting combat system. Rename and reorganize anything and everything you want so that it makes sense to you.</p>
+<p>The code presented in this tutorial series is far from perfect. I am finding lots of issues that bug me every time I go back to write one of these posts. The point is that the examples I provide here are just one way of doing things. Get some ideas here and then visit other blogs and read other tutorials to collect more ideas. Eventually you’ll settle upon what works best for you and your own unique style.</p>
+</article>
+            <div id="disqus_thread"></div>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+          </div>
+          
+          <div class="d-none d-lg-block col-md-3" role="complementary">
+            <div class="sideaffix pt-3 pb-3">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/FaronBracy/RogueSharp.Documentation/blob/master/articles/14_simple_combat.md/#L1" class="contribution-link text-info" title="Improve this Doc">
+                    <i class="fal fa-edit fa-fw"></i>
+                    <span>Improve this Doc</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <!--<div class="github-links">
+                  <a class="github-button" href="https://github.com/fszlin/certes" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star fszlin/certes on GitHub">Star</a>
+              </div>-->
+              <nav class="hidden-print affix mt-2" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      
+      <footer class="bg-secondary">
+        <!--<div class="grad-bottom"></div>-->
+        <div class="footer bg-secondary">
+          <div class="container">
+          <div class="d-flex">
+            <div class="p-2 flex-grow-1 text-white">
+            <a class="text-white" href="https://github.com/FaronBracy/RogueSharp">RogueSharp &copy; 2014-2020 Faron Bracy</a>
+            
+            </div>
+            <div class="p-2">
+              <a class="text-white" href="#top">Back to top</a>
+            </div>
+          </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/dos.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/powershell.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+  </body>
+</html>

@@ -1,0 +1,276 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Player | RogueSharp </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="title" content="Player - RogueSharp ">
+    <meta name="generator" content="docfx 2.47.0.0">
+    
+    <link rel="shortcut icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-87DrmpqHRiY8hPLIr7ByqhPIywuSsjuQAfMXAE0sMUpY3BM7nXjf+mLIUSvhDArs" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css">
+    <link rel="stylesheet" href="../styles/site.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+    <script type="text/javascript">
+    var appInsights=window.appInsights||function(a){function b(a){c[a]=function(){var b=arguments;c.queue.push(function(){c[a].apply(c,b)})}}var c={config:a},d=document,e=window;setTimeout(function(){var b=d.createElement("script");b.src=a.url||"https://az416426.vo.msecnd.net/scripts/a/ai.0.js",d.getElementsByTagName("script")[0].parentNode.appendChild(b)});try{c.cookie=d.cookie}catch(a){}c.queue=[];for(var f=["Event","Exception","Metric","PageView","Trace","Dependency"];f.length;)b("track"+f.pop());if(b("setAuthenticatedUserContext"),b("clearAuthenticatedUserContext"),b("startTrackEvent"),b("stopTrackEvent"),b("startTrackPage"),b("stopTrackPage"),b("flush"),!a.disableExceptionTracking){f="onerror",b("_"+f);var g=e[f];e[f]=function(a,b,d,e,h){var i=g&&g(a,b,d,e,h);return!0!==i&&c["_"+f](a,b,d,e,h),i}}return c}({instrumentationKey:"9aaf9896-bee3-4d08-abb6-2ef51b389035"});
+    window.appInsights=appInsights,appInsights.queue&&0===appInsights.queue.length&&appInsights.trackPageView();
+  </script>
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <div class="bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light container">
+          
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="RogueSharp" width="36" height="36">
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        
+          <div class="collapse navbar-collapse" id="navbar">
+            <!--<form id="search" role="search" class="form-inline my-2 my-lg-0">
+              <input id="search-query" class="form-control mr-sm-2" type="search" placeholder="Search" autocomplete="off" aria-label="Search">
+            </form>-->
+          </div>
+        </nav>
+        </div>
+        
+        <div class="bg-dark">
+        <nav aria-label="breadcrumb" id="breadcrumb" class="container hide-when-search">
+          <!--<ol class="breadcrumb">
+            <li class="breadcrumb-item" aria-current="page"></li>
+          </ol>-->
+        </nav>
+        </div>      </header>
+      <div role="main" class="container body-content hide-when-search">
+      <div class="row">
+        
+        
+        <div class="sidenav hide-when-search col-md-3 pt-md-3 pb-md-3">
+          <a class="btn btn-link toc-toggle d-md-none" data-toggle="collapse" data-target="#sidetoggle" href="javascript:;" aria-expanded="true" aria-controls="sidetoggle">
+            Show / Hide Table of Contents
+          </a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article col-md-9">
+      <div class="row">
+          <div class="col-lg-9">
+            <article class="content wrap pt-2 pb-2" id="_content" data-uid="">
+<h1 id="player">Player</h1>
+
+<p>During this tutorial we’ll create interfaces for Actors and for Drawing things. We’ll then create a simple Player class that implements both of our new interfaces. We’ll draw the Player and his field of view to the screen but we will not get into accepting keyboard input and moving the Player until next time.</p>
+<h2 id="creating-the-interfaces">Creating the Interfaces</h2>
+<p>There are two new interfaces that we want to create. In C# interfaces are used to define a set of functionality or a group of related behaviors. You can think of them as a contract that classes must follow. By implementing the interface a Class is agreeing to the contract and must implement those methods and behaviors. We will always prefix our interfaces with the letter ‘I’ as is common in C#.</p>
+<h3 id="iactor-interface">IActor Interface</h3>
+<p>The first interface we will create will be <code>IActor</code>. For now it will only have two properties, <code>Name</code> and <code>Awareness</code>. The <code>Awareness</code> property will be used when calculating field-of-view to determine the maximum distance the Actor is aware of, can see or sense.</p>
+<p>Create a <strong>new folder</strong> called <code>Interfaces</code> and then create a new interface in the folder called <code>IActor.cs</code>. Place the following code inside the new file.</p>
+<pre><code class="lang-cs">namespace RogueSharpV3Tutorial.Interfaces
+{
+  public interface IActor
+  {
+    string Name { get; set; }
+    int Awareness { get; set; }
+  }
+}
+</code></pre>
+<h3 id="idrawable-interface">IDrawable Interface</h3>
+<p>The next interface we will define will be <code>IDrawable</code>. The properties that we need to draw a cell in the console are a <code>Color</code>, <code>Symbol</code>, and the <code>X</code> and <code>Y</code> coordinates of the cell. We also want to have a <code>Draw</code> method that will take the <code>RLConsole</code> to draw to as well an <code>IMap</code>. Notice that we don’t require a concrete <code>Map</code> class but we will accept any class that follows the <code>IMap</code> contract. The <code>IMap</code> is important because that will allow us to calculate field-of-view.</p>
+<pre><code class="lang-cs">namespace RogueSharpV3Tutorial.Interfaces
+{
+  public interface IDrawable
+  {
+    RLColor Color { get; set; }
+    char Symbol { get; set; }
+    int X { get; set; }
+    int Y { get; set; }
+
+    void Draw( RLConsole console, IMap map );
+  }
+}
+</code></pre>
+<h2 id="actor-base-class">Actor Base Class</h2>
+<p>Now that we have defined our interfaces we’ll make a base class called Actor that implements both of our interfaces. In C# a class can only inherit from a single class. It can however implement as many interfaces as you want.</p>
+<p>Start by creating a new class in the <code>Core</code> folder called <code>Actor.cs</code>. It should implement both <code>IActor</code> and <code>IDrawable</code>. Place the following code in <code>Actor.cs</code>:</p>
+<pre><code class="lang-cs">public class Actor : IActor, IDrawable
+{
+  // IActor
+  public string Name { get; set; }
+  public int Awareness { get; set; }
+
+  // IDrawable
+  public RLColor Color { get; set; }
+  public char Symbol { get; set; }
+  public int X { get; set; }
+  public int Y { get; set; }
+  public void Draw( RLConsole console, IMap map )
+  {
+    // Don't draw actors in cells that haven't been explored
+    if ( !map.GetCell( X, Y ).IsExplored )
+    {
+      return;
+    }
+
+    // Only draw the actor with the color and symbol when they are in field-of-view
+    if ( map.IsInFov( X, Y ) )
+    {
+      console.Set( X, Y, Color, Colors.FloorBackgroundFov, Symbol );
+    }
+    else
+    {
+      // When not in field-of-view just draw a normal floor
+      console.Set( X, Y, Colors.Floor, Colors.FloorBackground, '.' );
+    }
+  }
+}
+</code></pre>
+<p>Implementing the properties should be straightforward. They just have public getters and setters. The most interesting part will be the Draw() method because it needs to inspect the IMap for explored cells and cells in field-of-view so that it can draw the appropriate symbols.</p>
+<h2 id="player-color">Player Color</h2>
+<p>We need to establish a <code>Color</code> for our <code>Player</code>. Open <code>Colors.cs</code> and add the following line:</p>
+<pre><code class="lang-cs">public static RLColor Player = Swatch.DbLight;
+</code></pre>
+<h2 id="player-class">Player Class</h2>
+<p>It’s time to create the <code>Player</code> class. In the <code>Core</code> folder make a new class called <code>Player.cs</code>. We want it to have a base class of <code>Actor</code> so that it will automatically get the <code>Draw()</code> method and all the necessary properties. The code should look like this.</p>
+<pre><code class="lang-cs">namespace RogueSharpV3Tutorial.Core
+{
+  public class Player : Actor
+  {
+    public Player()
+    {
+      Awareness = 15;
+      Name = &quot;Rogue&quot;;
+      Color = Colors.Player;
+      Symbol = '@';
+      X = 10;
+      Y = 10;
+    }
+  }
+}
+</code></pre>
+<p>You’ll see that all we have to do to make the <code>Player</code> unique from other <code>Actor</code>s is to define unique values for our properties. In this case the <code>Player</code> can see 15 cells so the <code>Awareness</code> is 15. We’re also setting the starting position to 10, 10 and the <code>Color</code> to the one we defined earlier. The <code>Symbol</code> is the standard ‘@’ character from the original Rogue. Feel free to adjust any of these values to anything you want.</p>
+<p>If you’ve been following along with the tutorial your project structure should now look like this:</p>
+<p><img src="../images/V3Tutorial/06_interfacesfolder.png" alt="alt text" title="Solution structure in Visual Studio"></p>
+<h3 id="player-field-of-view-method">Player Field-of-View Method</h3>
+<p>Open <code>DungeonMap.cs</code> and create a new method called <code>UpdatePlayerFieldOfView()</code> which will be called when we position the <code>Player</code></p>
+<pre><code class="lang-cs">// This method will be called any time we move the player to update field-of-view
+public void UpdatePlayerFieldOfView()
+{
+  Player player = Game.Player;
+  // Compute the field-of-view based on the player's location and awareness
+  ComputeFov( player.X, player.Y, player.Awareness, true );
+  // Mark all cells in field-of-view as having been explored
+  foreach ( Cell cell in GetAllCells() )
+  {
+    if ( IsInFov( cell.X, cell.Y ) )
+    {
+      SetCellProperties( cell.X, cell.Y, cell.IsTransparent, cell.IsWalkable, true );
+    }
+  }
+}
+</code></pre>
+<h2 id="adding-the-player-to-the-game">Adding the Player to the Game</h2>
+<p>The last thing that we have to do in this tutorial is add the <code>Player</code> to the <code>Game</code>. Open <code>Game.cs</code> and add a <code>Player</code> property just above our existing <code>DungeonMap</code> property.</p>
+<pre><code class="lang-cs">public static Player Player { get; private set; }
+</code></pre>
+<p>Next we need to construct a new <code>Player</code> in our <code>Main()</code> method. Don’t forget to update the field-of-view by calling <code>DungeonMap.UpdatePlayerFieldOfView()</code>.</p>
+<pre><code class="lang-cs">Player = new Player();
+// The next two lines already existed
+MapGenerator mapGenerator = new MapGenerator( _mapWidth, _mapHeight );
+DungeonMap = mapGenerator.CreateMap();
+// End of existing code
+DungeonMap.UpdatePlayerFieldOfView();
+</code></pre>
+<p>We’re almost done. The last thing we need to do is call <code>Player.Draw()</code> in our <code>OnRootConsoleRender()</code> method.</p>
+<pre><code class="lang-cs">Player.Draw( _mapConsole, DungeonMap );
+</code></pre>
+<p>If all went well when you start your game you should see this:</p>
+<p><img src="../images/V3Tutorial/06_mapwithplayer.png" alt="alt text" title="Game console showing map, player and field-of-view."></p>
+<h2 id="code-on-github">Code on GitHub</h2>
+<p>As always the code for the tutorial series so far can be found on GitHub:</p>
+<ul>
+<li><a href="https://github.com/FaronBracy/RogueSharpV3Tutorial/tree/04PlayerActor">https://github.com/FaronBracy/RogueSharpV3Tutorial/tree/04PlayerActor</a></li>
+</ul>
+<p>Bored waiting for the next tutorial? The complete tutorial project is already finished and the source code is available on Github:</p>
+<ul>
+<li>Sample Roguelike game using RogueSharp and RLNet console
+<ul>
+<li><a href="https://github.com/FaronBracy/RogueSharpRLNetSamples">https://github.com/FaronBracy/RogueSharpRLNetSamples</a></li>
+</ul>
+</li>
+<li>Sample Roguelike game using RogueSharp and SadConsole
+<ul>
+<li><a href="https://github.com/FaronBracy/RogueSharpSadConsoleSamples">https://github.com/FaronBracy/RogueSharpSadConsoleSamples</a></li>
+</ul>
+</li>
+</ul>
+</article>
+            <div id="disqus_thread"></div>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+          </div>
+          
+          <div class="d-none d-lg-block col-md-3" role="complementary">
+            <div class="sideaffix pt-3 pb-3">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/FaronBracy/RogueSharp.Documentation/blob/master/articles/06_player.md/#L1" class="contribution-link text-info" title="Improve this Doc">
+                    <i class="fal fa-edit fa-fw"></i>
+                    <span>Improve this Doc</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <!--<div class="github-links">
+                  <a class="github-button" href="https://github.com/fszlin/certes" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star fszlin/certes on GitHub">Star</a>
+              </div>-->
+              <nav class="hidden-print affix mt-2" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      
+      <footer class="bg-secondary">
+        <!--<div class="grad-bottom"></div>-->
+        <div class="footer bg-secondary">
+          <div class="container">
+          <div class="d-flex">
+            <div class="p-2 flex-grow-1 text-white">
+            <a class="text-white" href="https://github.com/FaronBracy/RogueSharp">RogueSharp &copy; 2014-2020 Faron Bracy</a>
+            
+            </div>
+            <div class="p-2">
+              <a class="text-white" href="#top">Back to top</a>
+            </div>
+          </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/dos.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/powershell.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+  </body>
+</html>

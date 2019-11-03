@@ -1,0 +1,1949 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Interface IMap
+   | RogueSharp </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="title" content="Interface IMap
+   - RogueSharp ">
+    <meta name="generator" content="docfx 2.47.0.0">
+    
+    <link rel="shortcut icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-87DrmpqHRiY8hPLIr7ByqhPIywuSsjuQAfMXAE0sMUpY3BM7nXjf+mLIUSvhDArs" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css">
+    <link rel="stylesheet" href="../styles/site.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+    <script type="text/javascript">
+    var appInsights=window.appInsights||function(a){function b(a){c[a]=function(){var b=arguments;c.queue.push(function(){c[a].apply(c,b)})}}var c={config:a},d=document,e=window;setTimeout(function(){var b=d.createElement("script");b.src=a.url||"https://az416426.vo.msecnd.net/scripts/a/ai.0.js",d.getElementsByTagName("script")[0].parentNode.appendChild(b)});try{c.cookie=d.cookie}catch(a){}c.queue=[];for(var f=["Event","Exception","Metric","PageView","Trace","Dependency"];f.length;)b("track"+f.pop());if(b("setAuthenticatedUserContext"),b("clearAuthenticatedUserContext"),b("startTrackEvent"),b("stopTrackEvent"),b("startTrackPage"),b("stopTrackPage"),b("flush"),!a.disableExceptionTracking){f="onerror",b("_"+f);var g=e[f];e[f]=function(a,b,d,e,h){var i=g&&g(a,b,d,e,h);return!0!==i&&c["_"+f](a,b,d,e,h),i}}return c}({instrumentationKey:"9aaf9896-bee3-4d08-abb6-2ef51b389035"});
+    window.appInsights=appInsights,appInsights.queue&&0===appInsights.queue.length&&appInsights.trackPageView();
+  </script>
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <div class="bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light container">
+          
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="RogueSharp" width="36" height="36">
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        
+          <div class="collapse navbar-collapse" id="navbar">
+            <!--<form id="search" role="search" class="form-inline my-2 my-lg-0">
+              <input id="search-query" class="form-control mr-sm-2" type="search" placeholder="Search" autocomplete="off" aria-label="Search">
+            </form>-->
+          </div>
+        </nav>
+        </div>
+        
+        <div class="bg-dark">
+        <nav aria-label="breadcrumb" id="breadcrumb" class="container hide-when-search">
+          <!--<ol class="breadcrumb">
+            <li class="breadcrumb-item" aria-current="page"></li>
+          </ol>-->
+        </nav>
+        </div>      </header>
+      <div role="main" class="container body-content hide-when-search">
+      <div class="row">
+        
+        
+        <div class="sidenav hide-when-search col-md-3 pt-md-3 pb-md-3">
+          <a class="btn btn-link toc-toggle d-md-none" data-toggle="collapse" data-target="#sidetoggle" href="javascript:;" aria-expanded="true" aria-controls="sidetoggle">
+            Show / Hide Table of Contents
+          </a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article col-md-9">
+      <div class="row">
+          <div class="col-lg-9">
+            <article class="content wrap pt-2 pb-2" id="_content" data-uid="RogueSharp.IMap">
+  
+  
+  <h1 id="RogueSharp_IMap" data-uid="RogueSharp.IMap" class="text-break">Interface IMap
+  </h1>
+  <div class="markdown level0 summary"><p>A Map represents a rectangular grid of Cells, each of which has a number of properties for determining walkability, field-of-view and so on
+The upper left corner of the Map is Cell (0,0) and the X value increases to the right, as the Y value increases downward</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <h6 class="mt-1"><i class="text-muted font-weight-light font-italic mb-0">Namespace:</i> <a class="xref" href="RogueSharp.html">RogueSharp</a></h6>
+  <h6 class="mt-1"><i class="text-muted font-weight-light font-italic mb-0">Assembly:</i> RogueSharp.dll</h6>
+  <h5 id="RogueSharp_IMap_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public interface IMap</code></pre>
+  </div>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_IMap_Height.md&amp;value=---%0Auid%3A%20RogueSharp.IMap.Height%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/IMap.cs/#L32">View Source</a>
+  </span>
+  <a id="RogueSharp_IMap_Height_" data-uid="RogueSharp.IMap.Height*"></a>
+  <h4 id="RogueSharp_IMap_Height" data-uid="RogueSharp.IMap.Height">Height</h4>
+  <div class="markdown level1 summary"><p>How many Cells tall the Map is</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">int Height { get; }</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="RogueSharp_IMap_Height_remarks" class="text-muted font-weight-light font-italic">Remarks</h5>
+  <div class="markdown level1 remarks"><p>A Map with a Height of 20 will have Cells with Y locations of 0 through 19
+Cells with an Y value of 0 will be the topmost Cells</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_IMap_Width.md&amp;value=---%0Auid%3A%20RogueSharp.IMap.Width%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/IMap.cs/#L20">View Source</a>
+  </span>
+  <a id="RogueSharp_IMap_Width_" data-uid="RogueSharp.IMap.Width*"></a>
+  <h4 id="RogueSharp_IMap_Width" data-uid="RogueSharp.IMap.Width">Width</h4>
+  <div class="markdown level1 summary"><p>How many Cells wide the Map is</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">int Width { get; }</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="RogueSharp_IMap_Width_remarks" class="text-muted font-weight-light font-italic">Remarks</h5>
+  <div class="markdown level1 remarks"><p>A Map with a Width of 10 will have Cells with X locations of 0 through 9
+Cells with an X value of 0 will be the leftmost Cells</p>
+</div>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_IMap_AppendFov_System_Int32_System_Int32_System_Int32_System_Boolean_.md&amp;value=---%0Auid%3A%20RogueSharp.IMap.AppendFov(System.Int32%2CSystem.Int32%2CSystem.Int32%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/IMap.cs/#L188">View Source</a>
+  </span>
+  <a id="RogueSharp_IMap_AppendFov_" data-uid="RogueSharp.IMap.AppendFov*"></a>
+  <h4 id="RogueSharp_IMap_AppendFov_System_Int32_System_Int32_System_Int32_System_Boolean_" data-uid="RogueSharp.IMap.AppendFov(System.Int32,System.Int32,System.Int32,System.Boolean)">AppendFov(Int32, Int32, Int32, Boolean)</h4>
+  <div class="markdown level1 summary"><p>Performs a field-of-view calculation with the specified parameters and appends it any existing field-of-view calculations.
+Field-of-view (FOV) is basically a calculation of what is observable in the Map from a given Cell with a given light radius.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">ReadOnlyCollection&lt;ICell&gt; AppendFov(int xOrigin, int yOrigin, int radius, bool lightWalls)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">xOrigin</span></td>
+        <td><p>X location of the Cell to perform the field-of-view calculation with 0 as the farthest left</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">yOrigin</span></td>
+        <td><p>Y location of the Cell to perform the field-of-view calculation with 0 as the top</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">radius</span></td>
+        <td><p>The number of Cells in which the field-of-view extends from the origin Cell. Think of this as the intensity of the light source.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">lightWalls</span></td>
+        <td><p>True if walls should be included in the field-of-view when they are within the radius of the light source. False excludes walls even when they are within range.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.ObjectModel.ReadOnlyCollection</span>&lt;<a class="xref" href="RogueSharp.ICell.html">ICell</a>&gt;</td>
+        <td><p>List of Cells representing what is observable in the Map based on the specified parameters</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="RogueSharp_IMap_AppendFov_System_Int32_System_Int32_System_Int32_System_Boolean__examples" class="text-muted font-weight-light font-italic">Examples</h5>
+  <p>When a character is holding a light source in a large area that also has several other sources of light such as torches along the walls
+ComputeFov could first be called for the character and then AppendFov could be called for each torch to give us the final combined FOV given all the light sources</p>
+
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_IMap_CellFor_System_Int32_.md&amp;value=---%0Auid%3A%20RogueSharp.IMap.CellFor(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/IMap.cs/#L326">View Source</a>
+  </span>
+  <a id="RogueSharp_IMap_CellFor_" data-uid="RogueSharp.IMap.CellFor*"></a>
+  <h4 id="RogueSharp_IMap_CellFor_System_Int32_" data-uid="RogueSharp.IMap.CellFor(System.Int32)">CellFor(Int32)</h4>
+  <div class="markdown level1 summary"><p>Get the Cell at the specified single dimensional array index using the formulas: x = index % Width; y = index / Width;</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">ICell CellFor(int index)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">index</span></td>
+        <td><p>The single dimensional array index for the Cell that we want to get</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="RogueSharp.ICell.html">ICell</a></td>
+        <td><p>Cell at the specified single dimensional array index</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_IMap_Clear.md&amp;value=---%0Auid%3A%20RogueSharp.IMap.Clear%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/IMap.cs/#L134">View Source</a>
+  </span>
+  <a id="RogueSharp_IMap_Clear_" data-uid="RogueSharp.IMap.Clear*"></a>
+  <h4 id="RogueSharp_IMap_Clear" data-uid="RogueSharp.IMap.Clear">Clear()</h4>
+  <div class="markdown level1 summary"><p>Sets the properties of all Cells in the Map to be transparent and walkable</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void Clear()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_IMap_Clear_System_Boolean_System_Boolean_.md&amp;value=---%0Auid%3A%20RogueSharp.IMap.Clear(System.Boolean%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/IMap.cs/#L141">View Source</a>
+  </span>
+  <a id="RogueSharp_IMap_Clear_" data-uid="RogueSharp.IMap.Clear*"></a>
+  <h4 id="RogueSharp_IMap_Clear_System_Boolean_System_Boolean_" data-uid="RogueSharp.IMap.Clear(System.Boolean,System.Boolean)">Clear(Boolean, Boolean)</h4>
+  <div class="markdown level1 summary"><p>Sets the properties of all Cells in the Map to the specified values</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void Clear(bool isTransparent, bool isWalkable)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">isTransparent</span></td>
+        <td><p>Optional parameter defaults to false if not provided. True if line-of-sight is not blocked by this Cell. False otherwise</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">isWalkable</span></td>
+        <td><p>Optional parameter defaults to false if not provided. True if a character could walk across the Cell normally. False otherwise</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_IMap_Clone__1.md&amp;value=---%0Auid%3A%20RogueSharp.IMap.Clone%60%601%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/IMap.cs/#L147">View Source</a>
+  </span>
+  <a id="RogueSharp_IMap_Clone_" data-uid="RogueSharp.IMap.Clone*"></a>
+  <h4 id="RogueSharp_IMap_Clone__1" data-uid="RogueSharp.IMap.Clone``1">Clone&lt;T&gt;()</h4>
+  <div class="markdown level1 summary"><p>Create and return a deep copy of an existing Map</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">T Clone&lt;T&gt;()
+    where T : IMap, new()</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td><p>T of type IMap which is a deep copy of the original Map</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_IMap_ComputeFov_System_Int32_System_Int32_System_Int32_System_Boolean_.md&amp;value=---%0Auid%3A%20RogueSharp.IMap.ComputeFov(System.Int32%2CSystem.Int32%2CSystem.Int32%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/IMap.cs/#L173">View Source</a>
+  </span>
+  <a id="RogueSharp_IMap_ComputeFov_" data-uid="RogueSharp.IMap.ComputeFov*"></a>
+  <h4 id="RogueSharp_IMap_ComputeFov_System_Int32_System_Int32_System_Int32_System_Boolean_" data-uid="RogueSharp.IMap.ComputeFov(System.Int32,System.Int32,System.Int32,System.Boolean)">ComputeFov(Int32, Int32, Int32, Boolean)</h4>
+  <div class="markdown level1 summary"><p>Performs a field-of-view calculation with the specified parameters.
+Field-of-view (FOV) is basically a calculation of what is observable in the Map from a given Cell with a given light radius.
+Any existing field-of-view calculations will be overwritten when calling this method.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">ReadOnlyCollection&lt;ICell&gt; ComputeFov(int xOrigin, int yOrigin, int radius, bool lightWalls)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">xOrigin</span></td>
+        <td><p>X location of the Cell to perform the field-of-view calculation with 0 as the farthest left</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">yOrigin</span></td>
+        <td><p>Y location of the Cell to perform the field-of-view calculation with 0 as the top</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">radius</span></td>
+        <td><p>The number of Cells in which the field-of-view extends from the origin Cell. Think of this as the intensity of the light source.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">lightWalls</span></td>
+        <td><p>True if walls should be included in the field-of-view when they are within the radius of the light source. False excludes walls even when they are within range.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.ObjectModel.ReadOnlyCollection</span>&lt;<a class="xref" href="RogueSharp.ICell.html">ICell</a>&gt;</td>
+        <td><p>List of Cells representing what is observable in the Map based on the specified parameters</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_IMap_Copy_RogueSharp_IMap_.md&amp;value=---%0Auid%3A%20RogueSharp.IMap.Copy(RogueSharp.IMap)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/IMap.cs/#L153">View Source</a>
+  </span>
+  <a id="RogueSharp_IMap_Copy_" data-uid="RogueSharp.IMap.Copy*"></a>
+  <h4 id="RogueSharp_IMap_Copy_RogueSharp_IMap_" data-uid="RogueSharp.IMap.Copy(RogueSharp.IMap)">Copy(IMap)</h4>
+  <div class="markdown level1 summary"><p>Copies the Cell properties of a smaller source Map into this destination Map at location (0,0)</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void Copy(IMap sourceMap)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="RogueSharp.IMap.html">IMap</a></td>
+        <td><span class="parametername">sourceMap</span></td>
+        <td><p>An IMap which must be of smaller size and able to fit in this destination Map at the specified location</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_IMap_Copy_RogueSharp_IMap_System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20RogueSharp.IMap.Copy(RogueSharp.IMap%2CSystem.Int32%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/IMap.cs/#L161">View Source</a>
+  </span>
+  <a id="RogueSharp_IMap_Copy_" data-uid="RogueSharp.IMap.Copy*"></a>
+  <h4 id="RogueSharp_IMap_Copy_RogueSharp_IMap_System_Int32_System_Int32_" data-uid="RogueSharp.IMap.Copy(RogueSharp.IMap,System.Int32,System.Int32)">Copy(IMap, Int32, Int32)</h4>
+  <div class="markdown level1 summary"><p>Copies the Cell properties of a smaller source Map into this destination Map at the specified location</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void Copy(IMap sourceMap, int left, int top)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="RogueSharp.IMap.html">IMap</a></td>
+        <td><span class="parametername">sourceMap</span></td>
+        <td><p>An IMap which must be of smaller size and able to fit in this destination Map at the specified location</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">left</span></td>
+        <td><p>Optional parameter defaults to 0 if not provided. X location of the Cell to start copying parameters to, starting with 0 as the farthest left</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">top</span></td>
+        <td><p>Optional parameter defaults to 0 if not provided. Y location of the Cell to start copying parameters to, starting with 0 as the top</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_IMap_GetAllCells.md&amp;value=---%0Auid%3A%20RogueSharp.IMap.GetAllCells%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/IMap.cs/#L194">View Source</a>
+  </span>
+  <a id="RogueSharp_IMap_GetAllCells_" data-uid="RogueSharp.IMap.GetAllCells*"></a>
+  <h4 id="RogueSharp_IMap_GetAllCells" data-uid="RogueSharp.IMap.GetAllCells">GetAllCells()</h4>
+  <div class="markdown level1 summary"><p>Get an IEnumerable of all Cells in the Map</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IEnumerable&lt;ICell&gt; GetAllCells()</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="RogueSharp.ICell.html">ICell</a>&gt;</td>
+        <td><p>IEnumerable of all Cells in the Map</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_IMap_GetBorderCellsInCircle_System_Int32_System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20RogueSharp.IMap.GetBorderCellsInCircle(System.Int32%2CSystem.Int32%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/IMap.cs/#L254">View Source</a>
+  </span>
+  <a id="RogueSharp_IMap_GetBorderCellsInCircle_" data-uid="RogueSharp.IMap.GetBorderCellsInCircle*"></a>
+  <h4 id="RogueSharp_IMap_GetBorderCellsInCircle_System_Int32_System_Int32_System_Int32_" data-uid="RogueSharp.IMap.GetBorderCellsInCircle(System.Int32,System.Int32,System.Int32)">GetBorderCellsInCircle(Int32, Int32, Int32)</h4>
+  <div class="markdown level1 summary"><p>Get an IEnumerable of outermost border Cells in a circle around the center Cell up to the specified radius using Bresenham's midpoint circle algorithm</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IEnumerable&lt;ICell&gt; GetBorderCellsInCircle(int xCenter, int yCenter, int radius)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">xCenter</span></td>
+        <td><p>X location of the center Cell with 0 as the farthest left</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">yCenter</span></td>
+        <td><p>Y location of the center Cell with 0 as the top</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">radius</span></td>
+        <td><p>The number of Cells to get in a radius from the center Cell</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="RogueSharp.ICell.html">ICell</a>&gt;</td>
+        <td><p>IEnumerable of outermost border Cells in a circle around the center Cell</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="RogueSharp_IMap_GetBorderCellsInCircle_System_Int32_System_Int32_System_Int32__seealso" class="text-muted font-weight-light font-italic">See Also</h5>
+  <div class="seealso">
+      <div><span><a href="https://en.wikipedia.org/wiki/Midpoint_circle_algorithm">Based on Bresenham&amp;apos;s midpoint circle algorithm</a></span></div>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_IMap_GetBorderCellsInDiamond_System_Int32_System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20RogueSharp.IMap.GetBorderCellsInDiamond(System.Int32%2CSystem.Int32%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/IMap.cs/#L263">View Source</a>
+  </span>
+  <a id="RogueSharp_IMap_GetBorderCellsInDiamond_" data-uid="RogueSharp.IMap.GetBorderCellsInDiamond*"></a>
+  <h4 id="RogueSharp_IMap_GetBorderCellsInDiamond_System_Int32_System_Int32_System_Int32_" data-uid="RogueSharp.IMap.GetBorderCellsInDiamond(System.Int32,System.Int32,System.Int32)">GetBorderCellsInDiamond(Int32, Int32, Int32)</h4>
+  <div class="markdown level1 summary"><p>Get an IEnumerable of outermost border Cells in a diamond (Rhombus) shape around the center Cell up to the specified distance</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IEnumerable&lt;ICell&gt; GetBorderCellsInDiamond(int xCenter, int yCenter, int distance)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">xCenter</span></td>
+        <td><p>X location of the center Cell with 0 as the farthest left</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">yCenter</span></td>
+        <td><p>Y location of the center Cell with 0 as the top</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">distance</span></td>
+        <td><p>The number of Cells to get in a distance from the center Cell</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="RogueSharp.ICell.html">ICell</a>&gt;</td>
+        <td><p>IEnumerable of outermost border Cells in a diamond (Rhombus) shape around the center Cell</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_IMap_GetBorderCellsInSquare_System_Int32_System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20RogueSharp.IMap.GetBorderCellsInSquare(System.Int32%2CSystem.Int32%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/IMap.cs/#L272">View Source</a>
+  </span>
+  <a id="RogueSharp_IMap_GetBorderCellsInSquare_" data-uid="RogueSharp.IMap.GetBorderCellsInSquare*"></a>
+  <h4 id="RogueSharp_IMap_GetBorderCellsInSquare_System_Int32_System_Int32_System_Int32_" data-uid="RogueSharp.IMap.GetBorderCellsInSquare(System.Int32,System.Int32,System.Int32)">GetBorderCellsInSquare(Int32, Int32, Int32)</h4>
+  <div class="markdown level1 summary"><p>Get an IEnumerable of outermost border Cells in a square area around the center Cell up to the specified distance</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IEnumerable&lt;ICell&gt; GetBorderCellsInSquare(int xCenter, int yCenter, int distance)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">xCenter</span></td>
+        <td><p>X location of the center Cell with 0 as the farthest left</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">yCenter</span></td>
+        <td><p>Y location of the center Cell with 0 as the top</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">distance</span></td>
+        <td><p>The number of Cells to get in each direction from the center Cell</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="RogueSharp.ICell.html">ICell</a>&gt;</td>
+        <td><p>IEnumerable of outermost border Cells in a square area around the center Cell</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_IMap_GetCell_System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20RogueSharp.IMap.GetCell(System.Int32%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/IMap.cs/#L294">View Source</a>
+  </span>
+  <a id="RogueSharp_IMap_GetCell_" data-uid="RogueSharp.IMap.GetCell*"></a>
+  <h4 id="RogueSharp_IMap_GetCell_System_Int32_System_Int32_" data-uid="RogueSharp.IMap.GetCell(System.Int32,System.Int32)">GetCell(Int32, Int32)</h4>
+  <div class="markdown level1 summary"><p>Get a Cell at the specified location</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">ICell GetCell(int x, int y)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">x</span></td>
+        <td><p>X location of the Cell to get starting with 0 as the farthest left</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">y</span></td>
+        <td><p>Y location of the Cell to get, starting with 0 as the top</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="RogueSharp.ICell.html">ICell</a></td>
+        <td><p>Cell at the specified location</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_IMap_GetCellsAlongLine_System_Int32_System_Int32_System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20RogueSharp.IMap.GetCellsAlongLine(System.Int32%2CSystem.Int32%2CSystem.Int32%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/IMap.cs/#L206">View Source</a>
+  </span>
+  <a id="RogueSharp_IMap_GetCellsAlongLine_" data-uid="RogueSharp.IMap.GetCellsAlongLine*"></a>
+  <h4 id="RogueSharp_IMap_GetCellsAlongLine_System_Int32_System_Int32_System_Int32_System_Int32_" data-uid="RogueSharp.IMap.GetCellsAlongLine(System.Int32,System.Int32,System.Int32,System.Int32)">GetCellsAlongLine(Int32, Int32, Int32, Int32)</h4>
+  <div class="markdown level1 summary"><p>Get an IEnumerable of Cells in a line from the Origin Cell to the Destination Cell
+The resulting IEnumerable includes the Origin and Destination Cells
+Uses Bresenham's line algorithm to determine which Cells are in the closest approximation to a straight line between the two Cells</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IEnumerable&lt;ICell&gt; GetCellsAlongLine(int xOrigin, int yOrigin, int xDestination, int yDestination)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">xOrigin</span></td>
+        <td><p>X location of the Origin Cell at the start of the line with 0 as the farthest left</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">yOrigin</span></td>
+        <td><p>Y location of the Origin Cell at the start of the line with 0 as the top</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">xDestination</span></td>
+        <td><p>X location of the Destination Cell at the end of the line with 0 as the farthest left</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">yDestination</span></td>
+        <td><p>Y location of the Destination Cell at the end of the line with 0 as the top</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="RogueSharp.ICell.html">ICell</a>&gt;</td>
+        <td><p>IEnumerable of Cells in a line from the Origin Cell to the Destination Cell which includes the Origin and Destination Cells</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_IMap_GetCellsInCircle_System_Int32_System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20RogueSharp.IMap.GetCellsInCircle(System.Int32%2CSystem.Int32%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/IMap.cs/#L216">View Source</a>
+  </span>
+  <a id="RogueSharp_IMap_GetCellsInCircle_" data-uid="RogueSharp.IMap.GetCellsInCircle*"></a>
+  <h4 id="RogueSharp_IMap_GetCellsInCircle_System_Int32_System_Int32_System_Int32_" data-uid="RogueSharp.IMap.GetCellsInCircle(System.Int32,System.Int32,System.Int32)">GetCellsInCircle(Int32, Int32, Int32)</h4>
+  <div class="markdown level1 summary"><p>Get an IEnumerable of Cells in a circle around the center Cell up to the specified radius using Bresenham's midpoint circle algorithm</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IEnumerable&lt;ICell&gt; GetCellsInCircle(int xCenter, int yCenter, int radius)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">xCenter</span></td>
+        <td><p>X location of the center Cell with 0 as the farthest left</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">yCenter</span></td>
+        <td><p>Y location of the center Cell with 0 as the top</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">radius</span></td>
+        <td><p>The number of Cells to get in a radius from the center Cell</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="RogueSharp.ICell.html">ICell</a>&gt;</td>
+        <td><p>IEnumerable of Cells in a circle around the center Cell</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="RogueSharp_IMap_GetCellsInCircle_System_Int32_System_Int32_System_Int32__seealso" class="text-muted font-weight-light font-italic">See Also</h5>
+  <div class="seealso">
+      <div><span><a href="https://en.wikipedia.org/wiki/Midpoint_circle_algorithm">Based on Bresenham&amp;apos;s midpoint circle algorithm</a></span></div>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_IMap_GetCellsInColumns_System_Int32___.md&amp;value=---%0Auid%3A%20RogueSharp.IMap.GetCellsInColumns(System.Int32%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/IMap.cs/#L286">View Source</a>
+  </span>
+  <a id="RogueSharp_IMap_GetCellsInColumns_" data-uid="RogueSharp.IMap.GetCellsInColumns*"></a>
+  <h4 id="RogueSharp_IMap_GetCellsInColumns_System_Int32___" data-uid="RogueSharp.IMap.GetCellsInColumns(System.Int32[])">GetCellsInColumns(Int32[])</h4>
+  <div class="markdown level1 summary"><p>Get an IEnumerable of all the Cells in the specified column numbers</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IEnumerable&lt;ICell&gt; GetCellsInColumns(params int[] columnNumbers)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span>[]</td>
+        <td><span class="parametername">columnNumbers</span></td>
+        <td><p>Integer array of column numbers with 0 as the farthest left</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="RogueSharp.ICell.html">ICell</a>&gt;</td>
+        <td><p>IEnumerable of all the Cells in the specified column numbers</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_IMap_GetCellsInDiamond_System_Int32_System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20RogueSharp.IMap.GetCellsInDiamond(System.Int32%2CSystem.Int32%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/IMap.cs/#L225">View Source</a>
+  </span>
+  <a id="RogueSharp_IMap_GetCellsInDiamond_" data-uid="RogueSharp.IMap.GetCellsInDiamond*"></a>
+  <h4 id="RogueSharp_IMap_GetCellsInDiamond_System_Int32_System_Int32_System_Int32_" data-uid="RogueSharp.IMap.GetCellsInDiamond(System.Int32,System.Int32,System.Int32)">GetCellsInDiamond(Int32, Int32, Int32)</h4>
+  <div class="markdown level1 summary"><p>Get an IEnumerable of Cells in a diamond (Rhombus) shape around the center Cell up to the specified distance</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IEnumerable&lt;ICell&gt; GetCellsInDiamond(int xCenter, int yCenter, int distance)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">xCenter</span></td>
+        <td><p>X location of the center Cell with 0 as the farthest left</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">yCenter</span></td>
+        <td><p>Y location of the center Cell with 0 as the top</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">distance</span></td>
+        <td><p>The number of Cells to get in a distance from the center Cell</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="RogueSharp.ICell.html">ICell</a>&gt;</td>
+        <td><p>IEnumerable of Cells in a diamond (Rhombus) shape around the center Cell</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_IMap_GetCellsInRectangle_System_Int32_System_Int32_System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20RogueSharp.IMap.GetCellsInRectangle(System.Int32%2CSystem.Int32%2CSystem.Int32%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/IMap.cs/#L244">View Source</a>
+  </span>
+  <a id="RogueSharp_IMap_GetCellsInRectangle_" data-uid="RogueSharp.IMap.GetCellsInRectangle*"></a>
+  <h4 id="RogueSharp_IMap_GetCellsInRectangle_System_Int32_System_Int32_System_Int32_System_Int32_" data-uid="RogueSharp.IMap.GetCellsInRectangle(System.Int32,System.Int32,System.Int32,System.Int32)">GetCellsInRectangle(Int32, Int32, Int32, Int32)</h4>
+  <div class="markdown level1 summary"><p>Get an IEnumerable of Cells in a rectangle area</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IEnumerable&lt;ICell&gt; GetCellsInRectangle(int top, int left, int width, int height)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">top</span></td>
+        <td><p>The top row of the rectangle</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">left</span></td>
+        <td><p>The left column of the rectangle</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">width</span></td>
+        <td><p>The width of the rectangle</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">height</span></td>
+        <td><p>The height of the rectangle</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="RogueSharp.ICell.html">ICell</a>&gt;</td>
+        <td><p>IEnumerable of Cells in a rectangle area</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_IMap_GetCellsInRows_System_Int32___.md&amp;value=---%0Auid%3A%20RogueSharp.IMap.GetCellsInRows(System.Int32%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/IMap.cs/#L279">View Source</a>
+  </span>
+  <a id="RogueSharp_IMap_GetCellsInRows_" data-uid="RogueSharp.IMap.GetCellsInRows*"></a>
+  <h4 id="RogueSharp_IMap_GetCellsInRows_System_Int32___" data-uid="RogueSharp.IMap.GetCellsInRows(System.Int32[])">GetCellsInRows(Int32[])</h4>
+  <div class="markdown level1 summary"><p>Get an IEnumerable of all the Cells in the specified row numbers</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IEnumerable&lt;ICell&gt; GetCellsInRows(params int[] rowNumbers)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span>[]</td>
+        <td><span class="parametername">rowNumbers</span></td>
+        <td><p>Integer array of row numbers with 0 as the top</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="RogueSharp.ICell.html">ICell</a>&gt;</td>
+        <td><p>IEnumerable of all the Cells in the specified row numbers</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_IMap_GetCellsInSquare_System_Int32_System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20RogueSharp.IMap.GetCellsInSquare(System.Int32%2CSystem.Int32%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/IMap.cs/#L234">View Source</a>
+  </span>
+  <a id="RogueSharp_IMap_GetCellsInSquare_" data-uid="RogueSharp.IMap.GetCellsInSquare*"></a>
+  <h4 id="RogueSharp_IMap_GetCellsInSquare_System_Int32_System_Int32_System_Int32_" data-uid="RogueSharp.IMap.GetCellsInSquare(System.Int32,System.Int32,System.Int32)">GetCellsInSquare(Int32, Int32, Int32)</h4>
+  <div class="markdown level1 summary"><p>Get an IEnumerable of Cells in a square area around the center Cell up to the specified distance</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IEnumerable&lt;ICell&gt; GetCellsInSquare(int xCenter, int yCenter, int distance)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">xCenter</span></td>
+        <td><p>X location of the center Cell with 0 as the farthest left</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">yCenter</span></td>
+        <td><p>Y location of the center Cell with 0 as the top</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">distance</span></td>
+        <td><p>The number of Cells to get in each direction from the center Cell</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="RogueSharp.ICell.html">ICell</a>&gt;</td>
+        <td><p>IEnumerable of Cells in a square area around the center Cell</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_IMap_IndexFor_RogueSharp_ICell_.md&amp;value=---%0Auid%3A%20RogueSharp.IMap.IndexFor(RogueSharp.ICell)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/IMap.cs/#L341">View Source</a>
+  </span>
+  <a id="RogueSharp_IMap_IndexFor_" data-uid="RogueSharp.IMap.IndexFor*"></a>
+  <h4 id="RogueSharp_IMap_IndexFor_RogueSharp_ICell_" data-uid="RogueSharp.IMap.IndexFor(RogueSharp.ICell)">IndexFor(ICell)</h4>
+  <div class="markdown level1 summary"><p>Get the single dimensional array index for the specified Cell</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">int IndexFor(ICell cell)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="RogueSharp.ICell.html">ICell</a></td>
+        <td><span class="parametername">cell</span></td>
+        <td><p>The Cell to get the index for</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><p>An index for the Cell which is useful if storing Cells in a single dimensional array</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_IMap_IndexFor_System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20RogueSharp.IMap.IndexFor(System.Int32%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/IMap.cs/#L334">View Source</a>
+  </span>
+  <a id="RogueSharp_IMap_IndexFor_" data-uid="RogueSharp.IMap.IndexFor*"></a>
+  <h4 id="RogueSharp_IMap_IndexFor_System_Int32_System_Int32_" data-uid="RogueSharp.IMap.IndexFor(System.Int32,System.Int32)">IndexFor(Int32, Int32)</h4>
+  <div class="markdown level1 summary"><p>Get the single dimensional array index for a Cell at the specified location using the formula: index = ( y * Width ) + x</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">int IndexFor(int x, int y)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">x</span></td>
+        <td><p>X location of the Cell index to get starting with 0 as the farthest left</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">y</span></td>
+        <td><p>Y location of the Cell index to get, starting with 0 as the top</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><p>An index for the Cell at the specified location useful if storing Cells in a single dimensional array</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_IMap_Initialize_System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20RogueSharp.IMap.Initialize(System.Int32%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/IMap.cs/#L45">View Source</a>
+  </span>
+  <a id="RogueSharp_IMap_Initialize_" data-uid="RogueSharp.IMap.Initialize*"></a>
+  <h4 id="RogueSharp_IMap_Initialize_System_Int32_System_Int32_" data-uid="RogueSharp.IMap.Initialize(System.Int32,System.Int32)">Initialize(Int32, Int32)</h4>
+  <div class="markdown level1 summary"><p>Create a new map with the properties of all Cells set to false</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void Initialize(int width, int height)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">width</span></td>
+        <td><p>How many Cells wide the Map will be</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">height</span></td>
+        <td><p>How many Cells tall the Map will be</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="RogueSharp_IMap_Initialize_System_Int32_System_Int32__remarks" class="text-muted font-weight-light font-italic">Remarks</h5>
+  <div class="markdown level1 remarks"><p>This is basically a solid stone map that would then need to be modified to have interesting features</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_IMap_IsExplored_System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20RogueSharp.IMap.IsExplored(System.Int32%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/IMap.cs/#L104">View Source</a>
+  </span>
+  <a id="RogueSharp_IMap_IsExplored_" data-uid="RogueSharp.IMap.IsExplored*"></a>
+  <h4 id="RogueSharp_IMap_IsExplored_System_Int32_System_Int32_" data-uid="RogueSharp.IMap.IsExplored(System.Int32,System.Int32)">IsExplored(Int32, Int32)</h4>
+  <div class="markdown level1 summary"><p>Check if the Cell is flagged as ever having been explored by the player</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool IsExplored(int x, int y)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">x</span></td>
+        <td><p>X location of the Cell to check starting with 0 as the farthest left</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">y</span></td>
+        <td><p>Y location of the Cell to check, starting with 0 as the top</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>True if the Cell has been flagged as being explored by the player, false otherwise</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="RogueSharp_IMap_IsExplored_System_Int32_System_Int32__remarks" class="text-muted font-weight-light font-italic">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The explored property of a Cell can be used to track if the Cell has ever been in the field-of-view of a character controlled by the player
+This property will not automatically be updated based on FOV calculations or any other built-in functions of the RogueSharp library.</p>
+</div>
+  <h5 id="RogueSharp_IMap_IsExplored_System_Int32_System_Int32__examples" class="text-muted font-weight-light font-italic">Examples</h5>
+  <p>As the player moves characters around a Map, Cells will enter and exit the currently computed field-of-view
+This property can be used to keep track of those Cells that have been &quot;seen&quot; and could be used to show fog-of-war type effects when rendering the map</p>
+
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_IMap_IsInFov_System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20RogueSharp.IMap.IsInFov(System.Int32%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/IMap.cs/#L88">View Source</a>
+  </span>
+  <a id="RogueSharp_IMap_IsInFov_" data-uid="RogueSharp.IMap.IsInFov*"></a>
+  <h4 id="RogueSharp_IMap_IsInFov_System_Int32_System_Int32_" data-uid="RogueSharp.IMap.IsInFov(System.Int32,System.Int32)">IsInFov(Int32, Int32)</h4>
+  <div class="markdown level1 summary"><p>Check if the Cell is in the currently computed field-of-view
+For newly initialized maps a field-of-view will not exist so all Cells will return false
+Field-of-view must first be calculated by calling ComputeFov and/or AppendFov</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool IsInFov(int x, int y)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">x</span></td>
+        <td><p>X location of the Cell to check starting with 0 as the farthest left</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">y</span></td>
+        <td><p>Y location of the Cell to check, starting with 0 as the top</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>True if the Cell is in the currently computed field-of-view, false otherwise</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="RogueSharp_IMap_IsInFov_System_Int32_System_Int32__remarks" class="text-muted font-weight-light font-italic">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Field-of-view (FOV) is basically a calculation of what is observable in the Map from a given Cell with a given light radius</p>
+</div>
+  <h5 id="RogueSharp_IMap_IsInFov_System_Int32_System_Int32__examples" class="text-muted font-weight-light font-italic">Examples</h5>
+  <p>Field-of-view c be used to simulate a character holding a light source and exploring a Map representing a dark cavern
+Any Cells within the FOV would be what the character could see from their current location and lighting conditions</p>
+
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_IMap_IsTransparent_System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20RogueSharp.IMap.IsTransparent(System.Int32%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/IMap.cs/#L58">View Source</a>
+  </span>
+  <a id="RogueSharp_IMap_IsTransparent_" data-uid="RogueSharp.IMap.IsTransparent*"></a>
+  <h4 id="RogueSharp_IMap_IsTransparent_System_Int32_System_Int32_" data-uid="RogueSharp.IMap.IsTransparent(System.Int32,System.Int32)">IsTransparent(Int32, Int32)</h4>
+  <div class="markdown level1 summary"><p>Get the transparency of the Cell i.e. if line of sight would be blocked by this Cell</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool IsTransparent(int x, int y)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">x</span></td>
+        <td><p>X location of the Cell to check starting with 0 as the farthest left</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">y</span></td>
+        <td><p>Y location of the Cell to check, starting with 0 as the top</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>True if line-of-sight is not blocked by this Cell, false otherwise</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="RogueSharp_IMap_IsTransparent_System_Int32_System_Int32__examples" class="text-muted font-weight-light font-italic">Examples</h5>
+  <p>A Cell representing an empty stone floor would be transparent
+A Cell representing a glass wall could be transparent (even though it may not be walkable)
+A Cell representing a solid stone wall would not be transparent</p>
+
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_IMap_IsWalkable_System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20RogueSharp.IMap.IsWalkable(System.Int32%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/IMap.cs/#L71">View Source</a>
+  </span>
+  <a id="RogueSharp_IMap_IsWalkable_" data-uid="RogueSharp.IMap.IsWalkable*"></a>
+  <h4 id="RogueSharp_IMap_IsWalkable_System_Int32_System_Int32_" data-uid="RogueSharp.IMap.IsWalkable(System.Int32,System.Int32)">IsWalkable(Int32, Int32)</h4>
+  <div class="markdown level1 summary"><p>Get the walkability of the Cell i.e. if a character could normally move across the Cell without difficulty</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool IsWalkable(int x, int y)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">x</span></td>
+        <td><p>X location of the Cell to check starting with 0 as the farthest left</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">y</span></td>
+        <td><p>Y location of the Cell to check, starting with 0 as the top</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>True if a character could move across this Cell, false otherwise</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="RogueSharp_IMap_IsWalkable_System_Int32_System_Int32__examples" class="text-muted font-weight-light font-italic">Examples</h5>
+  <p>A Cell representing an empty stone floor would be walkable
+A Cell representing a glass wall may not be walkable (even though it could be transparent)
+A Cell representing a solid stone wall would not be walkable</p>
+
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_IMap_Restore_RogueSharp_MapState_.md&amp;value=---%0Auid%3A%20RogueSharp.IMap.Restore(RogueSharp.MapState)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/IMap.cs/#L319">View Source</a>
+  </span>
+  <a id="RogueSharp_IMap_Restore_" data-uid="RogueSharp.IMap.Restore*"></a>
+  <h4 id="RogueSharp_IMap_Restore_RogueSharp_MapState_" data-uid="RogueSharp.IMap.Restore(RogueSharp.MapState)">Restore(MapState)</h4>
+  <div class="markdown level1 summary"><p>Restore the state of this Map from the specified MapState</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void Restore(MapState state)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="RogueSharp.MapState.html">MapState</a></td>
+        <td><span class="parametername">state</span></td>
+        <td><p>MapState POCO (Plain Old C# Object) which represents this Map and can be easily serialized and deserialized</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_IMap_Save.md&amp;value=---%0Auid%3A%20RogueSharp.IMap.Save%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/IMap.cs/#L313">View Source</a>
+  </span>
+  <a id="RogueSharp_IMap_Save_" data-uid="RogueSharp.IMap.Save*"></a>
+  <h4 id="RogueSharp_IMap_Save" data-uid="RogueSharp.IMap.Save">Save()</h4>
+  <div class="markdown level1 summary"><p>Get a MapState POCO which represents this Map and can be easily serialized
+Use Restore with the MapState to get back a full Map</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">MapState Save()</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="RogueSharp.MapState.html">MapState</a></td>
+        <td><p>MapState POCO (Plain Old C# Object) which represents this Map and can be easily serialized</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_IMap_SetCellProperties_System_Int32_System_Int32_System_Boolean_System_Boolean_.md&amp;value=---%0Auid%3A%20RogueSharp.IMap.SetCellProperties(System.Int32%2CSystem.Int32%2CSystem.Boolean%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/IMap.cs/#L129">View Source</a>
+  </span>
+  <a id="RogueSharp_IMap_SetCellProperties_" data-uid="RogueSharp.IMap.SetCellProperties*"></a>
+  <h4 id="RogueSharp_IMap_SetCellProperties_System_Int32_System_Int32_System_Boolean_System_Boolean_" data-uid="RogueSharp.IMap.SetCellProperties(System.Int32,System.Int32,System.Boolean,System.Boolean)">SetCellProperties(Int32, Int32, Boolean, Boolean)</h4>
+  <div class="markdown level1 summary"><p>Set the properties of an unexplored Cell to the specified values</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void SetCellProperties(int x, int y, bool isTransparent, bool isWalkable)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">x</span></td>
+        <td><p>X location of the Cell to set properties on, starting with 0 as the farthest left</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">y</span></td>
+        <td><p>Y location of the Cell to set properties on, starting with 0 as the top</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">isTransparent</span></td>
+        <td><p>True if line-of-sight is not blocked by this Cell. False otherwise</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">isWalkable</span></td>
+        <td><p>True if a character could walk across the Cell normally. False otherwise</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="RogueSharp_IMap_SetCellProperties_System_Int32_System_Int32_System_Boolean_System_Boolean__remarks" class="text-muted font-weight-light font-italic">Remarks</h5>
+  <div class="markdown level1 remarks"><p>IsInFov cannot be set through this method as it is always calculated by calling ComputeFov and/or AppendFov</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_IMap_SetCellProperties_System_Int32_System_Int32_System_Boolean_System_Boolean_System_Boolean_.md&amp;value=---%0Auid%3A%20RogueSharp.IMap.SetCellProperties(System.Int32%2CSystem.Int32%2CSystem.Boolean%2CSystem.Boolean%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/IMap.cs/#L117">View Source</a>
+  </span>
+  <a id="RogueSharp_IMap_SetCellProperties_" data-uid="RogueSharp.IMap.SetCellProperties*"></a>
+  <h4 id="RogueSharp_IMap_SetCellProperties_System_Int32_System_Int32_System_Boolean_System_Boolean_System_Boolean_" data-uid="RogueSharp.IMap.SetCellProperties(System.Int32,System.Int32,System.Boolean,System.Boolean,System.Boolean)">SetCellProperties(Int32, Int32, Boolean, Boolean, Boolean)</h4>
+  <div class="markdown level1 summary"><p>Set the properties of a Cell to the specified values</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void SetCellProperties(int x, int y, bool isTransparent, bool isWalkable, bool isExplored)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">x</span></td>
+        <td><p>X location of the Cell to set properties on, starting with 0 as the farthest left</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">y</span></td>
+        <td><p>Y location of the Cell to set properties on, starting with 0 as the top</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">isTransparent</span></td>
+        <td><p>True if line-of-sight is not blocked by this Cell. False otherwise</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">isWalkable</span></td>
+        <td><p>True if a character could walk across the Cell normally. False otherwise</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">isExplored</span></td>
+        <td><p>Optional parameter defaults to false if not provided. True if the Cell has ever been in the field-of-view of the player. False otherwise</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="RogueSharp_IMap_SetCellProperties_System_Int32_System_Int32_System_Boolean_System_Boolean_System_Boolean__remarks" class="text-muted font-weight-light font-italic">Remarks</h5>
+  <div class="markdown level1 remarks"><p>IsInFov cannot be set through this method as it is always calculated by calling ComputeFov and/or AppendFov</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_IMap_ToString_System_Boolean_.md&amp;value=---%0Auid%3A%20RogueSharp.IMap.ToString(System.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/IMap.cs/#L306">View Source</a>
+  </span>
+  <a id="RogueSharp_IMap_ToString_" data-uid="RogueSharp.IMap.ToString*"></a>
+  <h4 id="RogueSharp_IMap_ToString_System_Boolean_" data-uid="RogueSharp.IMap.ToString(System.Boolean)">ToString(Boolean)</h4>
+  <div class="markdown level1 summary"><p>Provides a simple visual representation of the map using the following symbols:</p>
+<ul>
+<li><code>%</code>: <code>Cell</code> is not in field-of-view</li>
+<li><code>.</code>: <code>Cell</code> is transparent, walkable, and in field-of-view</li>
+<li><code>s</code>: <code>Cell</code> is walkable and in field-of-view (but not transparent)</li>
+<li><code>o</code>: <code>Cell</code> is transparent and in field-of-view (but not walkable)</li>
+<li><code>#</code>: <code>Cell</code> is in field-of-view (but not transparent or walkable)</li>
+</ul>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string ToString(bool useFov)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">useFov</span></td>
+        <td><p>True if field-of-view calculations will be used when creating the string representation of the Map. False otherwise</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>A string representation of the map using special symbols to denote Cell properties</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+            <div id="disqus_thread"></div>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+          </div>
+          
+          <div class="d-none d-lg-block col-md-3" role="complementary">
+            <div class="sideaffix pt-3 pb-3">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_IMap.md&amp;value=---%0Auid%3A%20RogueSharp.IMap%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link text-info" title="Improve this Doc">
+                    <i class="fal fa-edit fa-fw"></i>
+                    <span>Improve this Doc</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/IMap.cs/#L11" class="contribution-link text-info" title="View Source">
+                    <i class="fal fa-code fa-fw"></i>
+                    <span>View Source</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <!--<div class="github-links">
+                  <a class="github-button" href="https://github.com/fszlin/certes" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star fszlin/certes on GitHub">Star</a>
+              </div>-->
+              <nav class="hidden-print affix mt-2" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      
+      <footer class="bg-secondary">
+        <!--<div class="grad-bottom"></div>-->
+        <div class="footer bg-secondary">
+          <div class="container">
+          <div class="d-flex">
+            <div class="p-2 flex-grow-1 text-white">
+            <a class="text-white" href="https://github.com/FaronBracy/RogueSharp">RogueSharp &copy; 2014-2020 Faron Bracy</a>
+            
+            </div>
+            <div class="p-2">
+              <a class="text-white" href="#top">Back to top</a>
+            </div>
+          </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/dos.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/powershell.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+  </body>
+</html>
