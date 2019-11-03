@@ -1,5 +1,6 @@
-[![Tutorials: Blog](https://img.shields.io/badge/tutorials-blog-blue.svg)](https://roguesharp.wordpress.com/ )
-[![Documentation: Github](https://img.shields.io/badge/docs-github-blue.svg)](https://faronbracy.github.io/RogueSharp/RogueSharp/index.htm)
+[![Tutorials: Github.io](https://img.shields.io/badge/tutorials-github.io-blue.svg)](https://faronbracy.github.io/RogueSharp/api/RogueSharp.html)
+[![Documentation: Github.io](https://img.shields.io/badge/docs-github.io-blue.svg)](https://faronbracy.github.io/RogueSharp/api/index.html)
+[![Posts: Blog](https://img.shields.io/badge/blog_posts-wordpress-blue.svg)](https://roguesharp.wordpress.com/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/FaronBracy/RogueSharp/master/LICENSE.txt)
 
 [![Build status](https://dreamersdesign.visualstudio.com/RogueSharp/_apis/build/status/RogueSharp%20Continuous)](https://dreamersdesign.visualstudio.com/RogueSharp/_build/latest?definitionId=1) 
@@ -25,7 +26,7 @@ It is loosely based on the popular [libtcod](http://doryen.eptalys.net/libtcod/ 
 1. Visit the [RogueSharp Blog](https://roguesharp.wordpress.com/ "RogueSharp Blog") for tips and tutorials.
 2. The quickest way to add RogueSharp to your project is by using the [RogueSharp nuget package](https://www.nuget.org/packages/RogueSharp "RogueSharp nuget package"). 
 2. If building the assembly yourself, the solution file "RogueSharp.sln" contains the main library and unit tests. This should be all you need.
-3. Class documentation is located on [Github Pages](https://faronbracy.github.io/RogueSharp "RogueSharp class documentation").
+3. Class documentation is located on [Github Pages](https://faronbracy.github.io/RogueSharp/api/index.html "RogueSharp class documentation").
 
 ## Features ##
 
@@ -163,9 +164,9 @@ A more interesting way to create a map is to use the `Map` class's static method
 	- Several classes from RogueSharps Algorithms namespace are inspired by these Algorithms
 - [RogueBasin](http://www.roguebasin.com/ "RogueBasin")
 	- [Articles of interest for Roguelike developers](http://www.roguebasin.com/index.php?title=Articles "Roguelike developer articles")
-- [Docu](https://github.com/jagregory/docu "Sandcastle Help File Builder")
+- [DocFx](https://github.com/dotnet/docfx "DocFx")
 	- Used to automatically generate documentation from the XML comments in source code
-	- [Docu License](https://github.com/jagregory/docu/blob/master/LICENSE.txt "Docu license")
+	- [DocFx License](https://github.com/dotnet/docfx/blob/dev/LICENSE "DocFx license")
 - [Dice Notation .NET](https://dicenotation.codeplex.com "Dice Notation .NET")
 	- Significant portions of the code in RougeSharp DiceNotation namespace are taken directly from this great library
 	- [Dice Notation .NET source code](https://dicenotation.codeplex.com/SourceControl/latest "Dice Notation .NET source code")
@@ -175,7 +176,7 @@ A more interesting way to create a map is to use the `Map` class's static method
 
 #### RogueSharp ####
 
-The MIT License (MIT)
+MIT License
 
 Copyright (c) 2014 - 2019 Faron Bracy
 
