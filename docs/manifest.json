@@ -681,7 +681,7 @@
       "output": {
         ".html": {
           "relative_path": "api/index.html",
-          "hash": "l/EAm2q1HQrc8It0QGMS7Q=="
+          "hash": "TjS30D6olQZDy8FFTuoDgQ=="
         }
       },
       "is_incremental": true,
@@ -912,7 +912,7 @@
           "hash": "oJAR9gblITeHOA3u0JgCdQ=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -1295,7 +1295,7 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "CyrtoWpZC4QQ1KDIib9H7g=="
+          "hash": "7J1sZMD/ExPA52yaQ2e3Sw=="
         }
       },
       "is_incremental": true,
@@ -1323,6 +1323,13 @@
         "skipped_file_count": 0
       },
       "processors": {
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        },
         "ResourceDocumentProcessor": {
           "can_incremental": false,
           "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
@@ -1334,20 +1341,13 @@
           "can_incremental": true,
           "incrementalPhase": "build",
           "total_file_count": 19,
-          "skipped_file_count": 18
+          "skipped_file_count": 19
         },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
           "total_file_count": 56,
           "skipped_file_count": 56
-        },
-        "TocDocumentProcessor": {
-          "can_incremental": false,
-          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
-          "incrementalPhase": "build",
-          "total_file_count": 0,
-          "skipped_file_count": 0
         }
       }
     },
