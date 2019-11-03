@@ -1,0 +1,215 @@
+﻿@media (min-width:1200px) {
+    .container {
+        max-width:1920px
+    }
+}
+
+.replaced-svg {
+    display: block;
+}
+
+.affix .nav li,
+.sidetoc .nav li {
+    max-width: 100%;
+    position: relative;
+}
+
+    .sidetoc .nav li > .expand-stub {
+        position: absolute;
+        width: 1.5rem;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        height: 1.5rem;
+        cursor: pointer;
+    }
+
+.implements a[data-toggle="collapse"]::after,
+.inheritedMembers a[data-toggle="collapse"]::after,
+.affix .nav .nav-item > a::before,
+.sidetoc .nav .nav-item > a::before {
+    font-family: "Font Awesome 5 Pro";
+    content: '';
+    font-size: smaller;
+    margin-right: 0.2rem;
+    width: 1.25rem;
+    text-align: center;
+    display: inline-block;
+}
+
+.sidenav,
+.sideaffix {
+    position: sticky;
+    overflow-y: auto;
+}
+
+.sidefilter {
+    margin-bottom: 0.8rem;
+}
+
+.affix .nav .nav-item > ul {
+    padding-left: 0.5rem;
+}
+
+.affix .nav .nav-item > a {
+    padding: 0.1rem 0;
+    font-size: 0.85rem;
+}
+
+.affix .nav .level1 > .nav-item > a {
+    font-size: 0.95rem;
+}
+
+.affix .nav .nav-item > a.active:before {
+    content: '\f124';
+}
+
+.affix .nav .nav-item > a:focus::before,
+.affix .nav .nav-item > a:hover::before {
+    content: '\f13d';
+}
+
+.affix .nav-item > a:not(.active) + ul {
+    display: none;
+}
+
+/*
+.sidetoc .nav .nav-item > ul {
+    padding-left: 0.5rem;
+}*/
+
+.sidetoc .nav .nav-item > a {
+    padding: 0.1rem 0;
+    font-size: 0.95rem;
+}
+
+.sidetoc .nav.level1 > .nav-item > a {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.sidetoc .nav.level2 > .nav-item > a {
+    font-weight: 600;
+}
+
+.sidetoc .nav .nav-item > a:focus::before,
+.sidetoc .nav .nav-item > a:hover::before {
+    content: '\f356';
+}
+
+.sidetoc .nav .nav-item > a.current:before {
+    content: '\f14a';
+}
+
+.sidetoc .nav .nav-item.in > .expand-stub + a:focus::before,
+.sidetoc .nav .nav-item.in > .expand-stub + a:focus::before,
+.sidetoc .nav .nav-item.in > .expand-stub + a::before {
+    content: '\f107';
+}
+
+.sidetoc .nav .nav-item > .expand-stub + a:focus::before,
+.sidetoc .nav .nav-item > .expand-stub + a:focus::before,
+.sidetoc .nav .nav-item > .expand-stub + a::before {
+    content: '\f106';
+}
+
+.sidetoc .nav .nav-item > .expand-stub + a {
+    cursor: pointer;
+}
+
+.sidetoc .nav .nav-item:not(.in):not(.filtered) > ul.nav {
+    display: none;
+}
+
+header .breadcrumb {
+    margin-bottom: 0;
+}
+
+/*.toc-toggle {
+    display: none;
+}*/
+
+h1 a:hover,
+h2 a:hover,
+h3 a:hover,
+h4 a:hover,
+h5 a:hover,
+h6 a:hover {
+    text-decoration: none;
+}
+
+/*
+article.content {
+    padding-top: 1rem;
+}
+*/
+
+.article img {
+    max-width: 100%;
+}
+
+article.content section {
+    margin-left: 0.5rem;
+}
+
+article.content .improve-link,
+article.content .source-link {
+    float: right;
+    margin-top: 0.45rem;
+    margin-right: 0.5rem;
+}
+/*
+.implements,
+.inheritance {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+    .implements h5,
+    .inheritance h5 {
+        width: 100%;
+        font-weight: 400;
+        font-style: italic;
+        margin-bottom: 0;
+    }
+
+    .inheritance div.level0::before {
+        content: '';
+        display: none;
+    }
+
+    .inheritance div::before {
+        content: '\f355';
+        margin-left: 0.25rem;
+    }*/
+
+
+.implements a[data-toggle="collapse"]::after,
+.inheritedMembers a[data-toggle="collapse"]::after {
+    content: '\f106';
+    font-style: normal;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.implements a[data-toggle="collapse"][aria-expanded="true"]::after,
+.inheritedMembers a[data-toggle="collapse"][aria-expanded="true"]::after {
+    content: '\f107';
+}
+
+.contribution a:hover {
+    text-decoration: none;
+}
+
+.contribution .nav {
+    display: block;
+}
+
+.navbar .fa-external-link-alt {
+    vertical-align: top;
+}
+
+.gist table td,
+.gist table th {
+    border-top: none;
+}

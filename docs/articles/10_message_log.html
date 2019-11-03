@@ -1,0 +1,230 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Message Log | RogueSharp </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="title" content="Message Log - RogueSharp ">
+    <meta name="generator" content="docfx 2.47.0.0">
+    
+    <link rel="shortcut icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-87DrmpqHRiY8hPLIr7ByqhPIywuSsjuQAfMXAE0sMUpY3BM7nXjf+mLIUSvhDArs" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css">
+    <link rel="stylesheet" href="../styles/site.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+    <script type="text/javascript">
+    var appInsights=window.appInsights||function(a){function b(a){c[a]=function(){var b=arguments;c.queue.push(function(){c[a].apply(c,b)})}}var c={config:a},d=document,e=window;setTimeout(function(){var b=d.createElement("script");b.src=a.url||"https://az416426.vo.msecnd.net/scripts/a/ai.0.js",d.getElementsByTagName("script")[0].parentNode.appendChild(b)});try{c.cookie=d.cookie}catch(a){}c.queue=[];for(var f=["Event","Exception","Metric","PageView","Trace","Dependency"];f.length;)b("track"+f.pop());if(b("setAuthenticatedUserContext"),b("clearAuthenticatedUserContext"),b("startTrackEvent"),b("stopTrackEvent"),b("startTrackPage"),b("stopTrackPage"),b("flush"),!a.disableExceptionTracking){f="onerror",b("_"+f);var g=e[f];e[f]=function(a,b,d,e,h){var i=g&&g(a,b,d,e,h);return!0!==i&&c["_"+f](a,b,d,e,h),i}}return c}({instrumentationKey:"9aaf9896-bee3-4d08-abb6-2ef51b389035"});
+    window.appInsights=appInsights,appInsights.queue&&0===appInsights.queue.length&&appInsights.trackPageView();
+  </script>
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <div class="bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light container">
+          
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="RogueSharp" width="36" height="36">
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        
+          <div class="collapse navbar-collapse" id="navbar">
+            <!--<form id="search" role="search" class="form-inline my-2 my-lg-0">
+              <input id="search-query" class="form-control mr-sm-2" type="search" placeholder="Search" autocomplete="off" aria-label="Search">
+            </form>-->
+          </div>
+        </nav>
+        </div>
+        
+        <div class="bg-dark">
+        <nav aria-label="breadcrumb" id="breadcrumb" class="container hide-when-search">
+          <!--<ol class="breadcrumb">
+            <li class="breadcrumb-item" aria-current="page"></li>
+          </ol>-->
+        </nav>
+        </div>      </header>
+      <div role="main" class="container body-content hide-when-search">
+      <div class="row">
+        
+        
+        <div class="sidenav hide-when-search col-md-3 pt-md-3 pb-md-3">
+          <a class="btn btn-link toc-toggle d-md-none" data-toggle="collapse" data-target="#sidetoggle" href="javascript:;" aria-expanded="true" aria-controls="sidetoggle">
+            Show / Hide Table of Contents
+          </a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article col-md-9">
+      <div class="row">
+          <div class="col-lg-9">
+            <article class="content wrap pt-2 pb-2" id="_content" data-uid="">
+<h1 id="message-log">Message Log</h1>
+
+<p>During this tutorial we’ll create a new <code>MessageLog</code> class that will allow us to add messages and draw them to a console. We’ll then add a bunch of messages to the log to prove that it works</p>
+<p><img src="../images/V3Tutorial/10_messagelog.png" alt="Message log console" title="A console with a running app and log"></p>
+<h2 id="designing-the-message-log-class">Designing the Message Log Class</h2>
+<p>How do we want to handle messages? We want a class that allows us to add messages to some sort of list. We also want to display some number of previous messages and have new messages scroll into view when they are added. Old messages after a certain limit should scroll out of view.</p>
+<p>A decent structure for handling this is a <a href="https://en.wikipedia.org/wiki/Queue_(abstract_data_type)">Queue</a>. You can read more about them from the link but basically you can think of it as a line at the grocery store. The first person to get in line is the first person to check out. In terms of our message log the oldest message will be the first one removed from the history.</p>
+<h2 id="creating-the-message-log-class">Creating the Message Log Class</h2>
+<p>Create a new class in the <code>Systems</code> folder called <code>MessageLog.cs</code>. Add the following code to it:</p>
+<pre><code class="lang-cs">// Represents a queue of messages that can be added to
+// Has a method for and drawing to an RLConsole
+public class MessageLog
+{
+  // Define the maximum number of lines to store
+  private static readonly int _maxLines = 9;
+
+  // Use a Queue to keep track of the lines of text
+  // The first line added to the log will also be the first removed
+  private readonly Queue&lt;string&gt; _lines;
+
+  public MessageLog()
+  {
+    _lines = new Queue&lt;string&gt;();
+  }
+
+  // Add a line to the MessageLog queue
+  public void Add( string message )
+  {
+    _lines.Enqueue( message );
+
+    // When exceeding the maximum number of lines remove the oldest one.
+    if ( _lines.Count &gt; _maxLines )
+    {
+      _lines.Dequeue();
+    }
+  }
+
+  // Draw each line of the MessageLog queue to the console
+  public void Draw( RLConsole console )
+  {
+    console.Clear();
+    string[] lines = _lines.ToArray();
+    for ( int i = 0; i &lt; lines.Length; i++ )
+    {
+      console.Print( 1, i + 1, lines[i], RLColor.White );
+    }
+  }
+}
+</code></pre>
+<h2 id="hooking-up-the-message-log">Hooking up the Message Log</h2>
+<p>All of the remaining work will be handled in <code>Game.cs</code>.</p>
+<p>First in the section at the top of the file where we define <code>Player</code>, <code>DungeonMap</code> and <code>CommandSystem</code> add the following:</p>
+<pre><code class="lang-cs">public static MessageLog MessageLog { get; private set; }
+</code></pre>
+<p>Next in the <code>Main()</code> method of <code>Game.cs</code> add some code to instantiate a new <code>MessageLog</code> and add a couple of messages to it. Don’t forget to also remove the old code that was setting the <code>_messageConsole</code> to a blue color and printing “Messages” on it.</p>
+<pre><code class="lang-cs">// Create a new MessageLog and print the random seed used to generate the level
+MessageLog = new MessageLog();
+MessageLog.Add( &quot;The rogue arrives on level 1&quot; );
+MessageLog.Add( $&quot;Level created with seed '{seed}'&quot; );
+
+// Remove these lines:
+_messageConsole.SetBackColor( 0, 0, _messageWidth, _messageHeight, Swatch.DbDeepWater );
+_messageConsole.Print( 1, 1, &quot;Messages&quot;, Colors.TextHeading );
+</code></pre>
+<p>The last thing we need to do is call <code>MessageLog.Draw()</code> in our <code>OnRootConsoleRender()</code> method near where we call <code>DungeonMap.Draw()</code> and <code>Player.Draw()</code>.</p>
+<pre><code class="lang-cs">MessageLog.Draw( _messageConsole );
+</code></pre>
+<h2 id="temporary-code-for-generating-lots-of-messages">Temporary Code for Generating Lots of Messages</h2>
+<p>Just to prove that our messages work the way we expect and remove old messages once we reach the limit we set of “9” lets log a bunch of messages. We’ll do this by adding a private member variable <code>_steps</code> and increment it each time the player acts.</p>
+<pre><code class="lang-cs">// Temporary member variable just to show our MessageLog is working
+private static int _steps = 0;
+
+// In OnRootConsoleUpdate() replace the if ( didPlayerAct ) block
+if ( didPlayerAct )
+{
+  // Every time the player acts increment the steps and log it
+  MessageLog.Add( $&quot;Step # {++_steps}&quot; );
+  _renderRequired = true;
+}
+</code></pre>
+<h2 id="code-on-github">Code on GitHub</h2>
+<p>As always the code for the tutorial series so far can be found on GitHub:</p>
+<ul>
+<li><a href="https://github.com/FaronBracy/RogueSharpV3Tutorial/tree/08MessageLog">https://github.com/FaronBracy/RogueSharpV3Tutorial/tree/08MessageLog</a></li>
+</ul>
+<p>Bored waiting for the next tutorial? The complete tutorial project is already finished and the source code is available on Github:</p>
+<ul>
+<li>Sample Roguelike game using RogueSharp and RLNet console
+<ul>
+<li><a href="https://github.com/FaronBracy/RogueSharpRLNetSamples">https://github.com/FaronBracy/RogueSharpRLNetSamples</a></li>
+</ul>
+</li>
+<li>Sample Roguelike game using RogueSharp and SadConsole
+<ul>
+<li><a href="https://github.com/FaronBracy/RogueSharpSadConsoleSamples">https://github.com/FaronBracy/RogueSharpSadConsoleSamples</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="closing-thoughts">Closing Thoughts</h2>
+<p>I’ve been spending a bunch of time messing with <a href="http://www.gridsagegames.com/rexpaint/">RexPaint</a>. It’s a fantastic ASCII art editor and can be used to design maps. I highly recommend you take a look at it.</p>
+</article>
+            <div id="disqus_thread"></div>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+          </div>
+          
+          <div class="d-none d-lg-block col-md-3" role="complementary">
+            <div class="sideaffix pt-3 pb-3">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/FaronBracy/RogueSharp.Documentation/blob/master/articles/10_message_log.md/#L1" class="contribution-link text-info" title="Improve this Doc">
+                    <i class="fal fa-edit fa-fw"></i>
+                    <span>Improve this Doc</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <!--<div class="github-links">
+                  <a class="github-button" href="https://github.com/fszlin/certes" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star fszlin/certes on GitHub">Star</a>
+              </div>-->
+              <nav class="hidden-print affix mt-2" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      
+      <footer class="bg-secondary">
+        <!--<div class="grad-bottom"></div>-->
+        <div class="footer bg-secondary">
+          <div class="container">
+          <div class="d-flex">
+            <div class="p-2 flex-grow-1 text-white">
+            <a class="text-white" href="https://github.com/FaronBracy/RogueSharp">RogueSharp &copy; 2014-2020 Faron Bracy</a>
+            
+            </div>
+            <div class="p-2">
+              <a class="text-white" href="#top">Back to top</a>
+            </div>
+          </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/dos.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/powershell.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+  </body>
+</html>

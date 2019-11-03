@@ -1,0 +1,272 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Simple Map Drawing | RogueSharp </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="title" content="Simple Map Drawing - RogueSharp ">
+    <meta name="generator" content="docfx 2.47.0.0">
+    
+    <link rel="shortcut icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-87DrmpqHRiY8hPLIr7ByqhPIywuSsjuQAfMXAE0sMUpY3BM7nXjf+mLIUSvhDArs" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css">
+    <link rel="stylesheet" href="../styles/site.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+    <script type="text/javascript">
+    var appInsights=window.appInsights||function(a){function b(a){c[a]=function(){var b=arguments;c.queue.push(function(){c[a].apply(c,b)})}}var c={config:a},d=document,e=window;setTimeout(function(){var b=d.createElement("script");b.src=a.url||"https://az416426.vo.msecnd.net/scripts/a/ai.0.js",d.getElementsByTagName("script")[0].parentNode.appendChild(b)});try{c.cookie=d.cookie}catch(a){}c.queue=[];for(var f=["Event","Exception","Metric","PageView","Trace","Dependency"];f.length;)b("track"+f.pop());if(b("setAuthenticatedUserContext"),b("clearAuthenticatedUserContext"),b("startTrackEvent"),b("stopTrackEvent"),b("startTrackPage"),b("stopTrackPage"),b("flush"),!a.disableExceptionTracking){f="onerror",b("_"+f);var g=e[f];e[f]=function(a,b,d,e,h){var i=g&&g(a,b,d,e,h);return!0!==i&&c["_"+f](a,b,d,e,h),i}}return c}({instrumentationKey:"9aaf9896-bee3-4d08-abb6-2ef51b389035"});
+    window.appInsights=appInsights,appInsights.queue&&0===appInsights.queue.length&&appInsights.trackPageView();
+  </script>
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <div class="bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light container">
+          
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="RogueSharp" width="36" height="36">
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        
+          <div class="collapse navbar-collapse" id="navbar">
+            <!--<form id="search" role="search" class="form-inline my-2 my-lg-0">
+              <input id="search-query" class="form-control mr-sm-2" type="search" placeholder="Search" autocomplete="off" aria-label="Search">
+            </form>-->
+          </div>
+        </nav>
+        </div>
+        
+        <div class="bg-dark">
+        <nav aria-label="breadcrumb" id="breadcrumb" class="container hide-when-search">
+          <!--<ol class="breadcrumb">
+            <li class="breadcrumb-item" aria-current="page"></li>
+          </ol>-->
+        </nav>
+        </div>      </header>
+      <div role="main" class="container body-content hide-when-search">
+      <div class="row">
+        
+        
+        <div class="sidenav hide-when-search col-md-3 pt-md-3 pb-md-3">
+          <a class="btn btn-link toc-toggle d-md-none" data-toggle="collapse" data-target="#sidetoggle" href="javascript:;" aria-expanded="true" aria-controls="sidetoggle">
+            Show / Hide Table of Contents
+          </a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article col-md-9">
+      <div class="row">
+          <div class="col-lg-9">
+            <article class="content wrap pt-2 pb-2" id="_content" data-uid="">
+<h1 id="simple-map-drawing">Simple Map Drawing</h1>
+
+<p>In this tutorial we’ll begin using the <code>Map</code> features of RogueSharp. We will create our own <code>DungeonMap</code> class that will start off very simple but give us lots of room for growth. We’ll also be drawing this to the map sub console and displaying it on the screen.</p>
+<h2 id="creating-the-dungeonmap">Creating the DungeonMap</h2>
+<p>When it comes to the <code>Map</code> class in RogueSharp it is designed to be generic so that it can be used in a variety of games. It has plenty of functionality for path-finding, determining field-of-view, selecting Cells and more.</p>
+<p>What RogueSharp doesn’t have is any concept of doors, stairs, traps, bookcases, torches, or any other dungeon features that are specific to an individual game’s domain. These are really up to the game designer and not something that I feel should be baked into an engine.</p>
+<p>With that said, we do really want all of these features in our game, so how can we add them and still use RogueSharp? The answer is we can create our own class that inherits all of the features of RougeSharp’s <code>Map</code> class but at the same time extends it with the features that are specific to our game.</p>
+<p>Start by creating a new class in the <code>Core</code> folder called <code>DungeonMap.cs</code> and add the following code to it.</p>
+<pre><code class="lang-cs">// Our custom DungeonMap class extends the base RogueSharp Map class
+public class DungeonMap : Map
+{
+  // The Draw method will be called each time the map is updated
+  // It will render all of the symbols/colors for each cell to the map sub console
+  public void Draw( RLConsole mapConsole )
+  {
+    mapConsole.Clear();
+    foreach ( Cell cell in GetAllCells() )
+    {
+      SetConsoleSymbolForCell( mapConsole, cell );
+    }
+  }
+
+  private void SetConsoleSymbolForCell( RLConsole console, Cell cell )
+  {
+    // When we haven't explored a cell yet, we don't want to draw anything
+    if ( !cell.IsExplored )
+    {
+      return;
+    }
+
+    // When a cell is currently in the field-of-view it should be drawn with ligher colors
+    if ( IsInFov( cell.X, cell.Y ) )
+    {
+      // Choose the symbol to draw based on if the cell is walkable or not
+      // '.' for floor and '#' for walls
+      if ( cell.IsWalkable )
+      {
+        console.Set( cell.X, cell.Y, Colors.FloorFov, Colors.FloorBackgroundFov, '.' );
+      }
+      else
+      {
+        console.Set( cell.X, cell.Y, Colors.WallFov, Colors.WallBackgroundFov, '#' );
+      }
+    }
+    // When a cell is outside of the field of view draw it with darker colors
+    else
+    {
+      if ( cell.IsWalkable )
+      {
+        console.Set( cell.X, cell.Y, Colors.Floor, Colors.FloorBackground, '.' );
+      }
+      else
+      {
+        console.Set( cell.X, cell.Y, Colors.Wall, Colors.WallBackground, '#' );
+      }
+    }
+  }
+}
+</code></pre>
+<p>You’ll notice on line 7 that our <code>DungeonMap</code> class inherits from the base RogueSharp <code>Map</code> class. <a href="../api/RogueSharp.Map.yml">This means that we already get access to everything that <strong>Map</strong> can do!</a></p>
+<p>The drawing code is pretty simple. We iterate through every <code>Cell</code> in the <code>Map</code> and then choose how to display it based on if it is explored, if it is walkable, and if it is in field-of-view or not.</p>
+<p>At this point we don’t have any special map features that actually require us to have our own class. Don’t worry though, those features are only a few tutorials away.</p>
+<h2 id="creating-the-mapgenerator">Creating the MapGenerator</h2>
+<p>Now we need a class that will be responsible for generating interesting maps for us. Make a new folder called <code>Systems</code> and inside the folder create a new class called <code>MapGenerator.cs</code></p>
+<p>To start off with we’ll make one of the simplest maps. It will be all open floors with a wall around the entire edge of the map.</p>
+<p>Add the following code to <code>MapGenerator.cs</code></p>
+<pre><code class="lang-cs">public class MapGenerator
+{
+  private readonly int _width;
+  private readonly int _height;
+
+  private readonly DungeonMap _map;
+
+  // Constructing a new MapGenerator requires the dimensions of the maps it will create
+  public MapGenerator( int width, int height )
+  {
+    _width = width;
+    _height = height;
+    _map = new DungeonMap();
+  }
+
+  // Generate a new map that is a simple open floor with walls around the outside
+  public DungeonMap CreateMap()
+  {
+    // Initialize every cell in the map by
+    // setting walkable, transparency, and explored to true
+    _map.Initialize( _width, _height );
+    foreach ( Cell cell in _map.GetAllCells() )
+    {
+      _map.SetCellProperties( cell.X, cell.Y, true, true, true );
+    }
+
+    // Set the first and last rows in the map to not be transparent or walkable
+    foreach ( Cell cell in _map.GetCellsInRows( 0, _height - 1 ) )
+    {
+      _map.SetCellProperties( cell.X, cell.Y, false, false, true );
+    }
+
+    // Set the first and last columns in the map to not be transparent or walkable
+    foreach ( Cell cell in _map.GetCellsInColumns( 0, _width - 1 ) )
+    {
+      _map.SetCellProperties( cell.X, cell.Y, false, false, true );
+    }
+
+    return _map;
+  }
+}
+</code></pre>
+<p>As with the <code>DungeonMap</code>, the <code>MapGenerator</code> also is not that interesting at this point but it gives us a solid foundation for adding features in the future.</p>
+<p>Your project file structure should now look something like this:</p>
+<p><img src="../images/V3Tutorial/05_projectstructurewithsystems.png" alt="alt text" title="Project structure in Visual Studio project pane"></p>
+<h2 id="hooking-up-the-mapgenerator-and-drawing">Hooking up the MapGenerator and Drawing</h2>
+<p>To start using our <code>DungeonMap</code> we need to first add it to <code>Game.cs</code></p>
+<pre><code class="lang-cs">public static DungeonMap DungeonMap { get; private set; }
+</code></pre>
+<p>Then in our <code>Main()</code> method of <code>Game.cs</code> we need to use our <code>MapGenerator</code> to create our <code>DungeonMap</code>.</p>
+<pre><code class="lang-cs">MapGenerator mapGenerator = new MapGenerator( _mapWidth, _mapHeight );
+DungeonMap = mapGenerator.CreateMap();
+</code></pre>
+<p>Now that the map is created all that is left is to draw it in our <code>OnRootConsoleRender()</code> method of <code>Game.cs</code></p>
+<pre><code class="lang-cs">DungeonMap.Draw( _mapConsole );
+</code></pre>
+<p>If everything worked when you run the game you should now see the map console has been replaced with this:</p>
+<p><img src="../images/V3Tutorial/05_simplemapdrawing.png" alt="alt text" title="rendered map"></p>
+<h2 id="code-on-github">Code on GitHub</h2>
+<p>As always the code for the tutorial series so far can be found on GitHub:</p>
+<ul>
+<li><a href="https://github.com/FaronBracy/RogueSharpV3Tutorial/tree/03BasicMap">https://github.com/FaronBracy/RogueSharpV3Tutorial/tree/03BasicMap</a></li>
+</ul>
+<p>Bored waiting for the next tutorial? The complete tutorial project is already finished and the source code is available on Github:</p>
+<ul>
+<li>Sample Roguelike game using RogueSharp and RLNet console
+<ul>
+<li><a href="https://github.com/FaronBracy/RogueSharpRLNetSamples">https://github.com/FaronBracy/RogueSharpRLNetSamples</a></li>
+</ul>
+</li>
+<li>Sample Roguelike game using RogueSharp and SadConsole
+<ul>
+<li><a href="https://github.com/FaronBracy/RogueSharpSadConsoleSamples">https://github.com/FaronBracy/RogueSharpSadConsoleSamples</a></li>
+</ul>
+</li>
+</ul>
+</article>
+            <div id="disqus_thread"></div>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+          </div>
+          
+          <div class="d-none d-lg-block col-md-3" role="complementary">
+            <div class="sideaffix pt-3 pb-3">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/FaronBracy/RogueSharp.Documentation/blob/master/articles/05_simple_map_drawing.md/#L1" class="contribution-link text-info" title="Improve this Doc">
+                    <i class="fal fa-edit fa-fw"></i>
+                    <span>Improve this Doc</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <!--<div class="github-links">
+                  <a class="github-button" href="https://github.com/fszlin/certes" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star fszlin/certes on GitHub">Star</a>
+              </div>-->
+              <nav class="hidden-print affix mt-2" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      
+      <footer class="bg-secondary">
+        <!--<div class="grad-bottom"></div>-->
+        <div class="footer bg-secondary">
+          <div class="container">
+          <div class="d-flex">
+            <div class="p-2 flex-grow-1 text-white">
+            <a class="text-white" href="https://github.com/FaronBracy/RogueSharp">RogueSharp &copy; 2014-2020 Faron Bracy</a>
+            
+            </div>
+            <div class="p-2">
+              <a class="text-white" href="#top">Back to top</a>
+            </div>
+          </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/dos.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/powershell.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+  </body>
+</html>

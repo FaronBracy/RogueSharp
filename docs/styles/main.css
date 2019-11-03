@@ -1,0 +1,130 @@
+﻿html,
+body {
+    font-size: 18px;
+}
+
+svg:hover path[fill="#4F9FE1"] {
+    fill: #4F9FE1;
+}
+
+svg:hover path[fill="#03477F"] {
+    fill: #03477F;
+}
+
+svg:hover path[fill="url(#A)"] {
+    fill: url(#A);
+}
+
+svg:hover path[fill="none"] {
+    fill: none;
+}
+
+svg:hover path[fill="url(#B)"] {
+    fill: url(#B);
+}
+
+.toc .nav > li.active > .expand-stub::before,
+.toc .nav > li.in > .expand-stub::before,
+.toc .nav > li.in.active > .expand-stub::before,
+.toc .nav > li.filtered > .expand-stub::before {
+    content: "";
+}
+
+.toc .nav > li > .expand-stub::before,
+.toc .nav > li.active > .expand-stub::before {
+    content: "";
+}
+
+.toc .nav > li > .expand-stub {
+    font-size: smaller;
+    top: 3px;
+    left: -10px;
+}
+
+    .toc .nav > li > .expand-stub > .fa-plus-hexagon {
+        display: inline-block;
+    }
+
+    .toc .nav > li > .expand-stub > .fa-minus-hexagon {
+        display: none;
+    }
+
+.toc .nav > li.in > .expand-stub > .fa-plus-hexagon {
+    display: none;
+}
+
+.toc .nav > li.in > .expand-stub > .fa-minus-hexagon {
+    display: inline-block;
+}
+
+.affix ul ul > li > a:before {
+    content: '';
+}
+
+.docs-search > .search-query {
+    font-size: 18px;
+}
+
+#search-results > .search-list {
+    font-size: 2.5rem;
+}
+
+#search-results p .index-loading {
+    font-size: 2.5rem;
+}
+
+#search-results .sr-items {
+    font-size: 28px;
+}
+
+.sr-item {
+    margin-bottom: 29px;
+}
+
+    .sr-item > .item-href {
+        font-size: 18px;
+    }
+
+    .sr-item > .item-brief {
+        font-size: 17px;
+    }
+
+.toc ul {
+    font-size: 16px;
+}
+
+.toc .level1 > li {
+    font-size: 20px;
+}
+
+.toc .level2 {
+    font-size: 18px;
+}
+
+.sideaffix {
+    font-size: 16px;
+}
+
+    .sideaffix > div.contribution > ul > li > a.contribution-link {
+        font-size: 16px;
+    }
+
+.affix h5 {
+    font-size: 16px;
+}
+
+.affix > ul > li > a:before {
+    font-size: 20px;
+}
+
+.tryspan {
+    font-size: 16px;
+}
+
+.toc .nav > li > a {
+    margin-left: 12px;
+}
+
+.github-links {
+    padding-left: 8px;
+}

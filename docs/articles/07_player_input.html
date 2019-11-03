@@ -1,0 +1,323 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Player Input | RogueSharp </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="title" content="Player Input - RogueSharp ">
+    <meta name="generator" content="docfx 2.47.0.0">
+    
+    <link rel="shortcut icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-87DrmpqHRiY8hPLIr7ByqhPIywuSsjuQAfMXAE0sMUpY3BM7nXjf+mLIUSvhDArs" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css">
+    <link rel="stylesheet" href="../styles/site.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+    <script type="text/javascript">
+    var appInsights=window.appInsights||function(a){function b(a){c[a]=function(){var b=arguments;c.queue.push(function(){c[a].apply(c,b)})}}var c={config:a},d=document,e=window;setTimeout(function(){var b=d.createElement("script");b.src=a.url||"https://az416426.vo.msecnd.net/scripts/a/ai.0.js",d.getElementsByTagName("script")[0].parentNode.appendChild(b)});try{c.cookie=d.cookie}catch(a){}c.queue=[];for(var f=["Event","Exception","Metric","PageView","Trace","Dependency"];f.length;)b("track"+f.pop());if(b("setAuthenticatedUserContext"),b("clearAuthenticatedUserContext"),b("startTrackEvent"),b("stopTrackEvent"),b("startTrackPage"),b("stopTrackPage"),b("flush"),!a.disableExceptionTracking){f="onerror",b("_"+f);var g=e[f];e[f]=function(a,b,d,e,h){var i=g&&g(a,b,d,e,h);return!0!==i&&c["_"+f](a,b,d,e,h),i}}return c}({instrumentationKey:"9aaf9896-bee3-4d08-abb6-2ef51b389035"});
+    window.appInsights=appInsights,appInsights.queue&&0===appInsights.queue.length&&appInsights.trackPageView();
+  </script>
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <div class="bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light container">
+          
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="RogueSharp" width="36" height="36">
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        
+          <div class="collapse navbar-collapse" id="navbar">
+            <!--<form id="search" role="search" class="form-inline my-2 my-lg-0">
+              <input id="search-query" class="form-control mr-sm-2" type="search" placeholder="Search" autocomplete="off" aria-label="Search">
+            </form>-->
+          </div>
+        </nav>
+        </div>
+        
+        <div class="bg-dark">
+        <nav aria-label="breadcrumb" id="breadcrumb" class="container hide-when-search">
+          <!--<ol class="breadcrumb">
+            <li class="breadcrumb-item" aria-current="page"></li>
+          </ol>-->
+        </nav>
+        </div>      </header>
+      <div role="main" class="container body-content hide-when-search">
+      <div class="row">
+        
+        
+        <div class="sidenav hide-when-search col-md-3 pt-md-3 pb-md-3">
+          <a class="btn btn-link toc-toggle d-md-none" data-toggle="collapse" data-target="#sidetoggle" href="javascript:;" aria-expanded="true" aria-controls="sidetoggle">
+            Show / Hide Table of Contents
+          </a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article col-md-9">
+      <div class="row">
+          <div class="col-lg-9">
+            <article class="content wrap pt-2 pb-2" id="_content" data-uid="">
+<h1 id="player-input">Player Input</h1>
+
+<p>During this tutorial we’ll handle keyboard input and allow moving the Player around the screen. We’ll update the field-of-view as the Player moves and make sure that walls cannot be walked through.</p>
+<p><img src="../images/V3Tutorial/07_playermove.gif" alt="alt text" title="Animation of the player moving through the map"></p>
+<h2 id="small-refactoring">Small Refactoring</h2>
+<p>Before starting on new code I noticed two things that should have been cleaned up in the last tutorial. The first was that in our <code>OnRootConsoleUpdate()</code> method in <code>Game.cs</code> we were still setting the background color and printing a message to <code>_mapConsole</code>. Immediately after doing this we overwrote all that work and drew our real map over it. Basically we were doing extra work that we didn’t need to do so we can delete those lines.</p>
+<p>The second thing is that all of the code from <code>OnRootConsoleUpdate()</code> for setting the background color and printing a message to each of the other three consoles is being called on each update. This is also a waste as currently the contents of those consoles never changes. All of that code can be moved to <code>Main()</code> so it will only be executed once when we first start our game.</p>
+<p>Although these refactorings are optional and the code will still work without doing them, I find that it is nice to continuously look at what you have written and try to clean it up. Some people call this the “<a href="https://learning.oreilly.com/library/view/97-things-every/9780596809515/ch08.html">boy scout rule</a>” which is to always leave the code cleaner than you found it.</p>
+<h2 id="creating-a-direction-enumeration">Creating a Direction Enumeration</h2>
+<p>Before we start handling the keyboard input it could be nice to create an enumeration of all the possible directions that a player could move. Create a new <code>Enum</code> called <code>Direction.cs</code> in the <code>Core</code> folder of the project. <code>Direction.cs</code> should have the following code in it:</p>
+<pre><code class="lang-cs">namespace RogueSharpV3Tutorial.Core
+{
+  // Direction values correspond to numpad numbers
+  public enum Direction
+  {
+    None = 0,
+    DownLeft = 1,
+    Down = 2,
+    DownRight = 3,
+    Left = 4,
+    Center = 5,
+    Right = 6,
+    UpLeft = 7,
+    Up = 8,
+    UpRight = 9
+  }
+}
+</code></pre>
+<p>You’ll notice that the enum supports diagonals however in this tutorial game we will only allow the player to move up, down, left and right. At this time RogueSharp is missing diagonal support in it’s pathfinder but that is something that we’re looking into adding.</p>
+<h2 id="setting-actor-positions">Setting Actor Positions</h2>
+<p>Since our <code>DungeonMap</code> class is responsible for knowing which <code>Cells</code> are walkable and it will also keep track of the positions of all of our <code>Actors</code> it seems like a good place to put a method that will move an <code>Actor</code>. Note that currently the <code>Player</code> is defined in the <code>Game</code> class and it is an exception as we want the <code>Player</code> to exist outside of the context of the <code>DungeonMap</code> so that we can regenerate the <code>DungeonMap</code> when moving down into deeper levels</p>
+<p>Open <code>DungeonMap.cs</code> and add the following methods to it:</p>
+<pre><code class="lang-cs">// Returns true when able to place the Actor on the cell or false otherwise
+public bool SetActorPosition( Actor actor, int x, int y )
+{
+  // Only allow actor placement if the cell is walkable
+  if ( GetCell( x, y ).IsWalkable )
+  {
+    // The cell the actor was previously on is now walkable
+    SetIsWalkable( actor.X, actor.Y, true );
+    // Update the actor's position
+    actor.X = x;
+    actor.Y = y;
+    // The new cell the actor is on is now not walkable
+    SetIsWalkable( actor.X, actor.Y, false );
+    // Don't forget to update the field of view if we just repositioned the player
+    if ( actor is Player )
+    {
+      UpdatePlayerFieldOfView();
+    }
+    return true;
+  }
+  return false;
+}
+
+// A helper method for setting the IsWalkable property on a Cell
+public void SetIsWalkable( int x, int y, bool isWalkable )
+{
+  Cell cell = GetCell( x, y );
+  SetCellProperties( cell.X, cell.Y, cell.IsTransparent, isWalkable, cell.IsExplored );
+}
+</code></pre>
+<p>The <code>SetActorPosition()</code> method runs through a set of steps to make sure that the old cell that the actor was previously on is now walkable, and the new cell the actor is moved to is not walkable. It also updates the player field-of-view if the actor that was moved was the player. The return status here is also important. It returns false if the actor could not be moved. This is necessary when moving the player in case we try to move into a wall or other impassible cell.</p>
+<p>The <code>SetIsWalkable()</code> method is really just a helper function so that we don’t have to call <code>SetCellProperties()</code> with so many parameters. In the future I think these helpers might be added directly to the RogueSharp <code>Map</code> class.</p>
+<h2 id="command-system">Command System</h2>
+<p>Make a new class in the <code>Systems</code> folder called <code>CommandSystem.cs</code>. The responsibility of this class will be to carry out the commands that the <code>Player</code> executes.</p>
+<p>Add the following code to <code>CommandSystem.cs</code>:</p>
+<pre><code class="lang-cs">public class CommandSystem
+{
+  // Return value is true if the player was able to move
+  // false when the player couldn't move, such as trying to move into a wall
+  public bool MovePlayer( Direction direction )
+  {
+    int x = Game.Player.X;
+    int y = Game.Player.Y;
+
+    switch ( direction )
+    {
+    case Direction.Up:
+      {
+        y = Game.Player.Y - 1;
+        break;
+      }
+    case Direction.Down:
+      {
+        y = Game.Player.Y + 1;
+        break;
+      }
+    case Direction.Left:
+      {
+        x = Game.Player.X - 1;
+        break;
+      }
+    case Direction.Right:
+      {
+        x = Game.Player.X + 1;
+        break;
+      }
+    default:
+      {
+        return false;
+      }
+    }
+
+    if ( Game.DungeonMap.SetActorPosition( Game.Player, x, y ) )
+    {
+      return true;
+    }
+
+    return false;
+  }
+}
+</code></pre>
+<p>The only method in this class for now is the <code>MovePlayer()</code> method which takes a <code>Direction</code> as a parameter. Based on the direction that is input we add or subtract to the X or Y position of the player. Then we call <code>SetActorPosition()</code> on the player to move them to the new position and return the result. The result will be true if the player is able to move and false otherwise.</p>
+<h2 id="capturing-key-presses">Capturing Key Presses</h2>
+<p>The last class that we’ll need to modify is <code>Game.cs</code> to get everything hooked up.</p>
+<p>First of all we need to add a new static member <code>_renderRequired</code> and a new property <code>CommandSystem</code> to the top of the class.</p>
+<pre><code class="lang-cs">private static bool _renderRequired = true;
+
+public static CommandSystem CommandSystem { get; private set; }
+</code></pre>
+<p>Then in our <code>Main()</code> method we need to instantiate a new <code>CommandSystem</code></p>
+<pre><code class="lang-cs">CommandSystem = new CommandSystem();
+</code></pre>
+<p>Next we need to capture the last key pressed and handle it in <code>OnRootConsoleUpdate()</code></p>
+<pre><code class="lang-cs">// Event handler for RLNET's Update event
+private static void OnRootConsoleUpdate( object sender, UpdateEventArgs e )
+{
+  bool didPlayerAct = false;
+  RLKeyPress keyPress = _rootConsole.Keyboard.GetKeyPress();
+
+  if ( keyPress != null )
+  {
+    if ( keyPress.Key == RLKey.Up )
+    {
+      didPlayerAct = CommandSystem.MovePlayer( Direction.Up );
+    }
+    else if ( keyPress.Key == RLKey.Down )
+    {
+      didPlayerAct = CommandSystem.MovePlayer( Direction.Down );
+    }
+    else if ( keyPress.Key == RLKey.Left )
+    {
+      didPlayerAct = CommandSystem.MovePlayer( Direction.Left );
+    }
+    else if ( keyPress.Key == RLKey.Right )
+    {
+      didPlayerAct = CommandSystem.MovePlayer( Direction.Right );
+    }
+    else if ( keyPress.Key == RLKey.Escape )
+    {
+      _rootConsole.Close();
+    }
+  }
+
+  if ( didPlayerAct )
+  {
+    _renderRequired = true;
+  }
+}
+</code></pre>
+<p>RLNET allows us to get the last key pressed by calling <code>Keyboard.GetKeyPress()</code> on the root console. The <code>_renderRequired</code> private member is a bit of an optimization. There is no need to redraw our map if no action was performed and the player didn’t move. Other than that all we are doing is checking if one of the direction keys was pressed and handing it off to the <code>CommandSystem.MovePlayer()</code> method to handle the movement. We also hooked up the Escape key to close the game.</p>
+<p>The last step is to wrap our drawing code in <code>OnRootConsoleRender()</code> in an if statement checking <code>_renderRequired</code> so that we don’t redraw all the consoles when nothing has changed.</p>
+<pre><code class="lang-cs">// Event handler for RLNET's Render event
+private static void OnRootConsoleRender( object sender, UpdateEventArgs e )
+{
+  // Don't bother redrawing all of the consoles if nothing has changed.
+  if ( _renderRequired )
+  {
+    // ... previous drawing code remains here
+
+    _renderRequired = false;
+  }
+}
+</code></pre>
+<h2 id="code-on-github">Code on GitHub</h2>
+<p>As always the code for the tutorial series so far can be found on GitHub:</p>
+<ul>
+<li><a href="https://github.com/FaronBracy/RogueSharpV3Tutorial/tree/05PlayerInput">https://github.com/FaronBracy/RogueSharpV3Tutorial/tree/05PlayerInput</a></li>
+</ul>
+<p>Bored waiting for the next tutorial? The complete tutorial project is already finished and the source code is available on Github:</p>
+<ul>
+<li>Sample Roguelike game using RogueSharp and RLNet console
+<ul>
+<li><a href="https://github.com/FaronBracy/RogueSharpRLNetSamples">https://github.com/FaronBracy/RogueSharpRLNetSamples</a></li>
+</ul>
+</li>
+<li>Sample Roguelike game using RogueSharp and SadConsole
+<ul>
+<li><a href="https://github.com/FaronBracy/RogueSharpSadConsoleSamples">https://github.com/FaronBracy/RogueSharpSadConsoleSamples</a></li>
+</ul>
+</li>
+</ul>
+</article>
+            <div id="disqus_thread"></div>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+          </div>
+          
+          <div class="d-none d-lg-block col-md-3" role="complementary">
+            <div class="sideaffix pt-3 pb-3">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/FaronBracy/RogueSharp.Documentation/blob/master/articles/07_player_input.md/#L1" class="contribution-link text-info" title="Improve this Doc">
+                    <i class="fal fa-edit fa-fw"></i>
+                    <span>Improve this Doc</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <!--<div class="github-links">
+                  <a class="github-button" href="https://github.com/fszlin/certes" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star fszlin/certes on GitHub">Star</a>
+              </div>-->
+              <nav class="hidden-print affix mt-2" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      
+      <footer class="bg-secondary">
+        <!--<div class="grad-bottom"></div>-->
+        <div class="footer bg-secondary">
+          <div class="container">
+          <div class="d-flex">
+            <div class="p-2 flex-grow-1 text-white">
+            <a class="text-white" href="https://github.com/FaronBracy/RogueSharp">RogueSharp &copy; 2014-2020 Faron Bracy</a>
+            
+            </div>
+            <div class="p-2">
+              <a class="text-white" href="#top">Back to top</a>
+            </div>
+          </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/dos.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/powershell.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+  </body>
+</html>

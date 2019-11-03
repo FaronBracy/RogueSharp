@@ -1,0 +1,977 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class GoalMap
+   | RogueSharp </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="title" content="Class GoalMap
+   - RogueSharp ">
+    <meta name="generator" content="docfx 2.47.0.0">
+    
+    <link rel="shortcut icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-87DrmpqHRiY8hPLIr7ByqhPIywuSsjuQAfMXAE0sMUpY3BM7nXjf+mLIUSvhDArs" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css">
+    <link rel="stylesheet" href="../styles/site.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+    <script type="text/javascript">
+    var appInsights=window.appInsights||function(a){function b(a){c[a]=function(){var b=arguments;c.queue.push(function(){c[a].apply(c,b)})}}var c={config:a},d=document,e=window;setTimeout(function(){var b=d.createElement("script");b.src=a.url||"https://az416426.vo.msecnd.net/scripts/a/ai.0.js",d.getElementsByTagName("script")[0].parentNode.appendChild(b)});try{c.cookie=d.cookie}catch(a){}c.queue=[];for(var f=["Event","Exception","Metric","PageView","Trace","Dependency"];f.length;)b("track"+f.pop());if(b("setAuthenticatedUserContext"),b("clearAuthenticatedUserContext"),b("startTrackEvent"),b("stopTrackEvent"),b("startTrackPage"),b("stopTrackPage"),b("flush"),!a.disableExceptionTracking){f="onerror",b("_"+f);var g=e[f];e[f]=function(a,b,d,e,h){var i=g&&g(a,b,d,e,h);return!0!==i&&c["_"+f](a,b,d,e,h),i}}return c}({instrumentationKey:"9aaf9896-bee3-4d08-abb6-2ef51b389035"});
+    window.appInsights=appInsights,appInsights.queue&&0===appInsights.queue.length&&appInsights.trackPageView();
+  </script>
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <div class="bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light container">
+          
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="RogueSharp" width="36" height="36">
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        
+          <div class="collapse navbar-collapse" id="navbar">
+            <!--<form id="search" role="search" class="form-inline my-2 my-lg-0">
+              <input id="search-query" class="form-control mr-sm-2" type="search" placeholder="Search" autocomplete="off" aria-label="Search">
+            </form>-->
+          </div>
+        </nav>
+        </div>
+        
+        <div class="bg-dark">
+        <nav aria-label="breadcrumb" id="breadcrumb" class="container hide-when-search">
+          <!--<ol class="breadcrumb">
+            <li class="breadcrumb-item" aria-current="page"></li>
+          </ol>-->
+        </nav>
+        </div>      </header>
+      <div role="main" class="container body-content hide-when-search">
+      <div class="row">
+        
+        
+        <div class="sidenav hide-when-search col-md-3 pt-md-3 pb-md-3">
+          <a class="btn btn-link toc-toggle d-md-none" data-toggle="collapse" data-target="#sidetoggle" href="javascript:;" aria-expanded="true" aria-controls="sidetoggle">
+            Show / Hide Table of Contents
+          </a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article col-md-9">
+      <div class="row">
+          <div class="col-lg-9">
+            <article class="content wrap pt-2 pb-2" id="_content" data-uid="RogueSharp.GoalMap">
+  
+  
+  <h1 id="RogueSharp_GoalMap" data-uid="RogueSharp.GoalMap" class="text-break">Class GoalMap
+  </h1>
+  <div class="markdown level0 summary"><p>A class for assigning weights to every cell on the Map which can then be used for finding paths or building desire-driven AI</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance mt-1">
+    <h5 class="text-muted font-weight-light font-italic mb-0">Inheritance</h5>
+    <div class="d-flex flex-wrap">
+    <div class="level0 mr-1"><span class="xref">System.Object</span><i class="fal fa-arrow-alt-left fa-fw"></i></div>
+    <div class="level1"><span class="xref">GoalMap</span></div>
+    </div>
+  </div>
+  <div class="implements mt-1">
+    <h5 class="font-weight-light font-italic mb-0">
+      <a class="text-muted" data-toggle="collapse" data-target="#implementsCollapse" role="button" aria-expanded="false" aria-controls="implementsCollapse">
+      Implements
+      </a>
+    </h5>
+    <div class="collapse" id="implementsCollapse">
+    <div><a class="xref" href="RogueSharp.IGoalMap.html">IGoalMap</a></div>
+    </div>
+  </div>
+  <div class="inheritedMembers mt-1">
+    <h5 class="font-weight-light font-italic mb-0">
+      <a class="text-muted" data-toggle="collapse" data-target="#inheritedMembersCollapse" role="button" aria-expanded="false" aria-controls="inheritedMembersCollapse">
+      Inherited Members
+      </a>
+    </h5>
+    <div class="collapse" id="inheritedMembersCollapse">
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    </div>
+  </div>
+  <h6 class="mt-1"><i class="text-muted font-weight-light font-italic mb-0">Namespace:</i> <a class="xref" href="RogueSharp.html">RogueSharp</a></h6>
+  <h6 class="mt-1"><i class="text-muted font-weight-light font-italic mb-0">Assembly:</i> RogueSharp.dll</h6>
+  <h5 id="RogueSharp_GoalMap_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class GoalMap : IGoalMap</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_GoalMap__ctor_RogueSharp_IMap_.md&amp;value=---%0Auid%3A%20RogueSharp.GoalMap.%23ctor(RogueSharp.IMap)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/GoalMap.cs/#L31">View Source</a>
+  </span>
+  <a id="RogueSharp_GoalMap__ctor_" data-uid="RogueSharp.GoalMap.#ctor*"></a>
+  <h4 id="RogueSharp_GoalMap__ctor_RogueSharp_IMap_" data-uid="RogueSharp.GoalMap.#ctor(RogueSharp.IMap)">GoalMap(IMap)</h4>
+  <div class="markdown level1 summary"><p>Constructs a new instance of a GoalMap for the specified Map that will not consider diagonal movements to be valid.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GoalMap(IMap map)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="RogueSharp.IMap.html">IMap</a></td>
+        <td><span class="parametername">map</span></td>
+        <td><p>The Map that this GoalMap will be created for</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>Thrown on null map</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_GoalMap__ctor_RogueSharp_IMap_System_Boolean_.md&amp;value=---%0Auid%3A%20RogueSharp.GoalMap.%23ctor(RogueSharp.IMap%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/GoalMap.cs/#L42">View Source</a>
+  </span>
+  <a id="RogueSharp_GoalMap__ctor_" data-uid="RogueSharp.GoalMap.#ctor*"></a>
+  <h4 id="RogueSharp_GoalMap__ctor_RogueSharp_IMap_System_Boolean_" data-uid="RogueSharp.GoalMap.#ctor(RogueSharp.IMap,System.Boolean)">GoalMap(IMap, Boolean)</h4>
+  <div class="markdown level1 summary"><p>Constructs a new instance of a GoalMap for the specified Map that will consider diagonal movements to be valid if allowDiagonalMovement is set to true.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GoalMap(IMap map, bool allowDiagonalMovement)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="RogueSharp.IMap.html">IMap</a></td>
+        <td><span class="parametername">map</span></td>
+        <td><p>The Map that this GoalMap will be created for</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">allowDiagonalMovement</span></td>
+        <td><p>True if diagonal movements are allowed. False otherwise</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>Thrown on null map</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_GoalMap_AddGoal_System_Int32_System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20RogueSharp.GoalMap.AddGoal(System.Int32%2CSystem.Int32%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/GoalMap.cs/#L58">View Source</a>
+  </span>
+  <a id="RogueSharp_GoalMap_AddGoal_" data-uid="RogueSharp.GoalMap.AddGoal*"></a>
+  <h4 id="RogueSharp_GoalMap_AddGoal_System_Int32_System_Int32_System_Int32_" data-uid="RogueSharp.GoalMap.AddGoal(System.Int32,System.Int32,System.Int32)">AddGoal(Int32, Int32, Int32)</h4>
+  <div class="markdown level1 summary"><p>Add a Goal at the specified location with the specified weight</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AddGoal(int x, int y, int weight)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">x</span></td>
+        <td><p>X location of the Goal starting with 0 as the farthest left</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">y</span></td>
+        <td><p>Y location of the Goal starting with 0 as the top</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">weight</span></td>
+        <td><p>The priority of this goal with respect to other goals with lower numbers being a higher priority</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_GoalMap_AddObstacle_System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20RogueSharp.GoalMap.AddObstacle(System.Int32%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/GoalMap.cs/#L94">View Source</a>
+  </span>
+  <a id="RogueSharp_GoalMap_AddObstacle_" data-uid="RogueSharp.GoalMap.AddObstacle*"></a>
+  <h4 id="RogueSharp_GoalMap_AddObstacle_System_Int32_System_Int32_" data-uid="RogueSharp.GoalMap.AddObstacle(System.Int32,System.Int32)">AddObstacle(Int32, Int32)</h4>
+  <div class="markdown level1 summary"><p>Add an Obstacle at the specified location. Any paths found must not go through Obstacles</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AddObstacle(int x, int y)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">x</span></td>
+        <td><p>X location of the Obstacle starting with 0 as the farthest left</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">y</span></td>
+        <td><p>Y location of the Obstacle starting with 0 as the top</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_GoalMap_AddObstacles_System_Collections_Generic_IEnumerable_RogueSharp_Point__.md&amp;value=---%0Auid%3A%20RogueSharp.GoalMap.AddObstacles(System.Collections.Generic.IEnumerable%7BRogueSharp.Point%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/GoalMap.cs/#L104">View Source</a>
+  </span>
+  <a id="RogueSharp_GoalMap_AddObstacles_" data-uid="RogueSharp.GoalMap.AddObstacles*"></a>
+  <h4 id="RogueSharp_GoalMap_AddObstacles_System_Collections_Generic_IEnumerable_RogueSharp_Point__" data-uid="RogueSharp.GoalMap.AddObstacles(System.Collections.Generic.IEnumerable{RogueSharp.Point})">AddObstacles(IEnumerable&lt;Point&gt;)</h4>
+  <div class="markdown level1 summary"><p>Add multiple obstacles from the specified enumeration of locations</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AddObstacles(IEnumerable&lt;Point&gt; obstacles)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="RogueSharp.Point.html">Point</a>&gt;</td>
+        <td><span class="parametername">obstacles</span></td>
+        <td><p>An enumeration of points representing X, Y locations of Obstacles to avoid when path-finding</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_GoalMap_ClearGoals.md&amp;value=---%0Auid%3A%20RogueSharp.GoalMap.ClearGoals%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/GoalMap.cs/#L83">View Source</a>
+  </span>
+  <a id="RogueSharp_GoalMap_ClearGoals_" data-uid="RogueSharp.GoalMap.ClearGoals*"></a>
+  <h4 id="RogueSharp_GoalMap_ClearGoals" data-uid="RogueSharp.GoalMap.ClearGoals">ClearGoals()</h4>
+  <div class="markdown level1 summary"><p>Remove all goals from this GoalMap</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ClearGoals()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_GoalMap_ClearObstacles.md&amp;value=---%0Auid%3A%20RogueSharp.GoalMap.ClearObstacles%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/GoalMap.cs/#L131">View Source</a>
+  </span>
+  <a id="RogueSharp_GoalMap_ClearObstacles_" data-uid="RogueSharp.GoalMap.ClearObstacles*"></a>
+  <h4 id="RogueSharp_GoalMap_ClearObstacles" data-uid="RogueSharp.GoalMap.ClearObstacles">ClearObstacles()</h4>
+  <div class="markdown level1 summary"><p>Remove all Obstacles from this GoalMap</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ClearObstacles()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_GoalMap_FindPath_System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20RogueSharp.GoalMap.FindPath(System.Int32%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/GoalMap.cs/#L234">View Source</a>
+  </span>
+  <a id="RogueSharp_GoalMap_FindPath_" data-uid="RogueSharp.GoalMap.FindPath*"></a>
+  <h4 id="RogueSharp_GoalMap_FindPath_System_Int32_System_Int32_" data-uid="RogueSharp.GoalMap.FindPath(System.Int32,System.Int32)">FindPath(Int32, Int32)</h4>
+  <div class="markdown level1 summary"><p>Returns a shortest Path representing an ordered List of Points from the specified location to the Goal determined to have the highest priority
+Distance to the goals and the weight of the goals are both used in determining the priority
+The path must not pass through any obstacles specified in this GoalMap instance</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Path FindPath(int x, int y)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">x</span></td>
+        <td><p>X location of the beginning of the path, starting with 0 as the farthest left</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">y</span></td>
+        <td><p>Y location of the beginning of the path, starting with 0 as the top</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="RogueSharp.Path.html">Path</a></td>
+        <td><p>An ordered List of Points representing a shortest path from the specified location to the Goal determined to have the highest priority</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="RogueSharp.PathNotFoundException.html">PathNotFoundException</a></td>
+        <td><p>Thrown when there is not a path from the Source x,y to any Goal or a Goal is not set</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_GoalMap_FindPathAvoidingGoals_System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20RogueSharp.GoalMap.FindPathAvoidingGoals(System.Int32%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/GoalMap.cs/#L150">View Source</a>
+  </span>
+  <a id="RogueSharp_GoalMap_FindPathAvoidingGoals_" data-uid="RogueSharp.GoalMap.FindPathAvoidingGoals*"></a>
+  <h4 id="RogueSharp_GoalMap_FindPathAvoidingGoals_System_Int32_System_Int32_" data-uid="RogueSharp.GoalMap.FindPathAvoidingGoals(System.Int32,System.Int32)">FindPathAvoidingGoals(Int32, Int32)</h4>
+  <div class="markdown level1 summary"><p>Returns a Path representing an ordered list of Points from the specified location away from Goals specified in this GoalMap instance
+Distance to the goals and the weight of the goals are both used in determining the priority of avoiding the Goals
+The path must not pass through any Obstacles specified in this GoalMap instance</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Path FindPathAvoidingGoals(int x, int y)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">x</span></td>
+        <td><p>X location of the beginning of the path, starting with 0 as the farthest left</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">y</span></td>
+        <td><p>Y location of the beginning of the path, starting with 0 as the top</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="RogueSharp.Path.html">Path</a></td>
+        <td><p>A Path representing ordered List of Points from the specified location away from Goals and avoiding Obstacles</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="RogueSharp.PathNotFoundException.html">PathNotFoundException</a></td>
+        <td><p>Thrown when there are no possible paths</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_GoalMap_FindPaths_System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20RogueSharp.GoalMap.FindPaths(System.Int32%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/GoalMap.cs/#L272">View Source</a>
+  </span>
+  <a id="RogueSharp_GoalMap_FindPaths_" data-uid="RogueSharp.GoalMap.FindPaths*"></a>
+  <h4 id="RogueSharp_GoalMap_FindPaths_System_Int32_System_Int32_" data-uid="RogueSharp.GoalMap.FindPaths(System.Int32,System.Int32)">FindPaths(Int32, Int32)</h4>
+  <div class="markdown level1 summary"><p>Returns a ReadOnlyCollection of Paths representing all of the shortest paths from the specified location to the Goal or Goals determined to have the highest priority
+This method is useful when there are multiple paths that would all work and we want to have some additional logic to pick one of the best paths
+The FindPath( int x, int y ) method in the GoalMap class uses this method and then chooses the first path.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ReadOnlyCollection&lt;Path&gt; FindPaths(int x, int y)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">x</span></td>
+        <td><p>X location of the beginning of the path, starting with 0 as the farthest left</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">y</span></td>
+        <td><p>Y location of the beginning of the path, starting with 0 as the top</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.ObjectModel.ReadOnlyCollection</span>&lt;<a class="xref" href="RogueSharp.Path.html">Path</a>&gt;</td>
+        <td><p>A ReadOnlyCollection of Paths representing all of the shortest paths from the specified location to the Goal or Goals determined to have the highest priority</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="RogueSharp.PathNotFoundException.html">PathNotFoundException</a></td>
+        <td><p>Thrown when there is not a path from the Source x,y to any Goal or a Goal is not set</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_GoalMap_RemoveGoal_System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20RogueSharp.GoalMap.RemoveGoal(System.Int32%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/GoalMap.cs/#L74">View Source</a>
+  </span>
+  <a id="RogueSharp_GoalMap_RemoveGoal_" data-uid="RogueSharp.GoalMap.RemoveGoal*"></a>
+  <h4 id="RogueSharp_GoalMap_RemoveGoal_System_Int32_System_Int32_" data-uid="RogueSharp.GoalMap.RemoveGoal(System.Int32,System.Int32)">RemoveGoal(Int32, Int32)</h4>
+  <div class="markdown level1 summary"><p>Remove a Goal at the specified location</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RemoveGoal(int x, int y)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">x</span></td>
+        <td><p>X location of the Goal starting with 0 as the farthest left</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">y</span></td>
+        <td><p>Y location of the Goal starting with 0 as the top</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_GoalMap_RemoveObstacle_System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20RogueSharp.GoalMap.RemoveObstacle(System.Int32%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/GoalMap.cs/#L122">View Source</a>
+  </span>
+  <a id="RogueSharp_GoalMap_RemoveObstacle_" data-uid="RogueSharp.GoalMap.RemoveObstacle*"></a>
+  <h4 id="RogueSharp_GoalMap_RemoveObstacle_System_Int32_System_Int32_" data-uid="RogueSharp.GoalMap.RemoveObstacle(System.Int32,System.Int32)">RemoveObstacle(Int32, Int32)</h4>
+  <div class="markdown level1 summary"><p>Remove an Obstacle at the specified location</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RemoveObstacle(int x, int y)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">x</span></td>
+        <td><p>X location of the Obstacle starting with 0 as the farthest left</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">y</span></td>
+        <td><p>Y location of the Obstacle starting with 0 as the top</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_GoalMap_ToString.md&amp;value=---%0Auid%3A%20RogueSharp.GoalMap.ToString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/GoalMap.cs/#L533">View Source</a>
+  </span>
+  <a id="RogueSharp_GoalMap_ToString_" data-uid="RogueSharp.GoalMap.ToString*"></a>
+  <h4 id="RogueSharp_GoalMap_ToString" data-uid="RogueSharp.GoalMap.ToString">ToString()</h4>
+  <div class="markdown level1 summary"><p>Returns a string representation of the current GoalMap</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override string ToString()</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>A string representing the current GoalMap</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic overrides">Overrides</h5>
+  <div><span class="xref">System.Object.ToString()</span></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_GoalMap_TryFindPath_System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20RogueSharp.GoalMap.TryFindPath(System.Int32%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/GoalMap.cs/#L250">View Source</a>
+  </span>
+  <a id="RogueSharp_GoalMap_TryFindPath_" data-uid="RogueSharp.GoalMap.TryFindPath*"></a>
+  <h4 id="RogueSharp_GoalMap_TryFindPath_System_Int32_System_Int32_" data-uid="RogueSharp.GoalMap.TryFindPath(System.Int32,System.Int32)">TryFindPath(Int32, Int32)</h4>
+  <div class="markdown level1 summary"><p>Returns a shortest Path representing an ordered List of Points from the specified location to the Goal determined to have the highest priority
+Distance to the goals and the weight of the goals are both used in determining the priority
+The path must not pass through any obstacles specified in this GoalMap instance
+null will be returned if a path cannot be found</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Path TryFindPath(int x, int y)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">x</span></td>
+        <td><p>X location of the beginning of the path, starting with 0 as the farthest left</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">y</span></td>
+        <td><p>Y location of the beginning of the path, starting with 0 as the top</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="RogueSharp.Path.html">Path</a></td>
+        <td><p>An ordered List of Points representing a shortest path from the specified location to the Goal determined to have the highest priority. null is returned if a path cannot be found</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_GoalMap_TryFindPathAvoidingGoals_System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20RogueSharp.GoalMap.TryFindPathAvoidingGoals(System.Int32%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/GoalMap.cs/#L169">View Source</a>
+  </span>
+  <a id="RogueSharp_GoalMap_TryFindPathAvoidingGoals_" data-uid="RogueSharp.GoalMap.TryFindPathAvoidingGoals*"></a>
+  <h4 id="RogueSharp_GoalMap_TryFindPathAvoidingGoals_System_Int32_System_Int32_" data-uid="RogueSharp.GoalMap.TryFindPathAvoidingGoals(System.Int32,System.Int32)">TryFindPathAvoidingGoals(Int32, Int32)</h4>
+  <div class="markdown level1 summary"><p>Returns a Path representing an ordered list of Points from the specified location away from Goals specified in this GoalMap instance
+Distance to the goals and the weight of the goals are both used in determining the priority of avoiding the Goals
+The path must not pass through any Obstacles specified in this GoalMap instance
+Returns null if a Path is not found</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Path TryFindPathAvoidingGoals(int x, int y)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">x</span></td>
+        <td><p>X location of the beginning of the path, starting with 0 as the farthest left</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">y</span></td>
+        <td><p>Y location of the beginning of the path, starting with 0 as the top</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="RogueSharp.Path.html">Path</a></td>
+        <td><p>A Path representing ordered List of Points from the specified location away from Goals and avoiding Obstacles. Returns null if a Path is not found</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_GoalMap_TryFindPaths_System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20RogueSharp.GoalMap.TryFindPaths(System.Int32%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/GoalMap.cs/#L309">View Source</a>
+  </span>
+  <a id="RogueSharp_GoalMap_TryFindPaths_" data-uid="RogueSharp.GoalMap.TryFindPaths*"></a>
+  <h4 id="RogueSharp_GoalMap_TryFindPaths_System_Int32_System_Int32_" data-uid="RogueSharp.GoalMap.TryFindPaths(System.Int32,System.Int32)">TryFindPaths(Int32, Int32)</h4>
+  <div class="markdown level1 summary"><p>Returns a ReadOnlyCollection of Paths representing all of the shortest paths from the specified location to the Goal or Goals determined to have the highest priority
+This method is useful when there are multiple paths that would all work and we want to have some additional logic to pick one of the best paths
+The FindPath( int x, int y ) method in the GoalMap class uses this method and then chooses the first path.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ReadOnlyCollection&lt;Path&gt; TryFindPaths(int x, int y)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">x</span></td>
+        <td><p>X location of the beginning of the path, starting with 0 as the farthest left</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">y</span></td>
+        <td><p>Y location of the beginning of the path, starting with 0 as the top</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.ObjectModel.ReadOnlyCollection</span>&lt;<a class="xref" href="RogueSharp.Path.html">Path</a>&gt;</td>
+        <td><p>A ReadOnlyCollection of Paths representing all of the shortest paths from the specified location to the Goal or Goals determined to have the highest priority. Returns null if no path is found.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements" class="text-muted font-weight-light font-italic">Implements</h3>
+  <div>
+      <a class="xref" href="RogueSharp.IGoalMap.html">IGoalMap</a>
+  </div>
+  <h3 id="seealso" class="text-muted font-weight-light font-italic">See Also</h3>
+  <div class="seealso">
+      <div><span><a href="http://www.roguebasin.com/index.php?title=The_Incredible_Power_of_Dijkstra_Maps">Inspired by the article &amp;quot;The Incredible Power of Dijkstra Maps on roguebasin</a></span></div>
+  </div>
+</article>
+            <div id="disqus_thread"></div>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+          </div>
+          
+          <div class="d-none d-lg-block col-md-3" role="complementary">
+            <div class="sideaffix pt-3 pb-3">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_GoalMap.md&amp;value=---%0Auid%3A%20RogueSharp.GoalMap%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link text-info" title="Improve this Doc">
+                    <i class="fal fa-edit fa-fw"></i>
+                    <span>Improve this Doc</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/GoalMap.cs/#L16" class="contribution-link text-info" title="View Source">
+                    <i class="fal fa-code fa-fw"></i>
+                    <span>View Source</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <!--<div class="github-links">
+                  <a class="github-button" href="https://github.com/fszlin/certes" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star fszlin/certes on GitHub">Star</a>
+              </div>-->
+              <nav class="hidden-print affix mt-2" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      
+      <footer class="bg-secondary">
+        <!--<div class="grad-bottom"></div>-->
+        <div class="footer bg-secondary">
+          <div class="container">
+          <div class="d-flex">
+            <div class="p-2 flex-grow-1 text-white">
+            <a class="text-white" href="https://github.com/FaronBracy/RogueSharp">RogueSharp &copy; 2014-2020 Faron Bracy</a>
+            
+            </div>
+            <div class="p-2">
+              <a class="text-white" href="#top">Back to top</a>
+            </div>
+          </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/dos.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/powershell.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+  </body>
+</html>

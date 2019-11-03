@@ -1,0 +1,246 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Connecting Rooms with Hallways | RogueSharp </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="title" content="Connecting Rooms with Hallways - RogueSharp ">
+    <meta name="generator" content="docfx 2.47.0.0">
+    
+    <link rel="shortcut icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-87DrmpqHRiY8hPLIr7ByqhPIywuSsjuQAfMXAE0sMUpY3BM7nXjf+mLIUSvhDArs" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css">
+    <link rel="stylesheet" href="../styles/site.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+    <script type="text/javascript">
+    var appInsights=window.appInsights||function(a){function b(a){c[a]=function(){var b=arguments;c.queue.push(function(){c[a].apply(c,b)})}}var c={config:a},d=document,e=window;setTimeout(function(){var b=d.createElement("script");b.src=a.url||"https://az416426.vo.msecnd.net/scripts/a/ai.0.js",d.getElementsByTagName("script")[0].parentNode.appendChild(b)});try{c.cookie=d.cookie}catch(a){}c.queue=[];for(var f=["Event","Exception","Metric","PageView","Trace","Dependency"];f.length;)b("track"+f.pop());if(b("setAuthenticatedUserContext"),b("clearAuthenticatedUserContext"),b("startTrackEvent"),b("stopTrackEvent"),b("startTrackPage"),b("stopTrackPage"),b("flush"),!a.disableExceptionTracking){f="onerror",b("_"+f);var g=e[f];e[f]=function(a,b,d,e,h){var i=g&&g(a,b,d,e,h);return!0!==i&&c["_"+f](a,b,d,e,h),i}}return c}({instrumentationKey:"9aaf9896-bee3-4d08-abb6-2ef51b389035"});
+    window.appInsights=appInsights,appInsights.queue&&0===appInsights.queue.length&&appInsights.trackPageView();
+  </script>
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <div class="bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light container">
+          
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="RogueSharp" width="36" height="36">
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        
+          <div class="collapse navbar-collapse" id="navbar">
+            <!--<form id="search" role="search" class="form-inline my-2 my-lg-0">
+              <input id="search-query" class="form-control mr-sm-2" type="search" placeholder="Search" autocomplete="off" aria-label="Search">
+            </form>-->
+          </div>
+        </nav>
+        </div>
+        
+        <div class="bg-dark">
+        <nav aria-label="breadcrumb" id="breadcrumb" class="container hide-when-search">
+          <!--<ol class="breadcrumb">
+            <li class="breadcrumb-item" aria-current="page"></li>
+          </ol>-->
+        </nav>
+        </div>      </header>
+      <div role="main" class="container body-content hide-when-search">
+      <div class="row">
+        
+        
+        <div class="sidenav hide-when-search col-md-3 pt-md-3 pb-md-3">
+          <a class="btn btn-link toc-toggle d-md-none" data-toggle="collapse" data-target="#sidetoggle" href="javascript:;" aria-expanded="true" aria-controls="sidetoggle">
+            Show / Hide Table of Contents
+          </a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article col-md-9">
+      <div class="row">
+          <div class="col-lg-9">
+            <article class="content wrap pt-2 pb-2" id="_content" data-uid="">
+<h1 id="connecting-rooms-with-hallways">Connecting Rooms with Hallways</h1>
+
+<p>During this tutorial we’ll connect the rooms we created in the last tutorial with hallways. We’ll also fix the bug that we introduced last time where the player could end up starting stuck in a solid wall.</p>
+<p><img src="../images/V3Tutorial/09_hallways.gif" alt="Player navigating rooms" title="Animation of player navigating rooms and hallways"></p>
+<h2 id="player-starting-location">Player Starting Location</h2>
+<p>Our strategy for choosing the player’s starting location is going to be very simple. We will place the player in the center of the first room that we generate on our map. Before we do that we’ll need a few new methods for dealing with player placement.</p>
+<p>First in <code>Game.cs</code> we need to get rid of a couple of things. We’re going to have our <code>MapGenerator</code> be responsible for creating and placing the <code>Player</code> instead of the <code>Game</code> class.</p>
+<pre><code class="lang-cs">// Make sure that the setter for Player is not private
+public static Player Player { get; set; }
+
+// In Main() remove this line
+Player = new Player();
+</code></pre>
+<p>Next open <code>DungeonMap.cs</code> and make a new method called <code>AddPlayer()</code> that will be ready to be used by our <code>MapGenerator</code>.</p>
+<pre><code class="lang-cs">// Called by MapGenerator after we generate a new map to add the player to the map
+public void AddPlayer( Player player )
+{
+  Game.Player = player;
+  SetIsWalkable( player.X, player.Y, false );
+  UpdatePlayerFieldOfView();
+}
+</code></pre>
+<p>Last we need to add a new private method to <code>MapGenerator.cs</code> called <code>PlacePlayer()</code> which will be responsible for generating the player in the center of the first room of the map.</p>
+<pre><code class="lang-cs">// Find the center of the first room that we created and place the Player there
+private void PlacePlayer()
+{
+  Player player = Game.Player;
+  if ( player == null )
+  {
+    player = new Player();
+  }
+
+  player.X = _map.Rooms[0].Center.X;
+  player.Y = _map.Rooms[0].Center.Y;
+
+  _map.AddPlayer( player );
+}
+</code></pre>
+<p>Don’t forget to call this private method from <code>CreateMap()</code> right after the code where we create rooms.</p>
+<pre><code class="lang-cs">// ... Old existing code ...
+foreach ( Rectangle room in _map.Rooms )
+{
+  CreateRoom( room );
+}
+
+// New code starts here
+PlacePlayer();
+</code></pre>
+<p>If you run the game now you should see that the player always starts in the center of a room. No more getting stuck in walls. Bug fixed!</p>
+<h2 id="connecting-rooms">Connecting Rooms</h2>
+<p>Next we are going to make an algorithm that will dig tunnels to create hallways between our rooms. The way that we will do this is by creating an ‘L’ shaped hallway from the center of one room to the center of the previous room that we generated. There are two possible ‘L’ shaped hallways that we can tunnel out as illustrated in the image below. We’ll just choose one of the two at random.</p>
+<p><img src="../images/V3Tutorial/09_connectingrooms.png" alt="L shaped hallways" title="L shaped hallways being generated"></p>
+<p>One thing to keep in mind that might not be obvious is that our rooms were not generated in a neat fashion from left to right and top to bottom. They will be scattered all over the map. It is extremely likely that as we tunnel out new hallways we’ll pass through other existing rooms. This is fine though and actually creates a nice effect.</p>
+<p>Open <code>MapGenerator.cs</code> and add two helper methods <code>CreateHorizontalTunnel()</code> and <code>CreateVerticalTunnel()</code> to help facilitate our hallway creation.</p>
+<pre><code class="lang-cs">// Carve a tunnel out of the map parallel to the x-axis
+private void CreateHorizontalTunnel( int xStart, int xEnd, int yPosition )
+{
+  for ( int x = Math.Min( xStart, xEnd ); x &lt;= Math.Max( xStart, xEnd ); x++ )
+  {
+    _map.SetCellProperties( x, yPosition, true, true );
+  }
+}
+
+// Carve a tunnel out of the map parallel to the y-axis
+private void CreateVerticalTunnel( int yStart, int yEnd, int xPosition )
+{
+  for ( int y = Math.Min( yStart, yEnd ); y &lt;= Math.Max( yStart, yEnd ); y++ )
+  {
+    _map.SetCellProperties( xPosition, y, true, true );
+  }
+}
+</code></pre>
+<p>Now add code to the <code>CreateMap()</code> method after the part where we generate the rooms that will use our helper methods to generate the tunnels between rooms.</p>
+<pre><code class="lang-cs">// Iterate through each room that was generated
+// Don't do anything with the first room, so start at r = 1 instead of r = 0
+for ( int r = 1; r &lt; _map.Rooms.Count; r++ )
+{
+  // For all remaining rooms get the center of the room and the previous room
+  int previousRoomCenterX = _map.Rooms[r - 1].Center.X;
+  int previousRoomCenterY = _map.Rooms[r - 1].Center.Y;
+  int currentRoomCenterX = _map.Rooms[r].Center.X;
+  int currentRoomCenterY = _map.Rooms[r].Center.Y;
+
+  // Give a 50/50 chance of which 'L' shaped connecting hallway to tunnel out
+  if ( Game.Random.Next( 1, 2 ) == 1 )
+  {
+    CreateHorizontalTunnel( previousRoomCenterX, currentRoomCenterX, previousRoomCenterY );
+    CreateVerticalTunnel( previousRoomCenterY, currentRoomCenterY, currentRoomCenterX );
+  }
+  else
+  {
+    CreateVerticalTunnel( previousRoomCenterY, currentRoomCenterY, previousRoomCenterX );
+    CreateHorizontalTunnel( previousRoomCenterX, currentRoomCenterX, currentRoomCenterY );
+  }
+}
+</code></pre>
+<p>Run the game. If everything went well you should get an image that looks like the one at the top of this post. Use the arrow keys to run around and explore the map.</p>
+<p><em>Note: If your rooms are showing up before you move to explore them make sure to set the IsExplored flag to false in the <code>CreateRoom()</code> method</em></p>
+<h2 id="code-on-github">Code on GitHub</h2>
+<p>As always the code for the tutorial series so far can be found on GitHub:</p>
+<ul>
+<li><a href="https://github.com/FaronBracy/RogueSharpV3Tutorial/tree/07ConnectingRooms">https://github.com/FaronBracy/RogueSharpV3Tutorial/tree/07ConnectingRooms</a></li>
+</ul>
+<p>Bored waiting for the next tutorial? The complete tutorial project is already finished and the source code is available on Github:</p>
+<ul>
+<li>Sample Roguelike game using RogueSharp and RLNet console
+<ul>
+<li><a href="https://github.com/FaronBracy/RogueSharpRLNetSamples">https://github.com/FaronBracy/RogueSharpRLNetSamples</a></li>
+</ul>
+</li>
+<li>Sample Roguelike game using RogueSharp and SadConsole
+<ul>
+<li><a href="https://github.com/FaronBracy/RogueSharpSadConsoleSamples">https://github.com/FaronBracy/RogueSharpSadConsoleSamples</a></li>
+</ul>
+</li>
+</ul>
+</article>
+            <div id="disqus_thread"></div>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+          </div>
+          
+          <div class="d-none d-lg-block col-md-3" role="complementary">
+            <div class="sideaffix pt-3 pb-3">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/FaronBracy/RogueSharp.Documentation/blob/master/articles/09_connecting_rooms_with_hallways.md/#L1" class="contribution-link text-info" title="Improve this Doc">
+                    <i class="fal fa-edit fa-fw"></i>
+                    <span>Improve this Doc</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <!--<div class="github-links">
+                  <a class="github-button" href="https://github.com/fszlin/certes" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star fszlin/certes on GitHub">Star</a>
+              </div>-->
+              <nav class="hidden-print affix mt-2" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      
+      <footer class="bg-secondary">
+        <!--<div class="grad-bottom"></div>-->
+        <div class="footer bg-secondary">
+          <div class="container">
+          <div class="d-flex">
+            <div class="p-2 flex-grow-1 text-white">
+            <a class="text-white" href="https://github.com/FaronBracy/RogueSharp">RogueSharp &copy; 2014-2020 Faron Bracy</a>
+            
+            </div>
+            <div class="p-2">
+              <a class="text-white" href="#top">Back to top</a>
+            </div>
+          </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/dos.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/powershell.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+  </body>
+</html>

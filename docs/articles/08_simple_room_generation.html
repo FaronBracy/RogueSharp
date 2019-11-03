@@ -1,0 +1,285 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Simple Room Generation | RogueSharp </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="title" content="Simple Room Generation - RogueSharp ">
+    <meta name="generator" content="docfx 2.47.0.0">
+    
+    <link rel="shortcut icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-87DrmpqHRiY8hPLIr7ByqhPIywuSsjuQAfMXAE0sMUpY3BM7nXjf+mLIUSvhDArs" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css">
+    <link rel="stylesheet" href="../styles/site.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+    <script type="text/javascript">
+    var appInsights=window.appInsights||function(a){function b(a){c[a]=function(){var b=arguments;c.queue.push(function(){c[a].apply(c,b)})}}var c={config:a},d=document,e=window;setTimeout(function(){var b=d.createElement("script");b.src=a.url||"https://az416426.vo.msecnd.net/scripts/a/ai.0.js",d.getElementsByTagName("script")[0].parentNode.appendChild(b)});try{c.cookie=d.cookie}catch(a){}c.queue=[];for(var f=["Event","Exception","Metric","PageView","Trace","Dependency"];f.length;)b("track"+f.pop());if(b("setAuthenticatedUserContext"),b("clearAuthenticatedUserContext"),b("startTrackEvent"),b("stopTrackEvent"),b("startTrackPage"),b("stopTrackPage"),b("flush"),!a.disableExceptionTracking){f="onerror",b("_"+f);var g=e[f];e[f]=function(a,b,d,e,h){var i=g&&g(a,b,d,e,h);return!0!==i&&c["_"+f](a,b,d,e,h),i}}return c}({instrumentationKey:"9aaf9896-bee3-4d08-abb6-2ef51b389035"});
+    window.appInsights=appInsights,appInsights.queue&&0===appInsights.queue.length&&appInsights.trackPageView();
+  </script>
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <div class="bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light container">
+          
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="RogueSharp" width="36" height="36">
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        
+          <div class="collapse navbar-collapse" id="navbar">
+            <!--<form id="search" role="search" class="form-inline my-2 my-lg-0">
+              <input id="search-query" class="form-control mr-sm-2" type="search" placeholder="Search" autocomplete="off" aria-label="Search">
+            </form>-->
+          </div>
+        </nav>
+        </div>
+        
+        <div class="bg-dark">
+        <nav aria-label="breadcrumb" id="breadcrumb" class="container hide-when-search">
+          <!--<ol class="breadcrumb">
+            <li class="breadcrumb-item" aria-current="page"></li>
+          </ol>-->
+        </nav>
+        </div>      </header>
+      <div role="main" class="container body-content hide-when-search">
+      <div class="row">
+        
+        
+        <div class="sidenav hide-when-search col-md-3 pt-md-3 pb-md-3">
+          <a class="btn btn-link toc-toggle d-md-none" data-toggle="collapse" data-target="#sidetoggle" href="javascript:;" aria-expanded="true" aria-controls="sidetoggle">
+            Show / Hide Table of Contents
+          </a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article col-md-9">
+      <div class="row">
+          <div class="col-lg-9">
+            <article class="content wrap pt-2 pb-2" id="_content" data-uid="">
+<h1 id="simple-room-generation">Simple Room Generation</h1>
+
+<p>During this tutorial we’ll handle adding rooms to our map. We’ll save connecting the rooms via hallways until the next tutorial.</p>
+<h2 id="dungeon-map-rooms">Dungeon Map Rooms</h2>
+<p>The first thing we’ll need to do is create a place to hold our room information in <code>DungeonMap.cs</code>. Since all of our rooms are going to start out simple and be rectangular in nature we’ll simple use the <code>Rectangle</code> class included with <code>RogueSharp</code> to represent a room.</p>
+<p>Some of you might ask why <code>Rectangle</code> in <code>RogueSharp</code> is a <code>class</code> and not a <code>struct</code> like in many other libraries. The answer is that it’s a mistake on my part. It really should be a <code>struct</code>. Here is an article on MSDN explaining the difference and when to use one over the other.</p>
+<p>Choosing Between Class and Struct:
+<a href="https://msdn.microsoft.com/en-us/library/ms229017(v=vs.110).aspx">https://msdn.microsoft.com/en-us/library/ms229017(v=vs.110).aspx</a></p>
+<p>Thanks to James Neal for pointing this out and for submitting a pull request to fix it. For our purposes it will work just fine as a <code>class</code>. On to creating our rooms! Add the following code to <code>DungeonMap.cs</code>.</p>
+<pre><code class="lang-cs">public class DungeonMap : Map
+{
+  // ... start of new code
+  public List&lt;Rectangle&gt; Rooms;
+
+  public DungeonMap()
+  {
+    // Initialize the list of rooms when we create a new DungeonMap
+    Rooms = new List&lt;Rectangle&gt;();
+  }
+  // ... old code continues here
+}
+</code></pre>
+<h2 id="random-number-generator-singleton">Random Number Generator Singleton</h2>
+<p>Since our levels will be randomly generated it will be nice to have easy access to a random number generator. By using the same random number generator that was created with a known seed we can always regenerate a level exactly as it was generated before by using the same seed. Open <code>Game.cs</code> and add the following code:</p>
+<pre><code class="lang-cs">// Singleton of IRandom used throughout the game when generating random numbers
+public static IRandom Random { get; private set; }
+
+public static void Main()
+{
+  // Establish the seed for the random number generator from the current time
+  int seed = (int) DateTime.UtcNow.Ticks;
+  Random = new DotNetRandom( seed );
+
+  // The title will appear at the top of the console window
+  // also include the seed used to generate the level
+  string consoleTitle = $&quot;RougeSharp V3 Tutorial - Level 1 - Seed {seed}&quot;;
+
+  // ... old code continues here
+}
+</code></pre>
+<p><code>RogueSharp</code> has <a href="../api/RogueSharp.Random.yml">several different random number generators that you can read about</a>.</p>
+<p>For our purposes we’ll use <code>DotNetRandom</code> which uses the standard RNG included with .NET. To establish a unique seed each time we start a new game we’ll get the Ticks (The value of this property represents the number of 100-nanosecond intervals that have elapsed since 12:00:00 midnight, January 1, 0001) of the current time. We’re also writing this seed into the title so that we could generate the level again in the future which could be useful for testing or debugging.</p>
+<h2 id="generating-rooms-with-mapgeneratorcs">Generating Rooms with MapGenerator.cs</h2>
+<p>If you remember previously we generated our map by only making the outside edges walls, and the entire rest of the map wide open floors. Because we are changing this completely I’m going to paste the entire source code for the new <code>MapGenerator.cs</code> below and then I’ll review the changes.</p>
+<pre><code class="lang-cs">public class MapGenerator
+{
+  private readonly int _width;
+  private readonly int _height;
+  private readonly int _maxRooms;
+  private readonly int _roomMaxSize;
+  private readonly int _roomMinSize;
+
+  private readonly DungeonMap _map;
+
+  // Constructing a new MapGenerator requires the dimensions of the maps it will create
+  // as well as the sizes and maximum number of rooms
+  public MapGenerator( int width, int height,
+  int maxRooms, int roomMaxSize, int roomMinSize )
+  {
+    _width = width;
+    _height = height;
+    _maxRooms = maxRooms;
+    _roomMaxSize = roomMaxSize;
+    _roomMinSize = roomMinSize;
+    _map = new DungeonMap();
+  }
+
+  // Generate a new map that places rooms randomly
+  public DungeonMap CreateMap()
+  {
+    // Set the properties of all cells to false
+    _map.Initialize( _width, _height );
+
+    // Try to place as many rooms as the specified maxRooms
+    // Note: Only using decrementing loop because of WordPress formatting
+    for ( int r = _maxRooms; r &gt; 0; r-- )
+    {
+      // Determine the size and position of the room randomly
+      int roomWidth = Game.Random.Next( _roomMinSize, _roomMaxSize );
+      int roomHeight = Game.Random.Next( _roomMinSize, _roomMaxSize );
+      int roomXPosition = Game.Random.Next( 0, _width - roomWidth - 1 );
+      int roomYPosition = Game.Random.Next( 0, _height - roomHeight - 1 );
+
+      // All of our rooms can be represented as Rectangles
+      var newRoom = new Rectangle( roomXPosition, roomYPosition,
+        roomWidth, roomHeight );
+
+      // Check to see if the room rectangle intersects with any other rooms
+      bool newRoomIntersects = _map.Rooms.Any( room =&gt; newRoom.Intersects( room ) );
+
+      // As long as it doesn't intersect add it to the list of rooms
+      if ( !newRoomIntersects )
+      {
+        _map.Rooms.Add( newRoom );
+      }
+    }
+    // Iterate through each room that we wanted placed
+    // call CreateRoom to make it
+    foreach ( Rectangle room in _map.Rooms )
+    {
+      CreateRoom( room );
+    }
+
+    return _map;
+  }
+
+  // Given a rectangular area on the map
+  // set the cell properties for that area to true
+  private void CreateRoom( Rectangle room )
+  {
+    for ( int x = room.Left + 1; x &lt; room.Right; x++ )
+    {
+      for ( int y = room.Top + 1; y &lt; room.Bottom; y++ )
+      {
+        _map.SetCellProperties( x, y, true, true, true );
+      }
+    }
+  }
+}
+</code></pre>
+<p>You’ll notice that we added 3 new parameters to the <code>MapGenerator</code> constructor. The new parameters are <code>maxRooms</code>, <code>roomMaxSize</code>, and <code>roomMinSize</code>. The way this algorithm works is it will try to create a number of rooms up to <code>maxRooms</code> on the map. Each room it will try to place in a random position on the map. It will also choose a width and height for the room between <code>roomMinSize</code> and <code>roomMaxSize</code>. The final step when placing the room is to see if it overlaps with any other room. If it does overlap then we throw it out.</p>
+<h2 id="hooking-up-the-mapgenerator">Hooking up the MapGenerator</h2>
+<p>Technically the <code>MapGenerator</code> is already used in <code>Game.cs</code> however if you tried to build you would get errors. We need to make sure we provide the new parameters that our <code>MapGenerator</code> requires. In <code>Game.cs</code> update the following line:</p>
+<pre><code class="lang-cs">// Old code to change
+MapGenerator mapGenerator = new MapGenerator( _mapWidth, _mapHeight );
+
+// New code to replace with
+MapGenerator mapGenerator = new MapGenerator( _mapWidth, _mapHeight, 20, 13, 7 );
+</code></pre>
+<p>We’ll attempt to create 20 rooms with sides that are between 7 and 13 cells long. The result should be less than 20 rooms as we throw out any that overlap.</p>
+<h2 id="results">Results</h2>
+<p>If you run the program now and you are lucky you’ll end up with the Rogue in a room and will be able to move around in that room. Unfortunately since the rooms are not connected you will not be able to leave the room.</p>
+<p><img src="../images/V3Tutorial/08_whenlucky.png" alt="When Lucky" title="When Lucky"></p>
+<p>If you’re not so lucky you’ll end up with your poor Rogue being stuck in a wall outside of the room.
+OutsideOfRoomBug</p>
+<p><img src="../images/V3Tutorial/08_outsideofroombug.png" alt="Unlucky" title="Outside of Room Bug"></p>
+<p>We’ll fix this issue in the next tutorial post where we’ll also get all of our rooms connected. If you are bored waiting for the next tutorial you should try and see if you can come up with a fix for this and also start experimenting with ways to connect the rooms.</p>
+<h2 id="code-on-github">Code on GitHub</h2>
+<p>As always the code for the tutorial series so far can be found on GitHub:</p>
+<ul>
+<li><a href="https://github.com/FaronBracy/RogueSharpV3Tutorial/tree/06Rooms">https://github.com/FaronBracy/RogueSharpV3Tutorial/tree/06Rooms</a></li>
+</ul>
+<p>Bored waiting for the next tutorial? The complete tutorial project is already finished and the source code is available on Github:</p>
+<ul>
+<li>Sample Roguelike game using RogueSharp and RLNet console
+<ul>
+<li><a href="https://github.com/FaronBracy/RogueSharpRLNetSamples">https://github.com/FaronBracy/RogueSharpRLNetSamples</a></li>
+</ul>
+</li>
+<li>Sample Roguelike game using RogueSharp and SadConsole
+<ul>
+<li><a href="https://github.com/FaronBracy/RogueSharpSadConsoleSamples">https://github.com/FaronBracy/RogueSharpSadConsoleSamples</a></li>
+</ul>
+</li>
+</ul>
+</article>
+            <div id="disqus_thread"></div>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+          </div>
+          
+          <div class="d-none d-lg-block col-md-3" role="complementary">
+            <div class="sideaffix pt-3 pb-3">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/FaronBracy/RogueSharp.Documentation/blob/master/articles/08_simple_room_generation.md/#L1" class="contribution-link text-info" title="Improve this Doc">
+                    <i class="fal fa-edit fa-fw"></i>
+                    <span>Improve this Doc</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <!--<div class="github-links">
+                  <a class="github-button" href="https://github.com/fszlin/certes" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star fszlin/certes on GitHub">Star</a>
+              </div>-->
+              <nav class="hidden-print affix mt-2" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      
+      <footer class="bg-secondary">
+        <!--<div class="grad-bottom"></div>-->
+        <div class="footer bg-secondary">
+          <div class="container">
+          <div class="d-flex">
+            <div class="p-2 flex-grow-1 text-white">
+            <a class="text-white" href="https://github.com/FaronBracy/RogueSharp">RogueSharp &copy; 2014-2020 Faron Bracy</a>
+            
+            </div>
+            <div class="p-2">
+              <a class="text-white" href="#top">Back to top</a>
+            </div>
+          </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/dos.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/powershell.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+  </body>
+</html>

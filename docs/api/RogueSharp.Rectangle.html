@@ -1,0 +1,1523 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Struct Rectangle
+   | RogueSharp </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="title" content="Struct Rectangle
+   - RogueSharp ">
+    <meta name="generator" content="docfx 2.47.0.0">
+    
+    <link rel="shortcut icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-87DrmpqHRiY8hPLIr7ByqhPIywuSsjuQAfMXAE0sMUpY3BM7nXjf+mLIUSvhDArs" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css">
+    <link rel="stylesheet" href="../styles/site.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+    <script type="text/javascript">
+    var appInsights=window.appInsights||function(a){function b(a){c[a]=function(){var b=arguments;c.queue.push(function(){c[a].apply(c,b)})}}var c={config:a},d=document,e=window;setTimeout(function(){var b=d.createElement("script");b.src=a.url||"https://az416426.vo.msecnd.net/scripts/a/ai.0.js",d.getElementsByTagName("script")[0].parentNode.appendChild(b)});try{c.cookie=d.cookie}catch(a){}c.queue=[];for(var f=["Event","Exception","Metric","PageView","Trace","Dependency"];f.length;)b("track"+f.pop());if(b("setAuthenticatedUserContext"),b("clearAuthenticatedUserContext"),b("startTrackEvent"),b("stopTrackEvent"),b("startTrackPage"),b("stopTrackPage"),b("flush"),!a.disableExceptionTracking){f="onerror",b("_"+f);var g=e[f];e[f]=function(a,b,d,e,h){var i=g&&g(a,b,d,e,h);return!0!==i&&c["_"+f](a,b,d,e,h),i}}return c}({instrumentationKey:"9aaf9896-bee3-4d08-abb6-2ef51b389035"});
+    window.appInsights=appInsights,appInsights.queue&&0===appInsights.queue.length&&appInsights.trackPageView();
+  </script>
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <div class="bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light container">
+          
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="RogueSharp" width="36" height="36">
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        
+          <div class="collapse navbar-collapse" id="navbar">
+            <!--<form id="search" role="search" class="form-inline my-2 my-lg-0">
+              <input id="search-query" class="form-control mr-sm-2" type="search" placeholder="Search" autocomplete="off" aria-label="Search">
+            </form>-->
+          </div>
+        </nav>
+        </div>
+        
+        <div class="bg-dark">
+        <nav aria-label="breadcrumb" id="breadcrumb" class="container hide-when-search">
+          <!--<ol class="breadcrumb">
+            <li class="breadcrumb-item" aria-current="page"></li>
+          </ol>-->
+        </nav>
+        </div>      </header>
+      <div role="main" class="container body-content hide-when-search">
+      <div class="row">
+        
+        
+        <div class="sidenav hide-when-search col-md-3 pt-md-3 pb-md-3">
+          <a class="btn btn-link toc-toggle d-md-none" data-toggle="collapse" data-target="#sidetoggle" href="javascript:;" aria-expanded="true" aria-controls="sidetoggle">
+            Show / Hide Table of Contents
+          </a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article col-md-9">
+      <div class="row">
+          <div class="col-lg-9">
+            <article class="content wrap pt-2 pb-2" id="_content" data-uid="RogueSharp.Rectangle">
+  
+  
+  <h1 id="RogueSharp_Rectangle" data-uid="RogueSharp.Rectangle" class="text-break">Struct Rectangle
+  </h1>
+  <div class="markdown level0 summary"><p>A struct that defines a rectangle</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="implements mt-1">
+    <h5 class="font-weight-light font-italic mb-0">
+      <a class="text-muted" data-toggle="collapse" data-target="#implementsCollapse" role="button" aria-expanded="false" aria-controls="implementsCollapse">
+      Implements
+      </a>
+    </h5>
+    <div class="collapse" id="implementsCollapse">
+    <div><span class="xref">System.IEquatable</span>&lt;<a class="xref" href="RogueSharp.Rectangle.html">Rectangle</a>&gt;</div>
+    </div>
+  </div>
+  <div class="inheritedMembers mt-1">
+    <h5 class="font-weight-light font-italic mb-0">
+      <a class="text-muted" data-toggle="collapse" data-target="#inheritedMembersCollapse" role="button" aria-expanded="false" aria-controls="inheritedMembersCollapse">
+      Inherited Members
+      </a>
+    </h5>
+    <div class="collapse" id="inheritedMembersCollapse">
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    </div>
+  </div>
+  <h6 class="mt-1"><i class="text-muted font-weight-light font-italic mb-0">Namespace:</i> <a class="xref" href="RogueSharp.html">RogueSharp</a></h6>
+  <h6 class="mt-1"><i class="text-muted font-weight-light font-italic mb-0">Assembly:</i> RogueSharp.dll</h6>
+  <h5 id="RogueSharp_Rectangle_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public struct Rectangle : IEquatable&lt;Rectangle&gt;</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_Rectangle__ctor_RogueSharp_Point_RogueSharp_Point_.md&amp;value=---%0Auid%3A%20RogueSharp.Rectangle.%23ctor(RogueSharp.Point%2CRogueSharp.Point)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/Rectangle.cs/#L58">View Source</a>
+  </span>
+  <a id="RogueSharp_Rectangle__ctor_" data-uid="RogueSharp.Rectangle.#ctor*"></a>
+  <h4 id="RogueSharp_Rectangle__ctor_RogueSharp_Point_RogueSharp_Point_" data-uid="RogueSharp.Rectangle.#ctor(RogueSharp.Point,RogueSharp.Point)">Rectangle(Point, Point)</h4>
+  <div class="markdown level1 summary"><p>Creates a new instance of <a class="xref" href="RogueSharp.Rectangle.html">Rectangle</a> struct, with the specified
+location and size.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Rectangle(Point location, Point size)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="RogueSharp.Point.html">Point</a></td>
+        <td><span class="parametername">location</span></td>
+        <td><p>The x and y coordinates of the top-left corner of the created <a class="xref" href="RogueSharp.Rectangle.html">Rectangle</a>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="RogueSharp.Point.html">Point</a></td>
+        <td><span class="parametername">size</span></td>
+        <td><p>The width and height of the created <a class="xref" href="RogueSharp.Rectangle.html">Rectangle</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_Rectangle__ctor_System_Int32_System_Int32_System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20RogueSharp.Rectangle.%23ctor(System.Int32%2CSystem.Int32%2CSystem.Int32%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/Rectangle.cs/#L43">View Source</a>
+  </span>
+  <a id="RogueSharp_Rectangle__ctor_" data-uid="RogueSharp.Rectangle.#ctor*"></a>
+  <h4 id="RogueSharp_Rectangle__ctor_System_Int32_System_Int32_System_Int32_System_Int32_" data-uid="RogueSharp.Rectangle.#ctor(System.Int32,System.Int32,System.Int32,System.Int32)">Rectangle(Int32, Int32, Int32, Int32)</h4>
+  <div class="markdown level1 summary"><p>Creates a new instance of <a class="xref" href="RogueSharp.Rectangle.html">Rectangle</a> struct, with the specified
+position, width, and height.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Rectangle(int x, int y, int width, int height)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">x</span></td>
+        <td><p>The x coordinate of the top-left corner of the created <a class="xref" href="RogueSharp.Rectangle.html">Rectangle</a>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">y</span></td>
+        <td><p>The y coordinate of the top-left corner of the created <a class="xref" href="RogueSharp.Rectangle.html">Rectangle</a>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">width</span></td>
+        <td><p>The width of the created <a class="xref" href="RogueSharp.Rectangle.html">Rectangle</a>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">height</span></td>
+        <td><p>The height of the created <a class="xref" href="RogueSharp.Rectangle.html">Rectangle</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_Rectangle_Bottom.md&amp;value=---%0Auid%3A%20RogueSharp.Rectangle.Bottom%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/Rectangle.cs/#L92">View Source</a>
+  </span>
+  <a id="RogueSharp_Rectangle_Bottom_" data-uid="RogueSharp.Rectangle.Bottom*"></a>
+  <h4 id="RogueSharp_Rectangle_Bottom" data-uid="RogueSharp.Rectangle.Bottom">Bottom</h4>
+  <div class="markdown level1 summary"><p>Returns the y-coordinate of the bottom of the rectangle</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int Bottom { get; }</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_Rectangle_Center.md&amp;value=---%0Auid%3A%20RogueSharp.Rectangle.Center%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/Rectangle.cs/#L110">View Source</a>
+  </span>
+  <a id="RogueSharp_Rectangle_Center_" data-uid="RogueSharp.Rectangle.Center*"></a>
+  <h4 id="RogueSharp_Rectangle_Center" data-uid="RogueSharp.Rectangle.Center">Center</h4>
+  <div class="markdown level1 summary"><p>Returns the Point that specifies the center of the rectangle</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Point Center { get; }</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="RogueSharp.Point.html">Point</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_Rectangle_Empty.md&amp;value=---%0Auid%3A%20RogueSharp.Rectangle.Empty%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/Rectangle.cs/#L72">View Source</a>
+  </span>
+  <a id="RogueSharp_Rectangle_Empty_" data-uid="RogueSharp.Rectangle.Empty*"></a>
+  <h4 id="RogueSharp_Rectangle_Empty" data-uid="RogueSharp.Rectangle.Empty">Empty</h4>
+  <div class="markdown level1 summary"><p>Returns a Rectangle with all of its values set to zero</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Rectangle Empty { get; }</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="RogueSharp.Rectangle.html">Rectangle</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_Rectangle_Height.md&amp;value=---%0Auid%3A%20RogueSharp.Rectangle.Height%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/Rectangle.cs/#L13">View Source</a>
+  </span>
+  <a id="RogueSharp_Rectangle_Height_" data-uid="RogueSharp.Rectangle.Height*"></a>
+  <h4 id="RogueSharp_Rectangle_Height" data-uid="RogueSharp.Rectangle.Height">Height</h4>
+  <div class="markdown level1 summary"><p>Specifies the Height of the Rectangle</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int Height { get; set; }</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_Rectangle_IsEmpty.md&amp;value=---%0Auid%3A%20RogueSharp.Rectangle.IsEmpty%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/Rectangle.cs/#L116">View Source</a>
+  </span>
+  <a id="RogueSharp_Rectangle_IsEmpty_" data-uid="RogueSharp.Rectangle.IsEmpty*"></a>
+  <h4 id="RogueSharp_Rectangle_IsEmpty" data-uid="RogueSharp.Rectangle.IsEmpty">IsEmpty</h4>
+  <div class="markdown level1 summary"><p>Returns a value that indicates whether the Rectangle is empty
+true if the Rectangle is empty; otherwise false</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsEmpty { get; }</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_Rectangle_Left.md&amp;value=---%0Auid%3A%20RogueSharp.Rectangle.Left%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/Rectangle.cs/#L77">View Source</a>
+  </span>
+  <a id="RogueSharp_Rectangle_Left_" data-uid="RogueSharp.Rectangle.Left*"></a>
+  <h4 id="RogueSharp_Rectangle_Left" data-uid="RogueSharp.Rectangle.Left">Left</h4>
+  <div class="markdown level1 summary"><p>Returns the x-coordinate of the left side of the rectangle</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int Left { get; }</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_Rectangle_Location.md&amp;value=---%0Auid%3A%20RogueSharp.Rectangle.Location%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/Rectangle.cs/#L97">View Source</a>
+  </span>
+  <a id="RogueSharp_Rectangle_Location_" data-uid="RogueSharp.Rectangle.Location*"></a>
+  <h4 id="RogueSharp_Rectangle_Location" data-uid="RogueSharp.Rectangle.Location">Location</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the Point representing the upper-left value of the Rectangle</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Point Location { get; set; }</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="RogueSharp.Point.html">Point</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_Rectangle_Right.md&amp;value=---%0Auid%3A%20RogueSharp.Rectangle.Right%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/Rectangle.cs/#L82">View Source</a>
+  </span>
+  <a id="RogueSharp_Rectangle_Right_" data-uid="RogueSharp.Rectangle.Right*"></a>
+  <h4 id="RogueSharp_Rectangle_Right" data-uid="RogueSharp.Rectangle.Right">Right</h4>
+  <div class="markdown level1 summary"><p>Returns the x-coordinate of the right side of the rectangle</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int Right { get; }</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_Rectangle_Top.md&amp;value=---%0Auid%3A%20RogueSharp.Rectangle.Top%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/Rectangle.cs/#L87">View Source</a>
+  </span>
+  <a id="RogueSharp_Rectangle_Top_" data-uid="RogueSharp.Rectangle.Top*"></a>
+  <h4 id="RogueSharp_Rectangle_Top" data-uid="RogueSharp.Rectangle.Top">Top</h4>
+  <div class="markdown level1 summary"><p>Returns the y-coordinate of the top of the rectangle</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int Top { get; }</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_Rectangle_Width.md&amp;value=---%0Auid%3A%20RogueSharp.Rectangle.Width%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/Rectangle.cs/#L18">View Source</a>
+  </span>
+  <a id="RogueSharp_Rectangle_Width_" data-uid="RogueSharp.Rectangle.Width*"></a>
+  <h4 id="RogueSharp_Rectangle_Width" data-uid="RogueSharp.Rectangle.Width">Width</h4>
+  <div class="markdown level1 summary"><p>Specifies the Width of the Rectangle</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int Width { get; set; }</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_Rectangle_X.md&amp;value=---%0Auid%3A%20RogueSharp.Rectangle.X%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/Rectangle.cs/#L24">View Source</a>
+  </span>
+  <a id="RogueSharp_Rectangle_X_" data-uid="RogueSharp.Rectangle.X*"></a>
+  <h4 id="RogueSharp_Rectangle_X" data-uid="RogueSharp.Rectangle.X">X</h4>
+  <div class="markdown level1 summary"><p>Specifies the x-coordinate of the Rectangle with 0 being to the left
+and increasing as the Rectangle is moved to the right</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int X { get; set; }</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_Rectangle_Y.md&amp;value=---%0Auid%3A%20RogueSharp.Rectangle.Y%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/Rectangle.cs/#L30">View Source</a>
+  </span>
+  <a id="RogueSharp_Rectangle_Y_" data-uid="RogueSharp.Rectangle.Y*"></a>
+  <h4 id="RogueSharp_Rectangle_Y" data-uid="RogueSharp.Rectangle.Y">Y</h4>
+  <div class="markdown level1 summary"><p>Specifies the y-coordinate of the Rectangle with 0 being at the top
+and increasing as the Rectangle is moved downwards</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int Y { get; set; }</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_Rectangle_Contains_RogueSharp_Point_.md&amp;value=---%0Auid%3A%20RogueSharp.Rectangle.Contains(RogueSharp.Point)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/Rectangle.cs/#L155">View Source</a>
+  </span>
+  <a id="RogueSharp_Rectangle_Contains_" data-uid="RogueSharp.Rectangle.Contains*"></a>
+  <h4 id="RogueSharp_Rectangle_Contains_RogueSharp_Point_" data-uid="RogueSharp.Rectangle.Contains(RogueSharp.Point)">Contains(Point)</h4>
+  <div class="markdown level1 summary"><p>Determines whether this Rectangle contains a specified Point</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Contains(Point value)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="RogueSharp.Point.html">Point</a></td>
+        <td><span class="parametername">value</span></td>
+        <td><p>The Point to evaluate</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>True if the specified Point is contained within this Rectangle; False otherwise</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_Rectangle_Contains_RogueSharp_Rectangle_.md&amp;value=---%0Auid%3A%20RogueSharp.Rectangle.Contains(RogueSharp.Rectangle)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/Rectangle.cs/#L165">View Source</a>
+  </span>
+  <a id="RogueSharp_Rectangle_Contains_" data-uid="RogueSharp.Rectangle.Contains*"></a>
+  <h4 id="RogueSharp_Rectangle_Contains_RogueSharp_Rectangle_" data-uid="RogueSharp.Rectangle.Contains(RogueSharp.Rectangle)">Contains(Rectangle)</h4>
+  <div class="markdown level1 summary"><p>Determines whether this Rectangle entirely contains the specified Rectangle</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Contains(Rectangle value)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="RogueSharp.Rectangle.html">Rectangle</a></td>
+        <td><span class="parametername">value</span></td>
+        <td><p>The Rectangle to evaluate</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>True if this Rectangle entirely contains the specified Rectangle; False otherwise</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_Rectangle_Contains_System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20RogueSharp.Rectangle.Contains(System.Int32%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/Rectangle.cs/#L145">View Source</a>
+  </span>
+  <a id="RogueSharp_Rectangle_Contains_" data-uid="RogueSharp.Rectangle.Contains*"></a>
+  <h4 id="RogueSharp_Rectangle_Contains_System_Int32_System_Int32_" data-uid="RogueSharp.Rectangle.Contains(System.Int32,System.Int32)">Contains(Int32, Int32)</h4>
+  <div class="markdown level1 summary"><p>Determines whether this Rectangle contains a specified point represented by its x and y-coordinates</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Contains(int x, int y)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">x</span></td>
+        <td><p>The x-coordinate of the specified point</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">y</span></td>
+        <td><p>The y-coordinate of the specified point</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>True if the specified point is contained within this Rectangle; False otherwise</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_Rectangle_Equals_RogueSharp_Rectangle_.md&amp;value=---%0Auid%3A%20RogueSharp.Rectangle.Equals(RogueSharp.Rectangle)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/Rectangle.cs/#L123">View Source</a>
+  </span>
+  <a id="RogueSharp_Rectangle_Equals_" data-uid="RogueSharp.Rectangle.Equals*"></a>
+  <h4 id="RogueSharp_Rectangle_Equals_RogueSharp_Rectangle_" data-uid="RogueSharp.Rectangle.Equals(RogueSharp.Rectangle)">Equals(Rectangle)</h4>
+  <div class="markdown level1 summary"><p>Determines whether two Rectangle instances are equal</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Equals(Rectangle other)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="RogueSharp.Rectangle.html">Rectangle</a></td>
+        <td><span class="parametername">other</span></td>
+        <td><p>The Rectangle to compare this instance to</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>True if the instances are equal; False otherwise</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_Rectangle_Equals_System_Object_.md&amp;value=---%0Auid%3A%20RogueSharp.Rectangle.Equals(System.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/Rectangle.cs/#L222">View Source</a>
+  </span>
+  <a id="RogueSharp_Rectangle_Equals_" data-uid="RogueSharp.Rectangle.Equals*"></a>
+  <h4 id="RogueSharp_Rectangle_Equals_System_Object_" data-uid="RogueSharp.Rectangle.Equals(System.Object)">Equals(Object)</h4>
+  <div class="markdown level1 summary"><p>Compares whether current instance is equal to specified <span class="xref">System.Object</span>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool Equals(object obj)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">obj</span></td>
+        <td><p>The <span class="xref">System.Object</span> to compare.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><code>true</code> if the instances are equal; <code>false</code> otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic overrides">Overrides</h5>
+  <div><span class="xref">System.ValueType.Equals(System.Object)</span></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_Rectangle_GetHashCode.md&amp;value=---%0Auid%3A%20RogueSharp.Rectangle.GetHashCode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/Rectangle.cs/#L241">View Source</a>
+  </span>
+  <a id="RogueSharp_Rectangle_GetHashCode_" data-uid="RogueSharp.Rectangle.GetHashCode*"></a>
+  <h4 id="RogueSharp_Rectangle_GetHashCode" data-uid="RogueSharp.Rectangle.GetHashCode">GetHashCode()</h4>
+  <div class="markdown level1 summary"><p>Gets the hash code for this object which can help for quick checks of equality
+or when inserting this Rectangle into a hash-based collection such as a Dictionary or Hashtable</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override int GetHashCode()</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><p>An integer hash used to identify this Rectangle</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic overrides">Overrides</h5>
+  <div><span class="xref">System.ValueType.GetHashCode()</span></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_Rectangle_Inflate_System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20RogueSharp.Rectangle.Inflate(System.Int32%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/Rectangle.cs/#L209">View Source</a>
+  </span>
+  <a id="RogueSharp_Rectangle_Inflate_" data-uid="RogueSharp.Rectangle.Inflate*"></a>
+  <h4 id="RogueSharp_Rectangle_Inflate_System_Int32_System_Int32_" data-uid="RogueSharp.Rectangle.Inflate(System.Int32,System.Int32)">Inflate(Int32, Int32)</h4>
+  <div class="markdown level1 summary"><p>Pushes the edges of the Rectangle out by the specified horizontal and vertical values</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Inflate(int horizontalValue, int verticalValue)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">horizontalValue</span></td>
+        <td><p>Value to push the sides out by</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">verticalValue</span></td>
+        <td><p>Value to push the top and bottom out by</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.OverflowException</span></td>
+        <td><p>Thrown if the new width or height exceed Int32.MaxValue, or new X or Y are smaller than int32.MinValue</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_Rectangle_Intersect_RogueSharp_Rectangle_RogueSharp_Rectangle_.md&amp;value=---%0Auid%3A%20RogueSharp.Rectangle.Intersect(RogueSharp.Rectangle%2CRogueSharp.Rectangle)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/Rectangle.cs/#L278">View Source</a>
+  </span>
+  <a id="RogueSharp_Rectangle_Intersect_" data-uid="RogueSharp.Rectangle.Intersect*"></a>
+  <h4 id="RogueSharp_Rectangle_Intersect_RogueSharp_Rectangle_RogueSharp_Rectangle_" data-uid="RogueSharp.Rectangle.Intersect(RogueSharp.Rectangle,RogueSharp.Rectangle)">Intersect(Rectangle, Rectangle)</h4>
+  <div class="markdown level1 summary"><p>Creates a Rectangle defining the area where one Rectangle overlaps with another Rectangle</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Rectangle Intersect(Rectangle value1, Rectangle value2)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="RogueSharp.Rectangle.html">Rectangle</a></td>
+        <td><span class="parametername">value1</span></td>
+        <td><p>The first Rectangle to compare</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="RogueSharp.Rectangle.html">Rectangle</a></td>
+        <td><span class="parametername">value2</span></td>
+        <td><p>The second Rectangle to compare</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="RogueSharp.Rectangle.html">Rectangle</a></td>
+        <td><p>The area where the two specified Rectangles overlap. If the two Rectangles do not overlap the resulting Rectangle will be Empty</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_Rectangle_Intersect_RogueSharp_Rectangle__RogueSharp_Rectangle__RogueSharp_Rectangle__.md&amp;value=---%0Auid%3A%20RogueSharp.Rectangle.Intersect(RogueSharp.Rectangle%40%2CRogueSharp.Rectangle%40%2CRogueSharp.Rectangle%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/Rectangle.cs/#L290">View Source</a>
+  </span>
+  <a id="RogueSharp_Rectangle_Intersect_" data-uid="RogueSharp.Rectangle.Intersect*"></a>
+  <h4 id="RogueSharp_Rectangle_Intersect_RogueSharp_Rectangle__RogueSharp_Rectangle__RogueSharp_Rectangle__" data-uid="RogueSharp.Rectangle.Intersect(RogueSharp.Rectangle@,RogueSharp.Rectangle@,RogueSharp.Rectangle@)">Intersect(ref Rectangle, ref Rectangle, out Rectangle)</h4>
+  <div class="markdown level1 summary"><p>Creates a Rectangle defining the area where one Rectangle overlaps with another Rectangle</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void Intersect(ref Rectangle value1, ref Rectangle value2, out Rectangle result)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="RogueSharp.Rectangle.html">Rectangle</a></td>
+        <td><span class="parametername">value1</span></td>
+        <td><p>The first Rectangle to compare</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="RogueSharp.Rectangle.html">Rectangle</a></td>
+        <td><span class="parametername">value2</span></td>
+        <td><p>The second Rectangle to compare</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="RogueSharp.Rectangle.html">Rectangle</a></td>
+        <td><span class="parametername">result</span></td>
+        <td><p>The area where the two specified Rectangles overlap. If the two Rectangles do not overlap the resulting Rectangle will be Empty</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_Rectangle_Intersects_RogueSharp_Rectangle_.md&amp;value=---%0Auid%3A%20RogueSharp.Rectangle.Intersects(RogueSharp.Rectangle)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/Rectangle.cs/#L251">View Source</a>
+  </span>
+  <a id="RogueSharp_Rectangle_Intersects_" data-uid="RogueSharp.Rectangle.Intersects*"></a>
+  <h4 id="RogueSharp_Rectangle_Intersects_RogueSharp_Rectangle_" data-uid="RogueSharp.Rectangle.Intersects(RogueSharp.Rectangle)">Intersects(Rectangle)</h4>
+  <div class="markdown level1 summary"><p>Determines whether this Rectangle intersects with the specified Rectangle</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Intersects(Rectangle value)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="RogueSharp.Rectangle.html">Rectangle</a></td>
+        <td><span class="parametername">value</span></td>
+        <td><p>The Rectangle to evaluate</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>True if the specified Rectangle intersects with this one; False otherwise</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_Rectangle_Intersects_RogueSharp_Rectangle__System_Boolean__.md&amp;value=---%0Auid%3A%20RogueSharp.Rectangle.Intersects(RogueSharp.Rectangle%40%2CSystem.Boolean%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/Rectangle.cs/#L264">View Source</a>
+  </span>
+  <a id="RogueSharp_Rectangle_Intersects_" data-uid="RogueSharp.Rectangle.Intersects*"></a>
+  <h4 id="RogueSharp_Rectangle_Intersects_RogueSharp_Rectangle__System_Boolean__" data-uid="RogueSharp.Rectangle.Intersects(RogueSharp.Rectangle@,System.Boolean@)">Intersects(ref Rectangle, out Boolean)</h4>
+  <div class="markdown level1 summary"><p>Determines whether this Rectangle intersects with the specified Rectangle</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Intersects(ref Rectangle value, out bool result)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="RogueSharp.Rectangle.html">Rectangle</a></td>
+        <td><span class="parametername">value</span></td>
+        <td><p>The Rectangle to evaluate</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">result</span></td>
+        <td><p>True if the specified Rectangle intersects with this one; False otherwise</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_Rectangle_Offset_RogueSharp_Point_.md&amp;value=---%0Auid%3A%20RogueSharp.Rectangle.Offset(RogueSharp.Point)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/Rectangle.cs/#L186">View Source</a>
+  </span>
+  <a id="RogueSharp_Rectangle_Offset_" data-uid="RogueSharp.Rectangle.Offset*"></a>
+  <h4 id="RogueSharp_Rectangle_Offset_RogueSharp_Point_" data-uid="RogueSharp.Rectangle.Offset(RogueSharp.Point)">Offset(Point)</h4>
+  <div class="markdown level1 summary"><p>Changes the position of the Rectangles by the values of the specified Point</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Offset(Point offsetPoint)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="RogueSharp.Point.html">Point</a></td>
+        <td><span class="parametername">offsetPoint</span></td>
+        <td><p>The values to adjust the position of the Rectangle by</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_Rectangle_Offset_System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20RogueSharp.Rectangle.Offset(System.Int32%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/Rectangle.cs/#L197">View Source</a>
+  </span>
+  <a id="RogueSharp_Rectangle_Offset_" data-uid="RogueSharp.Rectangle.Offset*"></a>
+  <h4 id="RogueSharp_Rectangle_Offset_System_Int32_System_Int32_" data-uid="RogueSharp.Rectangle.Offset(System.Int32,System.Int32)">Offset(Int32, Int32)</h4>
+  <div class="markdown level1 summary"><p>Changes the position of the Rectangle by the specified x and y offsets</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Offset(int offsetX, int offsetY)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">offsetX</span></td>
+        <td><p>Change in the x-position</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">offsetY</span></td>
+        <td><p>Change in the y-position</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_Rectangle_ToString.md&amp;value=---%0Auid%3A%20RogueSharp.Rectangle.ToString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/Rectangle.cs/#L231">View Source</a>
+  </span>
+  <a id="RogueSharp_Rectangle_ToString_" data-uid="RogueSharp.Rectangle.ToString*"></a>
+  <h4 id="RogueSharp_Rectangle_ToString" data-uid="RogueSharp.Rectangle.ToString">ToString()</h4>
+  <div class="markdown level1 summary"><p>Returns a string that represents the current Rectangle</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override string ToString()</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>A string that represents the current Rectangle</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic overrides">Overrides</h5>
+  <div><span class="xref">System.ValueType.ToString()</span></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_Rectangle_Union_RogueSharp_Rectangle_RogueSharp_Rectangle_.md&amp;value=---%0Auid%3A%20RogueSharp.Rectangle.Union(RogueSharp.Rectangle%2CRogueSharp.Rectangle)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/Rectangle.cs/#L312">View Source</a>
+  </span>
+  <a id="RogueSharp_Rectangle_Union_" data-uid="RogueSharp.Rectangle.Union*"></a>
+  <h4 id="RogueSharp_Rectangle_Union_RogueSharp_Rectangle_RogueSharp_Rectangle_" data-uid="RogueSharp.Rectangle.Union(RogueSharp.Rectangle,RogueSharp.Rectangle)">Union(Rectangle, Rectangle)</h4>
+  <div class="markdown level1 summary"><p>Creates a new Rectangle that exactly contains the specified two Rectangles</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Rectangle Union(Rectangle value1, Rectangle value2)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="RogueSharp.Rectangle.html">Rectangle</a></td>
+        <td><span class="parametername">value1</span></td>
+        <td><p>The first Rectangle to contain</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="RogueSharp.Rectangle.html">Rectangle</a></td>
+        <td><span class="parametername">value2</span></td>
+        <td><p>The second Rectangle to contain</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="RogueSharp.Rectangle.html">Rectangle</a></td>
+        <td><p>A new Rectangle that exactly contains the specified two Rectangles</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_Rectangle_Union_RogueSharp_Rectangle__RogueSharp_Rectangle__RogueSharp_Rectangle__.md&amp;value=---%0Auid%3A%20RogueSharp.Rectangle.Union(RogueSharp.Rectangle%40%2CRogueSharp.Rectangle%40%2CRogueSharp.Rectangle%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/Rectangle.cs/#L325">View Source</a>
+  </span>
+  <a id="RogueSharp_Rectangle_Union_" data-uid="RogueSharp.Rectangle.Union*"></a>
+  <h4 id="RogueSharp_Rectangle_Union_RogueSharp_Rectangle__RogueSharp_Rectangle__RogueSharp_Rectangle__" data-uid="RogueSharp.Rectangle.Union(RogueSharp.Rectangle@,RogueSharp.Rectangle@,RogueSharp.Rectangle@)">Union(ref Rectangle, ref Rectangle, out Rectangle)</h4>
+  <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="RogueSharp.Rectangle.html">Rectangle</a> that completely contains two other rectangles.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void Union(ref Rectangle value1, ref Rectangle value2, out Rectangle result)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="RogueSharp.Rectangle.html">Rectangle</a></td>
+        <td><span class="parametername">value1</span></td>
+        <td><p>The first <a class="xref" href="RogueSharp.Rectangle.html">Rectangle</a>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="RogueSharp.Rectangle.html">Rectangle</a></td>
+        <td><span class="parametername">value2</span></td>
+        <td><p>The second <a class="xref" href="RogueSharp.Rectangle.html">Rectangle</a>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="RogueSharp.Rectangle.html">Rectangle</a></td>
+        <td><span class="parametername">result</span></td>
+        <td><p>The union of the two rectangles as an output parameter.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="operators">Operators
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_Rectangle_op_Equality_RogueSharp_Rectangle_RogueSharp_Rectangle_.md&amp;value=---%0Auid%3A%20RogueSharp.Rectangle.op_Equality(RogueSharp.Rectangle%2CRogueSharp.Rectangle)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/Rectangle.cs/#L134">View Source</a>
+  </span>
+  <a id="RogueSharp_Rectangle_op_Equality_" data-uid="RogueSharp.Rectangle.op_Equality*"></a>
+  <h4 id="RogueSharp_Rectangle_op_Equality_RogueSharp_Rectangle_RogueSharp_Rectangle_" data-uid="RogueSharp.Rectangle.op_Equality(RogueSharp.Rectangle,RogueSharp.Rectangle)">Equality(Rectangle, Rectangle)</h4>
+  <div class="markdown level1 summary"><p>Compares two rectangles for equality</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator ==(Rectangle a, Rectangle b)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="RogueSharp.Rectangle.html">Rectangle</a></td>
+        <td><span class="parametername">a</span></td>
+        <td><p>Rectangle on the left side of the equals sign</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="RogueSharp.Rectangle.html">Rectangle</a></td>
+        <td><span class="parametername">b</span></td>
+        <td><p>Rectangle on the right side of the equals sign</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>True if the rectangles are equal; False otherwise</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_Rectangle_op_Inequality_RogueSharp_Rectangle_RogueSharp_Rectangle_.md&amp;value=---%0Auid%3A%20RogueSharp.Rectangle.op_Inequality(RogueSharp.Rectangle%2CRogueSharp.Rectangle)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/Rectangle.cs/#L177">View Source</a>
+  </span>
+  <a id="RogueSharp_Rectangle_op_Inequality_" data-uid="RogueSharp.Rectangle.op_Inequality*"></a>
+  <h4 id="RogueSharp_Rectangle_op_Inequality_RogueSharp_Rectangle_RogueSharp_Rectangle_" data-uid="RogueSharp.Rectangle.op_Inequality(RogueSharp.Rectangle,RogueSharp.Rectangle)">Inequality(Rectangle, Rectangle)</h4>
+  <div class="markdown level1 summary"><p>Compares two rectangles for inequality</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="text-muted font-weight-light font-italic decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator !=(Rectangle a, Rectangle b)</code></pre>
+  </div>
+  <h5 class="text-muted font-weight-light font-italic parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="RogueSharp.Rectangle.html">Rectangle</a></td>
+        <td><span class="parametername">a</span></td>
+        <td><p>Rectangle on the left side of the equals sign</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="RogueSharp.Rectangle.html">Rectangle</a></td>
+        <td><span class="parametername">b</span></td>
+        <td><p>Rectangle on the right side of the equals sign</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="text-muted font-weight-light font-italic returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>True if the rectangles are not equal; False otherwise</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements" class="text-muted font-weight-light font-italic">Implements</h3>
+  <div>
+      <span class="xref">System.IEquatable&lt;T&gt;</span>
+  </div>
+</article>
+            <div id="disqus_thread"></div>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+          </div>
+          
+          <div class="d-none d-lg-block col-md-3" role="complementary">
+            <div class="sideaffix pt-3 pb-3">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/FaronBracy/RogueSharp/new/master/apiSpec/new?filename=RogueSharp_Rectangle.md&amp;value=---%0Auid%3A%20RogueSharp.Rectangle%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link text-info" title="Improve this Doc">
+                    <i class="fal fa-edit fa-fw"></i>
+                    <span>Improve this Doc</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/FaronBracy/RogueSharp/blob/master/RogueSharp/Rectangle.cs/#L8" class="contribution-link text-info" title="View Source">
+                    <i class="fal fa-code fa-fw"></i>
+                    <span>View Source</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <!--<div class="github-links">
+                  <a class="github-button" href="https://github.com/fszlin/certes" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star fszlin/certes on GitHub">Star</a>
+              </div>-->
+              <nav class="hidden-print affix mt-2" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      
+      <footer class="bg-secondary">
+        <!--<div class="grad-bottom"></div>-->
+        <div class="footer bg-secondary">
+          <div class="container">
+          <div class="d-flex">
+            <div class="p-2 flex-grow-1 text-white">
+            <a class="text-white" href="https://github.com/FaronBracy/RogueSharp">RogueSharp &copy; 2014-2020 Faron Bracy</a>
+            
+            </div>
+            <div class="p-2">
+              <a class="text-white" href="#top">Back to top</a>
+            </div>
+          </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/dos.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/powershell.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+  </body>
+</html>

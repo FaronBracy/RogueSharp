@@ -1,0 +1,327 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Player Stats | RogueSharp </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="title" content="Player Stats - RogueSharp ">
+    <meta name="generator" content="docfx 2.47.0.0">
+    
+    <link rel="shortcut icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-87DrmpqHRiY8hPLIr7ByqhPIywuSsjuQAfMXAE0sMUpY3BM7nXjf+mLIUSvhDArs" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css">
+    <link rel="stylesheet" href="../styles/site.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+    <script type="text/javascript">
+    var appInsights=window.appInsights||function(a){function b(a){c[a]=function(){var b=arguments;c.queue.push(function(){c[a].apply(c,b)})}}var c={config:a},d=document,e=window;setTimeout(function(){var b=d.createElement("script");b.src=a.url||"https://az416426.vo.msecnd.net/scripts/a/ai.0.js",d.getElementsByTagName("script")[0].parentNode.appendChild(b)});try{c.cookie=d.cookie}catch(a){}c.queue=[];for(var f=["Event","Exception","Metric","PageView","Trace","Dependency"];f.length;)b("track"+f.pop());if(b("setAuthenticatedUserContext"),b("clearAuthenticatedUserContext"),b("startTrackEvent"),b("stopTrackEvent"),b("startTrackPage"),b("stopTrackPage"),b("flush"),!a.disableExceptionTracking){f="onerror",b("_"+f);var g=e[f];e[f]=function(a,b,d,e,h){var i=g&&g(a,b,d,e,h);return!0!==i&&c["_"+f](a,b,d,e,h),i}}return c}({instrumentationKey:"9aaf9896-bee3-4d08-abb6-2ef51b389035"});
+    window.appInsights=appInsights,appInsights.queue&&0===appInsights.queue.length&&appInsights.trackPageView();
+  </script>
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <div class="bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light container">
+          
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="RogueSharp" width="36" height="36">
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        
+          <div class="collapse navbar-collapse" id="navbar">
+            <!--<form id="search" role="search" class="form-inline my-2 my-lg-0">
+              <input id="search-query" class="form-control mr-sm-2" type="search" placeholder="Search" autocomplete="off" aria-label="Search">
+            </form>-->
+          </div>
+        </nav>
+        </div>
+        
+        <div class="bg-dark">
+        <nav aria-label="breadcrumb" id="breadcrumb" class="container hide-when-search">
+          <!--<ol class="breadcrumb">
+            <li class="breadcrumb-item" aria-current="page"></li>
+          </ol>-->
+        </nav>
+        </div>      </header>
+      <div role="main" class="container body-content hide-when-search">
+      <div class="row">
+        
+        
+        <div class="sidenav hide-when-search col-md-3 pt-md-3 pb-md-3">
+          <a class="btn btn-link toc-toggle d-md-none" data-toggle="collapse" data-target="#sidetoggle" href="javascript:;" aria-expanded="true" aria-controls="sidetoggle">
+            Show / Hide Table of Contents
+          </a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article col-md-9">
+      <div class="row">
+          <div class="col-lg-9">
+            <article class="content wrap pt-2 pb-2" id="_content" data-uid="">
+<h1 id="player-stats">Player Stats</h1>
+
+<p>During this tutorial we’ll add all of the necessary stats that the player and other actors will require to perform combat actions. We will also be rendering the player stats to the console that was previously just a placeholder on the right of the map.</p>
+<p><img src="../images/V3Tutorial/11_drawstats.png" alt="Drawing player stats" title="A console with player stats rendered in the top right corner"></p>
+<h2 id="combat-overview">Combat Overview</h2>
+<p>The combat system that I’ve decided upon for the tutorial is going to be a percentage based opposing roll system. First the attacker will roll a number of 100 sided dice equal to their attack value. Each die in the roll will have a percentage chance to be a success. Each success has the potential to inflict 1 point of damage. Thus the maximum amount of damage an actor can do is their Attack value, if they get all successes and their is no defense.</p>
+<p>So how about defense? It will work the same way. The defender rolls a number of 100 sided dice equal to their defense value. Each die has a percentage chance to be a success. The number of defender successes is subtracted from the number of attacker successes and if the remaining number is positive then that much damage is applied to the defender.</p>
+<p>Whew! Hopefully that’s not too confusing. We’ll go through the stats one-by-one in the next section.</p>
+<h2 id="defining-the-stats">Defining the Stats</h2>
+<ul>
+<li><p><code>Attack</code> – int – Number of dice to roll when performing an attack. Also represents the maximum amount of damage that can be inflicted in a single attack.</p>
+</li>
+<li><p><code>AttackChance</code> – int – Percentage chance that each die rolled is a success. A success for a die means that 1 point of damage was inflicted.</p>
+</li>
+<li><p><code>Awareness</code> – int – For the player this determines how far their field-of-view extends. For other actors or monsters this is the distance that they can see and hear. If the player gets within that distance then it is likely the monster will be alerted to their presence.</p>
+</li>
+<li><p><code>Defense</code> – int – Number of dice to roll when defending against an attack. Also represents the maximum amount of damage that can blocked or dodged from an incoming attack.</p>
+</li>
+<li><p><code>DefenseChance</code> – int – Percentage chance that each die rolled is a success. A success for a die means that 1 point of damage was blocked.</p>
+</li>
+<li><p><code>Gold</code> – int – How much money the actor has. Most monsters will drop gold upon death.</p>
+</li>
+<li><p><code>Health</code> – int – The current health total of the actor. If this value is 0 or less then the actor is killed.</p>
+</li>
+<li><p><code>MaxHealth</code> – int – How much health the actor has when fully healed.</p>
+</li>
+<li><p><code>Name</code> – string – Name of the actor</p>
+</li>
+<li><p><code>Speed</code> – int – How fast the actor is. This determines the rate at which they perform actions. A lower number is faster. An actor with a speed of 10 will perform twice as many actions in the same time as an actor with a speed of 20.</p>
+</li>
+</ul>
+<h2 id="adding-stats-to-actors">Adding Stats to Actors</h2>
+<p>Before we add the stats directly to our <code>Actor</code> class we should first add them to the <code>IActor</code> interface. Open <code>IActor.cs</code> and update the code to look like the following.</p>
+<pre><code class="lang-cs">public interface IActor
+{
+  int Attack { get; set; }
+  int AttackChance { get; set; }
+  int Awareness { get; set; }
+  int Defense { get; set; }
+  int DefenseChance { get; set; }
+  int Gold { get; set; }
+  int Health { get; set; }
+  int MaxHealth { get; set; }
+  string Name { get; set; }
+  int Speed { get; set; }
+}
+</code></pre>
+<p>Next open <code>Actor.cs</code> and make sure that each of these properties is implemented. Note that we won’t be doing auto-properties this time because later we’ll want to update the <code>getters</code> on the each property to account for additional stats from items that we equip. For instance the <code>Defense</code> stat might have a base value of 2, but then have an additional +2 bonus from armor that is being worn. So although it is more typing, we’ll implement these properties with their own private backing fields to allow us to add that additional functionality in later.</p>
+<pre><code class="lang-cs">public class Actor : IActor, IDrawable
+{
+  // IActor
+  private int _attack;
+  private int _attackChance;
+  private int _awareness;
+  private int _defense;
+  private int _defenseChance;
+  private int _gold;
+  private int _health;
+  private int _maxHealth;
+  private string _name;
+  private int _speed;
+
+  public int Attack
+  {
+    get { return _attack; }
+    set { _attack = value; }
+  }
+
+  public int AttackChance
+  {
+    get { return _attackChance; }
+    set { _attackChance = value; }
+  }
+
+  public int Awareness
+  {
+    get { return _awareness; }
+    set { _awareness = value; }
+  }
+
+  public int Defense
+  {
+    get { return _defense; }
+    set { _defense = value; }
+  }
+
+  public int DefenseChance
+  {
+    get { return _defenseChance; }
+    set { _defenseChance = value; }
+  }
+
+  public int Gold
+  {
+    get { return _gold; }
+    set { _gold = value; }
+  }
+
+  public int Health
+  {
+    get { return _health; }
+    set { _health = value; }
+  }
+
+  public int MaxHealth
+  {
+    get { return _maxHealth; }
+    set { _maxHealth = value; }
+  }
+
+  public string Name
+  {
+    get { return _name; }
+    set { _name = value; }
+  }
+
+  public int Speed
+  {
+    get { return _speed; }
+    set { _speed = value; }
+  }
+}
+</code></pre>
+<h2 id="drawing-player-stats">Drawing Player Stats</h2>
+<p>Now that we have the stats out of the way, we want to be able to draw the <code>Player</code> stats in the upper right corner of the <code>statConsole</code>. Open <code>Player.cs</code> and set all of the starting stats for the <code>Player</code> in the constructor. Also add the <code>DrawStats()</code> method to look like the following:</p>
+<pre><code class="lang-cs">public class Player : Actor
+{
+  public Player()
+  {
+    Attack = 2;
+    AttackChance = 50;
+    Awareness = 15;
+    Color = Colors.Player;
+    Defense = 2;
+    DefenseChance = 40;
+    Gold = 0;
+    Health = 100;
+    MaxHealth = 100;
+    Name = &quot;Rogue&quot;;
+    Speed = 10;
+    Symbol = '@';
+  }
+
+  public void DrawStats( RLConsole statConsole )
+  {
+    statConsole.Print( 1, 1, $&quot;Name:    {Name}&quot;, Colors.Text );
+    statConsole.Print( 1, 3, $&quot;Health:  {Health}/{MaxHealth}&quot;, Colors.Text );
+    statConsole.Print( 1, 5, $&quot;Attack:  {Attack} ({AttackChance}%)&quot;, Colors.Text );
+    statConsole.Print( 1, 7, $&quot;Defense: {Defense} ({DefenseChance}%)&quot;, Colors.Text );
+    statConsole.Print( 1, 9, $&quot;Gold:    {Gold}&quot;, Colors.Gold );
+  }
+}
+</code></pre>
+<p>Make sure to also add the colors to <code>Colors.cs</code>. Pick any colors you like. I used these:</p>
+<pre><code class="lang-cspublic">public static RLColor Text = Swatch.DbLight;
+public static RLColor Gold = Swatch.DbSun;
+</code></pre>
+<h2 id="updating-the-game">Updating the Game</h2>
+<p>The final thing left to do is to update <code>Game.cs</code> to make sure that <code>Player.DrawStats()</code> is called. During the last tutorial we also added some code to test out our the message log by printing a line every time the player took a step. I’ll be deleting that code now too.</p>
+<pre><code class="lang-cs">// DELETE all of the following lines
+private static int _steps = 0;
+
+MessageLog.Add( $&quot;Step # {++_steps}&quot; );
+
+_statConsole.SetBackColor( 0, 0, _statWidth, _statHeight, Swatch.DbOldStone );
+_statConsole.Print( 1, 1, &quot;Stats&quot;, Colors.TextHeading );
+</code></pre>
+<p>Then update <code>OnRootConsoleRender()</code> to call <code>Player.DrawStats()</code></p>
+<pre><code class="lang-cs">if ( _renderRequired )
+{
+  // Old code to keep
+  DungeonMap.Draw( _mapConsole );
+  Player.Draw( _mapConsole, DungeonMap );
+
+  // New code after Player.Draw()
+  Player.DrawStats( _statConsole );
+}
+</code></pre>
+<p>If you run the program now you should get something similar to the screenshot at the top of this post.</p>
+<h2 id="code-on-github">Code on GitHub</h2>
+<p>As always the code for the tutorial series so far can be found on GitHub:</p>
+<ul>
+<li><a href="https://github.com/FaronBracy/RogueSharpV3Tutorial/tree/09PlayerStats">https://github.com/FaronBracy/RogueSharpV3Tutorial/tree/09PlayerStats</a></li>
+</ul>
+<p>Bored waiting for the next tutorial? The complete tutorial project is already finished and the source code is available on Github:</p>
+<ul>
+<li>Sample Roguelike game using RogueSharp and RLNet console
+<ul>
+<li><a href="https://github.com/FaronBracy/RogueSharpRLNetSamples">https://github.com/FaronBracy/RogueSharpRLNetSamples</a></li>
+</ul>
+</li>
+<li>Sample Roguelike game using RogueSharp and SadConsole
+<ul>
+<li><a href="https://github.com/FaronBracy/RogueSharpSadConsoleSamples">https://github.com/FaronBracy/RogueSharpSadConsoleSamples</a></li>
+</ul>
+</li>
+</ul>
+</article>
+            <div id="disqus_thread"></div>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+          </div>
+          
+          <div class="d-none d-lg-block col-md-3" role="complementary">
+            <div class="sideaffix pt-3 pb-3">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/FaronBracy/RogueSharp.Documentation/blob/master/articles/11_player_stats.md/#L1" class="contribution-link text-info" title="Improve this Doc">
+                    <i class="fal fa-edit fa-fw"></i>
+                    <span>Improve this Doc</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <!--<div class="github-links">
+                  <a class="github-button" href="https://github.com/fszlin/certes" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star fszlin/certes on GitHub">Star</a>
+              </div>-->
+              <nav class="hidden-print affix mt-2" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      
+      <footer class="bg-secondary">
+        <!--<div class="grad-bottom"></div>-->
+        <div class="footer bg-secondary">
+          <div class="container">
+          <div class="d-flex">
+            <div class="p-2 flex-grow-1 text-white">
+            <a class="text-white" href="https://github.com/FaronBracy/RogueSharp">RogueSharp &copy; 2014-2020 Faron Bracy</a>
+            
+            </div>
+            <div class="p-2">
+              <a class="text-white" href="#top">Back to top</a>
+            </div>
+          </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/dos.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/powershell.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+  </body>
+</html>
