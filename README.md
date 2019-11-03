@@ -1,4 +1,4 @@
-[![Tutorials: Github.io](https://img.shields.io/badge/tutorials-github.io-blue.svg)](https://faronbracy.github.io/RogueSharp/api/RogueSharp.html)
+[![Tutorials: Github.io](https://img.shields.io/badge/tutorials-github.io-blue.svg)](https://faronbracy.github.io/RogueSharp/articles/01_introduction.html)
 [![Documentation: Github.io](https://img.shields.io/badge/docs-github.io-blue.svg)](https://faronbracy.github.io/RogueSharp/api/index.html)
 [![Posts: Blog](https://img.shields.io/badge/blog_posts-wordpress-blue.svg)](https://roguesharp.wordpress.com/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/FaronBracy/RogueSharp/master/LICENSE.txt)
