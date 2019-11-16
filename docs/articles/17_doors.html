@@ -1,0 +1,349 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Doors | RogueSharp </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="title" content="Doors - RogueSharp ">
+    <meta name="generator" content="docfx 2.47.0.0">
+    
+    <link rel="shortcut icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css">
+    <link rel="stylesheet" href="../styles/site.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <div class="bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light container">
+          
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="RogueSharp" width="36" height="36">
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        
+          <div class="collapse navbar-collapse" id="navbar">
+            <!--<form id="search" role="search" class="form-inline my-2 my-lg-0">
+              <input id="search-query" class="form-control mr-sm-2" type="search" placeholder="Search" autocomplete="off" aria-label="Search">
+            </form>-->
+          </div>
+        </nav>
+        </div>
+        
+        <div class="bg-dark">
+        <nav aria-label="breadcrumb" id="breadcrumb" class="container hide-when-search">
+          <!--<ol class="breadcrumb">
+            <li class="breadcrumb-item" aria-current="page"></li>
+          </ol>-->
+        </nav>
+        </div>      </header>
+      <div role="main" class="container body-content hide-when-search">
+      <div class="row">
+        
+        
+        <div class="sidenav hide-when-search col-md-3 pt-md-3 pb-md-3">
+          <a class="btn btn-link toc-toggle d-md-none" data-toggle="collapse" data-target="#sidetoggle" href="javascript:;" aria-expanded="true" aria-controls="sidetoggle">
+            Show / Hide Table of Contents
+          </a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article col-md-9">
+      <div class="row">
+          <div class="col-lg-9">
+            <article class="content wrap pt-2 pb-2" id="_content" data-uid="">
+<h1 id="doors">Doors</h1>
+
+<p>The purpose of this tutorial is to start placing doors in our dungeon. We want the doors to start out simple but be able to be expanded upon in the future.</p>
+<ul>
+<li>Doors can have 2 states: open or closed</li>
+<li>All doors start as closed</li>
+<li>A closed door blocks field-of-view</li>
+<li>A door can be opened by any actor (Player or Monster)</li>
+<li>Once a door is opened it cannot be closed again</li>
+<li>An actor entering the same cell as a door will open it automatically</li>
+<li>The symbol for a closed door will be a plus sign “+”</li>
+<li>The symbol for an open door will be a minus sign “-“</li>
+</ul>
+<h2 id="setting-door-colors">Setting Door Colors</h2>
+<p>We already set up the swatch of colors to use in our game but we never specified which colors doors should be. Let’s do that now. Open <code>Colors.cs</code> and add the following code to pick colors from the Swatch for different parts of the door.</p>
+<pre><code class="lang-cs">public static RLColor DoorBackground = Swatch.ComplimentDarkest;
+public static RLColor Door = Swatch.ComplimentLighter;
+public static RLColor DoorBackgroundFov = Swatch.ComplimentDarker;
+public static RLColor DoorFov = Swatch.ComplimentLightest;
+</code></pre>
+<h2 id="creating-the-door-class">Creating the Door Class</h2>
+<p>Next we need a new class to represent all of the properties of a door that we outlined in our goals at the beginning. The door class should inherit from <code>IDrawable</code> because we will want to draw it on the map console. Create a new file named <code>Door.cs</code> in the <code>Core</code> folder and place the following code in it.</p>
+<pre><code class="lang-cs">public class Door : IDrawable
+{
+  public Door()
+  {
+    Symbol = '+';
+    Color = Colors.Door;
+    BackgroundColor = Colors.DoorBackground;
+  }
+  public bool IsOpen { get; set; }
+
+  public RLColor Color { get; set; }
+  public RLColor BackgroundColor { get; set; }
+  public char Symbol { get; set; }
+  public int X { get; set; }
+  public int Y { get; set; }
+
+  public void Draw( RLConsole console, IMap map )
+  {
+    if ( !map.GetCell( X, Y ).IsExplored )
+    {
+      return;
+    }
+
+    Symbol = IsOpen ? '-' : '+';
+    if ( map.IsInFov( X, Y ) )
+    {
+      Color = Colors.DoorFov;
+      BackgroundColor = Colors.DoorBackgroundFov;
+    }
+    else
+    {
+      Color = Colors.Door;
+      BackgroundColor = Colors.DoorBackground;
+    }
+
+    console.Set( X, Y, Color, BackgroundColor, Symbol );
+  }
+}
+</code></pre>
+<p>Notice that we use the colors and symbols for the door that we determined earlier.</p>
+<h2 id="updating-the-dungeonmap-class">Updating the DungeonMap Class</h2>
+<p>Before we can start placing doors in our dungeon it’s important to add a few helper methods to our DungeonMap class for working with doors. Open <code>DungeonMap.cs</code> and add the following lines of code.</p>
+<p>First add a new public property to the class at the top where we already have a list of rooms.</p>
+<pre><code class="lang-cs">public List&lt;Door&gt; Doors { get; set; }
+</code></pre>
+<p>Be sure to initialize this list in the constructor</p>
+<pre><code class="lang-cs">public DungeonMap()
+{
+  // Previous constructor code omitted...
+
+  Doors = new List&lt;Door&gt;();
+}
+</code></pre>
+<p>Next we need to add two new methods to the class. <code>GetDoor(…)</code> and <code>OpenDoor(…)</code></p>
+<pre><code class="lang-cs">// Return the door at the x,y position or null if one is not found.
+public Door GetDoor( int x, int y )
+{
+  return Doors.SingleOrDefault( d =&gt; d.X == x &amp;&amp; d.Y == y );
+}
+
+// The actor opens the door located at the x,y position
+private void OpenDoor( Actor actor, int x, int y )
+{
+  Door door = GetDoor( x, y );
+  if ( door != null &amp;&amp; !door.IsOpen )
+  {
+    door.IsOpen = true;
+    var cell = GetCell( x, y );
+    // Once the door is opened it should be marked as transparent and no longer block field-of-view
+    SetCellProperties( x, y, true, cell.IsWalkable, cell.IsExplored );
+
+    Game.MessageLog.Add( $&quot;{actor.Name} opened a door&quot; );
+  }
+}
+</code></pre>
+<p>Last we need to update <code>SetActorPosition(…)</code> and call a the new method <code>OpenDoor(…)</code> which we just made. Call this immediately after <code>SetIsWalkable(…)</code>.</p>
+<pre><code class="lang-cs">// Returns true when able to place the Actor on the cell or false otherwise
+public bool SetActorPosition( Actor actor, int x, int y )
+{
+  // Previous code omitted...
+
+  // Try to open a door if one exists here
+  OpenDoor( actor, x, y );
+}
+</code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Thanks to rmcrackan for pointing out that I forgot to show updating the <code>Draw(…)</code> method to have a foreach loop for drawing each of the doors.</p>
+</div>
+<pre><code class="lang-cs">foreach ( Door door in Doors )
+{
+  door.Draw( mapConsole, this );
+}
+</code></pre>
+<h2 id="door-placement-strategy">Door Placement Strategy</h2>
+<p>Now that we are reasonably confident that we can draw doors and we have a few helper methods for working with them, how do we know where to put them? Think about where doors are placed in regard to rooms. They should be on an outer wall. So we should start by getting all of the cells along the boundaries of our rooms.</p>
+<p><img src="../images/V3Tutorial/17_doorstrategy1.png" alt="Room boundry check" title="Image illustrating concept of checking room boundries to aid in door placement"></p>
+<p>Once we have all of those cells we should look for any open floors that would be a good candidate for a door. And how do we know if a door should go there or not? We look at the floor’s neighboring cells to see if it fits.</p>
+<p><img src="../images/V3Tutorial/17_doorstrategy2.png" alt="Neighboring cell check" title="Image illustrating concept of checking neighboring cells to aid in door placement"></p>
+<p>A good Cell for a door placement is one that has two walls across from each other and two floors as opposing neighbors.</p>
+<h2 id="updating-the-mapgenerator-class">Updating the MapGenerator Class</h2>
+<p>Lets take the strategy that we just outlined for creating door and actually write the code. Open <code>MapGenerator.cs</code> and add the following new methods.</p>
+<pre><code class="lang-cs">private void CreateDoors( Rectangle room )
+{
+  // The the boundries of the room
+  int xMin = room.Left;
+  int xMax = room.Right;
+  int yMin = room.Top;
+  int yMax = room.Bottom;
+
+  // Put the rooms border cells into a list
+  List&lt;Cell&gt; borderCells = _map.GetCellsAlongLine( xMin, yMin, xMax, yMin ).ToList();
+  borderCells.AddRange( _map.GetCellsAlongLine( xMin, yMin, xMin, yMax ) );
+  borderCells.AddRange( _map.GetCellsAlongLine( xMin, yMax, xMax, yMax ) );
+  borderCells.AddRange( _map.GetCellsAlongLine( xMax, yMin, xMax, yMax ) );
+
+  // Go through each of the rooms border cells and look for locations to place doors.
+  foreach ( Cell cell in borderCells )
+  {
+    if ( IsPotentialDoor( cell ) )
+    {
+      // A door must block field-of-view when it is closed.
+      _map.SetCellProperties( cell.X, cell.Y, false, true );
+      _map.Doors.Add( new Door
+      {
+        X = cell.X,
+        Y = cell.Y,
+        IsOpen = false
+      } );
+    }
+  }
+}
+
+// Checks to see if a cell is a good candidate for placement of a door
+private bool IsPotentialDoor( Cell cell )
+{
+  // If the cell is not walkable
+  // then it is a wall and not a good place for a door
+  if ( !cell.IsWalkable )
+  {
+    return false;
+  }
+
+  // Store references to all of the neighboring cells
+  Cell right = _map.GetCell( cell.X + 1, cell.Y );
+  Cell left = _map.GetCell( cell.X - 1, cell.Y );
+  Cell top = _map.GetCell( cell.X, cell.Y - 1 );
+  Cell bottom = _map.GetCell( cell.X, cell.Y + 1 );
+
+  // Make sure there is not already a door here
+  if ( _map.GetDoor( cell.X, cell.Y ) != null ||
+      _map.GetDoor( right.X, right.Y ) != null ||
+      _map.GetDoor( left.X, left.Y ) != null ||
+      _map.GetDoor( top.X, top.Y ) != null ||
+      _map.GetDoor( bottom.X, bottom.Y ) != null )
+  {
+    return false;
+  }
+
+  // This is a good place for a door on the left or right side of the room
+  if ( right.IsWalkable &amp;&amp; left.IsWalkable &amp;&amp; !top.IsWalkable &amp;&amp; !bottom.IsWalkable )
+  {
+    return true;
+  }
+
+  // This is a good place for a door on the top or bottom of the room
+  if ( !right.IsWalkable &amp;&amp; !left.IsWalkable &amp;&amp; top.IsWalkable &amp;&amp; bottom.IsWalkable )
+  {
+    return true;
+  }
+  return false;
+}
+</code></pre>
+<p>That’s quite a bit of code but I hope that the comments help to understand what it is accomplishing. Now that we have the methods in place, we need to remember to call them. In the CreateMap() method we have a foreach where we call CreateRoom() on each room in the map. We also need to put a call for CreateDoors() in there.</p>
+<pre><code class="lang-cs">// Iterate through each room that we wanted placed
+// and dig out the room and create doors for it.
+foreach ( Rectangle room in _map.Rooms )
+{
+  CreateRoom( room );
+  CreateDoors( room );
+}
+</code></pre>
+<p>If we run the program now we should see our doors in place and working as expected!</p>
+<p><img src="../images/V3Tutorial/17_openingdoors.gif" alt="Open door animation" title="Animation demonstrating doors opening in-game"></p>
+<h2 id="code-on-github">Code on GitHub</h2>
+<p>As always the code for the tutorial series so far can be found on GitHub:</p>
+<ul>
+<li><a href="https://github.com/FaronBracy/RogueSharpV3Tutorial/tree/15Doors">https://github.com/FaronBracy/RogueSharpV3Tutorial/tree/15Doors</a></li>
+</ul>
+<p>Bored waiting for the next tutorial? The complete tutorial project is already finished and the source code is available on Github:</p>
+<ul>
+<li>Sample Roguelike game using RogueSharp and RLNet console
+<ul>
+<li><a href="https://github.com/FaronBracy/RogueSharpRLNetSamples">https://github.com/FaronBracy/RogueSharpRLNetSamples</a></li>
+</ul>
+</li>
+<li>Sample Roguelike game using RogueSharp and SadConsole
+<ul>
+<li><a href="https://github.com/FaronBracy/RogueSharpSadConsoleSamples">https://github.com/FaronBracy/RogueSharpSadConsoleSamples</a></li>
+</ul>
+</li>
+</ul>
+</article>
+            <div id="disqus_thread"></div>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+          </div>
+          
+          <div class="d-none d-lg-block col-md-3" role="complementary">
+            <div class="sideaffix pt-3 pb-3">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/FaronBracy/RogueSharp.Documentation/blob/master/articles/17_doors.md/#L1" class="contribution-link text-info" title="Improve this Doc">
+                    <i class="fal fa-edit fa-fw"></i>
+                    <span>Improve this Doc</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <!--<div class="github-links">
+                  <a class="github-button" href="https://github.com/fszlin/certes" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star fszlin/certes on GitHub">Star</a>
+              </div>-->
+              <nav class="hidden-print affix mt-2" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      
+      <footer class="bg-secondary">
+        <!--<div class="grad-bottom"></div>-->
+        <div class="footer bg-secondary">
+          <div class="container">
+          <div class="d-flex">
+            <div class="p-2 flex-grow-1 text-white">
+            <a class="text-white" href="https://github.com/FaronBracy/RogueSharp">RogueSharp &copy; 2014-2020 Faron Bracy</a>
+            
+            </div>
+            <div class="p-2">
+              <a class="text-white" href="#top">Back to top</a>
+            </div>
+          </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/dos.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/powershell.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+  </body>
+</html>
