@@ -53,20 +53,27 @@
 
 .affix .nav .nav-item > a {
     padding: 0.1rem 0;
-    font-size: 0.85rem;
+    /*font-size: 0.85rem;*/
 }
 
+/*
 .affix .nav .level1 > .nav-item > a {
     font-size: 0.95rem;
 }
+*/
 
 .affix .nav .nav-item > a.active:before {
-    content: '\f124';
+    content: '@';
+    color: #17a2b8 !important;
+}
+
+.affix .nav .nav-item > a.active {
+    color: #17a2b8 !important;
 }
 
 .affix .nav .nav-item > a:focus::before,
 .affix .nav .nav-item > a:hover::before {
-    content: '\f13d';
+    content: '#';
 }
 
 .affix .nav-item > a:not(.active) + ul {
@@ -80,7 +87,7 @@
 
 .sidetoc .nav .nav-item > a {
     padding: 0.1rem 0;
-    font-size: 0.95rem;
+    /*font-size: 0.95rem;*/
 }
 
 .sidetoc .nav.level1 > .nav-item > a {
@@ -94,23 +101,28 @@
 
 .sidetoc .nav .nav-item > a:focus::before,
 .sidetoc .nav .nav-item > a:hover::before {
-    content: '\f356';
+    content: '#';
 }
 
 .sidetoc .nav .nav-item > a.current:before {
-    content: '\f14a';
+    content: '@';
+    color: #17a2b8 !important;
+}
+
+.sidetoc .nav .nav-item > a.current {
+    color: #17a2b8 !important;
 }
 
 .sidetoc .nav .nav-item.in > .expand-stub + a:focus::before,
 .sidetoc .nav .nav-item.in > .expand-stub + a:focus::before,
 .sidetoc .nav .nav-item.in > .expand-stub + a::before {
-    content: '\f107';
+    content: '-';
 }
 
 .sidetoc .nav .nav-item > .expand-stub + a:focus::before,
 .sidetoc .nav .nav-item > .expand-stub + a:focus::before,
 .sidetoc .nav .nav-item > .expand-stub + a::before {
-    content: '\f106';
+    content: '+';
 }
 
 .sidetoc .nav .nav-item > .expand-stub + a {
@@ -123,6 +135,14 @@
 
 header .breadcrumb {
     margin-bottom: 0;
+}
+
+header li a {
+    color: black !important;
+}
+
+header li a.active {
+    color: #17a2b8 !important;
 }
 
 /*.toc-toggle {
@@ -186,7 +206,7 @@ article.content .source-link {
 
 .implements a[data-toggle="collapse"]::after,
 .inheritedMembers a[data-toggle="collapse"]::after {
-    content: '\f106';
+    content: '+';
     font-style: normal;
     font-weight: bold;
     cursor: pointer;
@@ -194,7 +214,7 @@ article.content .source-link {
 
 .implements a[data-toggle="collapse"][aria-expanded="true"]::after,
 .inheritedMembers a[data-toggle="collapse"][aria-expanded="true"]::after {
-    content: '\f107';
+    content: '-';
 }
 
 .contribution a:hover {

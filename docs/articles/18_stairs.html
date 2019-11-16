@@ -1,0 +1,300 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Stairs | RogueSharp </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="title" content="Stairs - RogueSharp ">
+    <meta name="generator" content="docfx 2.47.0.0">
+    
+    <link rel="shortcut icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css">
+    <link rel="stylesheet" href="../styles/site.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <div class="bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light container">
+          
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="RogueSharp" width="36" height="36">
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        
+          <div class="collapse navbar-collapse" id="navbar">
+            <!--<form id="search" role="search" class="form-inline my-2 my-lg-0">
+              <input id="search-query" class="form-control mr-sm-2" type="search" placeholder="Search" autocomplete="off" aria-label="Search">
+            </form>-->
+          </div>
+        </nav>
+        </div>
+        
+        <div class="bg-dark">
+        <nav aria-label="breadcrumb" id="breadcrumb" class="container hide-when-search">
+          <!--<ol class="breadcrumb">
+            <li class="breadcrumb-item" aria-current="page"></li>
+          </ol>-->
+        </nav>
+        </div>      </header>
+      <div role="main" class="container body-content hide-when-search">
+      <div class="row">
+        
+        
+        <div class="sidenav hide-when-search col-md-3 pt-md-3 pb-md-3">
+          <a class="btn btn-link toc-toggle d-md-none" data-toggle="collapse" data-target="#sidetoggle" href="javascript:;" aria-expanded="true" aria-controls="sidetoggle">
+            Show / Hide Table of Contents
+          </a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article col-md-9">
+      <div class="row">
+          <div class="col-lg-9">
+            <article class="content wrap pt-2 pb-2" id="_content" data-uid="">
+<h1 id="stairs">Stairs</h1>
+
+<p>The purpose of this tutorial is start placing stairs in our dungeon. We want to be able to proceed down stairs to get into deeper and more difficult levels.</p>
+<ul>
+<li>Stairs can either go up or down</li>
+<li>The symbol for stairs going down will be a greater than sign “&gt;”</li>
+<li>The symbol for stairs going up will be a less than sign “&lt;“</li>
+<li>Each dungeon level will have one up and one down staircase</li>
+<li>Stairs going down can be descended by the player by pressing the ‘&gt;’ or ‘.’ key</li>
+<li>Once a player has gone down to the next level they cannot go back</li>
+<li>Stairs going up are only used to indicate where the player came from</li>
+<li>When a player goes down stairs a brand new level is generated</li>
+</ul>
+<h2 id="creating-the-stairs-class">Creating the Stairs Class</h2>
+<p>To begin we need a new class to represent the stairs as we outlined in our goals above. The stairs class should inherit from <code>IDrawable</code> because we will want to draw it on the map console. Create a new file named <code>Stairs.cs</code> in the <code>Core</code> folder and place the following code in it.</p>
+<pre><code class="lang-cs">public class Stairs : IDrawable
+{
+  public RLColor Color
+  {
+    get; set;
+  }
+  public char Symbol
+  {
+    get; set;
+  }
+  public int X
+  {
+    get; set;
+  }
+  public int Y
+  {
+    get; set;
+  }
+  public bool IsUp
+  {
+    get; set;
+  }
+
+  public void Draw( RLConsole console, IMap map )
+  {
+    if ( !map.GetCell( X, Y ).IsExplored )
+    {
+      return;
+    }
+
+    Symbol = IsUp ? '&lt;' : '&gt;';
+
+    if ( map.IsInFov( X, Y ) )
+    {
+      Color = Colors.Player;
+    }
+    else
+    {
+      Color = Colors.Floor;
+    }
+
+    console.Set( X, Y, Color, null, Symbol );
+  }
+}
+</code></pre>
+<h2 id="updating-dungeonmap-class">Updating DungeonMap Class</h2>
+<p>Now that our <code>Stairs</code> class is created, we need to update <code>DungeonMap.cs</code> with a few changes to be able to use the <code>Stairs</code>. At the top of <code>DungeonMap.cs</code> add the following two properties for our <code>StairsUp</code> and <code>StairsDown</code> next to the existing <code>Rooms</code> and <code>Doors</code> properties.</p>
+<pre><code class="lang-cs">public Stairs StairsUp { get; set; }
+public Stairs StairsDown { get; set; }
+</code></pre>
+<p>Next update the <code>DungeonMap</code> constructor to call <code>Clear()</code> on the <code>SchedulingSystem</code> when a new <code>DungeonMap</code> is constructed. We do this because when we make a new level by going down stairs we want to make sure that all of the monsters from the previous level are removed from the schedule and do not continue to try to act.</p>
+<pre><code class="lang-cs">public DungeonMap()
+{
+  Game.SchedulingSystem.Clear();
+
+  // Previous code omitted...
+}
+</code></pre>
+<p>Now we need a new method which will check to see if the player is standing on the stairs going down. Create a method called <code>CanMoveDownToNextLevel()</code> with the following code.</p>
+<pre><code class="lang-cs">public bool CanMoveDownToNextLevel()
+{
+  Player player = Game.Player;
+  return StairsDown.X == player.X &amp;&amp; StairsDown.Y == player.Y;
+}
+</code></pre>
+<p>In the Doors tutorial last time we forgot to update the <code>Draw()</code> method and had to have a blog reader point out the mistake. We’ll try not to make the same mistake this time. Update the <code>Draw()</code> method and add the following lines of code to draw the stairs.</p>
+<pre><code class="lang-cs">// Add the following code after we finish drawing doors.
+StairsUp.Draw( mapConsole, this );
+StairsDown.Draw( mapConsole, this );
+</code></pre>
+<h2 id="updating-the-mapgenerator-class">Updating the MapGenerator Class</h2>
+<p>The next class we need to update is <code>MapGenerator</code>. We need to make sure that when we generate new maps, stairs are created along with the rest of the dungeon features. Open <code>MapGenerator.cs</code> and create a new private method named <code>CreateStairs()</code>.</p>
+<pre><code class="lang-cs">private void CreateStairs()
+{
+  _map.StairsUp = new Stairs
+  {
+    X = _map.Rooms.First().Center.X + 1,
+    Y = _map.Rooms.First().Center.Y,
+    IsUp = true
+  };
+  _map.StairsDown = new Stairs
+  {
+    X = _map.Rooms.Last().Center.X,
+    Y = _map.Rooms.Last().Center.Y,
+    IsUp = false
+  };
+}
+</code></pre>
+<p>We are not doing anything too fancy to generate the stairs. We are creating the stairs up in the center of the first room that was generated. This is the same room that the player starts in and the player is also in the center of the room, so we’ll offset the X coordinate by 1 to put the stairs next to the player. The last room we generated gets stairs going down and again we place them in the center of the room.</p>
+<p>Make sure to call the <code>CreateStairs()</code> method from the existing <code>CreateMap()</code> method right before calling <code>PlacePlayer()</code>;</p>
+<pre><code class="lang-cs">public DungeonMap CreateMap()
+{
+  // Previous code omitted...
+
+  // Call right before calling PlacePlayer();
+  CreateStairs();
+
+  // Previous code
+  PlacePlayer();
+}
+</code></pre>
+<p>Also we want to change the signature of the <code>MapGenerator</code> constructor and add an additional integer parameter called <code>mapLevel</code>.</p>
+<pre><code class="lang-cs">public MapGenerator( int width, int height, int maxRooms, int roomMaxSize, int roomMinSize, int mapLevel )
+{
+  // Keep all existing code in the constructor
+}
+</code></pre>
+<p>If you have any sort of static analysis on like FxCop it will complain about having an unused parameter in the method. We really shouldn’t add it until we are prepared to use it, but rest assured we will use it very soon.</p>
+<h2 id="updating-the-game-class">Updating the Game Class</h2>
+<p>Open up <code>Game.cs</code> which will be the final class that we need to update. Start by adding a new private static int member variable in with the rest of the member variables at the top of the class.</p>
+<pre><code class="lang-cs">private static int _mapLevel = 1;
+</code></pre>
+<p>Next change the line was setting the console title in the <code>Main()</code> method. Also add the <code>_mapLevel</code> parameter to line where we instantiate a new <code>MapGenerator</code>.</p>
+<pre><code class="lang-cs">// Old code was...
+// string consoleTitle = $&quot;RougeSharp V3 Tutorial - Level 1 - Seed {seed}&quot;;
+
+// New code is
+string consoleTitle = $&quot;RougeSharp V3 Tutorial - Level {_mapLevel} - Seed {seed}&quot;;
+
+// Old code was...
+// MapGenerator mapGenerator = new MapGenerator( _mapWidth, _mapHeight, 20, 13, 7 );
+
+// New code is
+MapGenerator mapGenerator = new MapGenerator( _mapWidth, _mapHeight, 20, 13, 7, _mapLevel );
+</code></pre>
+<p>Finally in the <code>OnRootConsoleUpdate(…)</code> method where we are checking to see which key was pressed ad the following else if onto the end of the if block.</p>
+<pre><code class="lang-cs">else if ( keyPress.Key == RLKey.Period )
+{
+  if ( DungeonMap.CanMoveDownToNextLevel() )
+  {
+    MapGenerator mapGenerator = new MapGenerator( _mapWidth, _mapHeight, 20, 13, 7, ++_mapLevel );
+    DungeonMap = mapGenerator.CreateMap();
+    MessageLog = new MessageLog();
+    CommandSystem = new CommandSystem();
+    _rootConsole.Title = $&quot;RougeSharp RLNet Tutorial - Level {_mapLevel}&quot;;
+    didPlayerAct = true;
+  }
+}
+</code></pre>
+<p>This last bit of code just checks for the “&gt;” or “.” key being pressed. It then calls into <code>DungeonMap.CanMoveDownToNextLevel()</code> which will return true if the Player is standing on a stairway leading down. We then generate a new map and increment the <code>_mapLevel</code>.</p>
+<p>If you run the game now you should be able to explore until you find stairs and descend deeper into the dungeon.</p>
+<p><img src="../images/V3Tutorial/18_stairs.gif" alt="Going down stairs" title="Animation demonstraiting going down stairs in-game"></p>
+<h2 id="code-on-github">Code on GitHub</h2>
+<p>As always the code for the tutorial series so far can be found on GitHub:</p>
+<ul>
+<li><a href="https://github.com/FaronBracy/RogueSharpV3Tutorial/tree/16Stairs">https://github.com/FaronBracy/RogueSharpV3Tutorial/tree/16Stairs</a></li>
+</ul>
+<p>Bored waiting for the next tutorial? The complete tutorial project is already finished and the source code is available on Github:</p>
+<ul>
+<li>Sample Roguelike game using RogueSharp and RLNet console
+<ul>
+<li><a href="https://github.com/FaronBracy/RogueSharpRLNetSamples">https://github.com/FaronBracy/RogueSharpRLNetSamples</a></li>
+</ul>
+</li>
+<li>Sample Roguelike game using RogueSharp and SadConsole
+<ul>
+<li><a href="https://github.com/FaronBracy/RogueSharpSadConsoleSamples">https://github.com/FaronBracy/RogueSharpSadConsoleSamples</a></li>
+</ul>
+</li>
+</ul>
+</article>
+            <div id="disqus_thread"></div>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+          </div>
+          
+          <div class="d-none d-lg-block col-md-3" role="complementary">
+            <div class="sideaffix pt-3 pb-3">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/FaronBracy/RogueSharp.Documentation/blob/master/articles/18_stairs.md/#L1" class="contribution-link text-info" title="Improve this Doc">
+                    <i class="fal fa-edit fa-fw"></i>
+                    <span>Improve this Doc</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <!--<div class="github-links">
+                  <a class="github-button" href="https://github.com/fszlin/certes" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star fszlin/certes on GitHub">Star</a>
+              </div>-->
+              <nav class="hidden-print affix mt-2" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      
+      <footer class="bg-secondary">
+        <!--<div class="grad-bottom"></div>-->
+        <div class="footer bg-secondary">
+          <div class="container">
+          <div class="d-flex">
+            <div class="p-2 flex-grow-1 text-white">
+            <a class="text-white" href="https://github.com/FaronBracy/RogueSharp">RogueSharp &copy; 2014-2020 Faron Bracy</a>
+            
+            </div>
+            <div class="p-2">
+              <a class="text-white" href="#top">Back to top</a>
+            </div>
+          </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/dos.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/powershell.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+  </body>
+</html>
