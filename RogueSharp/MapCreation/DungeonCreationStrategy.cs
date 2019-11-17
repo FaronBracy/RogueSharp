@@ -224,12 +224,11 @@ namespace RogueSharp.MapCreation
       public int Id { get; set; }
       public int X { get; set; }
       public int Y { get; set; }
+      public DungeonCell Floor { get; set; }
       public EntranceKind EntranceKind { get; set; }
       public bool IsTrapped { get; set; }
       public bool IsLocked { get; set; }
       public string Description { get; set; }
-      public int Symbol { get; set; }
-      public Color Color { get; set; }
    }
 
    public enum EntranceKind
@@ -255,6 +254,10 @@ namespace RogueSharp.MapCreation
 
    public class DungeonCell : Cell
    {
+      public int ParentId { get; set; }
+      public char Symbol { get; set; }
+      public Color Color { get; set; }
+
       public override string ToString()
       {
          if ( IsWalkable )
@@ -301,7 +304,6 @@ namespace RogueSharp.MapCreation
       private readonly int _rooms;
       private readonly int _width;
 
-      private DungeonAreaFeatureBuilder _featureBuilder;
       private EntranceBuilder _entranceBuilder;
 
       public DungeonBuilder( Dungeon dungeon, int rooms, IRandom random = null )
@@ -326,7 +328,6 @@ namespace RogueSharp.MapCreation
 
       public Dungeon Create()
       {
-         _featureBuilder = new DungeonAreaFeatureBuilder( _dungeon, _random );
          _entranceBuilder = new EntranceBuilder( _dungeon, _random );
          int roomsCreated = 0;
          for ( int i = 0; i < 1000; i++ )
@@ -355,8 +356,7 @@ namespace RogueSharp.MapCreation
             {
                _dungeon.AddRoom( new Room
                {
-                  Floor = newRoom,
-                  Description = _featureBuilder.GetRoomDescription()
+                  Floor = newRoom
                } );
             }
          }
@@ -487,8 +487,7 @@ namespace RogueSharp.MapCreation
                {
                   var corridor = new Corridor
                   {
-                     Floors = new List<DungeonCell>(),
-                     Description = _featureBuilder.GetCooridorDescription()
+                     Floors = new List<DungeonCell>()
                   };
                   dungeon.AddCorridor( corridor );
                   DigCorridors( dungeon, x, y, corridor );
@@ -879,6 +878,9 @@ namespace RogueSharp.MapCreation
          }
 
          description.AppendFormat( " {0} door", materialDescription );
+         DungeonCell floor = _dungeon.GetCell( x, y );
+         floor.Color = color;
+         floor.Symbol = 's';
          return new Entrance
          {
             Description = description.ToString(),
@@ -887,268 +889,9 @@ namespace RogueSharp.MapCreation
             IsTrapped = isTrapped,
             X = x,
             Y = y,
-            Color = color,
+            Floor = _dungeon.GetCell( x, y ),
          };
       }
    }
-
-   public class DungeonAreaFeatureBuilder
-   {
-      private Dungeon _dungeon;
-      private IRandom _random;
-
-      private List<string> _roomDescriptions = new List<string>
-      {
-         "Empty room that smells of dust and mold",
-         "Armory with racks of serviceable weapons",
-         "Storeroom containing numerous crates and barrels",
-         "Kitchen with mysterious meat rotting on the counters",
-         "Barracks full sleeping enemies",
-         "Musty tomb of a forgotten king",
-         "Blacksmith's forge that is cold and unused for some time",
-         "Living area with serveral lice-ridden straw beds",
-         "Training hall full of enemies practicing for battle",
-         "Partially excavated room full of chips of rock and dust",
-         "Throne room with a menacing boss",
-         "Mirrored room with sparkling torches",
-         "Red tapestries cover the walls of this room",
-         "A large yellow rug is in the center of this otherwise empty room",
-         "High ceiling chamber with intricate stonework",
-         "Nothing but spiderwebs and dust",
-         "Racks of wine bottles in neat rows",
-         "A strange fountain sits in the center of the room",
-         "A horrible smell and rubbish in the corners",
-         "Several pedestals with interesting art",
-         "Mess hall with enemies eating a meal",
-         "Gambling hall full of humanoid monsters",
-         "A brazier with green magical flame",
-         "Multitude of statues",
-         "Library with old and mildewed rows of books",
-         "Archives with scrolls and books that smell of dust and decay",
-         "Greenhouse has light coming from the ceiling and vegtables growing",
-         // Duplicated
-         "Empty room that smells of dust and mold",
-         "Armory with racks of serviceable weapons",
-         "Storeroom containing numerous crates and barrels",
-         "Kitchen with mysterious meat rotting on the counters",
-         "Barracks full sleeping enemies",
-         "Musty tomb of a forgotten king",
-         "Blacksmith's forge that is cold and unused for some time",
-         "Living area with serveral lice-ridden straw beds",
-         "Training hall full of enemies practicing for battle",
-         "Partially excavated room full of chips of rock and dust",
-         "Throne room with a menacing boss",
-         "Mirrored room with sparkling torches",
-         "Red tapestries cover the walls of this room",
-         "A large yellow rug is in the center of this otherwise empty room",
-         "High ceiling chamber with intricate stonework",
-         "Nothing but spiderwebs and dust",
-         "Racks of wine bottles in neat rows",
-         "A strange fountain sits in the center of the room",
-         "A horrible smell and rubbish in the corners",
-         "Several pedestals with interesting art",
-         "Mess hall with enemies eating a meal",
-         "Gambling hall full of humanoid monsters",
-         "A brazier with green magical flame",
-         "Multitude of statues",
-         "Library with old and mildewed rows of books",
-         "Archives with scrolls and books that smell of dust and decay",
-         "Greenhouse has light coming from the ceiling and vegtables growing",
-         // Duplicated
-         "Empty room that smells of dust and mold",
-         "Armory with racks of serviceable weapons",
-         "Storeroom containing numerous crates and barrels",
-         "Kitchen with mysterious meat rotting on the counters",
-         "Barracks full sleeping enemies",
-         "Musty tomb of a forgotten king",
-         "Blacksmith's forge that is cold and unused for some time",
-         "Living area with serveral lice-ridden straw beds",
-         "Training hall full of enemies practicing for battle",
-         "Partially excavated room full of chips of rock and dust",
-         "Throne room with a menacing boss",
-         "Mirrored room with sparkling torches",
-         "Red tapestries cover the walls of this room",
-         "A large yellow rug is in the center of this otherwise empty room",
-         "High ceiling chamber with intricate stonework",
-         "Nothing but spiderwebs and dust",
-         "Racks of wine bottles in neat rows",
-         "A strange fountain sits in the center of the room",
-         "A horrible smell and rubbish in the corners",
-         "Several pedestals with interesting art",
-         "Mess hall with enemies eating a meal",
-         "Gambling hall full of humanoid monsters",
-         "A brazier with green magical flame",
-         "Multitude of statues",
-         "Library with old and mildewed rows of books",
-         "Archives with scrolls and books that smell of dust and decay",
-         "Greenhouse has light coming from the ceiling and vegtables growing",
-         // Duplicated
-         "Empty room that smells of dust and mold",
-         "Armory with racks of serviceable weapons",
-         "Storeroom containing numerous crates and barrels",
-         "Kitchen with mysterious meat rotting on the counters",
-         "Barracks full sleeping enemies",
-         "Musty tomb of a forgotten king",
-         "Blacksmith's forge that is cold and unused for some time",
-         "Living area with serveral lice-ridden straw beds",
-         "Training hall full of enemies practicing for battle",
-         "Partially excavated room full of chips of rock and dust",
-         "Throne room with a menacing boss",
-         "Mirrored room with sparkling torches",
-         "Red tapestries cover the walls of this room",
-         "A large yellow rug is in the center of this otherwise empty room",
-         "High ceiling chamber with intricate stonework",
-         "Nothing but spiderwebs and dust",
-         "Racks of wine bottles in neat rows",
-         "A strange fountain sits in the center of the room",
-         "A horrible smell and rubbish in the corners",
-         "Several pedestals with interesting art",
-         "Mess hall with enemies eating a meal",
-         "Gambling hall full of humanoid monsters",
-         "A brazier with green magical flame",
-         "Multitude of statues",
-         "Library with old and mildewed rows of books",
-         "Archives with scrolls and books that smell of dust and decay",
-         "Greenhouse has light coming from the ceiling and vegtables growing", };
-
-      private List<string> _cooridorDescriptions = new List<string>
-      {
-         "Everburning Torches",
-         "Pit Trap",
-         "Gas Trap",
-         "Fountain",
-         "Casket",
-         "Rubble",
-         "Vines",
-         "Cobwebs",
-         "Dust",
-         "Under Construction",
-         "Empty",
-         "Crystal Hall",
-         "Red",
-         "Yellow",
-         "High Ceiling Corridor",
-         "Spiderwebs and Dust",
-         "Spike Trap",
-         "Secret Compartment",
-         "Barrels",
-         "Litter",
-         "Blood Stains",
-         "Sewer Grate",
-         "Everburning Torches",
-         "Strange Smell",
-         "Strange Sound",
-         "Old Books",
-         "Fancy Banners",
-         // Duplicated
-         "Everburning Torches",
-         "Pit Trap",
-         "Gas Trap",
-         "Fountain",
-         "Casket",
-         "Rubble",
-         "Vines",
-         "Cobwebs",
-         "Dust",
-         "Under Construction",
-         "Empty",
-         "Crystal Hall",
-         "Red",
-         "Yellow",
-         "High Ceiling Corridor",
-         "Spiderwebs and Dust",
-         "Spike Trap",
-         "Secret Compartment",
-         "Barrels",
-         "Litter",
-         "Blood Stains",
-         "Sewer Grate",
-         "Everburning Torches",
-         "Strange Smell",
-         "Strange Sound",
-         "Old Books",
-         "Fancy Banners",
-         // Duplicated
-         "Everburning Torches",
-         "Pit Trap",
-         "Gas Trap",
-         "Fountain",
-         "Casket",
-         "Rubble",
-         "Vines",
-         "Cobwebs",
-         "Dust",
-         "Under Construction",
-         "Empty",
-         "Crystal Hall",
-         "Red",
-         "Yellow",
-         "High Ceiling Corridor",
-         "Spiderwebs and Dust",
-         "Spike Trap",
-         "Secret Compartment",
-         "Barrels",
-         "Litter",
-         "Blood Stains",
-         "Sewer Grate",
-         "Everburning Torches",
-         "Strange Smell",
-         "Strange Sound",
-         "Old Books",
-         "Fancy Banners",
-         // Duplicated
-         "Everburning Torches",
-         "Pit Trap",
-         "Gas Trap",
-         "Fountain",
-         "Casket",
-         "Rubble",
-         "Vines",
-         "Cobwebs",
-         "Dust",
-         "Under Construction",
-         "Empty",
-         "Crystal Hall",
-         "Red",
-         "Yellow",
-         "High Ceiling Corridor",
-         "Spiderwebs and Dust",
-         "Spike Trap",
-         "Secret Compartment",
-         "Barrels",
-         "Litter",
-         "Blood Stains",
-         "Sewer Grate",
-         "Everburning Torches",
-         "Strange Smell",
-         "Strange Sound",
-         "Old Books",
-         "Fancy Banners"
-      };
-
-
-      public DungeonAreaFeatureBuilder( Dungeon dungeon, IRandom random )
-      {
-         _dungeon = dungeon;
-         _random = random;
-      }
-
-      public string GetRoomDescription()
-      {
-         int index = _random.Next( 0, _roomDescriptions.Count - 1 );
-         string description = _roomDescriptions[index];
-         _roomDescriptions.RemoveAt( index );
-         return description;
-      }
-
-      public string GetCooridorDescription()
-      {
-         int index = _random.Next( 0, _cooridorDescriptions.Count - 1 );
-         string description = _cooridorDescriptions[index];
-         _cooridorDescriptions.RemoveAt( index );
-         return description;
-      }
-   }
-
    #endregion DungeonBuilder
 }
