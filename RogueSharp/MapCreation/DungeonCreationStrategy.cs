@@ -372,7 +372,47 @@ namespace RogueSharp.MapCreation
 
          AddStairs( _dungeon, _random );
 
+         FillDeadEnds( _dungeon );
+
          return _dungeon;
+      }
+
+      private void FillDeadEnds( Dungeon dungeon )
+      {
+         foreach ( Corridor corridor in dungeon.Corridors )
+         {
+            bool madeChanges;
+            do
+            {
+               madeChanges = TryFillDeadEnds( corridor.Floors.ToArray(), dungeon, corridor );
+            }
+            while ( madeChanges );
+         }
+      }
+
+      private bool TryFillDeadEnds( DungeonCell[] corridorFloors, Dungeon dungeon, Corridor corridor )
+      {
+         bool madeChanges = false;
+         foreach ( DungeonCell floor in corridorFloors )
+         {
+            int exits = 0;
+            foreach ( DungeonCell neighbor in dungeon.GetBorderCellsInCircle( floor.X, floor.Y, 1 ) )
+            {
+               if ( neighbor.IsWalkable )
+               {
+                  exits++;
+               }
+            }
+
+            if ( exits <= 1 )
+            {
+               floor.IsWalkable = false;
+               corridor.Floors.Remove( floor );
+               madeChanges = true;
+            }
+         }
+
+         return madeChanges;
       }
 
       private void AddStairs( Dungeon dungeon, IRandom random )

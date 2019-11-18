@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System;
+using System.Text.RegularExpressions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RogueSharp.MapCreation;
 using RogueSharp.Random;
@@ -13,6 +14,7 @@ namespace RogueSharp.Test
       {
          DungeonCreationStrategy strategy = new DungeonCreationStrategy( 77, 29, new DotNetRandom( 11 ) );
          Dungeon dungeon = Map.Create( strategy );
+         Console.WriteLine( dungeon );
 
          string expectedMap = @"#############################################################################
                                 #.#.....#.......s...s...#...s.....s...........#.....#...#.......#.....#.....#
