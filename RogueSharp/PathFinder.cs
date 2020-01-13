@@ -25,7 +25,7 @@ namespace RogueSharp
       /// </summary>
       /// <param name="map">The Map that this PathFinder instance will run shortest path algorithms on</param>
       /// <param name="diagonalCost">
-      /// The cost of diagonal movement compared to horizontal or vertical movement. 
+      /// The cost of diagonal movement compared to horizontal or vertical movement.
       /// Use 1.0 if you want the same cost for all movements.
       /// On a standard cartesian map, it should be sqrt(2) (1.41)
       /// </param>
@@ -78,7 +78,7 @@ namespace RogueSharp
       /// </summary>
       /// <param name="map">The Map that this PathFinder instance will run shortest path algorithms on</param>
       /// <param name="diagonalCost">
-      /// The cost of diagonal movement compared to horizontal or vertical movement. 
+      /// The cost of diagonal movement compared to horizontal or vertical movement.
       /// Use 1.0 if you want the same cost for all movements.
       /// On a standard cartesian map, it should be sqrt(2) (1.41)
       /// </param>

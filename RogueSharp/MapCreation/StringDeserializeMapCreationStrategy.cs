@@ -4,7 +4,7 @@ namespace RogueSharp.MapCreation
    /// The StringDeserializeMapCreationStrategy creates a Map of the specified type from a string representation of the Map
    /// </summary>
    /// <typeparam name="TMap">The type of IMap that will be created</typeparam>
-   public class StringDeserializeMapCreationStrategy<TMap> : StringDeserializeMapCreationStrategy<TMap,Cell>, IMapCreationStrategy<TMap> where TMap : IMap<Cell>, new() 
+   public class StringDeserializeMapCreationStrategy<TMap> : StringDeserializeMapCreationStrategy<TMap,Cell>, IMapCreationStrategy<TMap> where TMap : IMap<Cell>, new()
    {
       /// <summary>
       /// Constructs a new StringDeserializeMapCreationStrategy with the specified parameters
