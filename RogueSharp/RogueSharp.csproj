@@ -2,13 +2,14 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard1.0;net40</TargetFrameworks>
-    <Version>5.0.0-pre</Version>
+    <Version>5.0.0-pre2</Version>
     <Authors>Faron Bracy</Authors>
     <Company />
     <Description>
  A .NET Standard class library providing map generation, path-finding, and field-of-view utilities frequently used in roguelikes or 2D tile based games. Inspired by libtcod
 
  New features:
+   * Map and cell classes now have generic versions that are easier to inherit from.
    * Weighted pool class for randomly picking items.
    * Pathfinder class caches graph and dijkstra result for speedier performance with multiple lookups.
    * Added Map.GetCellsInRectangle method. (Thanks to Andre Odendaal)
@@ -22,6 +23,7 @@
  A .NET Standard class library providing map generation, path-finding, and field-of-view utilities frequently used in roguelikes or 2D tile based games. Inspired by libtcod
 
  New features:
+   * Map and cell classes now have generic versions that are easier to inherit from.
    * Weighted pool class for randomly picking items.
    * Pathfinder class caches graph and dijkstra result for speedier performance with multiple lookups.
    * Added Map.GetCellsInRectangle method. (Thanks to Andre Odendaal)
@@ -31,7 +33,7 @@
    * Map.Initialize is virtual so that it can be overridden in derived classes
    * Map.Clone is now virtual and generic so that it can be overridden in derived classes.
     </PackageReleaseNotes>
-    <Copyright>Copyright 2014-2019 Faron Bracy</Copyright>
+    <Copyright>Copyright 2014-2020 Faron Bracy</Copyright>
     <PackageLicenseUrl>https://github.com/FaronBracy/RogueSharp/blob/master/LICENSE.txt</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/FaronBracy/RogueSharp</PackageProjectUrl>
     <RepositoryUrl>https://github.com/FaronBracy/RogueSharp.git</RepositoryUrl>

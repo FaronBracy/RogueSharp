@@ -8,10 +8,41 @@ namespace RogueSharp
    /// <summary>
    /// A class which can be used to find shortest path from a source to a destination in a Map
    /// </summary>
-   public class PathFinder
+   public class PathFinder : PathFinder<Cell>
+   {
+      /// <summary>
+      /// Constructs a new PathFinder instance for the specified Map that will not consider diagonal movements to be valid.
+      /// </summary>
+      /// <param name="map">The Map that this PathFinder instance will run shortest path algorithms on</param>
+      /// <exception cref="ArgumentNullException">Thrown when a null map parameter is passed in</exception>
+      public PathFinder( IMap<Cell> map )
+         : base( map )
+      {
+      }
+
+      /// <summary>
+      /// Constructs a new PathFinder instance for the specified Map that will consider diagonal movement by using the specified diagonalCost
+      /// </summary>
+      /// <param name="map">The Map that this PathFinder instance will run shortest path algorithms on</param>
+      /// <param name="diagonalCost">
+      /// The cost of diagonal movement compared to horizontal or vertical movement.
+      /// Use 1.0 if you want the same cost for all movements.
+      /// On a standard cartesian map, it should be sqrt(2) (1.41)
+      /// </param>
+      /// <exception cref="ArgumentNullException">Thrown when a null map parameter is passed in</exception>
+      public PathFinder( IMap<Cell> map, double diagonalCost )
+         : base( map, diagonalCost )
+      {
+      }
+   }
+
+   /// <summary>
+   /// A class which can be used to find shortest path from a source to a destination in a Map
+   /// </summary>
+   public class PathFinder<TCell> where TCell : ICell
    {
       private readonly EdgeWeightedDigraph _graph;
-      private readonly IMap _map;
+      private readonly IMap<TCell> _map;
       private int? _sourceIndex = null;
       private DijkstraShortestPath _dijkstraShortestPath = null;
 
@@ -20,16 +51,16 @@ namespace RogueSharp
       /// </summary>
       /// <param name="map">The Map that this PathFinder instance will run shortest path algorithms on</param>
       /// <exception cref="ArgumentNullException">Thrown when a null map parameter is passed in</exception>
-      public PathFinder( IMap map )
+      public PathFinder( IMap<TCell> map )
       {
          _map = map ?? throw new ArgumentNullException( nameof( map ), "Map cannot be null" );
          _graph = new EdgeWeightedDigraph( _map.Width * _map.Height );
-         foreach ( ICell cell in _map.GetAllCells() )
+         foreach ( TCell cell in _map.GetAllCells() )
          {
             if ( cell.IsWalkable )
             {
                int v = IndexFor( cell );
-               foreach ( ICell neighbor in _map.GetBorderCellsInDiamond( cell.X, cell.Y, 1 ) )
+               foreach ( TCell neighbor in _map.GetBorderCellsInDiamond( cell.X, cell.Y, 1 ) )
                {
                   if ( neighbor.IsWalkable )
                   {
@@ -47,21 +78,21 @@ namespace RogueSharp
       /// </summary>
       /// <param name="map">The Map that this PathFinder instance will run shortest path algorithms on</param>
       /// <param name="diagonalCost">
-      /// The cost of diagonal movement compared to horizontal or vertical movement. 
+      /// The cost of diagonal movement compared to horizontal or vertical movement.
       /// Use 1.0 if you want the same cost for all movements.
       /// On a standard cartesian map, it should be sqrt(2) (1.41)
       /// </param>
       /// <exception cref="ArgumentNullException">Thrown when a null map parameter is passed in</exception>
-      public PathFinder( IMap map, double diagonalCost )
+      public PathFinder( IMap<TCell> map, double diagonalCost )
       {
          _map = map ?? throw new ArgumentNullException( nameof( map ), "Map cannot be null" );
          _graph = new EdgeWeightedDigraph( _map.Width * _map.Height );
-         foreach ( ICell cell in _map.GetAllCells() )
+         foreach ( TCell cell in _map.GetAllCells() )
          {
             if ( cell.IsWalkable )
             {
                int v = IndexFor( cell );
-               foreach ( ICell neighbor in _map.GetBorderCellsInSquare( cell.X, cell.Y, 1 ) )
+               foreach ( TCell neighbor in _map.GetBorderCellsInSquare( cell.X, cell.Y, 1 ) )
                {
                   if ( neighbor.IsWalkable )
                   {
@@ -121,7 +152,7 @@ namespace RogueSharp
             throw new ArgumentNullException( nameof( destination ) );
          }
 
-         var cells = ShortestPathCells( source, destination ).ToList();
+         List<ICell> cells = ShortestPathCells( source, destination ).ToList();
          if ( cells[0] == null )
          {
             return null;
