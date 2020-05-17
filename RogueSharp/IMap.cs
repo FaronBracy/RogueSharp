@@ -275,15 +275,13 @@ namespace RogueSharp
 
       /// <summary>
       /// Provides a simple visual representation of the map using the following symbols:
-      /// - `%`: `Cell` is not in field-of-view
-      /// - `.`: `Cell` is transparent, walkable, and in field-of-view
-      /// - `s`: `Cell` is walkable and in field-of-view (but not transparent)
-      /// - `o`: `Cell` is transparent and in field-of-view (but not walkable)
-      /// - `#`: `Cell` is in field-of-view (but not transparent or walkable)
+      /// - `.`: `Cell` is transparent and walkable
+      /// - `s`: `Cell` is walkable (but not transparent)
+      /// - `o`: `Cell` is transparent (but not walkable)
+      /// - `#`: `Cell` is not transparent or walkable
       /// </summary>
-      /// <param name="useFov">True if field-of-view calculations will be used when creating the string representation of the Map. False otherwise</param>
       /// <returns>A string representation of the map using special symbols to denote Cell properties</returns>
-      string ToString( bool useFov );
+      string ToString();
 
       /// <summary>
       /// Get a MapState POCO which represents this Map and can be easily serialized

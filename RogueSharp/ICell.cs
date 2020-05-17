@@ -38,20 +38,6 @@ namespace RogueSharp
       bool IsWalkable { get; set; }
 
       /// <summary>
-      /// Check if the Cell is in the currently computed field-of-view
-      /// For newly initialized maps a field-of-view will not exist so all Cells will return false
-      /// Field-of-view must first be calculated by calling ComputeFov and/or AppendFov
-      /// </summary>
-      /// <remarks>
-      /// Field-of-view (FOV) is basically a calculation of what is observable in the Map from a given Cell with a given light radius
-      /// </remarks>
-      /// <example>
-      /// Field-of-view can be used to simulate a character holding a light source and exploring a Map representing a dark cavern
-      /// Any Cells within the FOV would be what the character could see from their current location and lighting conditions
-      /// </example>
-      bool IsInFov { get; set; }
-
-      /// <summary>
       /// Check if the Cell is flagged as ever having been explored by the player
       /// </summary>
       /// <remarks>

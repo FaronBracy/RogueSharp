@@ -201,9 +201,6 @@ namespace RogueSharp
       /// <summary>
       /// Set the properties of a Cell to the specified values
       /// </summary>
-      /// <remarks>
-      /// IsInFov cannot be set through this method as it is always calculated by calling ComputeFov and/or AppendFov
-      /// </remarks>
       /// <param name="x">X location of the Cell to set properties on, starting with 0 as the farthest left</param>
       /// <param name="y">Y location of the Cell to set properties on, starting with 0 as the top</param>
       /// <param name="isTransparent">True if line-of-sight is not blocked by this Cell. False otherwise</param>
@@ -219,9 +216,6 @@ namespace RogueSharp
       /// <summary>
       /// Set the properties of an unexplored Cell to the specified values
       /// </summary>
-      /// <remarks>
-      /// IsInFov cannot be set through this method as it is always calculated by calling ComputeFov and/or AppendFov
-      /// </remarks>
       /// <param name="x">X location of the Cell to set properties on, starting with 0 as the farthest left</param>
       /// <param name="y">Y location of the Cell to set properties on, starting with 0 as the top</param>
       /// <param name="isTransparent">True if line-of-sight is not blocked by this Cell. False otherwise</param>
@@ -783,15 +777,13 @@ namespace RogueSharp
 
       /// <summary>
       /// Provides a simple visual representation of the map using the following symbols:
-      /// - `%`: `Cell` is not in field-of-view
-      /// - `.`: `Cell` is transparent, walkable, and in field-of-view
-      /// - `s`: `Cell` is walkable and in field-of-view (but not transparent)
-      /// - `o`: `Cell` is transparent and in field-of-view (but not walkable)
-      /// - `#`: `Cell` is in field-of-view (but not transparent or walkable)
+      /// - `.`: `Cell` is transparent and walkable
+      /// - `s`: `Cell` is walkable (but not transparent)
+      /// - `o`: `Cell` is transparent (but not walkable)
+      /// - `#`: `Cell` is not transparent or walkable
       /// </summary>
-      /// <param name="useFov">True if field-of-view calculations will be used when creating the string representation of the Map. False otherwise</param>
       /// <returns>A string representation of the map using special symbols to denote Cell properties</returns>
-      public string ToString( bool useFov )
+      public override string ToString()
       {
          var mapRepresentation = new StringBuilder();
          int lastY = 0;
@@ -803,7 +795,7 @@ namespace RogueSharp
                lastY = cell.Y;
                mapRepresentation.Append( Environment.NewLine );
             }
-            mapRepresentation.Append( cell.ToString( useFov ) );
+            mapRepresentation.Append( cell.ToString() );
          }
          return mapRepresentation.ToString().TrimEnd( '\r', '\n' );
       }
@@ -824,10 +816,6 @@ namespace RogueSharp
          foreach ( TCell cell in GetAllCells() )
          {
             MapState.CellProperties cellProperties = MapState.CellProperties.None;
-            if ( cell.IsInFov )
-            {
-               cellProperties |= MapState.CellProperties.Visible;
-            }
             if ( cell.IsTransparent )
             {
                cellProperties |= MapState.CellProperties.Transparent;
@@ -857,16 +845,11 @@ namespace RogueSharp
             throw new ArgumentNullException( nameof( state ), "Map state cannot be null" );
          }
 
-         var inFov = new HashSet<int>();
-
          Initialize( state.Width, state.Height );
          foreach ( TCell cell in GetAllCells() )
          {
             MapState.CellProperties cellProperties = state.Cells[( cell.Y * Width ) + cell.X];
-            if ( cellProperties.HasFlag( MapState.CellProperties.Visible ) )
-            {
-               inFov.Add( IndexFor( cell.X, cell.Y ) );
-            }
+
             _cells[cell.X, cell.Y].IsTransparent = cellProperties.HasFlag( MapState.CellProperties.Transparent );
             _cells[cell.X, cell.Y].IsWalkable = cellProperties.HasFlag( MapState.CellProperties.Walkable );
             _cells[cell.X, cell.Y].IsExplored = cellProperties.HasFlag( MapState.CellProperties.Explored );
@@ -933,22 +916,6 @@ namespace RogueSharp
       private bool AddToHashSet( HashSet<int> hashSet, TCell cell )
       {
          return hashSet.Add( IndexFor( cell ) );
-      }
-
-      /// <summary>
-      /// Provides a simple visual representation of the map using the following symbols:
-      /// - `.`: `Cell` is transparent and walkable
-      /// - `s`: `Cell` is walkable (but not transparent)
-      /// - `o`: `Cell` is transparent (but not walkable)
-      /// - `#`: `Cell` is not transparent or walkable
-      /// </summary>
-      /// <remarks>
-      /// This call ignores field-of-view. If field-of-view is important use the ToString overload with a "true" parameter
-      /// </remarks>
-      /// <returns>A string representation of the map using special symbols to denote Cell properties</returns>
-      public override string ToString()
-      {
-         return ToString( false );
       }
    }
 }
