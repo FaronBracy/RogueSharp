@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 
 namespace RogueSharp
 {
    /// <summary>
-   /// A Map represents a rectangular grid of Cells, each of which has a number of properties for determining walkability, field-of-view and so on
+   /// A Map represents a rectangular grid of Cells, each of which has a number of properties for determining walkability, transparency and so on
    /// The upper left corner of the Map is Cell (0,0) and the X value increases to the right, as the Y value increases downward
    /// </summary>
    public interface IMap : IMap<Cell>
@@ -13,7 +12,7 @@ namespace RogueSharp
    }
 
    /// <summary>
-   /// A Map represents a rectangular grid of Cells, each of which has a number of properties for determining walkability, field-of-view and so on
+   /// A Map represents a rectangular grid of Cells, each of which has a number of properties for determining walkability, transparency and so on
    /// The upper left corner of the Map is Cell (0,0) and the X value increases to the right, as the Y value increases downward
    /// </summary>
    public interface IMap<TCell> where TCell : ICell
@@ -77,23 +76,6 @@ namespace RogueSharp
       /// <param name="y">Y location of the Cell to check, starting with 0 as the top</param>
       /// <returns>True if a character could move across this Cell, false otherwise</returns>
       bool IsWalkable( int x, int y );
-
-      /// <summary>
-      /// Check if the Cell is in the currently computed field-of-view
-      /// For newly initialized maps a field-of-view will not exist so all Cells will return false
-      /// Field-of-view must first be calculated by calling ComputeFov and/or AppendFov
-      /// </summary>
-      /// <remarks>
-      /// Field-of-view (FOV) is basically a calculation of what is observable in the Map from a given Cell with a given light radius
-      /// </remarks>
-      /// <example>
-      /// Field-of-view c be used to simulate a character holding a light source and exploring a Map representing a dark cavern
-      /// Any Cells within the FOV would be what the character could see from their current location and lighting conditions
-      /// </example>
-      /// <param name="x">X location of the Cell to check starting with 0 as the farthest left</param>
-      /// <param name="y">Y location of the Cell to check, starting with 0 as the top</param>
-      /// <returns>True if the Cell is in the currently computed field-of-view, false otherwise</returns>
-      bool IsInFov( int x, int y );
 
       /// <summary>
       /// Check if the Cell is flagged as ever having been explored by the player
@@ -167,33 +149,6 @@ namespace RogueSharp
       /// <param name="left">Optional parameter defaults to 0 if not provided. X location of the Cell to start copying parameters to, starting with 0 as the farthest left</param>
       /// <param name="top">Optional parameter defaults to 0 if not provided. Y location of the Cell to start copying parameters to, starting with 0 as the top</param>
       void Copy( IMap<TCell> sourceMap, int left, int top );
-
-      /// <summary>
-      /// Performs a field-of-view calculation with the specified parameters.
-      /// Field-of-view (FOV) is basically a calculation of what is observable in the Map from a given Cell with a given light radius.
-      /// Any existing field-of-view calculations will be overwritten when calling this method.
-      /// </summary>
-      /// <param name="xOrigin">X location of the Cell to perform the field-of-view calculation with 0 as the farthest left</param>
-      /// <param name="yOrigin">Y location of the Cell to perform the field-of-view calculation with 0 as the top</param>
-      /// <param name="radius">The number of Cells in which the field-of-view extends from the origin Cell. Think of this as the intensity of the light source.</param>
-      /// <param name="lightWalls">True if walls should be included in the field-of-view when they are within the radius of the light source. False excludes walls even when they are within range.</param>
-      /// <returns>List of Cells representing what is observable in the Map based on the specified parameters</returns>
-      ReadOnlyCollection<TCell> ComputeFov( int xOrigin, int yOrigin, int radius, bool lightWalls );
-
-      /// <summary>
-      /// Performs a field-of-view calculation with the specified parameters and appends it any existing field-of-view calculations.
-      /// Field-of-view (FOV) is basically a calculation of what is observable in the Map from a given Cell with a given light radius.
-      /// </summary>
-      /// <example>
-      /// When a character is holding a light source in a large area that also has several other sources of light such as torches along the walls
-      /// ComputeFov could first be called for the character and then AppendFov could be called for each torch to give us the final combined FOV given all the light sources
-      /// </example>
-      /// <param name="xOrigin">X location of the Cell to perform the field-of-view calculation with 0 as the farthest left</param>
-      /// <param name="yOrigin">Y location of the Cell to perform the field-of-view calculation with 0 as the top</param>
-      /// <param name="radius">The number of Cells in which the field-of-view extends from the origin Cell. Think of this as the intensity of the light source.</param>
-      /// <param name="lightWalls">True if walls should be included in the field-of-view when they are within the radius of the light source. False excludes walls even when they are within range.</param>
-      /// <returns>List of Cells representing what is observable in the Map based on the specified parameters</returns>
-      ReadOnlyCollection<TCell> AppendFov( int xOrigin, int yOrigin, int radius, bool lightWalls );
 
       /// <summary>
       /// Get an IEnumerable of all Cells in the Map

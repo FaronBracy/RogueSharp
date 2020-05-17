@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Text;
 using RogueSharp.MapCreation;
 
 namespace RogueSharp
 {
    /// <summary>
-   /// A Map represents a rectangular grid of Cells, each of which has a number of properties for determining walkability, field-of-view and so on
+   /// A Map represents a rectangular grid of Cells, each of which has a number of properties for determining walkability, transparency and so on
    /// The upper left corner of the Map is Cell (0,0) and the X value increases to the right, as the Y value increases downward
    /// </summary>
    public class Map : Map<Cell>, IMap
@@ -76,7 +75,6 @@ namespace RogueSharp
    /// </summary>
    public class Map<TCell> : IMap<TCell> where TCell : ICell
    {
-      private FieldOfView<TCell> _fieldOfView;
       private TCell[,] _cells;
 
       /// <summary>
@@ -147,7 +145,6 @@ namespace RogueSharp
                _cells[x, y].Y = y;
             }
          }
-         _fieldOfView = new FieldOfView<TCell>( this );
       }
 
       /// <summary>
@@ -180,26 +177,6 @@ namespace RogueSharp
       public bool IsWalkable( int x, int y )
       {
          return _cells[x, y].IsWalkable;
-      }
-
-      /// <summary>
-      /// Check if the Cell is in the currently computed field-of-view
-      /// For newly initialized maps a field-of-view will not exist so all Cells will return false
-      /// Field-of-view must first be calculated by calling ComputeFov and/or AppendFov
-      /// </summary>
-      /// <remarks>
-      /// Field-of-view (FOV) is basically a calculation of what is observable in the Map from a given Cell with a given light radius
-      /// </remarks>
-      /// <example>
-      /// Field-of-view can be used to simulate a character holding a light source and exploring a Map representing a dark cavern
-      /// Any Cells within the FOV would be what the character could see from their current location and lighting conditions
-      /// </example>
-      /// <param name="x">X location of the Cell to check starting with 0 as the farthest left</param>
-      /// <param name="y">Y location of the Cell to check, starting with 0 as the top</param>
-      /// <returns>True if the Cell is in the currently computed field-of-view, false otherwise</returns>
-      public bool IsInFov( int x, int y )
-      {
-         return _fieldOfView.IsInFov( x, y );
       }
 
       /// <summary>
@@ -330,40 +307,7 @@ namespace RogueSharp
             SetCellProperties( cell.X + left, cell.Y + top, cell.IsTransparent, cell.IsWalkable, cell.IsExplored );
          }
       }
-
-      /// <summary>
-      /// Performs a field-of-view calculation with the specified parameters.
-      /// Field-of-view (FOV) is basically a calculation of what is observable in the Map from a given Cell with a given light radius.
-      /// Any existing field-of-view calculations will be overwritten when calling this method.
-      /// </summary>
-      /// <param name="xOrigin">X location of the Cell to perform the field-of-view calculation with 0 as the farthest left</param>
-      /// <param name="yOrigin">Y location of the Cell to perform the field-of-view calculation with 0 as the top</param>
-      /// <param name="radius">The number of Cells in which the field-of-view extends from the origin Cell. Think of this as the intensity of the light source.</param>
-      /// <param name="lightWalls">True if walls should be included in the field-of-view when they are within the radius of the light source. False excludes walls even when they are within range.</param>
-      /// <returns>List of Cells representing what is observable in the Map based on the specified parameters</returns>
-      public ReadOnlyCollection<TCell> ComputeFov( int xOrigin, int yOrigin, int radius, bool lightWalls )
-      {
-         return _fieldOfView.ComputeFov( xOrigin, yOrigin, radius, lightWalls );
-      }
-
-      /// <summary>
-      /// Performs a field-of-view calculation with the specified parameters and appends it any existing field-of-view calculations.
-      /// Field-of-view (FOV) is basically a calculation of what is observable in the Map from a given Cell with a given light radius.
-      /// </summary>
-      /// <example>
-      /// When a character is holding a light source in a large area that also has several other sources of light such as torches along the walls
-      /// ComputeFov could first be called for the character and then AppendFov could be called for each torch to give us the final combined FOV given all the light sources
-      /// </example>
-      /// <param name="xOrigin">X location of the Cell to perform the field-of-view calculation with 0 as the farthest left</param>
-      /// <param name="yOrigin">Y location of the Cell to perform the field-of-view calculation with 0 as the top</param>
-      /// <param name="radius">The number of Cells in which the field-of-view extends from the origin Cell. Think of this as the intensity of the light source.</param>
-      /// <param name="lightWalls">True if walls should be included in the field-of-view when they are within the radius of the light source. False excludes walls even when they are within range.</param>
-      /// <returns>List of Cells representing what is observable in the Map based on the specified parameters</returns>
-      public ReadOnlyCollection<TCell> AppendFov( int xOrigin, int yOrigin, int radius, bool lightWalls )
-      {
-         return _fieldOfView.AppendFov( xOrigin, yOrigin, radius, lightWalls );
-      }
-
+      
       /// <summary>
       /// Get an IEnumerable of all Cells in the Map
       /// </summary>
@@ -834,9 +778,7 @@ namespace RogueSharp
       /// <returns>Cell at the specified location</returns>
       public TCell GetCell( int x, int y )
       {
-         TCell cell = _cells[x, y];
-         cell.IsInFov = _fieldOfView.IsInFov( x, y );
-         return cell;
+         return _cells[x, y];
       }
 
       /// <summary>
@@ -929,8 +871,6 @@ namespace RogueSharp
             _cells[cell.X, cell.Y].IsWalkable = cellProperties.HasFlag( MapState.CellProperties.Walkable );
             _cells[cell.X, cell.Y].IsExplored = cellProperties.HasFlag( MapState.CellProperties.Explored );
          }
-
-         _fieldOfView = new FieldOfView<TCell>( this, inFov );
       }
 
       /// <summary>
