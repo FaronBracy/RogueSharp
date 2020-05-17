@@ -758,6 +758,75 @@ namespace RogueSharp
       }
 
       /// <summary>
+      /// Get an IEnumerable of adjacent Cells which touch the center Cell. Diagonal cells do not count as adjacent.
+      /// </summary>
+      /// <param name="xCenter">X location of the center Cell with 0 as the farthest left</param>
+      /// <param name="yCenter">Y location of the center Cell with 0 as the top</param>
+      /// <returns>IEnumerable of adjacent Cells which touch the center Cell</returns>
+      public IEnumerable<TCell> GetAdjacentCells( int xCenter, int yCenter )
+      {
+         return GetAdjacentCells( xCenter, yCenter, false );
+      }
+
+      /// <summary>
+      /// Get an IEnumerable of adjacent Cells which touch the center Cell. Diagonal cells may optionally be included.
+      /// </summary>
+      /// <param name="xCenter">X location of the center Cell with 0 as the farthest left</param>
+      /// <param name="yCenter">Y location of the center Cell with 0 as the top</param>
+      /// <param name="includeDiagonals">Should diagonal Cells count as being adjacent cells?</param>
+      /// <returns>IEnumerable of adjacent Cells which touch the center Cell</returns>
+      public IEnumerable<TCell> GetAdjacentCells( int xCenter, int yCenter, bool includeDiagonals )
+      {
+         int topY = yCenter - 1;
+         int bottomY = yCenter + 1;
+         int leftX = xCenter - 1;
+         int rightX = xCenter + 1;
+
+         if ( topY >= 0 )
+         {
+            yield return GetCell( xCenter, topY );
+         }
+
+         if ( leftX >= 0 )
+         {
+            yield return GetCell( leftX, yCenter );
+         }
+
+         if ( bottomY < Height )
+         {
+            yield return GetCell( xCenter, bottomY );
+         }
+
+         if ( rightX < Width )
+         {
+            yield return GetCell( rightX, yCenter );
+         }
+
+         if ( includeDiagonals )
+         {
+            if ( rightX < Width && topY >= 0 )
+            {
+               yield return GetCell( rightX, topY );
+            }
+
+            if ( rightX < Width && bottomY < Height )
+            {
+               yield return GetCell( rightX, bottomY );
+            }
+
+            if ( leftX >= 0 && topY >= 0 )
+            {
+               yield return GetCell( leftX, topY );
+            }
+
+            if ( leftX >= 0 && bottomY < Height )
+            {
+               yield return GetCell( leftX, bottomY );
+            }
+         }
+      }
+
+      /// <summary>
       /// Get a Cell at the specified location
       /// </summary>
       /// <param name="x">X location of the Cell to get starting with 0 as the farthest left</param>

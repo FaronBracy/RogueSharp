@@ -294,6 +294,23 @@ namespace RogueSharp
       IEnumerable<TCell> GetCellsInColumns( params int[] columnNumbers );
 
       /// <summary>
+      /// Get an IEnumerable of adjacent Cells which touch the center Cell. Diagonal cells do not count as adjacent.
+      /// </summary>
+      /// <param name="xCenter">X location of the center Cell with 0 as the farthest left</param>
+      /// <param name="yCenter">Y location of the center Cell with 0 as the top</param>
+      /// <returns>IEnumerable of adjacent Cells which touch the center Cell</returns>
+      IEnumerable<TCell> GetAdjacentCells( int xCenter, int yCenter );
+      
+      /// <summary>
+      /// Get an IEnumerable of adjacent Cells which touch the center Cell. Diagonal cells may optionally be included.
+      /// </summary>
+      /// <param name="xCenter">X location of the center Cell with 0 as the farthest left</param>
+      /// <param name="yCenter">Y location of the center Cell with 0 as the top</param>
+      /// <param name="includeDiagonals">Should diagonal Cells count as being adjacent cells?</param>
+      /// <returns>IEnumerable of adjacent Cells which touch the center Cell</returns>
+      IEnumerable<TCell> GetAdjacentCells( int xCenter, int yCenter, bool includeDiagonals );
+
+      /// <summary>
       /// Get a Cell at the specified location
       /// </summary>
       /// <param name="x">X location of the Cell to get starting with 0 as the farthest left</param>
