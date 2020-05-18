@@ -692,6 +692,90 @@ namespace RogueSharp.Test
          Assert.AreEqual( expectedCells, actualCells.ToString() );
       }
 
+      [TestMethod]
+      public void GetAdjacentCells_TopLeftCorner_Returns2Cells()
+      {
+         string mapRepresentation = @"...
+                                      ...
+                                      ...";
+         IMapCreationStrategy<Map> mapCreationStrategy = new StringDeserializeMapCreationStrategy<Map>( mapRepresentation );
+         IMap map = Map.Create( mapCreationStrategy );
+
+         IEnumerable<Cell> cells = map.GetAdjacentCells( 0, 0 );
+
+         Assert.AreEqual( 2, cells.Count() );
+      }
+
+      [TestMethod]
+      public void GetAdjacentCells_BottomRightCorner_Returns2Cells()
+      {
+         string mapRepresentation = @"...
+                                      ...
+                                      ...";
+         IMapCreationStrategy<Map> mapCreationStrategy = new StringDeserializeMapCreationStrategy<Map>( mapRepresentation );
+         IMap map = Map.Create( mapCreationStrategy );
+
+         IEnumerable<Cell> cells = map.GetAdjacentCells( 2, 2 );
+
+         Assert.AreEqual( 2, cells.Count() );
+      }
+
+      [TestMethod]
+      public void GetAdjacentCells_X1Y1_Returns4Cells()
+      {
+         string mapRepresentation = @"...
+                                      ...
+                                      ...";
+         IMapCreationStrategy<Map> mapCreationStrategy = new StringDeserializeMapCreationStrategy<Map>( mapRepresentation );
+         IMap map = Map.Create( mapCreationStrategy );
+
+         IEnumerable<Cell> cells = map.GetAdjacentCells( 1, 1 );
+
+         Assert.AreEqual( 4, cells.Count() );
+      }
+
+      [TestMethod]
+      public void GetAdjacentCells_TopLeftCornerWithDiagonals_Returns3Cells()
+      {
+         string mapRepresentation = @"...
+                                      ...
+                                      ...";
+         IMapCreationStrategy<Map> mapCreationStrategy = new StringDeserializeMapCreationStrategy<Map>( mapRepresentation );
+         IMap map = Map.Create( mapCreationStrategy );
+
+         IEnumerable<Cell> cells = map.GetAdjacentCells( 0, 0, true );
+
+         Assert.AreEqual( 3, cells.Count() );
+      }
+
+      [TestMethod]
+      public void GetAdjacentCells_BottomRightCornerWithDiagonals_Returns3Cells()
+      {
+         string mapRepresentation = @"...
+                                      ...
+                                      ...";
+         IMapCreationStrategy<Map> mapCreationStrategy = new StringDeserializeMapCreationStrategy<Map>( mapRepresentation );
+         IMap map = Map.Create( mapCreationStrategy );
+
+         IEnumerable<Cell> cells = map.GetAdjacentCells( 2, 2, true );
+
+         Assert.AreEqual( 3, cells.Count() );
+      }
+
+      [TestMethod]
+      public void GetAdjacentCells_X1Y1WithDiagonals_Returns8Cells()
+      {
+         string mapRepresentation = @"...
+                                      ...
+                                      ...";
+         IMapCreationStrategy<Map> mapCreationStrategy = new StringDeserializeMapCreationStrategy<Map>( mapRepresentation );
+         IMap map = Map.Create( mapCreationStrategy );
+
+         IEnumerable<Cell> cells = map.GetAdjacentCells( 1, 1, true );
+
+         Assert.AreEqual( 8, cells.Count() );
+      }
+
       private static string RemoveWhiteSpace( string source )
       {
          return Regex.Replace( source, @"\s+", string.Empty );

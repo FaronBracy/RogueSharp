@@ -310,8 +310,8 @@ namespace RogueSharp.Test
 
          Assert.AreEqual( null, shortestPath );
       }
-	  
-	  [TestMethod]
+
+      [TestMethod]
       public void TryFindShortestPath_Large200x400MapFromX5Y1ToX29Y187_ReturnsExpectedPath()
       {
          IMapCreationStrategy<Map> mapCreationStrategy = new StringDeserializeMapCreationStrategy<Map>( Algorithms.TestSetup.TestHelpers.Map200x400 );
