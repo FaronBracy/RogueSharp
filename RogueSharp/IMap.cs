@@ -78,35 +78,6 @@ namespace RogueSharp
       bool IsWalkable( int x, int y );
 
       /// <summary>
-      /// Check if the Cell is flagged as ever having been explored by the player
-      /// </summary>
-      /// <remarks>
-      /// The explored property of a Cell can be used to track if the Cell has ever been in the field-of-view of a character controlled by the player
-      /// This property will not automatically be updated based on FOV calculations or any other built-in functions of the RogueSharp library.
-      /// </remarks>
-      /// <example>
-      /// As the player moves characters around a Map, Cells will enter and exit the currently computed field-of-view
-      /// This property can be used to keep track of those Cells that have been "seen" and could be used to show fog-of-war type effects when rendering the map
-      /// </example>
-      /// <param name="x">X location of the Cell to check starting with 0 as the farthest left</param>
-      /// <param name="y">Y location of the Cell to check, starting with 0 as the top</param>
-      /// <returns>True if the Cell has been flagged as being explored by the player, false otherwise</returns>
-      bool IsExplored( int x, int y );
-
-      /// <summary>
-      /// Set the properties of a Cell to the specified values
-      /// </summary>
-      /// <remarks>
-      /// IsInFov cannot be set through this method as it is always calculated by calling ComputeFov and/or AppendFov
-      /// </remarks>
-      /// <param name="x">X location of the Cell to set properties on, starting with 0 as the farthest left</param>
-      /// <param name="y">Y location of the Cell to set properties on, starting with 0 as the top</param>
-      /// <param name="isTransparent">True if line-of-sight is not blocked by this Cell. False otherwise</param>
-      /// <param name="isWalkable">True if a character could walk across the Cell normally. False otherwise</param>
-      /// <param name="isExplored">Optional parameter defaults to false if not provided. True if the Cell has ever been in the field-of-view of the player. False otherwise</param>
-      void SetCellProperties( int x, int y, bool isTransparent, bool isWalkable, bool isExplored );
-
-      /// <summary>
       /// Set the properties of an unexplored Cell to the specified values
       /// </summary>
       /// <remarks>

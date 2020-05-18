@@ -70,7 +70,7 @@ namespace RogueSharp.Test
 
          Assert.AreEqual( 7, path.Length );
          ICell stepForward = path.StepForward();
-         Assert.AreEqual( new Cell( 4, 4, true, true, false ), stepForward );
+         Assert.AreEqual( new Cell( 4, 4, true, true ), stepForward );
       }
 
       [TestMethod]
@@ -375,7 +375,7 @@ namespace RogueSharp.Test
 
          Assert.AreEqual( 7, path.Length );
          ICell stepForward = path.StepForward();
-         Assert.AreEqual( new Cell( 4, 4, true, true, false ), stepForward );
+         Assert.AreEqual( new Cell( 4, 4, true, true ), stepForward );
       }
 
       [TestMethod]

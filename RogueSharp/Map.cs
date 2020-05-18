@@ -75,7 +75,7 @@ namespace RogueSharp
    /// </summary>
    public class Map<TCell> : IMap<TCell> where TCell : ICell
    {
-      private TCell[,] _cells;
+      protected TCell[,] _cells;
 
       /// <summary>
       /// Constructor creates a new uninitialized Map
@@ -180,40 +180,6 @@ namespace RogueSharp
       }
 
       /// <summary>
-      /// Check if the Cell is flagged as ever having been explored by the player
-      /// </summary>
-      /// <remarks>
-      /// The explored property of a Cell can be used to track if the Cell has ever been in the field-of-view of a character controlled by the player
-      /// This property will not automatically be updated based on FOV calculations or any other built-in functions of the RogueSharp library.
-      /// </remarks>
-      /// <example>
-      /// As the player moves characters around a Map, Cells will enter and exit the currently computed field-of-view
-      /// This property can be used to keep track of those Cells that have been "seen" and could be used to show fog-of-war type effects when rendering the map
-      /// </example>
-      /// <param name="x">X location of the Cell to check starting with 0 as the farthest left</param>
-      /// <param name="y">Y location of the Cell to check, starting with 0 as the top</param>
-      /// <returns>True if the Cell has been flagged as being explored by the player, false otherwise</returns>
-      public bool IsExplored( int x, int y )
-      {
-         return _cells[x, y].IsExplored;
-      }
-
-      /// <summary>
-      /// Set the properties of a Cell to the specified values
-      /// </summary>
-      /// <param name="x">X location of the Cell to set properties on, starting with 0 as the farthest left</param>
-      /// <param name="y">Y location of the Cell to set properties on, starting with 0 as the top</param>
-      /// <param name="isTransparent">True if line-of-sight is not blocked by this Cell. False otherwise</param>
-      /// <param name="isWalkable">True if a character could walk across the Cell normally. False otherwise</param>
-      /// <param name="isExplored">True if the Cell has ever been in the field-of-view of the player. False otherwise</param>
-      public void SetCellProperties( int x, int y, bool isTransparent, bool isWalkable, bool isExplored )
-      {
-         _cells[x, y].IsTransparent = isTransparent;
-         _cells[x, y].IsWalkable = isWalkable;
-         _cells[x, y].IsExplored = isExplored;
-      }
-
-      /// <summary>
       /// Set the properties of an unexplored Cell to the specified values
       /// </summary>
       /// <param name="x">X location of the Cell to set properties on, starting with 0 as the farthest left</param>
@@ -222,7 +188,8 @@ namespace RogueSharp
       /// <param name="isWalkable">True if a character could walk across the Cell normally. False otherwise</param>
       public void SetCellProperties( int x, int y, bool isTransparent, bool isWalkable )
       {
-         SetCellProperties( x, y, isTransparent, isWalkable, false );
+         _cells[x, y].IsTransparent = isTransparent;
+         _cells[x, y].IsWalkable = isWalkable;
       }
 
       /// <summary>
@@ -259,7 +226,7 @@ namespace RogueSharp
 
          foreach ( TCell cell in GetAllCells() )
          {
-            map.SetCellProperties( cell.X, cell.Y, cell.IsTransparent, cell.IsWalkable, cell.IsExplored );
+            map.SetCellProperties( cell.X, cell.Y, cell.IsTransparent, cell.IsWalkable );
          }
          return map;
       }
@@ -298,7 +265,7 @@ namespace RogueSharp
          }
          foreach ( TCell cell in sourceMap.GetAllCells() )
          {
-            SetCellProperties( cell.X + left, cell.Y + top, cell.IsTransparent, cell.IsWalkable, cell.IsExplored );
+            SetCellProperties( cell.X + left, cell.Y + top, cell.IsTransparent, cell.IsWalkable );
          }
       }
       
@@ -824,10 +791,6 @@ namespace RogueSharp
             {
                cellProperties |= MapState.CellProperties.Walkable;
             }
-            if ( cell.IsExplored )
-            {
-               cellProperties |= MapState.CellProperties.Explored;
-            }
             mapState.Cells[( cell.Y * Width ) + cell.X] = cellProperties;
          }
          return mapState;
@@ -852,7 +815,6 @@ namespace RogueSharp
 
             _cells[cell.X, cell.Y].IsTransparent = cellProperties.HasFlag( MapState.CellProperties.Transparent );
             _cells[cell.X, cell.Y].IsWalkable = cellProperties.HasFlag( MapState.CellProperties.Walkable );
-            _cells[cell.X, cell.Y].IsExplored = cellProperties.HasFlag( MapState.CellProperties.Explored );
          }
       }
 

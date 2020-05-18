@@ -9,10 +9,10 @@ namespace RogueSharp.Test
    {
       private readonly List<ICell> _pathFromX1Y1ToX1Y4 = new List<ICell>
       {
-         new Cell( 1, 1, true, true, true ),
-         new Cell( 1, 2, true, true, true ),
-         new Cell( 1, 3, true, true, true ),
-         new Cell( 1, 4, true, true, true )
+         new Cell( 1, 1, true, true ),
+         new Cell( 1, 2, true, true ),
+         new Cell( 1, 3, true, true ),
+         new Cell( 1, 4, true, true )
       };
 
       [TestMethod]
@@ -36,7 +36,7 @@ namespace RogueSharp.Test
       {
          var path = new Path( _pathFromX1Y1ToX1Y4 );
 
-         Assert.AreEqual( new Cell( 1, 1, true, true, true ), path.Start );
+         Assert.AreEqual( new Cell( 1, 1, true, true ), path.Start );
       }
 
       [TestMethod]
@@ -44,7 +44,7 @@ namespace RogueSharp.Test
       {
          var path = new Path( _pathFromX1Y1ToX1Y4 );
 
-         Assert.AreEqual( new Cell( 1, 4, true, true, true ), path.End );
+         Assert.AreEqual( new Cell( 1, 4, true, true ), path.End );
       }
 
       [TestMethod]
@@ -60,7 +60,7 @@ namespace RogueSharp.Test
       {
          var path = new Path( _pathFromX1Y1ToX1Y4 );
 
-         Assert.AreEqual( new Cell( 1, 1, true, true, true ), path.CurrentStep );
+         Assert.AreEqual( new Cell( 1, 1, true, true ), path.CurrentStep );
       }
 
       [TestMethod]
@@ -70,8 +70,8 @@ namespace RogueSharp.Test
 
          ICell nextStep = path.StepForward();
 
-         Assert.AreEqual( new Cell( 1, 2, true, true, true ), nextStep );
-         Assert.AreEqual( new Cell( 1, 2, true, true, true ), path.CurrentStep );
+         Assert.AreEqual( new Cell( 1, 2, true, true ), nextStep );
+         Assert.AreEqual( new Cell( 1, 2, true, true ), path.CurrentStep );
       }
 
       [TestMethod]
@@ -83,8 +83,8 @@ namespace RogueSharp.Test
          path.StepForward();
          ICell nextStep = path.StepForward();
 
-         Assert.AreEqual( new Cell( 1, 4, true, true, true ), nextStep );
-         Assert.AreEqual( new Cell( 1, 4, true, true, true ), path.CurrentStep );
+         Assert.AreEqual( new Cell( 1, 4, true, true ), nextStep );
+         Assert.AreEqual( new Cell( 1, 4, true, true ), path.CurrentStep );
       }
 
       [TestMethod]
@@ -110,7 +110,7 @@ namespace RogueSharp.Test
          ICell nextStep = path.TryStepForward();
 
          Assert.IsNull( nextStep );
-         Assert.AreEqual( new Cell( 1, 4, true, true, true ), path.CurrentStep );
+         Assert.AreEqual( new Cell( 1, 4, true, true ), path.CurrentStep );
       }
 
       [TestMethod]
@@ -130,7 +130,7 @@ namespace RogueSharp.Test
          ICell previousStep = path.TryStepBackward();
 
          Assert.IsNull( previousStep );
-         Assert.AreEqual( new Cell( 1, 1, true, true, true ), path.CurrentStep );
+         Assert.AreEqual( new Cell( 1, 1, true, true ), path.CurrentStep );
       }
 
       [TestMethod]
@@ -157,7 +157,7 @@ namespace RogueSharp.Test
 
          ICell previousStep = path.StepBackward();
 
-         Assert.AreEqual( new Cell( 1, 1, true, true, true ), previousStep );
+         Assert.AreEqual( new Cell( 1, 1, true, true ), previousStep );
       }
 
       [TestMethod]

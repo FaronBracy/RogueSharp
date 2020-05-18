@@ -11,24 +11,7 @@
       public Cell()
       {
       }
-
-      /// <summary>
-      /// Construct a new Cell located at the specified x and y location with the specified properties
-      /// </summary>
-      /// <param name="x">X location of the Cell starting with 0 as the farthest left</param>
-      /// <param name="y">Y location of the Cell starting with 0 as the top</param>
-      /// <param name="isTransparent">Is there a clear line-of-sight through this Cell</param>
-      /// <param name="isWalkable">Could a character could normally walk across the Cell without difficulty</param>
-      /// <param name="isExplored">Has this Cell ever been explored by the player</param>
-      public Cell( int x, int y, bool isTransparent, bool isWalkable, bool isExplored )
-      {
-         X = x;
-         Y = y;
-         IsTransparent = isTransparent;
-         IsWalkable = isWalkable;
-         IsExplored = isExplored;
-      }
-
+      
       /// <summary>
       /// Construct a new unexplored Cell located at the specified x and y location with the specified properties
       /// </summary>
@@ -42,7 +25,6 @@
          Y = y;
          IsTransparent = isTransparent;
          IsWalkable = isWalkable;
-         IsExplored = false;
       }
 
       /// <summary>
@@ -75,19 +57,6 @@
       /// </example>
       public bool IsWalkable { get; set; }
       
-      /// <summary>
-      /// Check if the Cell is flagged as ever having been explored by the player
-      /// </summary>
-      /// <remarks>
-      /// The explored property of a Cell can be used to track if the Cell has ever been in the field-of-view of a character controlled by the player
-      /// This property will not automatically be updated based on FOV calculations or any other built-in functions of the RogueSharp library.
-      /// </remarks>
-      /// <example>
-      /// As the player moves characters around a Map, Cells will enter and exit the currently computed field-of-view
-      /// This property can be used to keep track of those Cells that have been "seen" and could be used to show fog-of-war type effects when rendering the map
-      /// </example>
-      public bool IsExplored { get; set; }
-
       /// <summary>
       /// Provides a simple visual representation of the Cell using the following symbols:
       /// - `.`: `Cell` is transparent and walkable
@@ -131,7 +100,7 @@
          {
             return true;
          }
-         return X == other.X && Y == other.Y && IsTransparent == other.IsTransparent && IsWalkable == other.IsWalkable && IsExplored == other.IsExplored;
+         return X == other.X && Y == other.Y && IsTransparent == other.IsTransparent && IsWalkable == other.IsWalkable;
       }
 
       /// <summary>
@@ -191,7 +160,6 @@
             hashCode = ( hashCode * 397 ) ^ Y;
             hashCode = ( hashCode * 397 ) ^ IsTransparent.GetHashCode();
             hashCode = ( hashCode * 397 ) ^ IsWalkable.GetHashCode();
-            hashCode = ( hashCode * 397 ) ^ IsExplored.GetHashCode();
             return hashCode;
          }
       }
