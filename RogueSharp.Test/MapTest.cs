@@ -693,143 +693,87 @@ namespace RogueSharp.Test
       }
 
       [TestMethod]
-      public void ComputeFov_X6Y1CellRadius20_ExpectedFovMap()
+      public void GetAdjacentCells_TopLeftCorner_Returns2Cells()
       {
-         string mapRepresentation = @"####################################
-                                      #..................................#
-                                      #..###.########....................#
-                                      #....#.#......#....................#
-                                      #....#.#......#....................#
-                                      #.............#....................#
-                                      #....#.#......######################
-                                      #....#.#...........................#
-                                      #....#.#...........................#
-                                      #..................................#
-                                      ####################################";
+         string mapRepresentation = @"...
+                                      ...
+                                      ...";
          IMapCreationStrategy<Map> mapCreationStrategy = new StringDeserializeMapCreationStrategy<Map>( mapRepresentation );
          IMap map = Map.Create( mapCreationStrategy );
 
-         var visibleCells = map.ComputeFov( 6, 1, 20, true );
+         IEnumerable<Cell> cells = map.GetAdjacentCells( 0, 0 );
 
-         string expectedFovMap = @"###########################%%%%%%%%%
-                                   #..........................%%%%%%%%%
-                                   #..###.########%%.........%%%%%%%%%%
-                                   #%%%%#.#%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-                                   %%%%%#.#%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-                                   %%%%%%.%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-                                   %%%%%#.#%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-                                   %%%%%#.#%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-                                   %%%%%#.#%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-                                   %%%%%%.%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-                                   %%%%%###%%%%%%%%%%%%%%%%%%%%%%%%%%%%";
-         Assert.AreEqual( RemoveWhiteSpace( expectedFovMap ), RemoveWhiteSpace( map.ToString( true ) ) );
-         Assert.AreEqual( 99, visibleCells.Count );
+         Assert.AreEqual( 2, cells.Count() );
       }
 
       [TestMethod]
-      public void ComputeFov_EmptyMap_ExpectedCollectionOfVisibleCells()
+      public void GetAdjacentCells_BottomRightCorner_Returns2Cells()
       {
-         string mapRepresentation = @"####################################
-                                      #..................................#
-                                      #..................................#
-                                      #..................................#
-                                      #..................................#
-                                      #..................................#
-                                      #..................................#
-                                      #..................................#
-                                      #..................................#
-                                      #..................................#
-                                      ####################################";
-
+         string mapRepresentation = @"...
+                                      ...
+                                      ...";
          IMapCreationStrategy<Map> mapCreationStrategy = new StringDeserializeMapCreationStrategy<Map>( mapRepresentation );
          IMap map = Map.Create( mapCreationStrategy );
 
-         map.ComputeFov( 15, 5, 3, false );
+         IEnumerable<Cell> cells = map.GetAdjacentCells( 2, 2 );
 
-         string expectedFovMap = @"%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-                                   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-                                   %%%%%%%%%%%%%%%.%%%%%%%%%%%%%%%%%%%%
-                                   %%%%%%%%%%%%%%...%%%%%%%%%%%%%%%%%%%
-                                   %%%%%%%%%%%%%.....%%%%%%%%%%%%%%%%%%
-                                   %%%%%%%%%%%%.......%%%%%%%%%%%%%%%%%
-                                   %%%%%%%%%%%%%.....%%%%%%%%%%%%%%%%%%
-                                   %%%%%%%%%%%%%%...%%%%%%%%%%%%%%%%%%%
-                                   %%%%%%%%%%%%%%%.%%%%%%%%%%%%%%%%%%%%
-                                   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-                                   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%";
-         Assert.AreEqual( RemoveWhiteSpace( expectedFovMap ), RemoveWhiteSpace( map.ToString( true ) ) );
+         Assert.AreEqual( 2, cells.Count() );
       }
 
       [TestMethod]
-      public void AppendFov_X6Y1CellRadius20AndX15Y1CellRadius5_ExpectedFovMap()
+      public void GetAdjacentCells_X1Y1_Returns4Cells()
       {
-         string mapRepresentation = @"####################################
-                                      #..................................#
-                                      #..###.########....................#
-                                      #....#.#......#....................#
-                                      #....#.#......#....................#
-                                      #.............#....................#
-                                      #....#.#......######################
-                                      #....#.#...........................#
-                                      #....#.#...........................#
-                                      #..................................#
-                                      ####################################";
+         string mapRepresentation = @"...
+                                      ...
+                                      ...";
          IMapCreationStrategy<Map> mapCreationStrategy = new StringDeserializeMapCreationStrategy<Map>( mapRepresentation );
          IMap map = Map.Create( mapCreationStrategy );
 
-         map.ComputeFov( 6, 1, 20, true );
-         var visibleCells = map.AppendFov( 15, 1, 5, true );
+         IEnumerable<Cell> cells = map.GetAdjacentCells( 1, 1 );
 
-         string expectedFovMap = @"###########################%%%%%%%%%
-                                   #..........................%%%%%%%%%
-                                   #..###.########...........%%%%%%%%%%
-                                   #%%%%#.#%%%%%%#....%%%%%%%%%%%%%%%%%
-                                   %%%%%#.#%%%%%%#...%%%%%%%%%%%%%%%%%%
-                                   %%%%%%.%%%%%%%#..%%%%%%%%%%%%%%%%%%%
-                                   %%%%%#.#%%%%%%####%%%%%%%%%%%%%%%%%%
-                                   %%%%%#.#%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-                                   %%%%%#.#%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-                                   %%%%%%.%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-                                   %%%%%###%%%%%%%%%%%%%%%%%%%%%%%%%%%%";
-         Assert.AreEqual( RemoveWhiteSpace( expectedFovMap ), RemoveWhiteSpace( map.ToString( true ) ) );
-         Assert.AreEqual( 117, visibleCells.Count );
+         Assert.AreEqual( 4, cells.Count() );
       }
 
       [TestMethod]
-      public void Restore_AfterComputingFovAndSaving_ExpectedMapWithFov()
+      public void GetAdjacentCells_TopLeftCornerWithDiagonals_Returns3Cells()
       {
-         string mapRepresentation = @"####################################
-                                      #..................................#
-                                      #..###.########....................#
-                                      #....#.#......#....................#
-                                      #....#.#......#....................#
-                                      #.............#....................#
-                                      #....#.#......######################
-                                      #....#.#...........................#
-                                      #....#.#...........................#
-                                      #..................................#
-                                      ####################################";
+         string mapRepresentation = @"...
+                                      ...
+                                      ...";
          IMapCreationStrategy<Map> mapCreationStrategy = new StringDeserializeMapCreationStrategy<Map>( mapRepresentation );
          IMap map = Map.Create( mapCreationStrategy );
-         map.ComputeFov( 6, 1, 20, true );
-         map.AppendFov( 15, 1, 5, true );
-         MapState mapState = map.Save();
 
-         IMap newMap = new Map();
-         newMap.Restore( mapState );
+         IEnumerable<Cell> cells = map.GetAdjacentCells( 0, 0, true );
 
-         string expectedFovMap = @"###########################%%%%%%%%%
-                                   #..........................%%%%%%%%%
-                                   #..###.########...........%%%%%%%%%%
-                                   #%%%%#.#%%%%%%#....%%%%%%%%%%%%%%%%%
-                                   %%%%%#.#%%%%%%#...%%%%%%%%%%%%%%%%%%
-                                   %%%%%%.%%%%%%%#..%%%%%%%%%%%%%%%%%%%
-                                   %%%%%#.#%%%%%%####%%%%%%%%%%%%%%%%%%
-                                   %%%%%#.#%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-                                   %%%%%#.#%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-                                   %%%%%%.%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-                                   %%%%%###%%%%%%%%%%%%%%%%%%%%%%%%%%%%";
-         Assert.AreEqual( RemoveWhiteSpace( expectedFovMap ), RemoveWhiteSpace( map.ToString( true ) ) );
+         Assert.AreEqual( 3, cells.Count() );
+      }
+
+      [TestMethod]
+      public void GetAdjacentCells_BottomRightCornerWithDiagonals_Returns3Cells()
+      {
+         string mapRepresentation = @"...
+                                      ...
+                                      ...";
+         IMapCreationStrategy<Map> mapCreationStrategy = new StringDeserializeMapCreationStrategy<Map>( mapRepresentation );
+         IMap map = Map.Create( mapCreationStrategy );
+
+         IEnumerable<Cell> cells = map.GetAdjacentCells( 2, 2, true );
+
+         Assert.AreEqual( 3, cells.Count() );
+      }
+
+      [TestMethod]
+      public void GetAdjacentCells_X1Y1WithDiagonals_Returns8Cells()
+      {
+         string mapRepresentation = @"...
+                                      ...
+                                      ...";
+         IMapCreationStrategy<Map> mapCreationStrategy = new StringDeserializeMapCreationStrategy<Map>( mapRepresentation );
+         IMap map = Map.Create( mapCreationStrategy );
+
+         IEnumerable<Cell> cells = map.GetAdjacentCells( 1, 1, true );
+
+         Assert.AreEqual( 8, cells.Count() );
       }
 
       private static string RemoveWhiteSpace( string source )

@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Text;
 using RogueSharp.MapCreation;
 
 namespace RogueSharp
 {
    /// <summary>
-   /// A Map represents a rectangular grid of Cells, each of which has a number of properties for determining walkability, field-of-view and so on
+   /// A Map represents a rectangular grid of Cells, each of which has a number of properties for determining walkability, transparency and so on
    /// The upper left corner of the Map is Cell (0,0) and the X value increases to the right, as the Y value increases downward
    /// </summary>
    public class Map : Map<Cell>, IMap
@@ -76,8 +75,7 @@ namespace RogueSharp
    /// </summary>
    public class Map<TCell> : IMap<TCell> where TCell : ICell
    {
-      private FieldOfView<TCell> _fieldOfView;
-      private TCell[,] _cells;
+      protected TCell[,] _cells;
 
       /// <summary>
       /// Constructor creates a new uninitialized Map
@@ -147,7 +145,6 @@ namespace RogueSharp
                _cells[x, y].Y = y;
             }
          }
-         _fieldOfView = new FieldOfView<TCell>( this );
       }
 
       /// <summary>
@@ -183,75 +180,16 @@ namespace RogueSharp
       }
 
       /// <summary>
-      /// Check if the Cell is in the currently computed field-of-view
-      /// For newly initialized maps a field-of-view will not exist so all Cells will return false
-      /// Field-of-view must first be calculated by calling ComputeFov and/or AppendFov
-      /// </summary>
-      /// <remarks>
-      /// Field-of-view (FOV) is basically a calculation of what is observable in the Map from a given Cell with a given light radius
-      /// </remarks>
-      /// <example>
-      /// Field-of-view can be used to simulate a character holding a light source and exploring a Map representing a dark cavern
-      /// Any Cells within the FOV would be what the character could see from their current location and lighting conditions
-      /// </example>
-      /// <param name="x">X location of the Cell to check starting with 0 as the farthest left</param>
-      /// <param name="y">Y location of the Cell to check, starting with 0 as the top</param>
-      /// <returns>True if the Cell is in the currently computed field-of-view, false otherwise</returns>
-      public bool IsInFov( int x, int y )
-      {
-         return _fieldOfView.IsInFov( x, y );
-      }
-
-      /// <summary>
-      /// Check if the Cell is flagged as ever having been explored by the player
-      /// </summary>
-      /// <remarks>
-      /// The explored property of a Cell can be used to track if the Cell has ever been in the field-of-view of a character controlled by the player
-      /// This property will not automatically be updated based on FOV calculations or any other built-in functions of the RogueSharp library.
-      /// </remarks>
-      /// <example>
-      /// As the player moves characters around a Map, Cells will enter and exit the currently computed field-of-view
-      /// This property can be used to keep track of those Cells that have been "seen" and could be used to show fog-of-war type effects when rendering the map
-      /// </example>
-      /// <param name="x">X location of the Cell to check starting with 0 as the farthest left</param>
-      /// <param name="y">Y location of the Cell to check, starting with 0 as the top</param>
-      /// <returns>True if the Cell has been flagged as being explored by the player, false otherwise</returns>
-      public bool IsExplored( int x, int y )
-      {
-         return _cells[x, y].IsExplored;
-      }
-
-      /// <summary>
-      /// Set the properties of a Cell to the specified values
-      /// </summary>
-      /// <remarks>
-      /// IsInFov cannot be set through this method as it is always calculated by calling ComputeFov and/or AppendFov
-      /// </remarks>
-      /// <param name="x">X location of the Cell to set properties on, starting with 0 as the farthest left</param>
-      /// <param name="y">Y location of the Cell to set properties on, starting with 0 as the top</param>
-      /// <param name="isTransparent">True if line-of-sight is not blocked by this Cell. False otherwise</param>
-      /// <param name="isWalkable">True if a character could walk across the Cell normally. False otherwise</param>
-      /// <param name="isExplored">True if the Cell has ever been in the field-of-view of the player. False otherwise</param>
-      public void SetCellProperties( int x, int y, bool isTransparent, bool isWalkable, bool isExplored )
-      {
-         _cells[x, y].IsTransparent = isTransparent;
-         _cells[x, y].IsWalkable = isWalkable;
-         _cells[x, y].IsExplored = isExplored;
-      }
-
-      /// <summary>
       /// Set the properties of an unexplored Cell to the specified values
       /// </summary>
-      /// <remarks>
-      /// IsInFov cannot be set through this method as it is always calculated by calling ComputeFov and/or AppendFov
-      /// </remarks>
       /// <param name="x">X location of the Cell to set properties on, starting with 0 as the farthest left</param>
       /// <param name="y">Y location of the Cell to set properties on, starting with 0 as the top</param>
       /// <param name="isTransparent">True if line-of-sight is not blocked by this Cell. False otherwise</param>
       /// <param name="isWalkable">True if a character could walk across the Cell normally. False otherwise</param>
       public void SetCellProperties( int x, int y, bool isTransparent, bool isWalkable )
       {
-         SetCellProperties( x, y, isTransparent, isWalkable, false );
+         _cells[x, y].IsTransparent = isTransparent;
+         _cells[x, y].IsWalkable = isWalkable;
       }
 
       /// <summary>
@@ -288,7 +226,7 @@ namespace RogueSharp
 
          foreach ( TCell cell in GetAllCells() )
          {
-            map.SetCellProperties( cell.X, cell.Y, cell.IsTransparent, cell.IsWalkable, cell.IsExplored );
+            map.SetCellProperties( cell.X, cell.Y, cell.IsTransparent, cell.IsWalkable );
          }
          return map;
       }
@@ -327,43 +265,10 @@ namespace RogueSharp
          }
          foreach ( TCell cell in sourceMap.GetAllCells() )
          {
-            SetCellProperties( cell.X + left, cell.Y + top, cell.IsTransparent, cell.IsWalkable, cell.IsExplored );
+            SetCellProperties( cell.X + left, cell.Y + top, cell.IsTransparent, cell.IsWalkable );
          }
       }
-
-      /// <summary>
-      /// Performs a field-of-view calculation with the specified parameters.
-      /// Field-of-view (FOV) is basically a calculation of what is observable in the Map from a given Cell with a given light radius.
-      /// Any existing field-of-view calculations will be overwritten when calling this method.
-      /// </summary>
-      /// <param name="xOrigin">X location of the Cell to perform the field-of-view calculation with 0 as the farthest left</param>
-      /// <param name="yOrigin">Y location of the Cell to perform the field-of-view calculation with 0 as the top</param>
-      /// <param name="radius">The number of Cells in which the field-of-view extends from the origin Cell. Think of this as the intensity of the light source.</param>
-      /// <param name="lightWalls">True if walls should be included in the field-of-view when they are within the radius of the light source. False excludes walls even when they are within range.</param>
-      /// <returns>List of Cells representing what is observable in the Map based on the specified parameters</returns>
-      public ReadOnlyCollection<TCell> ComputeFov( int xOrigin, int yOrigin, int radius, bool lightWalls )
-      {
-         return _fieldOfView.ComputeFov( xOrigin, yOrigin, radius, lightWalls );
-      }
-
-      /// <summary>
-      /// Performs a field-of-view calculation with the specified parameters and appends it any existing field-of-view calculations.
-      /// Field-of-view (FOV) is basically a calculation of what is observable in the Map from a given Cell with a given light radius.
-      /// </summary>
-      /// <example>
-      /// When a character is holding a light source in a large area that also has several other sources of light such as torches along the walls
-      /// ComputeFov could first be called for the character and then AppendFov could be called for each torch to give us the final combined FOV given all the light sources
-      /// </example>
-      /// <param name="xOrigin">X location of the Cell to perform the field-of-view calculation with 0 as the farthest left</param>
-      /// <param name="yOrigin">Y location of the Cell to perform the field-of-view calculation with 0 as the top</param>
-      /// <param name="radius">The number of Cells in which the field-of-view extends from the origin Cell. Think of this as the intensity of the light source.</param>
-      /// <param name="lightWalls">True if walls should be included in the field-of-view when they are within the radius of the light source. False excludes walls even when they are within range.</param>
-      /// <returns>List of Cells representing what is observable in the Map based on the specified parameters</returns>
-      public ReadOnlyCollection<TCell> AppendFov( int xOrigin, int yOrigin, int radius, bool lightWalls )
-      {
-         return _fieldOfView.AppendFov( xOrigin, yOrigin, radius, lightWalls );
-      }
-
+      
       /// <summary>
       /// Get an IEnumerable of all Cells in the Map
       /// </summary>
@@ -758,6 +663,75 @@ namespace RogueSharp
       }
 
       /// <summary>
+      /// Get an IEnumerable of adjacent Cells which touch the center Cell. Diagonal cells do not count as adjacent.
+      /// </summary>
+      /// <param name="xCenter">X location of the center Cell with 0 as the farthest left</param>
+      /// <param name="yCenter">Y location of the center Cell with 0 as the top</param>
+      /// <returns>IEnumerable of adjacent Cells which touch the center Cell</returns>
+      public IEnumerable<TCell> GetAdjacentCells( int xCenter, int yCenter )
+      {
+         return GetAdjacentCells( xCenter, yCenter, false );
+      }
+
+      /// <summary>
+      /// Get an IEnumerable of adjacent Cells which touch the center Cell. Diagonal cells may optionally be included.
+      /// </summary>
+      /// <param name="xCenter">X location of the center Cell with 0 as the farthest left</param>
+      /// <param name="yCenter">Y location of the center Cell with 0 as the top</param>
+      /// <param name="includeDiagonals">Should diagonal Cells count as being adjacent cells?</param>
+      /// <returns>IEnumerable of adjacent Cells which touch the center Cell</returns>
+      public IEnumerable<TCell> GetAdjacentCells( int xCenter, int yCenter, bool includeDiagonals )
+      {
+         int topY = yCenter - 1;
+         int bottomY = yCenter + 1;
+         int leftX = xCenter - 1;
+         int rightX = xCenter + 1;
+
+         if ( topY >= 0 )
+         {
+            yield return GetCell( xCenter, topY );
+         }
+
+         if ( leftX >= 0 )
+         {
+            yield return GetCell( leftX, yCenter );
+         }
+
+         if ( bottomY < Height )
+         {
+            yield return GetCell( xCenter, bottomY );
+         }
+
+         if ( rightX < Width )
+         {
+            yield return GetCell( rightX, yCenter );
+         }
+
+         if ( includeDiagonals )
+         {
+            if ( rightX < Width && topY >= 0 )
+            {
+               yield return GetCell( rightX, topY );
+            }
+
+            if ( rightX < Width && bottomY < Height )
+            {
+               yield return GetCell( rightX, bottomY );
+            }
+
+            if ( leftX >= 0 && topY >= 0 )
+            {
+               yield return GetCell( leftX, topY );
+            }
+
+            if ( leftX >= 0 && bottomY < Height )
+            {
+               yield return GetCell( leftX, bottomY );
+            }
+         }
+      }
+
+      /// <summary>
       /// Get a Cell at the specified location
       /// </summary>
       /// <param name="x">X location of the Cell to get starting with 0 as the farthest left</param>
@@ -765,22 +739,18 @@ namespace RogueSharp
       /// <returns>Cell at the specified location</returns>
       public TCell GetCell( int x, int y )
       {
-         TCell cell = _cells[x, y];
-         cell.IsInFov = _fieldOfView.IsInFov( x, y );
-         return cell;
+         return _cells[x, y];
       }
 
       /// <summary>
       /// Provides a simple visual representation of the map using the following symbols:
-      /// - `%`: `Cell` is not in field-of-view
-      /// - `.`: `Cell` is transparent, walkable, and in field-of-view
-      /// - `s`: `Cell` is walkable and in field-of-view (but not transparent)
-      /// - `o`: `Cell` is transparent and in field-of-view (but not walkable)
-      /// - `#`: `Cell` is in field-of-view (but not transparent or walkable)
+      /// - `.`: `Cell` is transparent and walkable
+      /// - `s`: `Cell` is walkable (but not transparent)
+      /// - `o`: `Cell` is transparent (but not walkable)
+      /// - `#`: `Cell` is not transparent or walkable
       /// </summary>
-      /// <param name="useFov">True if field-of-view calculations will be used when creating the string representation of the Map. False otherwise</param>
       /// <returns>A string representation of the map using special symbols to denote Cell properties</returns>
-      public string ToString( bool useFov )
+      public override string ToString()
       {
          var mapRepresentation = new StringBuilder();
          int lastY = 0;
@@ -792,7 +762,7 @@ namespace RogueSharp
                lastY = cell.Y;
                mapRepresentation.Append( Environment.NewLine );
             }
-            mapRepresentation.Append( cell.ToString( useFov ) );
+            mapRepresentation.Append( cell.ToString() );
          }
          return mapRepresentation.ToString().TrimEnd( '\r', '\n' );
       }
@@ -813,10 +783,6 @@ namespace RogueSharp
          foreach ( TCell cell in GetAllCells() )
          {
             MapState.CellProperties cellProperties = MapState.CellProperties.None;
-            if ( cell.IsInFov )
-            {
-               cellProperties |= MapState.CellProperties.Visible;
-            }
             if ( cell.IsTransparent )
             {
                cellProperties |= MapState.CellProperties.Transparent;
@@ -824,10 +790,6 @@ namespace RogueSharp
             if ( cell.IsWalkable )
             {
                cellProperties |= MapState.CellProperties.Walkable;
-            }
-            if ( cell.IsExplored )
-            {
-               cellProperties |= MapState.CellProperties.Explored;
             }
             mapState.Cells[( cell.Y * Width ) + cell.X] = cellProperties;
          }
@@ -846,22 +808,14 @@ namespace RogueSharp
             throw new ArgumentNullException( nameof( state ), "Map state cannot be null" );
          }
 
-         var inFov = new HashSet<int>();
-
          Initialize( state.Width, state.Height );
          foreach ( TCell cell in GetAllCells() )
          {
             MapState.CellProperties cellProperties = state.Cells[( cell.Y * Width ) + cell.X];
-            if ( cellProperties.HasFlag( MapState.CellProperties.Visible ) )
-            {
-               inFov.Add( IndexFor( cell.X, cell.Y ) );
-            }
+
             _cells[cell.X, cell.Y].IsTransparent = cellProperties.HasFlag( MapState.CellProperties.Transparent );
             _cells[cell.X, cell.Y].IsWalkable = cellProperties.HasFlag( MapState.CellProperties.Walkable );
-            _cells[cell.X, cell.Y].IsExplored = cellProperties.HasFlag( MapState.CellProperties.Explored );
          }
-
-         _fieldOfView = new FieldOfView<TCell>( this, inFov );
       }
 
       /// <summary>
@@ -924,22 +878,6 @@ namespace RogueSharp
       private bool AddToHashSet( HashSet<int> hashSet, TCell cell )
       {
          return hashSet.Add( IndexFor( cell ) );
-      }
-
-      /// <summary>
-      /// Provides a simple visual representation of the map using the following symbols:
-      /// - `.`: `Cell` is transparent and walkable
-      /// - `s`: `Cell` is walkable (but not transparent)
-      /// - `o`: `Cell` is transparent (but not walkable)
-      /// - `#`: `Cell` is not transparent or walkable
-      /// </summary>
-      /// <remarks>
-      /// This call ignores field-of-view. If field-of-view is important use the ToString overload with a "true" parameter
-      /// </remarks>
-      /// <returns>A string representation of the map using special symbols to denote Cell properties</returns>
-      public override string ToString()
-      {
-         return ToString( false );
       }
    }
 }

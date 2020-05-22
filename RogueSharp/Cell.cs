@@ -11,26 +11,7 @@
       public Cell()
       {
       }
-
-      /// <summary>
-      /// Construct a new Cell located at the specified x and y location with the specified properties
-      /// </summary>
-      /// <param name="x">X location of the Cell starting with 0 as the farthest left</param>
-      /// <param name="y">Y location of the Cell starting with 0 as the top</param>
-      /// <param name="isTransparent">Is there a clear line-of-sight through this Cell</param>
-      /// <param name="isWalkable">Could a character could normally walk across the Cell without difficulty</param>
-      /// <param name="isInFov">Is the Cell currently in the currently observable field-of-view</param>
-      /// <param name="isExplored">Has this Cell ever been explored by the player</param>
-      public Cell( int x, int y, bool isTransparent, bool isWalkable, bool isInFov, bool isExplored )
-      {
-         X = x;
-         Y = y;
-         IsTransparent = isTransparent;
-         IsWalkable = isWalkable;
-         IsInFov = isInFov;
-         IsExplored = isExplored;
-      }
-
+      
       /// <summary>
       /// Construct a new unexplored Cell located at the specified x and y location with the specified properties
       /// </summary>
@@ -38,15 +19,12 @@
       /// <param name="y">Y location of the Cell starting with 0 as the top</param>
       /// <param name="isTransparent">Is there a clear line-of-sight through this Cell</param>
       /// <param name="isWalkable">Could a character could normally walk across the Cell without difficulty</param>
-      /// <param name="isInFov">Is the Cell currently in the currently observable field-of-view</param>
-      public Cell( int x, int y, bool isTransparent, bool isWalkable, bool isInFov )
+      public Cell( int x, int y, bool isTransparent, bool isWalkable )
       {
          X = x;
          Y = y;
          IsTransparent = isTransparent;
          IsWalkable = isWalkable;
-         IsInFov = isInFov;
-         IsExplored = false;
       }
 
       /// <summary>
@@ -78,34 +56,7 @@
       /// A Cell representing a solid stone wall would not be walkable
       /// </example>
       public bool IsWalkable { get; set; }
-
-      /// <summary>
-      /// Check if the Cell is in the currently computed field-of-view
-      /// For newly initialized maps a field-of-view will not exist so all Cells will return false
-      /// Field-of-view must first be calculated by calling ComputeFov and/or AppendFov
-      /// </summary>
-      /// <remarks>
-      /// Field-of-view (FOV) is basically a calculation of what is observable in the Map from a given Cell with a given light radius
-      /// </remarks>
-      /// <example>
-      /// Field-of-view can be used to simulate a character holding a light source and exploring a Map representing a dark cavern
-      /// Any Cells within the FOV would be what the character could see from their current location and lighting conditions
-      /// </example>
-      public bool IsInFov { get; set; }
-
-      /// <summary>
-      /// Check if the Cell is flagged as ever having been explored by the player
-      /// </summary>
-      /// <remarks>
-      /// The explored property of a Cell can be used to track if the Cell has ever been in the field-of-view of a character controlled by the player
-      /// This property will not automatically be updated based on FOV calculations or any other built-in functions of the RogueSharp library.
-      /// </remarks>
-      /// <example>
-      /// As the player moves characters around a Map, Cells will enter and exit the currently computed field-of-view
-      /// This property can be used to keep track of those Cells that have been "seen" and could be used to show fog-of-war type effects when rendering the map
-      /// </example>
-      public bool IsExplored { get; set; }
-
+      
       /// <summary>
       /// Provides a simple visual representation of the Cell using the following symbols:
       /// - `.`: `Cell` is transparent and walkable
@@ -113,53 +64,25 @@
       /// - `o`: `Cell` is transparent (but not walkable)
       /// - `#`: `Cell` is not transparent or walkable
       /// </summary>
-      /// <remarks>
-      /// This call ignores field-of-view. If field-of-view is important use the ToString overload with a "true" parameter
-      /// </remarks>
       /// <returns>A string representation of the Cell using special symbols to denote Cell properties</returns>
       public override string ToString()
       {
-         return ToString( false );
-      }
-
-      /// <summary>
-      /// Provides a simple visual representation of the Cell using the following symbols:
-      /// - `%`: `Cell` is not in field-of-view
-      /// - `.`: `Cell` is transparent, walkable, and in field-of-view
-      /// - `s`: `Cell` is walkable and in field-of-view (but not transparent)
-      /// - `o`: `Cell` is transparent and in field-of-view (but not walkable)
-      /// - `#`: `Cell` is in field-of-view (but not transparent or walkable)
-      /// </summary>
-      /// <param name="useFov">True if field-of-view calculations will be used when creating the string representation of the Cell. False otherwise</param>
-      /// <returns>A string representation of the Cell using special symbols to denote Cell properties</returns>
-      public string ToString( bool useFov )
-      {
-         if ( useFov && !IsInFov )
-         {
-            return "%";
-         }
          if ( IsWalkable )
          {
             if ( IsTransparent )
             {
                return ".";
             }
-            else
-            {
-               return "s";
-            }
+
+            return "s";
          }
-         else
+
+         if ( IsTransparent )
          {
-            if ( IsTransparent )
-            {
-               return "o";
-            }
-            else
-            {
-               return "#";
-            }
+            return "o";
          }
+
+         return "#";
       }
 
       /// <summary>
@@ -177,7 +100,7 @@
          {
             return true;
          }
-         return X == other.X && Y == other.Y && IsTransparent == other.IsTransparent && IsWalkable == other.IsWalkable && IsInFov == other.IsInFov && IsExplored == other.IsExplored;
+         return X == other.X && Y == other.Y && IsTransparent == other.IsTransparent && IsWalkable == other.IsWalkable;
       }
 
       /// <summary>
@@ -237,8 +160,6 @@
             hashCode = ( hashCode * 397 ) ^ Y;
             hashCode = ( hashCode * 397 ) ^ IsTransparent.GetHashCode();
             hashCode = ( hashCode * 397 ) ^ IsWalkable.GetHashCode();
-            hashCode = ( hashCode * 397 ) ^ IsInFov.GetHashCode();
-            hashCode = ( hashCode * 397 ) ^ IsExplored.GetHashCode();
             return hashCode;
          }
       }
