@@ -75,7 +75,7 @@ namespace RogueSharp
    /// </summary>
    public class Map<TCell> : IMap<TCell> where TCell : ICell
    {
-      protected TCell[,] _cells;
+      private TCell[,] _cells;
 
       /// <summary>
       /// Constructor creates a new uninitialized Map
@@ -92,6 +92,19 @@ namespace RogueSharp
       public Map( int width, int height )
       {
          Init( width, height );
+      }
+
+      /// <summary>
+      /// This Indexer allows direct access to Cells given x and y index
+      /// </summary>
+      /// <param name="x">X index of the Cell to get</param>
+      /// <param name="y">Y index of the Cell to get</param>
+      /// <returns>Cell at the specified index</returns>
+      public TCell this[int x, int y]
+      {
+         get => _cells[x, y];
+         set => _cells[x, y] = value;
+
       }
 
       /// <summary>
@@ -268,7 +281,7 @@ namespace RogueSharp
             SetCellProperties( cell.X + left, cell.Y + top, cell.IsTransparent, cell.IsWalkable );
          }
       }
-      
+
       /// <summary>
       /// Get an IEnumerable of all Cells in the Map
       /// </summary>

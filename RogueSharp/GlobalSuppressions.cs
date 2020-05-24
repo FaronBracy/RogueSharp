@@ -51,3 +51,4 @@ using System.Diagnostics.CodeAnalysis;
 [assembly: SuppressMessage( "Performance", "CA1814:Prefer jagged arrays over multidimensional", Justification = "Does not waste space", Scope = "member", Target = "~F:RogueSharp.GoalMap`1._cellWeights" )]
 [assembly: SuppressMessage( "Performance", "CA1814:Prefer jagged arrays over multidimensional", Justification = "Does not waste space", Scope = "member", Target = "~M:RogueSharp.GoalMap`1.#ctor(RogueSharp.IMap{`0},System.Boolean)" )]
 [assembly: SuppressMessage( "Performance", "CA1814:Prefer jagged arrays over multidimensional", Justification = "Does not waste space", Scope = "member", Target = "~M:RogueSharp.Map`1.Init(System.Int32,System.Int32)" )]
+[assembly: SuppressMessage( "Performance", "CA1814:Prefer jagged arrays over multidimensional", Justification = "Does not waste space", Scope = "member", Target = "~F:RogueSharp.Map`1._cells" )]
