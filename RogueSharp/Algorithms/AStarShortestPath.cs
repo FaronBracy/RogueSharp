@@ -17,8 +17,7 @@ namespace RogueSharp.Algorithms
       public AStarShortestPath()
       {
       }
-
-
+      
       /// <summary>
       /// Construct a new class for computing the shortest path between two Cells on a Map using the A* algorithm
       /// </summary>
@@ -136,7 +135,7 @@ namespace RogueSharp.Algorithms
          return path;
       }
 
-      private double CalculateDistance( TCell source, TCell destination )
+      private static double CalculateDistance( TCell source, TCell destination )
       {
          int dx = Math.Abs( source.X - destination.X );
          int dy = Math.Abs( source.Y - destination.Y );
@@ -144,7 +143,7 @@ namespace RogueSharp.Algorithms
          return dx + dy;
       }
 
-      private double CalculateDistance( TCell source, TCell destination, double? diagonalCost )
+      private static double CalculateDistance( TCell source, TCell destination, double? diagonalCost )
       {
          if ( !diagonalCost.HasValue )
          {

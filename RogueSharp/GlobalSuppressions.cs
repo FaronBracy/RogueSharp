@@ -8,6 +8,8 @@
 // "In Suppression File".
 // You do not need to add suppressions to this file manually.
 
+using System.Diagnostics.CodeAnalysis;
+
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Scope = "member", Target = "RogueSharp.Rectangle.#Intersects(RogueSharp.Rectangle&,System.Boolean&)" )]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Scope = "member", Target = "RogueSharp.Rectangle.#Intersect(RogueSharp.Rectangle&,RogueSharp.Rectangle&,RogueSharp.Rectangle&)" )]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "1", Scope = "member", Target = "RogueSharp.Rectangle.#Intersect(RogueSharp.Rectangle&,RogueSharp.Rectangle&,RogueSharp.Rectangle&)" )]
@@ -46,3 +48,6 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Performance", "CA1814:Prefer jagged arrays over multidimensional", Justification = "The array in question represents a rectangular map", Scope = "member", Target = "~M:RogueSharp.GoalMap.#ctor(RogueSharp.IMap,System.Boolean)" )]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Globalization", "CA1304:Specify CultureInfo", Justification = "Not available in .NET Standard 1.0", Scope = "member", Target = "~M:RogueSharp.DiceNotation.DiceParser.Parse(System.String)~RogueSharp.DiceNotation.DiceExpression" )]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Performance", "CA1814:Prefer jagged arrays over multidimensional", Justification = "<Pending>", Scope = "member", Target = "~M:RogueSharp.Map.#ctor(System.Int32,System.Int32)" )]
+[assembly: SuppressMessage( "Performance", "CA1814:Prefer jagged arrays over multidimensional", Justification = "Does not waste space", Scope = "member", Target = "~F:RogueSharp.GoalMap`1._cellWeights" )]
+[assembly: SuppressMessage( "Performance", "CA1814:Prefer jagged arrays over multidimensional", Justification = "Does not waste space", Scope = "member", Target = "~M:RogueSharp.GoalMap`1.#ctor(RogueSharp.IMap{`0},System.Boolean)" )]
+[assembly: SuppressMessage( "Performance", "CA1814:Prefer jagged arrays over multidimensional", Justification = "Does not waste space", Scope = "member", Target = "~M:RogueSharp.Map`1.Init(System.Int32,System.Int32)" )]
