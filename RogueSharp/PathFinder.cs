@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using RogueSharp.Algorithms;
 
 namespace RogueSharp
@@ -41,10 +40,8 @@ namespace RogueSharp
    /// </summary>
    public class PathFinder<TCell> where TCell : ICell
    {
-      private readonly EdgeWeightedDigraph _graph;
+      private readonly double? _diagonalCost;
       private readonly IMap<TCell> _map;
-      private int? _sourceIndex = null;
-      private DijkstraShortestPath _dijkstraShortestPath = null;
 
       /// <summary>
       /// Constructs a new PathFinder instance for the specified Map that will not consider diagonal movements to be valid.
@@ -54,23 +51,6 @@ namespace RogueSharp
       public PathFinder( IMap<TCell> map )
       {
          _map = map ?? throw new ArgumentNullException( nameof( map ), "Map cannot be null" );
-         _graph = new EdgeWeightedDigraph( _map.Width * _map.Height );
-         foreach ( TCell cell in _map.GetAllCells() )
-         {
-            if ( cell.IsWalkable )
-            {
-               int v = IndexFor( cell );
-               foreach ( TCell neighbor in _map.GetAdjacentCells( cell.X, cell.Y ) )
-               {
-                  if ( neighbor.IsWalkable )
-                  {
-                     int w = IndexFor( neighbor );
-                     _graph.AddEdge( new DirectedEdge( v, w, 1.0 ) );
-                     _graph.AddEdge( new DirectedEdge( w, v, 1.0 ) );
-                  }
-               }
-            }
-         }
       }
 
       /// <summary>
@@ -86,35 +66,11 @@ namespace RogueSharp
       public PathFinder( IMap<TCell> map, double diagonalCost )
       {
          _map = map ?? throw new ArgumentNullException( nameof( map ), "Map cannot be null" );
-         _graph = new EdgeWeightedDigraph( _map.Width * _map.Height );
-         foreach ( TCell cell in _map.GetAllCells() )
-         {
-            if ( cell.IsWalkable )
-            {
-               int v = IndexFor( cell );
-               foreach ( TCell neighbor in _map.GetAdjacentCells( cell.X, cell.Y, true ) )
-               {
-                  if ( neighbor.IsWalkable )
-                  {
-                     int w = IndexFor( neighbor );
-                     if ( neighbor.X != cell.X && neighbor.Y != cell.Y )
-                     {
-                        _graph.AddEdge( new DirectedEdge( v, w, diagonalCost ) );
-                        _graph.AddEdge( new DirectedEdge( w, v, diagonalCost ) );
-                     }
-                     else
-                     {
-                        _graph.AddEdge( new DirectedEdge( v, w, 1.0 ) );
-                        _graph.AddEdge( new DirectedEdge( w, v, 1.0 ) );
-                     }
-                  }
-               }
-            }
-         }
+         _diagonalCost = diagonalCost;
       }
 
       /// <summary>
-      /// Returns a shortest Path containing a list of Cells from a specified source Cell to a destination Cell
+      /// Returns a shortest Path containing a list of Cells from a specified source Cell to a destination Cell using the AStar search algorithm.
       /// </summary>
       /// <param name="source">The Cell which is at the start of the path</param>
       /// <param name="destination">The Cell which is at the end of the path</param>
@@ -134,7 +90,7 @@ namespace RogueSharp
       }
 
       /// <summary>
-      /// Returns a shortest Path containing a list of Cells from a specified source Cell to a destination Cell
+      /// Returns a shortest Path containing a list of Cells from a specified source Cell to a destination Cell using the AStar search algorithm.
       /// </summary>
       /// <param name="source">The Cell which is at the start of the path</param>
       /// <param name="destination">The Cell which is at the end of the path</param>
@@ -152,54 +108,31 @@ namespace RogueSharp
             throw new ArgumentNullException( nameof( destination ) );
          }
 
-         List<ICell> cells = ShortestPathCells( source, destination ).ToList();
-         if ( cells[0] == null )
+         if ( !source.IsWalkable )
          {
             return null;
          }
-         return new Path( cells );
-      }
 
-      private IEnumerable<ICell> ShortestPathCells( ICell source, ICell destination )
-      {
-         IEnumerable<DirectedEdge> path;
-         int sourceIndex = IndexFor( source );
-         if ( _sourceIndex.HasValue && _sourceIndex == sourceIndex && _dijkstraShortestPath != null )
+         if ( !destination.IsWalkable )
          {
-            path = _dijkstraShortestPath.PathTo( IndexFor( destination ) );
+            return null;
+         }
+
+         AStarShortestPath<TCell> aStarShortestPath;
+         if ( _diagonalCost.HasValue )
+         {
+            aStarShortestPath = new AStarShortestPath<TCell>( (int) _diagonalCost.Value );
          }
          else
          {
-            _sourceIndex = sourceIndex;
-            _dijkstraShortestPath = new DijkstraShortestPath( _graph, sourceIndex );
-            path = _dijkstraShortestPath.PathTo( IndexFor( destination ) );
+            aStarShortestPath = new AStarShortestPath<TCell>();
          }
-
-         if ( path == null )
+         List<TCell> cells = aStarShortestPath.FindPath( (TCell) source, (TCell) destination, _map );
+         if ( cells == null )
          {
-            yield return null;
+            return null;
          }
-         else
-         {
-            yield return source;
-            foreach ( DirectedEdge edge in path )
-            {
-               yield return CellFor( edge.To );
-            }
-         }
-      }
-
-      private int IndexFor( ICell cell )
-      {
-         return ( cell.Y * _map.Width ) + cell.X;
-      }
-
-      private ICell CellFor( int index )
-      {
-         int x = index % _map.Width;
-         int y = index / _map.Width;
-
-         return _map.GetCell( x, y );
+         return new Path( (IEnumerable<ICell>) cells );
       }
    }
 }
