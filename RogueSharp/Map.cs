@@ -104,7 +104,6 @@ namespace RogueSharp
       {
          get => _cells[x, y];
          set => _cells[x, y] = value;
-
       }
 
       /// <summary>
