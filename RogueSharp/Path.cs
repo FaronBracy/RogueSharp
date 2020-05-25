@@ -67,7 +67,7 @@ namespace RogueSharp
 
          if ( cell == null )
          {
-            throw new NoMoreStepsException( "Cannot take a step foward when at the end of the path" );
+            throw new NoMoreStepsException( "Cannot take a step forward when at the end of the path" );
          }
 
          return cell;

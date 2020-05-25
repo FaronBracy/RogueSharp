@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard1.0;net40</TargetFrameworks>
-    <Version>5.0.0-pre3</Version>
+    <Version>5.0.0-pre4</Version>
     <Authors>Faron Bracy</Authors>
     <Company />
     <Description>
@@ -13,7 +13,8 @@
    * Weighted pool class for randomly picking items.
    * Pathfinder class caches graph and dijkstra result for speedier performance with multiple lookups.
    * Added Map.GetCellsInRectangle method. (Thanks to Andre Odendaal)
-   * Improved performance of Pathfinder class.
+   * Improved performance of Pathfinder class up to 75x
+   * Added A* shortest path algorithm
  Breaking changes:
    * Bug fix - Change Map.Create to be generic, returning the same map type as the creation strategy's map. (Thanks to Andre Odendaal)
    * Bug fix - Update Map Save and Restore methods to track IsExplored status. (Thanks to Andre Odendaal)
@@ -30,7 +31,8 @@
    * Weighted pool class for randomly picking items.
    * Pathfinder class caches graph and dijkstra result for speedier performance with multiple lookups.
    * Added Map.GetCellsInRectangle method. (Thanks to Andre Odendaal)
-   * Improved performance of Pathfinder class.
+   * Improved performance of Pathfinder class up to 75x
+   * Added A* shortest path algorithm
  Breaking changes:
    * Bug fix - Change Map.Create to be generic, returning the same map type as the creation strategy's map. (Thanks to Andre Odendaal)
    * Bug fix - Update Map Save and Restore methods to track IsExplored status. (Thanks to Andre Odendaal)
@@ -40,18 +42,21 @@
    * Removed IsExplored from Map and Cell classes
     </PackageReleaseNotes>
     <Copyright>Copyright 2014-2020 Faron Bracy</Copyright>
-    <PackageLicenseUrl>https://github.com/FaronBracy/RogueSharp/blob/master/LICENSE.txt</PackageLicenseUrl>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/FaronBracy/RogueSharp</PackageProjectUrl>
     <RepositoryUrl>https://github.com/FaronBracy/RogueSharp.git</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>roguelike libtcod pathfinding game map random generator field-of-view fog-of-war dice</PackageTags>
-    <PackageIconUrl>https://content.screencast.com/users/dr.zeus/folders/Blog%20Links/media/66acf3c6-3b44-4bdd-b1f5-e89a62489b20/nugeticon.png</PackageIconUrl>
+    <PackageIcon>icon.png</PackageIcon>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DocumentationFile>bin\Debug\netstandard1.0\RogueSharp.xml</DocumentationFile>
   </PropertyGroup>
-
+  <ItemGroup>
+    <None Include="..\LICENSE.txt" Pack="true" PackagePath="\"/>
+    <None Include="..\icon.png" Pack="true" PackagePath="\"/>
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.6.3">
       <PrivateAssets>all</PrivateAssets>

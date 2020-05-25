@@ -18,6 +18,14 @@ namespace RogueSharp
    public interface IMap<TCell> where TCell : ICell
    {
       /// <summary>
+      /// This Indexer allows direct access to Cells given x and y index
+      /// </summary>
+      /// <param name="x">X index of the Cell to get</param>
+      /// <param name="y">Y index of the Cell to get</param>
+      /// <returns>Cell at the specified index</returns>
+      TCell this[int x, int y] { get; set; }
+
+      /// <summary>
       /// How many Cells wide the Map is
       /// </summary>
       /// <remarks>
@@ -313,15 +321,7 @@ namespace RogueSharp
          /// <summary>
          /// There is a clear line-of-sight through this Cell
          /// </summary>
-         Transparent = 2,
-         /// <summary>
-         /// The Cell is in the currently observable field-of-view
-         /// </summary>
-         Visible = 4,
-         /// <summary>
-         /// The Cell has been in the field-of-view in the player at some point during the game
-         /// </summary>
-         Explored = 8
+         Transparent = 2
       }
 
       /// <summary>
