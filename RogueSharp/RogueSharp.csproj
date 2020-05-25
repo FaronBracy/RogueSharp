@@ -13,7 +13,8 @@
    * Weighted pool class for randomly picking items.
    * Pathfinder class caches graph and dijkstra result for speedier performance with multiple lookups.
    * Added Map.GetCellsInRectangle method. (Thanks to Andre Odendaal)
-   * Improved performance of Pathfinder class.
+   * Improved performance of Pathfinder class up to 75x
+   * Added A* shortest path algorithm
  Breaking changes:
    * Bug fix - Change Map.Create to be generic, returning the same map type as the creation strategy's map. (Thanks to Andre Odendaal)
    * Bug fix - Update Map Save and Restore methods to track IsExplored status. (Thanks to Andre Odendaal)
@@ -30,7 +31,8 @@
    * Weighted pool class for randomly picking items.
    * Pathfinder class caches graph and dijkstra result for speedier performance with multiple lookups.
    * Added Map.GetCellsInRectangle method. (Thanks to Andre Odendaal)
-   * Improved performance of Pathfinder class.
+   * Improved performance of Pathfinder class up to 75x
+   * Added A* shortest path algorithm
  Breaking changes:
    * Bug fix - Change Map.Create to be generic, returning the same map type as the creation strategy's map. (Thanks to Andre Odendaal)
    * Bug fix - Update Map Save and Restore methods to track IsExplored status. (Thanks to Andre Odendaal)
