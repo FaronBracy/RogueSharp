@@ -37,7 +37,7 @@ namespace RogueSharp.Algorithms
       /// <param name="source">The source Cell to find a shortest path from</param>
       /// <param name="destination">The destination Cell to find a shortest path to</param>
       /// <param name="map">The Map on which to find the shortest path between Cells</param>
-      /// <returns>List of Cells representing a shortest path from the specified source to the specified destination</returns>
+      /// <returns>List of Cells representing a shortest path from the specified source to the specified destination. If no path is found null will be returned</returns>
       public List<TCell> FindPath( TCell source, TCell destination, IMap<TCell> map )
       {
          // OPEN = the set of nodes to be evaluated

@@ -125,7 +125,7 @@ namespace RogueSharp.Algorithms
       /// Returns an IEnumerable of DirectedEdges representing a shortest path from the sourceVertex to the specified destinationVertex
       /// </summary>
       /// <param name="destinationVertex">The destination vertex to find a shortest path to</param>
-      /// <returns>IEnumerable of DirectedEdges representing a shortest path from the sourceVertex to the specified destinationVertex</returns>
+      /// <returns>IEnumerable of DirectedEdges representing a shortest path from the sourceVertex to the specified destinationVertex. If no path is found null will be returned</returns>
       public IEnumerable<DirectedEdge> PathTo( int destinationVertex )
       {
          if ( !HasPathTo( destinationVertex ) )
