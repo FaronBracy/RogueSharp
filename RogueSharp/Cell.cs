@@ -90,7 +90,7 @@
       /// </summary>
       /// <param name="other">The Cell to compare this instance to</param>
       /// <returns>True if the instances are equal; False otherwise</returns>
-      public bool Equals( ICell other )
+      public virtual bool Equals( ICell other )
       {
          if ( ReferenceEquals( null, other ) )
          {

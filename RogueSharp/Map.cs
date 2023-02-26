@@ -198,7 +198,7 @@ namespace RogueSharp
       /// <param name="y">Y location of the Cell to set properties on, starting with 0 as the top</param>
       /// <param name="isTransparent">True if line-of-sight is not blocked by this Cell. False otherwise</param>
       /// <param name="isWalkable">True if a character could walk across the Cell normally. False otherwise</param>
-      public void SetCellProperties( int x, int y, bool isTransparent, bool isWalkable )
+      public virtual void SetCellProperties( int x, int y, bool isTransparent, bool isWalkable )
       {
          _cells[x, y].IsTransparent = isTransparent;
          _cells[x, y].IsWalkable = isWalkable;
@@ -207,7 +207,7 @@ namespace RogueSharp
       /// <summary>
       /// Sets the properties of all Cells in the Map to be transparent and walkable
       /// </summary>
-      public void Clear()
+      public virtual void Clear()
       {
          Clear( true, true );
       }
@@ -217,7 +217,7 @@ namespace RogueSharp
       /// </summary>
       /// <param name="isTransparent">Optional parameter defaults to true if not provided. True if line-of-sight is not blocked by this Cell. False otherwise</param>
       /// <param name="isWalkable">Optional parameter defaults to true if not provided. True if a character could walk across the Cell normally. False otherwise</param>
-      public void Clear( bool isTransparent, bool isWalkable )
+      public virtual void Clear( bool isTransparent, bool isWalkable )
       {
          foreach ( TCell cell in GetAllCells() )
          {
@@ -247,7 +247,7 @@ namespace RogueSharp
       /// Copies the Cell properties of a smaller source Map into this destination Map at location (0,0)
       /// </summary>
       /// <param name="sourceMap">An IMap which must be of smaller size and able to fit in this destination Map at the specified location</param>
-      public void Copy( IMap<TCell> sourceMap )
+      public virtual void Copy( IMap<TCell> sourceMap )
       {
          Copy( sourceMap, 0, 0 );
       }
@@ -260,7 +260,7 @@ namespace RogueSharp
       /// <param name="top">Optional parameter defaults to 0 if not provided. Y location of the Cell to start copying parameters to, starting with 0 as the top</param>
       /// <exception cref="ArgumentNullException">Thrown on null source map</exception>
       /// <exception cref="ArgumentException">Thrown on invalid source map dimensions</exception>
-      public void Copy( IMap<TCell> sourceMap, int left, int top )
+      public virtual void Copy( IMap<TCell> sourceMap, int left, int top )
       {
          if ( sourceMap == null )
          {
