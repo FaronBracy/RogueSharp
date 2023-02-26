@@ -37,8 +37,8 @@ namespace RogueSharp.Test
          IMapCreationStrategy<Map> mapCreationStrategy = new StringDeserializeMapCreationStrategy<Map>( mapRepresentation );
          IMap map = Map.Create( mapCreationStrategy );
          DijkstraPathFinder dijkstraPathFinder = new DijkstraPathFinder( map );
-         ICell source = null;
-         ICell destination = map.GetCell( 5, 4 );
+         Cell source = null;
+         Cell destination = map.GetCell( 5, 4 );
 
          Path shortestPath = dijkstraPathFinder.ShortestPath( source, destination );
       }
@@ -56,8 +56,8 @@ namespace RogueSharp.Test
          IMapCreationStrategy<Map> mapCreationStrategy = new StringDeserializeMapCreationStrategy<Map>( mapRepresentation );
          IMap map = Map.Create( mapCreationStrategy );
          DijkstraPathFinder dijkstraPathFinder = new DijkstraPathFinder( map );
-         ICell source = map.GetCell( 1, 4 );
-         ICell destination = null;
+         Cell source = map.GetCell( 1, 4 );
+         Cell destination = null;
 
          Path shortestPath = dijkstraPathFinder.ShortestPath( source, destination );
       }
@@ -74,8 +74,8 @@ namespace RogueSharp.Test
          IMapCreationStrategy<Map> mapCreationStrategy = new StringDeserializeMapCreationStrategy<Map>( mapRepresentation );
          IMap map = Map.Create( mapCreationStrategy );
          DijkstraPathFinder dijkstraPathFinder = new DijkstraPathFinder( map );
-         ICell source = map.GetCell( 1, 4 );
-         ICell destination = map.GetCell( 5, 4 );
+         Cell source = map.GetCell( 1, 4 );
+         Cell destination = map.GetCell( 5, 4 );
 
          Path shortestPath = dijkstraPathFinder.ShortestPath( source, destination );
 
@@ -97,8 +97,8 @@ namespace RogueSharp.Test
          IMapCreationStrategy<Map> mapCreationStrategy = new StringDeserializeMapCreationStrategy<Map>( mapRepresentation );
          IMap map = Map.Create( mapCreationStrategy );
          DijkstraPathFinder dijkstraPathFinder = new DijkstraPathFinder( map, 1.41 );
-         ICell source = map.GetCell( 1, 1 );
-         ICell destination = map.GetCell( 6, 4 );
+         Cell source = map.GetCell( 1, 1 );
+         Cell destination = map.GetCell( 6, 4 );
 
          Path shortestPath = dijkstraPathFinder.ShortestPath( source, destination );
 
@@ -122,8 +122,8 @@ namespace RogueSharp.Test
          IMapCreationStrategy<Map> mapCreationStrategy = new StringDeserializeMapCreationStrategy<Map>( mapRepresentation );
          IMap map = Map.Create( mapCreationStrategy );
          DijkstraPathFinder dijkstraPathFinder = new DijkstraPathFinder( map );
-         ICell source = map.GetCell( 0, 1 );
-         ICell destination = map.GetCell( 1, 1 );
+         Cell source = map.GetCell( 0, 1 );
+         Cell destination = map.GetCell( 1, 1 );
 
          dijkstraPathFinder.ShortestPath( source, destination );
       }
@@ -141,8 +141,8 @@ namespace RogueSharp.Test
          IMapCreationStrategy<Map> mapCreationStrategy = new StringDeserializeMapCreationStrategy<Map>( mapRepresentation );
          IMap map = Map.Create( mapCreationStrategy );
          DijkstraPathFinder dijkstraPathFinder = new DijkstraPathFinder( map );
-         ICell source = map.GetCell( 1, 1 );
-         ICell destination = map.GetCell( 0, 1 );
+         Cell source = map.GetCell( 1, 1 );
+         Cell destination = map.GetCell( 0, 1 );
 
          dijkstraPathFinder.ShortestPath( source, destination );
       }
@@ -160,8 +160,8 @@ namespace RogueSharp.Test
          IMapCreationStrategy<Map> mapCreationStrategy = new StringDeserializeMapCreationStrategy<Map>( mapRepresentation );
          IMap map = Map.Create( mapCreationStrategy );
          DijkstraPathFinder dijkstraPathFinder = new DijkstraPathFinder( map );
-         ICell source = map.GetCell( 1, 1 );
-         ICell destination = map.GetCell( 6, 1 );
+         Cell source = map.GetCell( 1, 1 );
+         Cell destination = map.GetCell( 6, 1 );
 
          dijkstraPathFinder.ShortestPath( source, destination );
       }
@@ -178,8 +178,8 @@ namespace RogueSharp.Test
          IMapCreationStrategy<Map> mapCreationStrategy = new StringDeserializeMapCreationStrategy<Map>( mapRepresentation );
          IMap map = Map.Create( mapCreationStrategy );
          DijkstraPathFinder dijkstraPathFinder = new DijkstraPathFinder( map );
-         ICell source = map.GetCell( 1, 4 );
-         ICell destination = map.GetCell( 5, 4 );
+         Cell source = map.GetCell( 1, 4 );
+         Cell destination = map.GetCell( 5, 4 );
 
          Path shortestPath = dijkstraPathFinder.TryFindShortestPath( source, destination );
 
@@ -201,8 +201,8 @@ namespace RogueSharp.Test
          IMapCreationStrategy<Map> mapCreationStrategy = new StringDeserializeMapCreationStrategy<Map>( mapRepresentation );
          IMap map = Map.Create( mapCreationStrategy );
          DijkstraPathFinder dijkstraPathFinder = new DijkstraPathFinder( map, 1.41 );
-         ICell source = map.GetCell( 1, 1 );
-         ICell destination = map.GetCell( 6, 4 );
+         Cell source = map.GetCell( 1, 1 );
+         Cell destination = map.GetCell( 6, 4 );
 
          Path shortestPath = dijkstraPathFinder.TryFindShortestPath( source, destination );
 
@@ -226,8 +226,8 @@ namespace RogueSharp.Test
          IMapCreationStrategy<Map> mapCreationStrategy = new StringDeserializeMapCreationStrategy<Map>( mapRepresentation );
          IMap map = Map.Create( mapCreationStrategy );
          DijkstraPathFinder dijkstraPathFinder = new DijkstraPathFinder( map );
-         ICell source = null;
-         ICell destination = map.GetCell( 5, 4 );
+         Cell source = null;
+         Cell destination = map.GetCell( 5, 4 );
 
          Path shortestPath = dijkstraPathFinder.TryFindShortestPath( source, destination );
       }
@@ -245,8 +245,8 @@ namespace RogueSharp.Test
          IMapCreationStrategy<Map> mapCreationStrategy = new StringDeserializeMapCreationStrategy<Map>( mapRepresentation );
          IMap map = Map.Create( mapCreationStrategy );
          DijkstraPathFinder dijkstraPathFinder = new DijkstraPathFinder( map );
-         ICell source = map.GetCell( 1, 4 );
-         ICell destination = null;
+         Cell source = map.GetCell( 1, 4 );
+         Cell destination = null;
 
          Path shortestPath = dijkstraPathFinder.TryFindShortestPath( source, destination );
       }
@@ -263,8 +263,8 @@ namespace RogueSharp.Test
          IMapCreationStrategy<Map> mapCreationStrategy = new StringDeserializeMapCreationStrategy<Map>( mapRepresentation );
          IMap map = Map.Create( mapCreationStrategy );
          DijkstraPathFinder dijkstraPathFinder = new DijkstraPathFinder( map );
-         ICell source = map.GetCell( 0, 1 );
-         ICell destination = map.GetCell( 1, 1 );
+         Cell source = map.GetCell( 0, 1 );
+         Cell destination = map.GetCell( 1, 1 );
 
          Path shortestPath = dijkstraPathFinder.TryFindShortestPath( source, destination );
 
@@ -283,8 +283,8 @@ namespace RogueSharp.Test
          IMapCreationStrategy<Map> mapCreationStrategy = new StringDeserializeMapCreationStrategy<Map>( mapRepresentation );
          IMap map = Map.Create( mapCreationStrategy );
          DijkstraPathFinder dijkstraPathFinder = new DijkstraPathFinder( map );
-         ICell source = map.GetCell( 1, 1 );
-         ICell destination = map.GetCell( 0, 1 );
+         Cell source = map.GetCell( 1, 1 );
+         Cell destination = map.GetCell( 0, 1 );
 
          Path shortestPath = dijkstraPathFinder.TryFindShortestPath( source, destination );
 
@@ -303,8 +303,8 @@ namespace RogueSharp.Test
          IMapCreationStrategy<Map> mapCreationStrategy = new StringDeserializeMapCreationStrategy<Map>( mapRepresentation );
          IMap map = Map.Create( mapCreationStrategy );
          DijkstraPathFinder dijkstraPathFinder = new DijkstraPathFinder( map );
-         ICell source = map.GetCell( 1, 1 );
-         ICell destination = map.GetCell( 6, 1 );
+         Cell source = map.GetCell( 1, 1 );
+         Cell destination = map.GetCell( 6, 1 );
 
          Path shortestPath = dijkstraPathFinder.TryFindShortestPath( source, destination );
 
@@ -316,8 +316,8 @@ namespace RogueSharp.Test
       {
          IMapCreationStrategy<Map> mapCreationStrategy = new StringDeserializeMapCreationStrategy<Map>( Algorithms.TestSetup.TestHelpers.Map200x400 );
          IMap map = Map.Create( mapCreationStrategy );
-         ICell source = map.GetCell( 5, 1 );
-         ICell destination = map.GetCell( 29, 187 );
+         Cell source = map.GetCell( 5, 1 );
+         Cell destination = map.GetCell( 29, 187 );
          DijkstraPathFinder dijkstraPathFinder = new DijkstraPathFinder( map );
 
          Path shortestPath = dijkstraPathFinder.TryFindShortestPath( source, destination );
@@ -340,8 +340,8 @@ namespace RogueSharp.Test
             int y1 = randomY.Next( 399 );
             int x2 = randomX.Next( 199 );
             int y2 = randomY.Next( 399 );
-            ICell source = map.GetCell( x1, y1 );
-            ICell destination = map.GetCell( x2, y2 );
+            Cell source = map.GetCell( x1, y1 );
+            Cell destination = map.GetCell( x2, y2 );
 
             Stopwatch timer = Stopwatch.StartNew();
 
@@ -382,8 +382,8 @@ namespace RogueSharp.Test
             int y1 = randomY.Next( 399 );
             int x2 = randomX.Next( 199 );
             int y2 = randomY.Next( 399 );
-            ICell source = map.GetCell( x1, y1 );
-            ICell destination = map.GetCell( x2, y2 );
+            Cell source = map.GetCell( x1, y1 );
+            Cell destination = map.GetCell( x2, y2 );
 
             Stopwatch timer = Stopwatch.StartNew();
             
@@ -423,8 +423,8 @@ namespace RogueSharp.Test
             int y1 = 1;
             int x2 = randomX.Next( 199 );
             int y2 = randomY.Next( 399 );
-            ICell source = map.GetCell( x1, y1 );
-            ICell destination = map.GetCell( x2, y2 );
+            Cell source = map.GetCell( x1, y1 );
+            Cell destination = map.GetCell( x2, y2 );
 
             Stopwatch timer = Stopwatch.StartNew();
 

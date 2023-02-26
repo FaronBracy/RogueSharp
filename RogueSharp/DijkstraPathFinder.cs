@@ -61,12 +61,12 @@ namespace RogueSharp
          {
             if ( cell.IsWalkable )
             {
-               int v = IndexFor( cell );
+               int v = _map.IndexFor( cell );
                foreach ( TCell neighbor in _map.GetAdjacentCells( cell.X, cell.Y ) )
                {
                   if ( neighbor.IsWalkable )
                   {
-                     int w = IndexFor( neighbor );
+                     int w = _map.IndexFor( neighbor );
                      _graph.AddEdge( new DirectedEdge( v, w, 1.0 ) );
                      _graph.AddEdge( new DirectedEdge( w, v, 1.0 ) );
                   }
@@ -93,12 +93,12 @@ namespace RogueSharp
          {
             if ( cell.IsWalkable )
             {
-               int v = IndexFor( cell );
+               int v = _map.IndexFor( cell );
                foreach ( TCell neighbor in _map.GetAdjacentCells( cell.X, cell.Y, true ) )
                {
                   if ( neighbor.IsWalkable )
                   {
-                     int w = IndexFor( neighbor );
+                     int w = _map.IndexFor( neighbor );
                      if ( neighbor.X != cell.X && neighbor.Y != cell.Y )
                      {
                         _graph.AddEdge( new DirectedEdge( v, w, diagonalCost ) );
@@ -123,7 +123,7 @@ namespace RogueSharp
       /// <exception cref="ArgumentNullException">Thrown when source or destination is null</exception>
       /// <exception cref="PathNotFoundException">Thrown when there is not a path from the source to the destination</exception>
       /// <returns>Returns a shortest Path containing a list of Cells from a specified source Cell to a destination Cell</returns>
-      public Path ShortestPath( ICell source, ICell destination )
+      public Path ShortestPath( TCell source, TCell destination )
       {
          Path shortestPath = TryFindShortestPath( source, destination );
 
@@ -142,7 +142,7 @@ namespace RogueSharp
       /// <param name="destination">The Cell which is at the end of the path</param>
       /// <exception cref="ArgumentNullException">Thrown when source or destination is null</exception>
       /// <returns>Returns a shortest Path containing a list of Cells from a specified source Cell to a destination Cell. If no path is found null will be returned</returns>
-      public Path TryFindShortestPath( ICell source, ICell destination )
+      public Path TryFindShortestPath( TCell source, TCell destination )
       {
          if ( source == null )
          {
@@ -162,19 +162,19 @@ namespace RogueSharp
          return new Path( cells );
       }
 
-      private IEnumerable<ICell> ShortestPathCells( ICell source, ICell destination )
+      private IEnumerable<ICell> ShortestPathCells( TCell source, TCell destination )
       {
          IEnumerable<DirectedEdge> path;
-         int sourceIndex = IndexFor( source );
+         int sourceIndex = _map.IndexFor( source );
          if ( _sourceIndex.HasValue && _sourceIndex == sourceIndex && _dijkstraShortestPath != null )
          {
-            path = _dijkstraShortestPath.PathTo( IndexFor( destination ) );
+            path = _dijkstraShortestPath.PathTo( _map.IndexFor( destination ) );
          }
          else
          {
             _sourceIndex = sourceIndex;
             _dijkstraShortestPath = new DijkstraShortestPath( _graph, sourceIndex );
-            path = _dijkstraShortestPath.PathTo( IndexFor( destination ) );
+            path = _dijkstraShortestPath.PathTo( _map.IndexFor( destination ) );
          }
 
          if ( path == null )
@@ -186,22 +186,9 @@ namespace RogueSharp
             yield return source;
             foreach ( DirectedEdge edge in path )
             {
-               yield return CellFor( edge.To );
+               yield return _map.CellFor( edge.To );
             }
          }
-      }
-
-      private int IndexFor( ICell cell )
-      {
-         return ( cell.Y * _map.Width ) + cell.X;
-      }
-
-      private ICell CellFor( int index )
-      {
-         int x = index % _map.Width;
-         int y = index / _map.Width;
-
-         return _map.GetCell( x, y );
       }
    }
 }
