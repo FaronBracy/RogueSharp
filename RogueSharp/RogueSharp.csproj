@@ -17,11 +17,11 @@
    * Added A* shortest path algorithm
  Breaking changes:
    * Bug fix - Change Map.Create to be generic, returning the same map type as the creation strategy's map. (Thanks to Andre Odendaal)
-   * Bug fix - Update Map Save and Restore methods to track IsExplored status. (Thanks to Andre Odendaal)
    * Map.Initialize is virtual so that it can be overridden in derived classes
    * Map.Clone is now virtual and generic so that it can be overridden in derived classes.
    * Removed IsInFov from Map and Cell classes (use FieldOfView class instead)
    * Removed IsExplored from Map and Cell classes
+   * Multi target .NET Standard 2.0 and .NET 6
     </Description>
     <PackageReleaseNotes>
  A .NET Standard class library providing map generation, path-finding, and field-of-view utilities frequently used in roguelikes or 2D tile based games. Inspired by libtcod
@@ -35,13 +35,13 @@
    * Added A* shortest path algorithm
  Breaking changes:
    * Bug fix - Change Map.Create to be generic, returning the same map type as the creation strategy's map. (Thanks to Andre Odendaal)
-   * Bug fix - Update Map Save and Restore methods to track IsExplored status. (Thanks to Andre Odendaal)
    * Map.Initialize is virtual so that it can be overridden in derived classes
    * Map.Clone is now virtual and generic so that it can be overridden in derived classes.
    * Removed IsInFov from Map and Cell classes (use FieldOfView class instead)
    * Removed IsExplored from Map and Cell classes
+   * Multi target .NET Standard 2.0 and .NET 6
     </PackageReleaseNotes>
-    <Copyright>Copyright 2014-2020 Faron Bracy</Copyright>
+    <Copyright>Copyright 2014-2023 Faron Bracy</Copyright>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/FaronBracy/RogueSharp</PackageProjectUrl>
     <RepositoryUrl>https://github.com/FaronBracy/RogueSharp.git</RepositoryUrl>
