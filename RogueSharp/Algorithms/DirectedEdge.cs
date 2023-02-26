@@ -22,17 +22,17 @@
       /// <summary>
       /// Returns the destination vertex of the DirectedEdge
       /// </summary>
-      public int From { get; private set; }
+      public int From { get; set; }
 
       /// <summary>
       /// Returns the start vertex of the DirectedEdge
       /// </summary>
-      public int To { get; private set; }
+      public int To { get; set; }
 
       /// <summary>
       /// Returns the weight of the DirectedEdge
       /// </summary>
-      public double Weight { get; private set; }
+      public double Weight { get; set; }
 
       /// <summary>
       /// Returns a string that represents the current DirectedEdge
