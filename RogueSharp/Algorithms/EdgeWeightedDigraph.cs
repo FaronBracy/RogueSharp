@@ -12,7 +12,8 @@ namespace RogueSharp.Algorithms
    /// <seealso href="http://algs4.cs.princeton.edu/44sp/EdgeWeightedDigraph.java.html">EdgeWeightedDigraph class from Princeton University's Java Algorithms</seealso>
    public class EdgeWeightedDigraph
    {
-      private readonly LinkedList<DirectedEdge>[] _adjacent;
+      private readonly LinkedList<DirectedEdge>[] _edgesOutgoingFrom;
+      private readonly LinkedList<DirectedEdge>[] _edgesIncomingTo;
 
       /// <summary>
       /// Constructs an empty edge-weighted digraph with the specified number of vertices and 0 edges
@@ -20,19 +21,25 @@ namespace RogueSharp.Algorithms
       /// <param name="vertices">Number of vertices in the Graph</param>
       public EdgeWeightedDigraph( int vertices )
       {
+         if ( vertices <= 0 )
+         {
+            throw new ArgumentOutOfRangeException( nameof( vertices ) );
+         }
          NumberOfVertices = vertices;
          NumberOfEdges = 0;
-         _adjacent = new LinkedList<DirectedEdge>[NumberOfVertices];
+         _edgesOutgoingFrom = new LinkedList<DirectedEdge>[NumberOfVertices];
+         _edgesIncomingTo = new LinkedList<DirectedEdge>[NumberOfVertices];
          for ( int v = 0; v < NumberOfVertices; v++ )
          {
-            _adjacent[v] = new LinkedList<DirectedEdge>();
+            _edgesOutgoingFrom[v] = new LinkedList<DirectedEdge>();
+            _edgesIncomingTo[v] = new LinkedList<DirectedEdge>();
          }
       }
 
       /// <summary>
       /// The number of vertices in the edge-weighted digraph
       /// </summary>
-      public int NumberOfVertices { get; private set; }
+      public int NumberOfVertices { get; }
 
       /// <summary>
       /// The number of edges in the edge-weighted digraph
@@ -51,7 +58,8 @@ namespace RogueSharp.Algorithms
             throw new ArgumentNullException( nameof( edge ), "DirectedEdge cannot be null" );
          }
 
-         _adjacent[edge.From].AddLast( edge );
+         _edgesOutgoingFrom[edge.From].AddLast( edge );
+         _edgesIncomingTo[edge.To].AddLast( edge );
          NumberOfEdges++;
       }
 
@@ -60,9 +68,27 @@ namespace RogueSharp.Algorithms
       /// </summary>
       /// <param name="vertex">The vertex to find incident DirectedEdges from</param>
       /// <returns>IEnumerable of the DirectedEdges incident from the specified vertex</returns>
-      public IEnumerable<DirectedEdge> Adjacent( int vertex )
+      public IEnumerable<DirectedEdge> EdgesOutgoingFrom( int vertex )
       {
-         return _adjacent[vertex];
+         if ( vertex < 0 || vertex >= NumberOfVertices )
+         {
+            throw new ArgumentOutOfRangeException( nameof( vertex ) );
+         }
+         return _edgesOutgoingFrom[vertex];
+      }
+
+      /// <summary>
+      /// Returns an IEnumerable of the DirectedEdges incident to the specified vertex
+      /// </summary>
+      /// <param name="vertex">The vertex to find incident DirectedEdges to</param>
+      /// <returns>IEnumerable of the DirectedEdges incident to the specified vertex</returns>
+      public IEnumerable<DirectedEdge> EdgesIncomingTo( int vertex )
+      {
+         if ( vertex < 0 || vertex >= NumberOfVertices )
+         {
+            throw new ArgumentOutOfRangeException( nameof( vertex ) );
+         }
+         return _edgesIncomingTo[vertex];
       }
 
       /// <summary>
@@ -73,7 +99,7 @@ namespace RogueSharp.Algorithms
       {
          for ( int v = 0; v < NumberOfVertices; v++ )
          {
-            foreach ( DirectedEdge edge in _adjacent[v] )
+            foreach ( DirectedEdge edge in _edgesOutgoingFrom[v] )
             {
                yield return edge;
             }
@@ -88,7 +114,26 @@ namespace RogueSharp.Algorithms
       /// <returns>The number of directed edges incident from the specified vertex</returns>
       public int OutDegree( int vertex )
       {
-         return _adjacent[vertex].Count;
+         if ( vertex < 0 || vertex >= NumberOfVertices )
+         {
+            throw new ArgumentOutOfRangeException( nameof( vertex ) );
+         }
+         return _edgesOutgoingFrom[vertex].Count;
+      }
+
+      /// <summary>
+      /// Returns the number of directed edges incident to the specified vertex
+      /// This is known as the in-degree of the vertex
+      /// </summary>
+      /// <param name="vertex">The vertex to find find the in-degree of</param>
+      /// <returns>The number of directed edges incident to the specified vertex</returns>
+      public int InDegree( int vertex )
+      {
+         if ( vertex < 0 || vertex >= NumberOfVertices )
+         {
+            throw new ArgumentOutOfRangeException( nameof( vertex ) );
+         }
+         return _edgesIncomingTo[vertex].Count;
       }
 
       /// <summary>
@@ -104,7 +149,7 @@ namespace RogueSharp.Algorithms
          for ( int v = 0; v < NumberOfVertices; v++ )
          {
             formattedString.AppendFormat( CultureInfo.CurrentCulture, "{0}:", v );
-            foreach ( DirectedEdge edge in _adjacent[v] )
+            foreach ( DirectedEdge edge in _edgesOutgoingFrom[v] )
             {
                formattedString.AppendFormat( CultureInfo.CurrentCulture, " {0}", edge.To );
             }

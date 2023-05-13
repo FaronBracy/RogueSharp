@@ -58,27 +58,61 @@ namespace RogueSharp.Test.Algorithms
       }
 
       [TestMethod]
-      public void Adjacent_WhenVertexHasNoEdgesToOtherVertices_WillReturn0DirectedEdges()
+      public void EdgesOutgoingFrom_WhenVertexHasNoOutgoingEdges_WillReturn0DirectedEdges()
       {
          EdgeWeightedDigraph graph = new EdgeWeightedDigraph( 5 );
 
-         Assert.AreEqual( 0, graph.Adjacent( 1 ).Count() );
+         Assert.AreEqual( 0, graph.EdgesOutgoingFrom( 1 ).Count() );
       }
 
       [TestMethod]
-      public void Adjacent_WhenVertexHas3EdgesToOtherVertices_WillReturn3DirectedEdges()
+      public void EdgesOutgoingFrom_WhenVertexHas3OutgoingEdges_WillReturn3DirectedEdges()
+      {
+         EdgeWeightedDigraph graph = new EdgeWeightedDigraph( 5 );
+         graph.AddEdge( new DirectedEdge( 1, 2, 1.0 ) );
+         graph.AddEdge( new DirectedEdge( 1, 3, 1.5 ) );
+         graph.AddEdge( new DirectedEdge( 1, 4, 2.0 ) );
+
+         DirectedEdge[] outgoing = graph.EdgesOutgoingFrom( 1 ).ToArray();
+
+         Assert.AreEqual( 3, outgoing.Length );
+         Assert.AreEqual( 2, outgoing[0].To );
+         Assert.AreEqual( 1, outgoing[0].From );
+         Assert.AreEqual( 1.0, outgoing[0].Weight );
+         Assert.AreEqual( 3, outgoing[1].To );
+         Assert.AreEqual( 1, outgoing[1].From );
+         Assert.AreEqual( 1.5, outgoing[1].Weight );
+         Assert.AreEqual( 4, outgoing[2].To );
+         Assert.AreEqual( 1, outgoing[2].From );
+         Assert.AreEqual( 2.0, outgoing[2].Weight );
+      }
+
+      [TestMethod]
+      public void EdgesIncomingTo_WhenVertexHasNoIncomingEdges_WillReturn0DirectedEdges()
+      {
+         EdgeWeightedDigraph graph = new EdgeWeightedDigraph( 5 );
+
+         Assert.AreEqual( 0, graph.EdgesIncomingTo( 1 ).Count() );
+      }
+
+      [TestMethod]
+      public void EdgesIncomingTo_WhenVertexHas2IncomingEdges_WillReturn2DirectedEdges()
       {
          EdgeWeightedDigraph graph = new EdgeWeightedDigraph( 5 );
          graph.AddEdge( new DirectedEdge( 1, 2, 1.0 ) );
          graph.AddEdge( new DirectedEdge( 1, 3, 1.5 ) );
          graph.AddEdge( new DirectedEdge( 1, 4, 1.0 ) );
+         graph.AddEdge( new DirectedEdge( 3, 4, 5.0 ) );
 
-         DirectedEdge[] adjacent = graph.Adjacent( 1 ).ToArray();
+         DirectedEdge[] incoming = graph.EdgesIncomingTo( 4 ).ToArray();
 
-         Assert.AreEqual( 3, adjacent.Length );
-         Assert.AreEqual( 2, adjacent[0].To );
-         Assert.AreEqual( 3, adjacent[1].To );
-         Assert.AreEqual( 4, adjacent[2].To );
+         Assert.AreEqual( 2, incoming.Length );
+         Assert.AreEqual( 4, incoming[0].To );
+         Assert.AreEqual( 1, incoming[0].From );
+         Assert.AreEqual( 1.0, incoming[0].Weight );
+         Assert.AreEqual( 4, incoming[1].To );
+         Assert.AreEqual( 3, incoming[1].From );
+         Assert.AreEqual( 5.0, incoming[1].Weight );
       }
 
       [TestMethod]
@@ -102,7 +136,7 @@ namespace RogueSharp.Test.Algorithms
          Assert.AreEqual( "From: 3, To: 4, Weight: 5.5", edges[4].ToString() );
          Assert.AreEqual( "From: 3, To: 0, Weight: 4", edges[5].ToString() );
       }
-      
+
       [TestMethod]
       public void OutDegree_WhenVertexHas3EdgesToOtherVertices_WillBe3()
       {
@@ -112,6 +146,18 @@ namespace RogueSharp.Test.Algorithms
          graph.AddEdge( new DirectedEdge( 1, 4, 1.0 ) );
 
          Assert.AreEqual( 3, graph.OutDegree( 1 ) );
+      }
+
+      [TestMethod]
+      public void InDegree_WhenVertexHas2EdgesFromOtherVertices_WillBe2()
+      {
+         EdgeWeightedDigraph graph = new EdgeWeightedDigraph( 5 );
+         graph.AddEdge( new DirectedEdge( 1, 2, 1.0 ) );
+         graph.AddEdge( new DirectedEdge( 1, 3, 1.5 ) );
+         graph.AddEdge( new DirectedEdge( 1, 4, 4.0 ) );
+         graph.AddEdge( new DirectedEdge( 3, 4, 2.0 ) );
+
+         Assert.AreEqual( 2, graph.InDegree( 4 ) );
       }
 
       [TestMethod]

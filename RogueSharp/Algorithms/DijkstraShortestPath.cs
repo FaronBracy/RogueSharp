@@ -60,7 +60,7 @@ namespace RogueSharp.Algorithms
                return;
             }
 
-            foreach ( DirectedEdge edge in graph.Adjacent( v ) )
+            foreach ( DirectedEdge edge in graph.EdgesOutgoingFrom( v ) )
             {
                Relax( edge );
             }
@@ -171,7 +171,7 @@ namespace RogueSharp.Algorithms
          }
          for ( int v = 0; v < graph.NumberOfVertices; v++ )
          {
-            foreach ( DirectedEdge edge in graph.Adjacent( v ) )
+            foreach ( DirectedEdge edge in graph.EdgesOutgoingFrom( v ) )
             {
                int w = edge.To;
                if ( _distanceTo[v] + edge.Weight < _distanceTo[w] )
