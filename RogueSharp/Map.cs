@@ -477,12 +477,12 @@ namespace RogueSharp
       /// <summary>
       /// Get an IEnumerable of Cells in a rectangle area
       /// </summary>
-      /// <param name="top">The top row of the rectangle </param>
       /// <param name="left">The left column of the rectangle</param>
+      /// <param name="top">The top row of the rectangle </param>
       /// <param name="width">The width of the rectangle</param>
       /// <param name="height">The height of the rectangle</param>
       /// <returns>IEnumerable of Cells in a rectangle area</returns>
-      public IEnumerable<TCell> GetCellsInRectangle( int top, int left, int width, int height )
+      public IEnumerable<TCell> GetCellsInRectangle( int left, int top, int width, int height )
       {
          int xMin = Math.Max( 0, left );
          int xMax = Math.Min( Width, left + width );

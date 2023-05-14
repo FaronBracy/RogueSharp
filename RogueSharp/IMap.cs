@@ -178,12 +178,12 @@ namespace RogueSharp
       /// <summary>
       /// Get an IEnumerable of Cells in a rectangle area
       /// </summary>
-      /// <param name="top">The top row of the rectangle </param>
       /// <param name="left">The left column of the rectangle</param>
+      /// <param name="top">The top row of the rectangle </param>
       /// <param name="width">The width of the rectangle</param>
       /// <param name="height">The height of the rectangle</param>
       /// <returns>IEnumerable of Cells in a rectangle area</returns>
-      IEnumerable<TCell> GetCellsInRectangle( int top, int left, int width, int height );
+      IEnumerable<TCell> GetCellsInRectangle( int left, int top, int width, int height );
 
       /// <summary>
       /// Get an IEnumerable of outermost border Cells in a circle around the center Cell up to the specified radius using Bresenham's midpoint circle algorithm

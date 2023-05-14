@@ -579,9 +579,9 @@ namespace RogueSharp.Test
                                       #################";
          IMapCreationStrategy<Map> mapCreationStrategy = new StringDeserializeMapCreationStrategy<Map>( mapRepresentation );
          IMap map = Map.Create( mapCreationStrategy );
-         string expectedCells = "..#.....##.#";
+         string expectedCells = "###..#.....#";
 
-         IEnumerable<ICell> cells = map.GetCellsInRectangle( 2, 2, 4, 3 )
+         IEnumerable<ICell> cells = map.GetCellsInRectangle( 1, 2, 4, 3 )
             .OrderBy( c => c.X )
             .ThenBy( c => c.Y );
          var actualCells = new StringBuilder();
