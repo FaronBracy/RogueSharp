@@ -409,6 +409,47 @@ namespace RogueSharp.Test
       }
 
       [TestMethod]
+      public void TryFindShortestPath_Large200x400MapTrying12KnownPathsCardinalAndDiagonalCosts_ReturnsExpectedPaths()
+      {
+         KnownSeriesRandom randomX = new KnownSeriesRandom( 150, 137, 51, 31, 40, 135, 116, 148, 83, 94, 153, 30, 63, 80, 31, 107, 64, 95, 6, 145, 105, 66, 96, 37 );
+         KnownSeriesRandom randomY = new KnownSeriesRandom( 255, 359, 175, 279, 169, 293, 335, 208, 235, 327, 67, 234, 56, 272, 241, 215, 230, 377, 194, 301, 161, 348, 89, 171 );
+         int[] pathLengths = { 749, 203, 557, 667, 328, 463, 371, 602, 692, 733, 626, 326 };
+         IMapCreationStrategy<Map> mapCreationStrategy = new StringDeserializeMapCreationStrategy<Map>( Algorithms.TestSetup.TestHelpers.Map200x400 );
+         IMap map = Map.Create( mapCreationStrategy );
+         DijkstraPathFinder dijkstraPathFinder = new DijkstraPathFinder( map, 10.0, 14.1 );
+         for ( int i = 0; i < 12; i++ )
+         {
+            int x1 = randomX.Next( 199 );
+            int y1 = randomY.Next( 399 );
+            int x2 = randomX.Next( 199 );
+            int y2 = randomY.Next( 399 );
+            Cell source = map.GetCell( x1, y1 );
+            Cell destination = map.GetCell( x2, y2 );
+
+            Stopwatch timer = Stopwatch.StartNew();
+
+            Path shortestPath = dijkstraPathFinder.TryFindShortestPath( source, destination );
+
+            Console.WriteLine( $"Path from `{x1}:{y1}` to `{x2}:{y2}` was {shortestPath?.Steps?.Count()} long and took Elapsed Milliseconds: {timer.ElapsedMilliseconds}" );
+            Assert.AreEqual( pathLengths[i % 12], shortestPath?.Steps?.Count() );
+         }
+
+         // Sample Output (Release Mode)
+         //Path from `150:255` to `137:359` was 749 long and took Elapsed Milliseconds: 44
+         //Path from `51:175` to `31:279` was 203 long and took Elapsed Milliseconds: 35
+         //Path from `40:169` to `135:293` was 557 long and took Elapsed Milliseconds: 39
+         //Path from `116:335` to `148:208` was 667 long and took Elapsed Milliseconds: 37
+         //Path from `83:235` to `94:327` was 328 long and took Elapsed Milliseconds: 52
+         //Path from `153:67` to `30:234` was 463 long and took Elapsed Milliseconds: 32
+         //Path from `63:56` to `80:272` was 371 long and took Elapsed Milliseconds: 33
+         //Path from `31:241` to `107:215` was 602 long and took Elapsed Milliseconds: 42
+         //Path from `64:230` to `95:377` was 692 long and took Elapsed Milliseconds: 35
+         //Path from `6:194` to `145:301` was 733 long and took Elapsed Milliseconds: 36
+         //Path from `105:161` to `66:348` was 626 long and took Elapsed Milliseconds: 35
+         //Path from `96:89` to `37:171` was 326 long and took Elapsed Milliseconds: 48
+      }
+
+      [TestMethod]
       public void TryFindShortestPath_Large200x400MapTrying24KnownPathsFrom1Source_ReturnsExpectedPaths()
       {
          KnownSeriesRandom randomX = new KnownSeriesRandom( 150, 137, 51, 31, 40, 135, 116, 148, 83, 94, 153, 30, 63, 80, 31, 107, 64, 95, 6, 145, 105, 66, 96, 37 );

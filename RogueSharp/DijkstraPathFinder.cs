@@ -35,6 +35,24 @@ namespace RogueSharp
          : base( map, diagonalCost )
       {
       }
+
+      /// <summary>
+      /// Constructs a new PathFinder instance for the specified Map
+      /// that will consider diagonal movement by using the specified diagonalCost
+      /// and horizontal and vertical movement by using the specified cardinalCost
+      /// </summary>
+      /// <param name="map">The Map that this PathFinder instance will run shortest path algorithms on</param>
+      /// <param name="cardinalCost">
+      /// The cost of horizontal or vertical movement compared to diagonal movement
+      /// </param>
+      /// <param name="diagonalCost">
+      /// The cost of diagonal movement compared to horizontal or vertical movement.
+      /// </param>
+      /// <exception cref="ArgumentNullException">Thrown when a null map parameter is passed in</exception>
+      public DijkstraPathFinder( IMap<Cell> map, double cardinalCost, double diagonalCost )
+         : base( map, cardinalCost, diagonalCost )
+      {
+      }
    }
 
    /// <summary>
@@ -54,25 +72,8 @@ namespace RogueSharp
       /// <param name="map">The Map that this PathFinder instance will run shortest path algorithms on</param>
       /// <exception cref="ArgumentNullException">Thrown when a null map parameter is passed in</exception>
       public DijkstraPathFinder( IMap<TCell> map )
+      : this ( map, 1.0, -1.0 )
       {
-         _map = map ?? throw new ArgumentNullException( nameof( map ), "Map cannot be null" );
-         _graph = new EdgeWeightedDigraph( _map.Width * _map.Height );
-         foreach ( TCell cell in _map.GetAllCells() )
-         {
-            if ( cell.IsWalkable )
-            {
-               int v = _map.IndexFor( cell );
-               foreach ( TCell neighbor in _map.GetAdjacentCells( cell.X, cell.Y ) )
-               {
-                  if ( neighbor.IsWalkable )
-                  {
-                     int w = _map.IndexFor( neighbor );
-                     _graph.AddEdge( new DirectedEdge( v, w, 1.0 ) );
-                     _graph.AddEdge( new DirectedEdge( w, v, 1.0 ) );
-                  }
-               }
-            }
-         }
       }
 
       /// <summary>
@@ -86,30 +87,55 @@ namespace RogueSharp
       /// </param>
       /// <exception cref="ArgumentNullException">Thrown when a null map parameter is passed in</exception>
       public DijkstraPathFinder( IMap<TCell> map, double diagonalCost )
+      : this ( map, 1.0, diagonalCost )
+      {
+      }
+
+      /// <summary>
+      /// Constructs a new PathFinder instance for the specified Map
+      /// that will consider diagonal movement by using the specified diagonalCost
+      /// and horizontal and vertical movement by using the specified cardinalCost
+      /// </summary>
+      /// <param name="map">The Map that this PathFinder instance will run shortest path algorithms on</param>
+      /// <param name="cardinalCost">
+      /// The cost of horizontal or vertical movement compared to diagonal movement
+      /// </param>
+      /// <param name="diagonalCost">
+      /// The cost of diagonal movement compared to horizontal or vertical movement.
+      /// Set diagonal cost to -1 to disallow diagonal movement or use the default constructor.
+      /// <seealso cref="DijkstraPathFinder(IMap{TCell})"/>
+      /// </param>
+      /// <exception cref="ArgumentNullException">Thrown when a null map parameter is passed in</exception>
+      public DijkstraPathFinder( IMap<TCell> map, double cardinalCost, double diagonalCost )
       {
          _map = map ?? throw new ArgumentNullException( nameof( map ), "Map cannot be null" );
          _graph = new EdgeWeightedDigraph( _map.Width * _map.Height );
+         bool includeDiagonals = diagonalCost > 0;
          foreach ( TCell cell in _map.GetAllCells() )
          {
-            if ( cell.IsWalkable )
+            if ( !cell.IsWalkable )
             {
-               int v = _map.IndexFor( cell );
-               foreach ( TCell neighbor in _map.GetAdjacentCells( cell.X, cell.Y, true ) )
+               continue;
+            }
+
+            int v = _map.IndexFor( cell );
+            foreach ( TCell neighbor in _map.GetAdjacentCells( cell.X, cell.Y, includeDiagonals ) )
+            {
+               if ( !neighbor.IsWalkable )
                {
-                  if ( neighbor.IsWalkable )
-                  {
-                     int w = _map.IndexFor( neighbor );
-                     if ( neighbor.X != cell.X && neighbor.Y != cell.Y )
-                     {
-                        _graph.AddEdge( new DirectedEdge( v, w, diagonalCost ) );
-                        _graph.AddEdge( new DirectedEdge( w, v, diagonalCost ) );
-                     }
-                     else
-                     {
-                        _graph.AddEdge( new DirectedEdge( v, w, 1.0 ) );
-                        _graph.AddEdge( new DirectedEdge( w, v, 1.0 ) );
-                     }
-                  }
+                  continue;
+               }
+
+               int w = _map.IndexFor( neighbor );
+               if ( includeDiagonals && neighbor.X != cell.X && neighbor.Y != cell.Y )
+               {
+                  _graph.AddEdge( new DirectedEdge( v, w, diagonalCost ) );
+                  _graph.AddEdge( new DirectedEdge( w, v, diagonalCost ) );
+               }
+               else
+               {
+                  _graph.AddEdge( new DirectedEdge( v, w, cardinalCost ) );
+                  _graph.AddEdge( new DirectedEdge( w, v, cardinalCost ) );
                }
             }
          }
