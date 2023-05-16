@@ -6,15 +6,15 @@ using RogueSharp.Algorithms;
 namespace RogueSharp
 {
    /// <summary>
-   /// A class which can be used to find shortest path from a source to a destination in a Map.
+   /// A class which can be used to find shortest path from a source to a destination in a Map using Dijkstra's shortest path algorithm.
    /// This is only more efficient than the standard pathfinder when attempting to find multiple paths from a single source node. 
    /// </summary>
    public class DijkstraPathFinder : DijkstraPathFinder<Cell>
    {
       /// <summary>
-      /// Constructs a new PathFinder instance for the specified Map that will not consider diagonal movements to be valid.
+      /// Constructs a new DijkstraPathFinder instance for the specified Map that will not consider diagonal movements to be valid.
       /// </summary>
-      /// <param name="map">The Map that this PathFinder instance will run shortest path algorithms on</param>
+      /// <param name="map">The Map that this DijkstraPathFinder instance will run shortest path algorithms on</param>
       /// <exception cref="ArgumentNullException">Thrown when a null map parameter is passed in</exception>
       public DijkstraPathFinder( IMap<Cell> map )
          : base( map )
@@ -22,9 +22,9 @@ namespace RogueSharp
       }
 
       /// <summary>
-      /// Constructs a new PathFinder instance for the specified Map that will consider diagonal movement by using the specified diagonalCost
+      /// Constructs a new DijkstraPathFinder instance for the specified Map that will consider diagonal movement by using the specified diagonalCost
       /// </summary>
-      /// <param name="map">The Map that this PathFinder instance will run shortest path algorithms on</param>
+      /// <param name="map">The Map that this DijkstraPathFinder instance will run shortest path algorithms on</param>
       /// <param name="diagonalCost">
       /// The cost of diagonal movement compared to horizontal or vertical movement.
       /// Use 1.0 if you want the same cost for all movements.
@@ -37,16 +37,18 @@ namespace RogueSharp
       }
 
       /// <summary>
-      /// Constructs a new PathFinder instance for the specified Map
+      /// Constructs a new DijkstraPathFinder instance for the specified Map
       /// that will consider diagonal movement by using the specified diagonalCost
       /// and horizontal and vertical movement by using the specified cardinalCost
       /// </summary>
-      /// <param name="map">The Map that this PathFinder instance will run shortest path algorithms on</param>
+      /// <param name="map">The Map that this DijkstraPathFinder instance will run shortest path algorithms on</param>
       /// <param name="cardinalCost">
       /// The cost of horizontal or vertical movement compared to diagonal movement
       /// </param>
       /// <param name="diagonalCost">
       /// The cost of diagonal movement compared to horizontal or vertical movement.
+      /// Set diagonal cost to -1 to disallow diagonal movement or use the default constructor.
+      /// <seealso cref="DijkstraPathFinder(IMap{Cell})"/>
       /// </param>
       /// <exception cref="ArgumentNullException">Thrown when a null map parameter is passed in</exception>
       public DijkstraPathFinder( IMap<Cell> map, double cardinalCost, double diagonalCost )
@@ -56,7 +58,7 @@ namespace RogueSharp
    }
 
    /// <summary>
-   /// A class which can be used to find shortest path from a source to a destination in a Map
+   /// A class which can be used to find shortest path from a source to a destination in a Map using Dijkstra's shortest path algorithm.
    /// This is only more efficient than the standard pathfinder when attempting to find multiple paths from a single source node. 
    /// </summary>
    public class DijkstraPathFinder<TCell> where TCell : ICell
@@ -67,9 +69,9 @@ namespace RogueSharp
       private DijkstraShortestPath _dijkstraShortestPath = null;
 
       /// <summary>
-      /// Constructs a new PathFinder instance for the specified Map that will not consider diagonal movements to be valid.
+      /// Constructs a new DijkstraPathFinder instance for the specified Map that will not consider diagonal movements to be valid.
       /// </summary>
-      /// <param name="map">The Map that this PathFinder instance will run shortest path algorithms on</param>
+      /// <param name="map">The Map that this DijkstraPathFinder instance will run shortest path algorithms on</param>
       /// <exception cref="ArgumentNullException">Thrown when a null map parameter is passed in</exception>
       public DijkstraPathFinder( IMap<TCell> map )
       : this ( map, 1.0, -1.0 )
@@ -77,9 +79,9 @@ namespace RogueSharp
       }
 
       /// <summary>
-      /// Constructs a new PathFinder instance for the specified Map that will consider diagonal movement by using the specified diagonalCost
+      /// Constructs a new DijkstraPathFinder instance for the specified Map that will consider diagonal movement by using the specified diagonalCost
       /// </summary>
-      /// <param name="map">The Map that this PathFinder instance will run shortest path algorithms on</param>
+      /// <param name="map">The Map that this DijkstraPathFinder instance will run shortest path algorithms on</param>
       /// <param name="diagonalCost">
       /// The cost of diagonal movement compared to horizontal or vertical movement.
       /// Use 1.0 if you want the same cost for all movements.
@@ -92,18 +94,18 @@ namespace RogueSharp
       }
 
       /// <summary>
-      /// Constructs a new PathFinder instance for the specified Map
+      /// Constructs a new DijkstraPathFinder instance for the specified Map
       /// that will consider diagonal movement by using the specified diagonalCost
       /// and horizontal and vertical movement by using the specified cardinalCost
       /// </summary>
-      /// <param name="map">The Map that this PathFinder instance will run shortest path algorithms on</param>
+      /// <param name="map">The Map that this DijkstraPathFinder instance will run shortest path algorithms on</param>
       /// <param name="cardinalCost">
       /// The cost of horizontal or vertical movement compared to diagonal movement
       /// </param>
       /// <param name="diagonalCost">
       /// The cost of diagonal movement compared to horizontal or vertical movement.
       /// Set diagonal cost to -1 to disallow diagonal movement or use the default constructor.
-      /// <seealso cref="DijkstraPathFinder(IMap{TCell})"/>
+      /// <seealso cref="DijkstraPathFinder{TCell}(IMap{TCell})"/>
       /// </param>
       /// <exception cref="ArgumentNullException">Thrown when a null map parameter is passed in</exception>
       public DijkstraPathFinder( IMap<TCell> map, double cardinalCost, double diagonalCost )
