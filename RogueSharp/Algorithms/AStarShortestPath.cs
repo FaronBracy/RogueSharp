@@ -43,7 +43,7 @@ namespace RogueSharp.Algorithms
       /// Set diagonal cost to -1 to disallow diagonal movement or use the default constructor.
       /// <seealso cref="PathFinder(IMap{Cell})"/>
       /// </param>
-      public AStarShortestPath( double cardinalCost, double diagonalCost )
+      public AStarShortestPath( double cardinalCost, double? diagonalCost )
       {
          _cardinalCost = cardinalCost;
          _diagonalCost = diagonalCost;

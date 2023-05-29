@@ -60,7 +60,7 @@ namespace RogueSharp
    /// </summary>
    public class PathFinder<TCell> where TCell : ICell
    {
-      private readonly double _cardinalCost;
+      private readonly double _cardinalCost = 1.0;
       private readonly double? _diagonalCost;
       private readonly IMap<TCell> _map;
 
@@ -160,15 +160,8 @@ namespace RogueSharp
             return null;
          }
 
-         AStarShortestPath<TCell> aStarShortestPath;
-         if ( _diagonalCost.HasValue )
-         {
-            aStarShortestPath = new AStarShortestPath<TCell>( (int) _diagonalCost.Value );
-         }
-         else
-         {
-            aStarShortestPath = new AStarShortestPath<TCell>();
-         }
+         AStarShortestPath<TCell> aStarShortestPath = new AStarShortestPath<TCell>( _cardinalCost, _diagonalCost );
+     
          List<TCell> cells = aStarShortestPath.FindPath( (TCell) source, (TCell) destination, _map );
          if ( cells == null )
          {
