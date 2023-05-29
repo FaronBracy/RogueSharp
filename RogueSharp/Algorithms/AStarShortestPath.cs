@@ -10,31 +10,37 @@ namespace RogueSharp.Algorithms
    {
       private readonly double? _diagonalCost;
       private readonly double _cardinalCost = 1.0;
+      private readonly IMap<TCell> _map;
 
       /// <summary>
       /// Construct a new class for computing the shortest path between two Cells on a Map using the A* algorithm
       /// Using this constructor will not allow diagonal movement. Use the overloaded constructor with diagonalCost if diagonal movement is allowed.
       /// </summary>
-      public AStarShortestPath()
+      /// <param name="map">The Map to run the AStar shortest path algorithms on</param>
+      public AStarShortestPath( IMap<TCell> map )
       {
+         _map = map;
       }
 
       /// <summary>
       /// Construct a new class for computing the shortest path between two Cells on a Map using the A* algorithm
       /// </summary>
+      /// <param name="map">The Map to run the AStar shortest path algorithms on</param>
       /// <param name="diagonalCost">
       /// The cost of diagonal movement compared to horizontal or vertical movement.
       /// Use 1.0 if you want the same cost for all movements.
       /// On a standard cartesian map, it should be sqrt(2) (1.41)
       /// </param>
-      public AStarShortestPath( double diagonalCost )
+      public AStarShortestPath( IMap<TCell> map, double diagonalCost )
       {
+         _map = map;
          _diagonalCost = diagonalCost;
       }
 
       /// <summary>
       /// Construct a new class for computing the shortest path between two Cells on a Map using the A* algorithm
       /// </summary>
+      /// <param name="map">The Map to run the AStar shortest path algorithms on</param>
       /// <param name="cardinalCost">
       /// The cost of horizontal or vertical movement compared to diagonal movement
       /// </param>
@@ -43,8 +49,9 @@ namespace RogueSharp.Algorithms
       /// Set diagonal cost to -1 to disallow diagonal movement or use the default constructor.
       /// <seealso cref="PathFinder(IMap{Cell})"/>
       /// </param>
-      public AStarShortestPath( double cardinalCost, double? diagonalCost )
+      public AStarShortestPath( IMap<TCell> map, double cardinalCost, double? diagonalCost )
       {
+         _map = map;
          _cardinalCost = cardinalCost;
          _diagonalCost = diagonalCost;
       }
@@ -56,15 +63,15 @@ namespace RogueSharp.Algorithms
       /// <param name="destination">The destination Cell to find a shortest path to</param>
       /// <param name="map">The Map on which to find the shortest path between Cells</param>
       /// <returns>List of Cells representing a shortest path from the specified source to the specified destination. If no path is found null will be returned</returns>
-      public List<TCell> FindPath( TCell source, TCell destination, IMap<TCell> map )
+      public List<TCell> FindPath( TCell source, TCell destination )
       {
          // OPEN = the set of nodes to be evaluated
-         IndexMinPriorityQueue<PathNode> openNodes = new IndexMinPriorityQueue<PathNode>( map.Height * map.Width );
+         IndexMinPriorityQueue<PathNode> openNodes = new IndexMinPriorityQueue<PathNode>( _map.Height * _map.Width );
          // CLOSED = the set of nodes already evaluated
-         bool[] isNodeClosed = new bool[map.Height * map.Width];
+         bool[] isNodeClosed = new bool[_map.Height * _map.Width];
 
          // add the start node to OPEN
-         openNodes.Insert( map.IndexFor( source ), new PathNode
+         openNodes.Insert( _map.IndexFor( source ), new PathNode
          {
             DistanceFromStart = 0,
             HeuristicDistanceFromEnd = CalculateDistance( source, destination, _cardinalCost, _diagonalCost ),
@@ -88,7 +95,7 @@ namespace RogueSharp.Algorithms
             // add current to CLOSED
             isNodeClosed[currentIndex] = true;
 
-            ICell currentCell = map.CellFor( currentIndex );
+            ICell currentCell = _map.CellFor( currentIndex );
             // if current is the target node the path has been found
             if ( currentCell.Equals( destination ) )
             {
@@ -97,9 +104,9 @@ namespace RogueSharp.Algorithms
 
             // foreach neighbor of the current node
             bool includeDiagonals = _diagonalCost.HasValue;
-            foreach ( TCell neighbor in map.GetAdjacentCells( currentCell.X, currentCell.Y, includeDiagonals ) )
+            foreach ( TCell neighbor in _map.GetAdjacentCells( currentCell.X, currentCell.Y, includeDiagonals ) )
             {
-               int neighborIndex = map.IndexFor( neighbor );
+               int neighborIndex = _map.IndexFor( neighbor );
                // if neighbor is not walkable or neighbor is in CLOSED
                if ( neighbor.IsWalkable == false || isNodeClosed[neighborIndex] )
                {
@@ -142,11 +149,11 @@ namespace RogueSharp.Algorithms
          }
 
          List<TCell> path = new List<TCell>();
-         path.Add( map.GetCell( currentNode.X, currentNode.Y ) );
+         path.Add( _map.GetCell( currentNode.X, currentNode.Y ) );
          while ( currentNode.Parent != null )
          {
             currentNode = currentNode.Parent;
-            path.Add( map.GetCell( currentNode.X, currentNode.Y ) );
+            path.Add( _map.GetCell( currentNode.X, currentNode.Y ) );
          }
 
          path.Reverse();

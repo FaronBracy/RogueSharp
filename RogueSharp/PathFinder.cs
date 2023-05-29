@@ -160,9 +160,9 @@ namespace RogueSharp
             return null;
          }
 
-         AStarShortestPath<TCell> aStarShortestPath = new AStarShortestPath<TCell>( _cardinalCost, _diagonalCost );
+         AStarShortestPath<TCell> aStarShortestPath = new AStarShortestPath<TCell>( _map, _cardinalCost, _diagonalCost );
      
-         List<TCell> cells = aStarShortestPath.FindPath( (TCell) source, (TCell) destination, _map );
+         List<TCell> cells = aStarShortestPath.FindPath( (TCell) source, (TCell) destination );
          if ( cells == null )
          {
             return null;
