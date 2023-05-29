@@ -33,6 +33,26 @@ namespace RogueSharp
          : base( map, diagonalCost )
       {
       }
+
+      /// <summary>
+      /// Constructs a new PathFinder instance for the specified Map
+      /// that will consider diagonal movement by using the specified diagonalCost
+      /// and horizontal and vertical movement by using the specified cardinalCost
+      /// </summary>
+      /// <param name="map">The Map that this PathFinder instance will run shortest path algorithms on</param>
+      /// <param name="cardinalCost">
+      /// The cost of horizontal or vertical movement compared to diagonal movement
+      /// </param>
+      /// <param name="diagonalCost">
+      /// The cost of diagonal movement compared to horizontal or vertical movement.
+      /// Set diagonal cost to -1 to disallow diagonal movement or use the default constructor.
+      /// <seealso cref="PathFinder(IMap{Cell})"/>
+      /// </param>
+      /// <exception cref="ArgumentNullException">Thrown when a null map parameter is passed in</exception>
+      public PathFinder( IMap<Cell> map, double cardinalCost, double diagonalCost )
+         : base( map, cardinalCost, diagonalCost )
+      {
+      }
    }
 
    /// <summary>
@@ -40,6 +60,7 @@ namespace RogueSharp
    /// </summary>
    public class PathFinder<TCell> where TCell : ICell
    {
+      private readonly double _cardinalCost;
       private readonly double? _diagonalCost;
       private readonly IMap<TCell> _map;
 
@@ -66,6 +87,27 @@ namespace RogueSharp
       public PathFinder( IMap<TCell> map, double diagonalCost )
       {
          _map = map ?? throw new ArgumentNullException( nameof( map ), "Map cannot be null" );
+         _diagonalCost = diagonalCost;
+      }
+
+      /// <summary>
+      /// Constructs a new PathFinder instance for the specified Map
+      /// that will consider diagonal movement by using the specified diagonalCost
+      /// and horizontal and vertical movement by using the specified cardinalCost
+      /// </summary>
+      /// <param name="map">The Map that this PathFinder instance will run shortest path algorithms on</param>
+      /// <param name="cardinalCost">
+      /// The cost of horizontal or vertical movement compared to diagonal movement
+      /// </param>
+      /// <param name="diagonalCost">
+      /// Set diagonal cost to -1 to disallow diagonal movement or use the default constructor.
+      /// <seealso cref="PathFinder(IMap{Cell})"/>
+      /// </param>
+      /// <exception cref="ArgumentNullException">Thrown when a null map parameter is passed in</exception>
+      public PathFinder( IMap<TCell> map, double cardinalCost, double diagonalCost )
+      {
+         _map = map ?? throw new ArgumentNullException( nameof( map ), "Map cannot be null" );
+         _cardinalCost = cardinalCost;
          _diagonalCost = diagonalCost;
       }
 

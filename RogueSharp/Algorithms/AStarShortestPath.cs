@@ -9,6 +9,7 @@ namespace RogueSharp.Algorithms
    public class AStarShortestPath<TCell> where TCell : ICell
    {
       private readonly double? _diagonalCost;
+      private readonly double _cardinalCost = 1.0;
 
       /// <summary>
       /// Construct a new class for computing the shortest path between two Cells on a Map using the A* algorithm
@@ -17,7 +18,7 @@ namespace RogueSharp.Algorithms
       public AStarShortestPath()
       {
       }
-      
+
       /// <summary>
       /// Construct a new class for computing the shortest path between two Cells on a Map using the A* algorithm
       /// </summary>
@@ -28,6 +29,23 @@ namespace RogueSharp.Algorithms
       /// </param>
       public AStarShortestPath( double diagonalCost )
       {
+         _diagonalCost = diagonalCost;
+      }
+
+      /// <summary>
+      /// Construct a new class for computing the shortest path between two Cells on a Map using the A* algorithm
+      /// </summary>
+      /// <param name="cardinalCost">
+      /// The cost of horizontal or vertical movement compared to diagonal movement
+      /// </param>
+      /// <param name="diagonalCost">
+      /// The cost of diagonal movement compared to horizontal or vertical movement.
+      /// Set diagonal cost to -1 to disallow diagonal movement or use the default constructor.
+      /// <seealso cref="PathFinder(IMap{Cell})"/>
+      /// </param>
+      public AStarShortestPath( double cardinalCost, double diagonalCost )
+      {
+         _cardinalCost = cardinalCost;
          _diagonalCost = diagonalCost;
       }
 
@@ -49,7 +67,7 @@ namespace RogueSharp.Algorithms
          openNodes.Insert( map.IndexFor( source ), new PathNode
          {
             DistanceFromStart = 0,
-            HeuristicDistanceFromEnd = CalculateDistance( source, destination, _diagonalCost ),
+            HeuristicDistanceFromEnd = CalculateDistance( source, destination, _cardinalCost, _diagonalCost ),
             X = source.X,
             Y = source.Y,
             Parent = null
@@ -112,7 +130,7 @@ namespace RogueSharp.Algorithms
                   PathNode neighborNode = new PathNode
                   {
                      DistanceFromStart = currentNode.DistanceFromStart + 1,
-                     HeuristicDistanceFromEnd = CalculateDistance( source, destination, _diagonalCost ),
+                     HeuristicDistanceFromEnd = CalculateDistance( source, destination, _cardinalCost, _diagonalCost ),
                      X = neighbor.X,
                      Y = neighbor.Y,
                      Parent = currentNode
@@ -143,19 +161,33 @@ namespace RogueSharp.Algorithms
          return dx + dy;
       }
 
-      private static double CalculateDistance( TCell source, TCell destination, double? diagonalCost )
+      private static double CalculateDistance( TCell source, TCell destination, double cardinalCost )
+      {
+         int dx = Math.Abs( source.X - destination.X );
+         int dy = Math.Abs( source.Y - destination.Y );
+
+         return ( dx + dy ) * cardinalCost;
+      }
+
+      private static double CalculateDistance( TCell source, TCell destination, double cardinalCost, double? diagonalCost )
       {
          if ( !diagonalCost.HasValue )
          {
-            return CalculateDistance( source, destination );
+            if ( Math.Abs( cardinalCost - 1.0 ) < .001 )
+            {
+               return CalculateDistance( source, destination );
+            }
+
+            return CalculateDistance( source, destination, cardinalCost );
          }
+
          int dx = Math.Abs( source.X - destination.X );
          int dy = Math.Abs( source.Y - destination.Y );
 
          int dMin = Math.Min( dx, dy );
          int dMax = Math.Max( dx, dy );
 
-         return ( dMin * diagonalCost.Value ) + ( dMax - dMin );
+         return ( dMin * diagonalCost.Value ) + ( ( dMax - dMin ) * cardinalCost );
       }
 
       private class PathNode : IComparable<PathNode>
