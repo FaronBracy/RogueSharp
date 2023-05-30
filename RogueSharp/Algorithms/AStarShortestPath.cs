@@ -56,14 +56,27 @@ namespace RogueSharp.Algorithms
          _diagonalCost = diagonalCost;
       }
 
+
+      /// <summary>
+      /// Returns an List of Cells representing a shortest path from the specified source to the specified destination
+      /// This method will use the default CalculateDistance function which is Euclidean distance
+      /// </summary>
+      /// <param name="source">The source Cell to find a shortest path from</param>
+      /// <param name="destination">The destination Cell to find a shortest path to</param>
+      /// <returns>List of Cells representing a shortest path from the specified source to the specified destination. If no path is found null will be returned</returns>
+      public List<TCell> FindPath( TCell source, TCell destination )
+      {
+         return FindPath( source, destination, CalculateDistance );
+      }
+
       /// <summary>
       /// Returns an List of Cells representing a shortest path from the specified source to the specified destination
       /// </summary>
       /// <param name="source">The source Cell to find a shortest path from</param>
       /// <param name="destination">The destination Cell to find a shortest path to</param>
-      /// <param name="map">The Map on which to find the shortest path between Cells</param>
+      /// <param name="distanceHeuristicFunction">A function which takes a TCell source, and TCell destination and returns a double representing the Distance Heuristic function</param>
       /// <returns>List of Cells representing a shortest path from the specified source to the specified destination. If no path is found null will be returned</returns>
-      public List<TCell> FindPath( TCell source, TCell destination )
+      public List<TCell> FindPath( TCell source, TCell destination, Func<TCell, TCell, double> distanceHeuristicFunction )
       {
          // OPEN = the set of nodes to be evaluated
          IndexMinPriorityQueue<PathNode> openNodes = new IndexMinPriorityQueue<PathNode>( _map.Height * _map.Width );
@@ -74,7 +87,7 @@ namespace RogueSharp.Algorithms
          openNodes.Insert( _map.IndexFor( source ), new PathNode
          {
             DistanceFromStart = 0,
-            HeuristicDistanceFromEnd = CalculateDistance( source, destination, _cardinalCost, _diagonalCost ),
+            HeuristicDistanceFromEnd = distanceHeuristicFunction.Invoke( source, destination ),
             X = source.X,
             Y = source.Y,
             Parent = null
@@ -137,7 +150,7 @@ namespace RogueSharp.Algorithms
                   PathNode neighborNode = new PathNode
                   {
                      DistanceFromStart = currentNode.DistanceFromStart + 1,
-                     HeuristicDistanceFromEnd = CalculateDistance( source, destination, _cardinalCost, _diagonalCost ),
+                     HeuristicDistanceFromEnd = distanceHeuristicFunction.Invoke( source, destination ),
                      X = neighbor.X,
                      Y = neighbor.Y,
                      Parent = currentNode
@@ -160,41 +173,25 @@ namespace RogueSharp.Algorithms
          return path;
       }
 
-      private static double CalculateDistance( TCell source, TCell destination )
+      private double CalculateDistance( TCell source, TCell destination )
       {
          int dx = Math.Abs( source.X - destination.X );
          int dy = Math.Abs( source.Y - destination.Y );
 
-         return dx + dy;
-      }
-
-      private static double CalculateDistance( TCell source, TCell destination, double cardinalCost )
-      {
-         int dx = Math.Abs( source.X - destination.X );
-         int dy = Math.Abs( source.Y - destination.Y );
-
-         return ( dx + dy ) * cardinalCost;
-      }
-
-      private static double CalculateDistance( TCell source, TCell destination, double cardinalCost, double? diagonalCost )
-      {
-         if ( !diagonalCost.HasValue )
+         if ( !_diagonalCost.HasValue )
          {
-            if ( Math.Abs( cardinalCost - 1.0 ) < .001 )
+            if ( Math.Abs( _cardinalCost - 1.0 ) < .001 )
             {
-               return CalculateDistance( source, destination );
+               return dx + dy;
             }
 
-            return CalculateDistance( source, destination, cardinalCost );
+            return ( dx + dy ) * _cardinalCost;
          }
-
-         int dx = Math.Abs( source.X - destination.X );
-         int dy = Math.Abs( source.Y - destination.Y );
 
          int dMin = Math.Min( dx, dy );
          int dMax = Math.Max( dx, dy );
 
-         return ( dMin * diagonalCost.Value ) + ( ( dMax - dMin ) * cardinalCost );
+         return ( dMin * _diagonalCost.Value ) + ( ( dMax - dMin ) * _cardinalCost );
       }
 
       private class PathNode : IComparable<PathNode>
